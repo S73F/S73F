@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "@inertiajs/react";
 import Layout from "../../Layouts/Layout";
+import "../../../css/creazioneOrdine.css";
 
 export default function CreazioneOrdine() {
     const { data, setData, post, processing } = useForm({

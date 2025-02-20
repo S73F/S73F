@@ -12,7 +12,7 @@ export default function Dashboard() {
 
             <div id="btns-container">
                 <Link href="/cliente/ordini/creazione">Nuovo ordine</Link>
-                <Link href="">Storico ordini</Link>
+                <Link href="/cliente/ordini/storico">Storico ordini</Link>
             </div>
         </div>
     );

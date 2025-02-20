@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ordine;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class OrdineController extends Controller
 {
@@ -84,20 +85,14 @@ class OrdineController extends Controller
                     'fileok' => 1,
                     'nomefile' => $newFileName,
                 ]);
-                // toastify()->success('Ordine creato e file caricato con successo!');
+                return redirect()->intended('/cliente/dashboard')->with(['success' => 'Ordine creato e file caricato con successo!']);
             } else {
-                // toastify()->success('Ordine creato con successo!');
+                return redirect()->intended('/cliente/dashboard')->with(['success' => 'Ordine creato con successo!']);
             }
-
-            return redirect()->back()->with('success', 'Ordine creato e file caricato con successo!');
         } catch (ValidationException $e) {
             // Log tramite toast degli errori
             $errors = $e->validator->errors();
-            foreach ($errors->all() as $error) {
-                // toastify()->error($error);
-            }
-            // toastify()->error('Errore durante la creazione dell\'ordine');
-            return redirect()->back()->withErrors($errors)->withInput();
+            return redirect()->back()->with(["error" => "Errore durante la creazione dell'ordine", "validation_errors" => $errors])->withInput();
         }
     }
 
@@ -123,9 +118,9 @@ class OrdineController extends Controller
     {
         $ordine = Ordine::with('cliente')->find($id);
 
-        // $pdf = Pdf::loadView("cliente.ordinePDF", compact("ordine"));
+        $pdf = Pdf::loadView("cliente.ordinePDF", compact("ordine"));
 
-        // return $pdf->stream("ordine_{$ordine->IDordine}.pdf");
+        return $pdf->stream("ordine_{$ordine->IDordine}.pdf");
     }
 
     public function getLavori(Request $request)

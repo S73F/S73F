@@ -10,8 +10,21 @@ export default function Layout({ children }) {
     useEffect(() => {
         if (flash?.success) {
             toast.success(flash.success);
-        } else if (flash?.error) {
+            history.replaceState({}, document.title);
+        }
+
+        if (flash?.error) {
             toast.error(flash.error);
+            history.replaceState({}, document.title);
+        }
+
+        if (flash?.validation_errors) {
+            Object.values(flash.validation_errors).forEach((errors) => {
+                errors.forEach((error) => {
+                    toast.error(error);
+                });
+            });
+            history.replaceState({}, document.title);
         }
     }, [flash]);
 
@@ -40,9 +53,9 @@ export default function Layout({ children }) {
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             >
                                 <rect
                                     x="3"
@@ -72,7 +85,7 @@ export default function Layout({ children }) {
                 </p>
             </footer>
 
-            <ToastContainer />
+            <ToastContainer position="bottom-right" closeOnClick={true} />
         </div>
     );
 }
