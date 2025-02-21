@@ -16,9 +16,13 @@
     },
     "dependencies": {
         "@inertiajs/react": "^2.0.3",
+        "dompurify": "^3.2.4",
         "js-cookie": "^3.0.5",
         "react": "^19.0.0",
+        "react-data-table-component": "^7.6.2",
         "react-dom": "^19.0.0",
-        "react-toastify": "^11.0.3"
+        "react-paginate": "^8.3.0",
+        "react-toastify": "^11.0.3",
+        "styled-components": "^6.1.15"
     }
 }

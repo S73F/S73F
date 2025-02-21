@@ -30,4 +30,5 @@ Route::group(['middleware' => "auth:cliente"], function () {
 
 Route::group(['middleware' => "auth:operatore"], function () {
     Route::get("/operatore/dashboard", [OperatoreController::class, "showDashboard"])->name("operatoreDashboard");
+    Route::get('/operatore/lavori', [OrdineController::class, 'getLavori'])->name('getLavori');
 });

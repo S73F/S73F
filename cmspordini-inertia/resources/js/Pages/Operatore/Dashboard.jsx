@@ -1,11 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../Layouts/Layout";
-import "../../../css/clienteDashboard.css";
+import "../../../css/operatoreDashboard.css";
+import { Link } from "@inertiajs/react";
+import LavoriInCorso from "../../Components/LavoriInCorso";
+import LavoriNuovi from "../../Components/LavoriNuovi";
 
-export default function Dashboard() {
+export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
+    const [tipoLavori, setTipoLavori] = useState("inCorso");
+
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div id="dashboard-container">
+            <div id="main-container">
+                <h2>Benvenuto {user.nome}</h2>
+
+                <div id="btns-container">
+                    <Link href="">Gestione clienti</Link>
+                    <Link href="">Ordini</Link>
+                    <button
+                        id="btn-nuovi-lavori"
+                        onClick={() => setTipoLavori("nuovi")}
+                    >
+                        Nuovi lavori
+                    </button>
+                    <button
+                        id="btn-lavori-in-corso"
+                        onClick={() => setTipoLavori("inCorso")}
+                    >
+                        Lavori in corso
+                    </button>
+                </div>
+            </div>
+
+            {tipoLavori === "inCorso" && (
+                <LavoriInCorso lavori={lavoriInCorso} />
+            )}
+
+            {tipoLavori === "nuovi" && <LavoriNuovi lavori={lavoriNuovi} />}
         </div>
     );
 }
