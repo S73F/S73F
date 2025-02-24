@@ -4,7 +4,7 @@ import "../../../css/login.css";
 import Layout from "../../Layouts/Layout";
 
 export default function Login() {
-    const { data, setData, post, errors } = useForm({
+    const { data, setData, post } = useForm({
         username: "",
         password: "",
     });
@@ -27,7 +27,6 @@ export default function Login() {
                     placeholder="Username"
                     required
                 />
-                {errors.username && <p>{errors.username}</p>}
 
                 <input
                     type="password"
@@ -37,7 +36,6 @@ export default function Login() {
                     placeholder="Password"
                     required
                 />
-                {errors.password && <p>{errors.password}</p>}
 
                 <button type="submit">Login</button>
             </form>

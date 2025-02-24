@@ -14,7 +14,9 @@ export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
                 <h2>Benvenuto {user.nome}</h2>
 
                 <div id="btns-container">
-                    <Link href="">Gestione clienti</Link>
+                    <Link href="/operatore/gestione-clienti">
+                        Gestione clienti
+                    </Link>
                     <Link href="">Ordini</Link>
                     <button
                         id="btn-nuovi-lavori"

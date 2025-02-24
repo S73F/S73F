@@ -12,7 +12,6 @@
 
 #upload-form-container {
     width: 90%;
-    max-width: 600px;
     padding: 20px;
     margin: 3rem 0;
     background: white;
@@ -27,7 +26,25 @@
     font-weight: 600;
 }
 
-label {
+#upload-form-container form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 0 3rem;
+}
+
+#upload-form-container form .form-field {
+    width: 30%;
+}
+
+#upload-form-container form .form-field-textarea {
+    width: 45%;
+}
+
+#upload-form-container form .form-field label,
+#upload-form-container form .form-field-textarea label {
     display: block;
     font-weight: bold;
     margin-top: 0.3rem;
@@ -35,10 +52,10 @@ label {
     font-size: 0.9rem;
 }
 
-input[type="text"],
-input[type="date"],
-input[type="time"],
-textarea {
+#upload-form-container form .form-field input[type="text"],
+#upload-form-container form .form-field input[type="date"],
+#upload-form-container form .form-field input[type="time"],
+#upload-form-container form .form-field-textarea textarea {
     width: 100%;
     padding: 10px;
     margin: 8px 0 1rem;
@@ -47,26 +64,30 @@ textarea {
     transition: border 0.3s ease-in-out;
 }
 
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="time"]:focus,
-textarea:focus {
+#upload-form-container form .form-field input[type="text"]:focus,
+#upload-form-container form .form-field input[type="date"]:focus,
+#upload-form-container form .form-field input[type="time"]:focus,
+#upload-form-container form .form-field-textarea textarea:focus {
     border-color: var(--hover-color);
     outline: none;
 }
 
-textarea {
+#upload-form-container form .form-field-textarea textarea {
     min-height: 80px;
     resize: none;
 }
 
-input[type="date"],
-input[type="time"] {
+#upload-form-container form .form-field input[type="date"],
+#upload-form-container form .form-field input[type="time"] {
     cursor: text;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator,
-input[type="time"]::-webkit-calendar-picker-indicator {
+#upload-form-container
+    form
+    input[type="date"]::-webkit-calendar-picker-indicator,
+#upload-form-container
+    form
+    input[type="time"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
@@ -75,12 +96,15 @@ input[type="time"]::-webkit-calendar-picker-indicator {
     margin: 0.8rem 0 0.5rem;
 }
 
-input[type="file"] {
+#upload-form-container form .form-field input[type="file"] {
     display: block;
     margin-bottom: 2rem;
 }
 
-input[type="file"]::file-selector-button,
+#upload-form-container
+    form
+    .form-field
+    input[type="file"]::file-selector-button,
 #submit-btn {
     width: 6rem;
     height: 2rem;
@@ -90,7 +114,10 @@ input[type="file"]::file-selector-button,
     transition: all 0.1s ease-in;
 }
 
-input[type="file"]::file-selector-button:hover,
+#upload-form-container
+    form
+    .form-field
+    input[type="file"]::file-selector-button:hover,
 #submit-btn:hover {
     cursor: pointer;
     border: 2px solid var(--hover-color);
