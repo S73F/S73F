@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-.table {
+#table-container-lavori table {
     width: 100%;
     max-width: 100%;
     border-collapse: collapse;
@@ -27,7 +27,7 @@
     margin-bottom: 0.8rem;
 }
 
-thead tr th {
+#table-container-lavori table thead tr th {
     background-color: var(--btn-color);
     color: white;
     padding: 12px;
@@ -37,16 +37,16 @@ thead tr th {
     text-align: center;
 }
 
-tbody tr {
+#table-container-lavori table tbody tr {
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.2s ease-in-out;
 }
 
-tbody tr:hover {
+#table-container-lavori table tbody tr:hover {
     background-color: rgba(0, 165, 95, 0.1);
 }
 
-tbody tr td {
+#table-container-lavori table tbody tr td {
     padding: 0.8rem;
     text-align: center;
     font-size: 0.9rem;
@@ -56,14 +56,14 @@ tbody tr td {
     line-height: 1.3rem;
 }
 
-tbody tr td a {
+#table-container-lavori table tbody tr td a {
     text-decoration: none;
     font-weight: 700;
     color: var(--main-color);
     transition: color 0.2s ease-in;
 }
 
-tbody tr td a:hover {
+#table-container-lavori table tbody tr td a:hover {
     color: var(--btn-color);
 }
 

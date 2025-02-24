@@ -122,23 +122,4 @@ class OrdineController extends Controller
 
         return $pdf->stream("ordine_{$ordine->IDordine}.pdf");
     }
-
-    // public function getLavori(Request $request)
-    // {
-    //     $tipoLavori = $request->input("q");
-
-    //     $query = Ordine::with(["cliente", "operatore"]);
-
-    //     if ($tipoLavori === "inCorso") {
-    //         $query->where("stato", '!=', 0);
-    //     }
-
-    //     if ($tipoLavori === 'nuovi') {
-    //         $query->where('stato', 0);
-    //     }
-
-    //     $lavori = $query->orderBy('data', 'desc')->paginate(10);
-
-    //     return response()->json($lavori);
-    // }
 }

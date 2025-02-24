@@ -9,15 +9,13 @@ use Inertia\Inertia;
 
 class OperatoreController extends Controller
 {
-    function showDashboard()
+    public function showDashboard()
     {
         if (Auth::guard('operatore')->check()) {
 
             $lavoriInCorso = Ordine::with(["cliente", "operatore"])->where("stato", '!=', 0)->orderBy('data', 'desc')->paginate(10);
 
             $lavoriNuovi = Ordine::with(["cliente", "operatore"])->where('stato', 0)->orderBy('data', 'desc')->get();
-
-            // dd($lavoriInCorso, $lavoriNuovi);
 
             return Inertia::render("Operatore/Dashboard", [
                 "lavoriInCorso" => $lavoriInCorso,

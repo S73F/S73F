@@ -3,9 +3,9 @@ import "../../css/lavori.css";
 
 const LavoriNuovi = ({ lavori }) => {
     return (
-        <div id="table-container">
+        <div id="table-container-lavori">
             <h3 className="tipo-lavori">Lavori Nuovi</h3>
-            <table className="table">
+            <table>
                 <thead>
                     <tr>
                         <th>

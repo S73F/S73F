@@ -4,9 +4,9 @@ import "../../css/lavori.css";
 
 const LavoriInCorso = ({ lavori }) => {
     return (
-        <div id="table-container">
+        <div id="table-container-lavori">
             <h3 className="tipo-lavori">Lavori in Corso</h3>
-            <table className="table">
+            <table>
                 <thead>
                     <tr>
                         <th>

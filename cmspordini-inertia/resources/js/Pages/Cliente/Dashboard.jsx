@@ -7,10 +7,10 @@ export default function Dashboard() {
     const { user } = usePage().props;
 
     return (
-        <div id="main-container">
+        <div id="main-container-cliente">
             <h2>Benvenuto {user.nome}</h2>
 
-            <div id="btns-container">
+            <div id="btns-container-cliente">
                 <Link href="/cliente/ordini/creazione">Nuovo ordine</Link>
                 <Link href="/cliente/ordini/storico">Storico ordini</Link>
             </div>

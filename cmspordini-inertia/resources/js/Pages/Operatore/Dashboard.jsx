@@ -9,8 +9,8 @@ export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
     const [tipoLavori, setTipoLavori] = useState("inCorso");
 
     return (
-        <div id="dashboard-container">
-            <div id="main-container">
+        <div id="dashboard-container-operatore">
+            <div id="main-container-operatore">
                 <h2>Benvenuto {user.nome}</h2>
 
                 <div id="btns-container">

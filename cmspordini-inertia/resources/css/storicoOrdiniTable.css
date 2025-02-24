@@ -1,0 +1,69 @@
+.table-container-storico {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+}
+
+.table-container-storico table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.table-container-storico table thead tr th {
+    background-color: var(--btn-color);
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.table-container-storico table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.table-container-storico tbody tr:hover {
+    background-color: rgba(0, 165, 95, 0.1);
+}
+
+.table-container-storico tbody tr td {
+    padding: 0.8rem 0.6rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--main-color);
+    border: 1px solid var(--border-color);
+    word-wrap: break-word;
+    white-space: nowrap;
+}
+
+.table-container-storico tbody tr td a {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--main-color);
+    transition: all 0.1s ease-in;
+}
+
+.table-container-storico tbody tr td a:visited {
+    color: var(--main-color);
+}
+
+.table-container-storico tbody tr td a:hover {
+    color: var(--btn-color);
+}
+
+@media only screen and (max-width: 768px) {
+    .table-container-storico {
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-container-storico table {
+        font-size: 0.85rem;
+    }
+}

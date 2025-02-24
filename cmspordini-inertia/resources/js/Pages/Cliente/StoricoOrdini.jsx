@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../../css/storicoOrdini.css";
 import Layout from "../../Layouts/Layout";
+import StoricoOrdiniTable from "../../Components/StoricoOrdiniTable";
 
 export default function StoricoOrdini() {
     const [tempo, setTempo] = useState(null);
@@ -46,63 +47,7 @@ export default function StoricoOrdini() {
                 </option>
             </select>
 
-            {data && (
-                <div className="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Data Ordine</th>
-                                <th>Richiedente</th>
-                                <th>Nome Paziente</th>
-                                <th>Cognome Paziente</th>
-                                <th>Indirizzo</th>
-                                <th>Inizio Lavoro</th>
-                                <th>Stato Lavoro</th>
-                                <th>Spedizione</th>
-                                <th>PDF</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.map((ordine) => {
-                                return (
-                                    <tr key={ordine.IDordine}>
-                                        <td>{ordine.data}</td>
-                                        <td>{ordine.medicoOrdinante}</td>
-                                        <td>{ordine.PazienteNome}</td>
-                                        <td>{ordine.PazienteCognome}</td>
-                                        <td>{ordine.IndirizzoSpedizione}</td>
-                                        <td>
-                                            {ordine.data_inizioLavorazione
-                                                ? ordine.data_inizioLavorazione
-                                                : "-"}
-                                        </td>
-                                        <td>
-                                            {ordine.stato === 0
-                                                ? "Nuovo"
-                                                : ordine.stato === 1
-                                                ? "In lavorazione"
-                                                : "Spedito"}
-                                        </td>
-                                        <td>
-                                            {ordine.data_spedizione
-                                                ? ordine.data_spedizione
-                                                : "-"}
-                                        </td>
-                                        <td>
-                                            <a
-                                                href={`/cliente/ordini/${ordine.IDordine}`}
-                                                target="_blank"
-                                            >
-                                                Visualizza PDF
-                                            </a>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+            {data && <StoricoOrdiniTable ordini={data} />}
         </div>
     );
 }
