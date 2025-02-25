@@ -17,7 +17,7 @@ export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
                     <Link href="/operatore/gestione-clienti">
                         Gestione clienti
                     </Link>
-                    <Link href="">Ordini</Link>
+                    <Link href="/operatore/ordini-clienti">Ordini</Link>
                     <button
                         id="btn-nuovi-lavori"
                         onClick={() => setTipoLavori("nuovi")}

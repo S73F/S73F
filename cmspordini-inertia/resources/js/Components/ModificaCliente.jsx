@@ -55,7 +55,7 @@ export default function ModificaCliente({ cliente, onClose }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        patch(`/operatore/gestione-clienti/${cliente.IDcliente}`, {
+        patch(`/operatore/gestione-clienti/modifica/${cliente.IDcliente}`, {
             onSuccess: onClose,
             onError: () => {
                 console.log("Errore durante la modifica del cliente");
@@ -191,7 +191,7 @@ export default function ModificaCliente({ cliente, onClose }) {
                         type="submit"
                         disabled={processing}
                     >
-                        Crea
+                        Modifica
                     </button>
                 </form>
             </div>

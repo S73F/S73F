@@ -63,7 +63,8 @@
 }
 
 #gestione-clienti-table tbody tr td a:hover {
-    color: var(--btn-color);
+    color: var(--hover-color);
+    cursor: pointer;
 }
 
 .actions {

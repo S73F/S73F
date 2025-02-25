@@ -7,6 +7,7 @@ use App\Models\Ordine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
@@ -26,9 +27,17 @@ class OperatoreController extends Controller
 
     public function showGestioneClienti()
     {
-        $clienti = Cliente::select("IDcliente", "ragione_sociale", "nome", "cognome", "emailcliente", "username")->orderBy('IDcliente', 'desc')->get();
+        try {
+            $clienti = Cliente::orderBy('IDcliente', 'desc')->paginate(10);
+            return Inertia::render('Operatore/GestioneClienti', ["clienti" => $clienti]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with(["error" => "Errore durante il recupero dei clienti"]);
+        }
+    }
 
-        return Inertia::render('Operatore/GestioneClienti', ["clienti" => $clienti]);
+    public function showOrdiniClienti()
+    {
+        return Inertia::render('Operatore/Ordini');
     }
 
     public function createCliente(Request $request)
@@ -80,36 +89,49 @@ class OperatoreController extends Controller
 
         try {
             $validatedData = $request->validate([
-                'ragione_sociale' => 'string|max:100',
-                'nome' => 'string|max:50',
-                'cognome' => 'string|max:50',
-                'partitaIVA' => 'string|max:50',
-                'indirizzo' => 'string|max:50',
-                'citta' => 'string|max:50',
-                'cap' => 'integer',
-                'provincia' => 'string|max:50',
-                'emailcliente' => 'email|string|max:50',
-                'username' => 'string|max:20',
-                'password' => 'string|max:100',
+                'ragione_sociale' => 'sometimes|nullable|string|max:100',
+                'nome' => 'sometimes|nullable|string|max:50',
+                'cognome' => 'sometimes|nullable|string|max:50',
+                'partitaIVA' => 'sometimes|nullable|string|max:50',
+                'indirizzo' => 'sometimes|nullable|string|max:50',
+                'citta' => 'sometimes|nullable|string|max:50',
+                'cap' => 'sometimes|nullable|integer',
+                'provincia' => 'sometimes|nullable|string|max:50',
+                'emailcliente' => 'sometimes|nullable|email|string|max:50',
+                'username' => 'sometimes|nullable|string|max:20',
+                'password' => 'sometimes|nullable|string|max:100',
             ], [
                 'required' => 'Il campo :attribute è obbligatorio.',
                 'max' => 'Il campo :attribute non può superare i :max caratteri.',
                 'email' => 'La mail inserita non è valida.',
-                'integer' => 'Il campo :attribute deve contenere un numero intero.'
+                'integer' => 'Il campo :attribute deve contenere un numero intero.',
+                'string' => 'Il campo :attribute deve contenere una stringa di testo.'
             ]);
 
-            $cliente->fill(array_filter($validatedData));
+
+            $cliente->fill(array_filter($validatedData, function ($value) {
+                return $value !== null && $value !== '';
+            }));
 
             if (!empty($validatedData['password'])) {
                 $cliente->password = bcrypt($validatedData['password']);
             }
 
-            $cliente->save();
+            $cliente->update();
 
             return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente modificato con successo!']);
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();
             return redirect()->back()->with(["error" => "Errore durante la modifica del cliente", "validation_errors" => $errors])->withErrors($errors)->withInput();
         }
+    }
+
+    public function delete($IDCliente)
+    {
+        $cliente = Cliente::findOrFail($IDCliente);
+
+        $cliente->delete();
+
+        return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente eliminato con successo']);
     }
 }

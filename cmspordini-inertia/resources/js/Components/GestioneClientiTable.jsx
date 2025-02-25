@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../../css/gestioneClientiTable.css";
+import "./Pagination";
 import ModificaCliente from "./ModificaCliente";
+import { router } from "@inertiajs/react";
 
 export default function GestioneClientiTable({ clienti }) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -11,7 +13,9 @@ export default function GestioneClientiTable({ clienti }) {
         setIsEditModalOpen(true);
     };
 
-    const handleDelete = () => {};
+    const handleDelete = (IDcliente) => {
+        router.delete(`/operatore/gestione-clienti/cancellazione/${IDcliente}`);
+    };
 
     return (
         <div id="gestione-clienti-table-container">
@@ -29,7 +33,11 @@ export default function GestioneClientiTable({ clienti }) {
                 <tbody>
                     {clienti.map((cliente) => (
                         <tr key={cliente.IDcliente}>
-                            <td>{cliente.ragione_sociale}</td>
+                            <td>
+                                <a onClick={handleEdit}>
+                                    {cliente.ragione_sociale}
+                                </a>
+                            </td>
                             <td>{cliente.nome}</td>
                             <td>{cliente.cognome}</td>
                             <td>{cliente.emailcliente}</td>
@@ -38,6 +46,7 @@ export default function GestioneClientiTable({ clienti }) {
                                 <button
                                     id="edit-btn"
                                     onClick={() => handleEdit(cliente)}
+                                    title="Modifica cliente"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +64,13 @@ export default function GestioneClientiTable({ clienti }) {
                                     </svg>
                                 </button>
 
-                                <button id="delete-btn">
+                                <button
+                                    id="delete-btn"
+                                    onClick={() =>
+                                        handleDelete(cliente.IDcliente)
+                                    }
+                                    title="Elimina cliente"
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="20"

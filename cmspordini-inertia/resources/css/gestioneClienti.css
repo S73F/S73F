@@ -25,5 +25,25 @@
 #gestione-clienti-title {
     font-size: 1.5rem;
     font-weight: 600;
-    margin: 1.5rem 0 2rem;
+    margin: 1.5rem 0 1rem;
+}
+
+#add-cliente-btn {
+    margin-bottom: 1.3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+#add-cliente-btn svg {
+    margin: auto;
+    vertical-align: middle;
+    color: var(--main-color);
+    transition: color 0.2s ease-in-out;
+}
+
+#add-cliente-btn:hover svg {
+    color: var(--hover-color);
 }
