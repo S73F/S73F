@@ -36,4 +36,5 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::patch('/operatore/gestione-clienti/modifica/{id}', [OperatoreController::class, 'patchCliente'])->name('patchCliente');
     Route::delete('/operatore/gestione-clienti/cancellazione/{id}', [OperatoreController::class, 'delete'])->name('deleteCliente');
     Route::get('/operatore/ordini-clienti', [OperatoreController::class, 'showOrdiniClienti'])->name('showOrdiniClienti');
+    Route::get('/operatore/ordini-clienti/cliente', [OperatoreController::class, 'showOrdiniCliente'])->name('showOrdiniCliente');
 });

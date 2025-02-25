@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
 
 class OperatoreController extends Controller
@@ -37,7 +38,40 @@ class OperatoreController extends Controller
 
     public function showOrdiniClienti()
     {
-        return Inertia::render('Operatore/Ordini');
+        $clienti = Cliente::get();
+
+        return Inertia::render('Operatore/Ordini', ["clienti" => $clienti]);
+    }
+
+    public function showOrdiniCliente(Request $request)
+    {
+        $IDcliente = $request->input('q');
+
+        $ordini = Ordine::where('IDcliente', $IDcliente)
+            ->with([
+                'operatore' => function ($query) {
+                    $query->select('IDoperatore', 'nome', 'cognome');
+                },
+                'cliente' => function ($query) {
+                    $query->select('IDcliente', 'ragione_sociale');
+                }
+            ])
+            ->select(
+                'IDordine',
+                'IDcliente',
+                'IDoperatore',
+                'medicoOrdinante',
+                'PazienteNome',
+                'PazienteCognome',
+                'data',
+                'data_inizioLavorazione',
+                'data_spedizione',
+                'file_fin_nome'
+            )
+            ->orderByDesc('data')
+            ->get();
+
+        return Response::json($ordini);
     }
 
     public function createCliente(Request $request)
