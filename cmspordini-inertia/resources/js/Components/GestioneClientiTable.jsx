@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../css/table.css";
 import "../../css/gestioneClientiTable.css";
 import "./Pagination";
 import ModificaCliente from "./ModificaCliente";
@@ -18,8 +19,8 @@ export default function GestioneClientiTable({ clienti }) {
     };
 
     return (
-        <div id="gestione-clienti-table-container">
-            <table id="gestione-clienti-table">
+        <div id="table-container">
+            <table id="table-content">
                 <thead>
                     <tr>
                         <th>Ragione Sociale</th>

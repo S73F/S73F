@@ -2,23 +2,21 @@ import React, { useEffect, useState } from "react";
 import "../../../css/storicoOrdini.css";
 import Layout from "../../Layouts/Layout";
 import StoricoOrdiniTable from "../../Components/StoricoOrdiniTable";
+import { router } from "@inertiajs/react";
 
-export default function StoricoOrdini() {
+export default function StoricoOrdini({ ordini }) {
     const [tempo, setTempo] = useState(null);
-    const [data, setData] = useState(null);
 
     const handleChange = (e) => {
-        const tempo = e.target.value;
-        setTempo(tempo);
+        setTempo(e.target.value);
     };
 
     useEffect(() => {
         if (tempo) {
-            fetch(`/cliente/ordini/storico/tempo?q=${tempo}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setData(data);
-                });
+            router.visit(`/cliente/ordini/storico/${tempo}`, {
+                method: "get",
+                preserveState: true,
+            });
         }
     }, [tempo]);
 
@@ -47,7 +45,7 @@ export default function StoricoOrdini() {
                 </option>
             </select>
 
-            {data && <StoricoOrdiniTable ordini={data} />}
+            {ordini?.data.length > 0 && <StoricoOrdiniTable ordini={ordini} />}
         </div>
     );
 }

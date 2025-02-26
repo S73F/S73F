@@ -24,7 +24,7 @@ Route::group(['middleware' => "auth:cliente"], function () {
     Route::get("/cliente/ordini/creazione", [OrdineController::class, "showCreazione"])->name("paginaCreazioneOrdine");
     Route::post('/cliente/ordini/creazione', [OrdineController::class, 'creazione'])->name('creazioneOrdine');
     Route::get("/cliente/ordini/storico", [OrdineController::class, "showStorico"])->name("paginaStoricoOrdini");
-    Route::get("/cliente/ordini/storico/tempo", [OrdineController::class, "getStorico"])->name("tabellaStoricoOrdini");
+    Route::get("/cliente/ordini/storico/{tempo}", [OrdineController::class, "getStorico"])->name("tabellaStoricoOrdini");
     Route::get('/cliente/ordini/{id}', [OrdineController::class, 'generaPDF'])->name('clienteGeneraPDF');
 });
 
@@ -39,5 +39,5 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::get('/operatore/ordini-clienti/{id}', [OperatoreController::class, 'showOrdiniCliente'])->name('showOrdiniCliente');
     Route::get('/operatore/ordini-clienti/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('operatoreGeneraPDF');
     Route::patch('/operatore/ordini-clienti/update/{id}', [OrdineController::class, 'aggiornaStato'])->name('aggiornaStato');
-    // Route::get('/operatore/ordini-clienti/cliente', [OperatoreController::class, 'showOrdiniCliente'])->name('showOrdiniCliente');
+    Route::get('/operatore/ordini-clienti/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFile');
 });

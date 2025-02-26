@@ -1,5 +1,7 @@
 import React from "react";
+import "../../css/table.css";
 import "../../css/lavori.css";
+
 import { router } from "@inertiajs/react";
 import { toast } from "react-toastify";
 
@@ -22,10 +24,25 @@ const LavoriNuovi = ({ lavori }) => {
         }, 4000);
     };
 
+    const handleFile = (IDordine) => {
+        window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
+        router.patch(`/operatore/ordini-clienti/update/${IDordine}`);
+        toast.success(
+            "Hai preso in carico il lavoro. Download del file in corso...",
+            {
+                position: "top-center",
+                autoClose: 3500,
+                closeOnClick: false,
+                pauseOnHover: false,
+                theme: "dark",
+            }
+        );
+    };
+
     return (
-        <div id="table-container-lavori">
+        <div id="table-container">
             <h3 className="tipo-lavori">Lavori Nuovi</h3>
-            <table>
+            <table id="table-content">
                 <thead>
                     <tr>
                         <th>
@@ -57,13 +74,20 @@ const LavoriNuovi = ({ lavori }) => {
                                 </td>
                                 <td>{lavoro.data}</td>
                                 <td>
-                                    <a>File</a>
-                                    <br />
+                                    <button
+                                        className="btn-link"
+                                        onClick={() =>
+                                            handleFile(lavoro.IDordine)
+                                        }
+                                    >
+                                        File
+                                    </button>
+                                    <hr />
                                     <button
                                         onClick={() =>
                                             handlePDF(lavoro.IDordine)
                                         }
-                                        id="btn-link"
+                                        className="btn-link"
                                     >
                                         Pdf
                                     </button>

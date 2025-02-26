@@ -1,5 +1,6 @@
 import React from "react";
 import "../../css/storicoOrdiniTable.css";
+import Pagination from "./Pagination";
 
 export default function StoricoOrdiniTable({ ordini }) {
     return (
@@ -19,7 +20,7 @@ export default function StoricoOrdiniTable({ ordini }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {ordini.map((ordine) => {
+                    {ordini.data.map((ordine) => {
                         return (
                             <tr key={ordine.IDordine}>
                                 <td>{ordine.data}</td>
@@ -57,6 +58,8 @@ export default function StoricoOrdiniTable({ ordini }) {
                     })}
                 </tbody>
             </table>
+
+            {ordini.links.length > 1 && <Pagination links={ordini.links} />}
         </div>
     );
 }

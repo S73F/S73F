@@ -164,6 +164,7 @@ export default function CreazioneOrdine() {
                         id="userfile"
                         name="userfile"
                         type="file"
+                        required
                         onChange={handleFileChange}
                     />
                 </div>

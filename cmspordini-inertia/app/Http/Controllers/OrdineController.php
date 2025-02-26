@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Facades\Storage;
 
 class OrdineController extends Controller
 {
@@ -37,7 +37,7 @@ class OrdineController extends Controller
                 'data_cons' => 'required|date',
                 'ora_cons' => 'required',
                 'note' => 'nullable|string',
-                'userfile' => 'nullable|file|mimes:zip,pdf,stl',
+                'userfile' => 'required|file|mimes:zip,pdf,stl',
             ], [
                 'required' => 'Il campo :attribute è obbligatorio.',
                 'max' => 'Il campo :attribute non può superare i :max caratteri.',
@@ -75,7 +75,7 @@ class OrdineController extends Controller
             if ($request->hasFile('userfile') && $request->file('userfile')->isValid()) {
                 $file = $request->file('userfile');
                 $extension = $file->getClientOriginalExtension();
-                $newFileName = "Cliente_{$request->paziente_cognome}_{$request->paziente_nome}_{$ordine->IDordine}.{$extension}";
+                $newFileName = Auth::guard('cliente')->user()->ragione_sociale . "_{$request->paziente_cognome}_{$request->paziente_nome}_{$ordine->IDordine}.{$extension}";
 
                 // Salva il file nella cartella storage/app/public/uploads
                 $file->storeAs('uploads', $newFileName, 'public');
@@ -96,22 +96,28 @@ class OrdineController extends Controller
         }
     }
 
-    public function getStorico(Request $request)
+    public function getStorico($tempo)
     {
-        $tempo = $request->input('q');
         $idCliente = Auth::guard('cliente')->user()->IDcliente;
 
         $query = Ordine::where('IDcliente', $idCliente);
 
-        if ($tempo === "30") {
-            $query->whereBetween("data", [now()->subDays(30), now()]);
-        } elseif ($tempo === "60") {
-            $query->whereBetween("data", [now()->subDays(60), now()]);
+        if ($tempo !== "tutto") {
+            $query->whereBetween("data", [now()->subDays($tempo), now()]);
         }
 
-        $ordini = $query->orderBy('data', "desc")->get();
+        $ordini = $query->select(
+            'data',
+            'medicoOrdinante',
+            'PazienteNome',
+            'PazienteCognome',
+            'IndirizzoSpedizione',
+            'data_inizioLavorazione',
+            'stato',
+            'data_spedizione'
+        )->orderBy('data', "desc")->paginate(10);
 
-        return response()->json($ordini);
+        return Inertia::render('Cliente/StoricoOrdini', ['ordini' => $ordini]);
     }
 
     public function generaPDF($id)
@@ -130,5 +136,12 @@ class OrdineController extends Controller
 
         return redirect()->intended('/operatore/dashboard');
         // ->with('success', 'Hai preso in carico il lavoro. Caricamento PDF in corso...')
+    }
+
+    public function downloadFile($id)
+    {
+        $fileName = Ordine::where('IDordine', $id)->value('nomefile');
+
+        return Storage::download("public/uploads/{$fileName}");
     }
 }

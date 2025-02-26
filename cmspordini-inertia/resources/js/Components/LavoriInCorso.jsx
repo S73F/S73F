@@ -1,12 +1,12 @@
 import React from "react";
 import Pagination from "./Pagination";
-import "../../css/lavori.css";
+import "../../css/table.css";
 
 const LavoriInCorso = ({ lavori }) => {
     return (
-        <div id="table-container-lavori">
+        <div id="table-container">
             <h3 className="tipo-lavori">Lavori in Corso</h3>
-            <table>
+            <table id="table-content">
                 <thead>
                     <tr>
                         <th>
@@ -19,7 +19,7 @@ const LavoriInCorso = ({ lavori }) => {
                         <th>Operatore</th>
                         <th>Inizio lavorazione</th>
                         <th>Allegati</th>
-                        <th>Azioni</th>
+                        {/* <th>Azioni</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -68,9 +68,9 @@ const LavoriInCorso = ({ lavori }) => {
                                         Pdf
                                     </a>
                                 </td>
-                                <td>
+                                {/* <td>
                                     <a>Spedito</a>
-                                </td>
+                                </td> */}
                             </tr>
                         );
                     })}
