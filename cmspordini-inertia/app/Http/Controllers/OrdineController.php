@@ -122,4 +122,13 @@ class OrdineController extends Controller
 
         return $pdf->stream("ordine_{$ordine->IDordine}.pdf");
     }
+
+    public function aggiornaStato($IDordine, Request $request)
+    {
+        $ordine = Ordine::find($IDordine);
+        $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
+
+        return redirect()->intended('/operatore/dashboard');
+        // ->with('success', 'Hai preso in carico il lavoro. Caricamento PDF in corso...')
+    }
 }

@@ -3,6 +3,7 @@
     --main-font-family: "Raleway", "Helvetica", sans-serif;
     --main-color: #3c3b3b;
     --btn-color: #00a55f;
+    --hover-color: rgb(0, 165, 95);
     --border-color: #cfcfcf;
     --font-size-small: 0.8rem;
     --letter-spacing: 1.5px;
@@ -90,4 +91,19 @@
 
 .btn-action:hover {
     background-color: var(--btn-color);
+}
+
+#btn-link {
+    background: none;
+    border: none;
+    color: var(--main-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease-in;
+}
+
+#btn-link:hover {
+    color: var(--hover-color);
 }

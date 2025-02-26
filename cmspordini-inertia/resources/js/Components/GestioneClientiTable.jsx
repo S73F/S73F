@@ -34,13 +34,17 @@ export default function GestioneClientiTable({ clienti }) {
                     {clienti.map((cliente) => (
                         <tr key={cliente.IDcliente}>
                             <td>
-                                <a onClick={handleEdit}>
+                                <a onClick={() => handleEdit(cliente)}>
                                     {cliente.ragione_sociale}
                                 </a>
                             </td>
                             <td>{cliente.nome}</td>
                             <td>{cliente.cognome}</td>
-                            <td>{cliente.emailcliente}</td>
+                            <td>
+                                <a href={`mailto:${cliente.emailcliente}`}>
+                                    {cliente.emailcliente}
+                                </a>
+                            </td>
                             <td>{cliente.username}</td>
                             <td id="actions">
                                 <button

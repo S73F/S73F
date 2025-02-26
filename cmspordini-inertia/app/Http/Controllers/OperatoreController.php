@@ -16,7 +16,7 @@ class OperatoreController extends Controller
 {
     public function showDashboard()
     {
-        $lavoriInCorso = Ordine::with(["cliente", "operatore"])->where("stato", '!=', 0)->orderBy('data', 'desc')->paginate(10);
+        $lavoriInCorso = Ordine::with(["cliente", "operatore"])->where("stato", '!=', 0)->orderBy('data_inizioLavorazione', 'desc')->paginate(10);
 
         $lavoriNuovi = Ordine::with(["cliente", "operatore"])->where('stato', 0)->orderBy('data', 'desc')->get();
 
@@ -40,12 +40,12 @@ class OperatoreController extends Controller
     {
         $clienti = Cliente::get();
 
-        return Inertia::render('Operatore/Ordini', ["clienti" => $clienti]);
+        return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti]);
     }
 
-    public function showOrdiniCliente(Request $request)
+    public function showOrdiniCliente($IDcliente)
     {
-        $IDcliente = $request->input('q');
+        $clienti = Cliente::get();
 
         $ordini = Ordine::where('IDcliente', $IDcliente)
             ->with([
@@ -69,11 +69,10 @@ class OperatoreController extends Controller
                 'file_fin_nome'
             )
             ->orderByDesc('data')
-            ->get();
+            ->paginate(10);
 
-        return Response::json($ordini);
+        return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti, "ordini" => $ordini]);
     }
-
     public function createCliente(Request $request)
     {
         try {

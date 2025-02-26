@@ -1,30 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { router } from "@inertiajs/react";
 import Layout from "../../Layouts/Layout";
 import OrdiniClienteTable from "../../Components/OrdiniClienteTable";
 
-export default function Ordini({ clienti }) {
-    const [data, setData] = useState(null);
+export default function OrdiniClienti({ clienti, ordini }) {
     const [clienteID, setClienteID] = useState(null);
 
     const handleChange = (e) => {
-        const IDcliente = e.target.value;
-        setClienteID(IDcliente);
+        setClienteID(e.target.value);
     };
 
     useEffect(() => {
         if (clienteID) {
-            fetch(`/operatore/ordini-clienti/cliente?q=${clienteID}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setData(data);
-                })
-                .catch((error) => console.error("Errore nel fetch:", error));
+            router.visit(`/operatore/ordini-clienti/${clienteID}`, {
+                method: "get",
+                preserveState: true,
+            });
         }
     }, [clienteID]);
 
     return (
-        <div id="ordini-clienti-history">
-            <h2 id="ordini-clienti-history-title">Storico ordini</h2>
+        <div id="orders-history">
+            <h2 id="orders-history-title">Storico ordini</h2>
 
             <select
                 id="selector"
@@ -42,9 +39,9 @@ export default function Ordini({ clienti }) {
                 ))}
             </select>
 
-            {data && <OrdiniClienteTable ordini={data} />}
+            {ordini?.data.length > 0 && <OrdiniClienteTable ordini={ordini} />}
         </div>
     );
 }
 
-Ordini.layout = (page) => <Layout>{page}</Layout>;
+OrdiniClienti.layout = (page) => <Layout>{page}</Layout>;

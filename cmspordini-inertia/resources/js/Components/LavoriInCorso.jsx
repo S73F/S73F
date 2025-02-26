@@ -61,7 +61,12 @@ const LavoriInCorso = ({ lavori }) => {
                                 <td>
                                     <a>Sorgente</a>
                                     <hr />
-                                    <a>Pdf</a>
+                                    <a
+                                        href={`/operatore/ordini-clienti/pdf/${lavoro.IDordine}`}
+                                        target="_blank"
+                                    >
+                                        Pdf
+                                    </a>
                                 </td>
                                 <td>
                                     <a>Spedito</a>

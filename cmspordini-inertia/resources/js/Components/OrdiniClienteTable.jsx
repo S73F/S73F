@@ -1,8 +1,9 @@
 import React from "react";
+import Pagination from "./Pagination";
 
 export default function OrdiniClienteTable({ ordini }) {
     return (
-        <div className="table-container-ordini-cliente">
+        <div className="table-container-storico">
             <table>
                 <thead>
                     <tr>
@@ -16,7 +17,7 @@ export default function OrdiniClienteTable({ ordini }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {ordini.map((ordine) => (
+                    {ordini.data.map((ordine) => (
                         <tr key={ordine.IDordine}>
                             <td>{ordine.medicoOrdinante}</td>
                             <td>{`${ordine.PazienteNome} ${ordine.PazienteCognome}`}</td>
@@ -32,13 +33,20 @@ export default function OrdiniClienteTable({ ordini }) {
                             </td>
                             <td>
                                 <p>
-                                    <a href="">File</a> e <a href="">PDF</a>
+                                    <a
+                                        href={`/operatore/ordini-clienti/pdf/${ordine.IDordine}`}
+                                        target="_blank"
+                                    >
+                                        Visualizza PDF
+                                    </a>
                                 </p>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+
+            {ordini.links?.length > 1 && <Pagination links={ordini.links} />}
         </div>
     );
 }
