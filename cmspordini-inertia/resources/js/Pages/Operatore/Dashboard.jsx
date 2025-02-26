@@ -4,7 +4,6 @@ import "../../../css/operatoreDashboard.css";
 import { Link } from "@inertiajs/react";
 import LavoriInCorso from "../../Components/LavoriInCorso";
 import LavoriNuovi from "../../Components/LavoriNuovi";
-import { ToastContainer } from "react-toastify";
 import Notification from "../../Components/Notification";
 
 export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {

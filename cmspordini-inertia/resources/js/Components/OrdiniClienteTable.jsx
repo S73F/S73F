@@ -1,10 +1,11 @@
 import React from "react";
 import Pagination from "./Pagination";
+import "../../css/table.css";
 
 export default function OrdiniClienteTable({ ordini }) {
     return (
-        <div className="table-container-storico">
-            <table>
+        <div id="table-container">
+            <table id="table-content">
                 <thead>
                     <tr>
                         <th>Dottore</th>

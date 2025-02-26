@@ -1,8 +1,23 @@
 import React from "react";
 import Pagination from "./Pagination";
 import "../../css/table.css";
+import { toast } from "react-toastify";
 
 const LavoriInCorso = ({ lavori }) => {
+    const handleFile = (IDordine) => {
+        window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
+
+        setTimeout(() => {
+            toast.success("Download del file in corso...", {
+                position: "top-center",
+                autoClose: 2000,
+                closeOnClick: false,
+                pauseOnHover: false,
+                theme: "dark",
+            });
+        }, 1000);
+    };
+
     return (
         <div id="table-container">
             <h3 className="tipo-lavori">Lavori in Corso</h3>
@@ -59,7 +74,14 @@ const LavoriInCorso = ({ lavori }) => {
                                         : ""}
                                 </td>
                                 <td>
-                                    <a>Sorgente</a>
+                                    <button
+                                        className="btn-link"
+                                        onClick={() =>
+                                            handleFile(lavoro.IDordine)
+                                        }
+                                    >
+                                        Sorgente
+                                    </button>
                                     <hr />
                                     <a
                                         href={`/operatore/ordini-clienti/pdf/${lavoro.IDordine}`}

@@ -6,37 +6,22 @@ import { router } from "@inertiajs/react";
 import { toast } from "react-toastify";
 
 const LavoriNuovi = ({ lavori }) => {
-    const handlePDF = (IDordine) => {
-        router.patch(`/operatore/ordini-clienti/update/${IDordine}`);
-        toast.success(
-            "Hai preso in carico il lavoro. Caricamento PDF in corso...",
-            {
-                position: "top-center",
-                autoClose: 3400,
-                closeOnClick: false,
-                pauseOnHover: false,
-                theme: "dark",
-            }
-        );
-
-        setTimeout(() => {
-            window.open(`/operatore/ordini-clienti/pdf/${IDordine}`, "_blank");
-        }, 4000);
-    };
-
     const handleFile = (IDordine) => {
         window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
-        router.patch(`/operatore/ordini-clienti/update/${IDordine}`);
-        toast.success(
-            "Hai preso in carico il lavoro. Download del file in corso...",
-            {
+
+        setTimeout(() => {
+            toast.success("Download del file in corso...", {
                 position: "top-center",
-                autoClose: 3500,
+                autoClose: 2000,
                 closeOnClick: false,
                 pauseOnHover: false,
                 theme: "dark",
-            }
-        );
+            });
+        }, 1000);
+    };
+
+    const handleIncarico = (IDordine) => {
+        router.patch(`/operatore/ordini-clienti/update/${IDordine}`);
     };
 
     return (
@@ -53,6 +38,7 @@ const LavoriNuovi = ({ lavori }) => {
                         <th>Paziente</th>
                         <th>Data ordine</th>
                         <th>Allegati</th>
+                        <th>Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,13 +69,21 @@ const LavoriNuovi = ({ lavori }) => {
                                         File
                                     </button>
                                     <hr />
-                                    <button
-                                        onClick={() =>
-                                            handlePDF(lavoro.IDordine)
-                                        }
-                                        className="btn-link"
+                                    <a
+                                        href={`/operatore/ordini-clienti/pdf/${lavoro.IDordine}`}
+                                        target="_blank"
                                     >
                                         Pdf
+                                    </a>
+                                </td>
+                                <td>
+                                    <button
+                                        className="btn-link"
+                                        onClick={() =>
+                                            handleIncarico(lavoro.IDordine)
+                                        }
+                                    >
+                                        Accetta incarico
                                     </button>
                                 </td>
                             </tr>

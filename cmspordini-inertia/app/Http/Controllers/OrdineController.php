@@ -134,14 +134,21 @@ class OrdineController extends Controller
         $ordine = Ordine::find($IDordine);
         $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
 
-        return redirect()->intended('/operatore/dashboard');
-        // ->with('success', 'Hai preso in carico il lavoro. Caricamento PDF in corso...')
+        return redirect()->intended('/operatore/dashboard')->with('success', 'Hai preso in carico il lavoro.');
     }
 
     public function downloadFile($id)
     {
         $fileName = Ordine::where('IDordine', $id)->value('nomefile');
 
-        return Storage::download("public/uploads/{$fileName}");
+        if (!$fileName) {
+            return redirect()->back()->with(['error' => 'File non trovato nel database.']);
+        }
+
+        if (Storage::disk('public')->exists("uploads/{$fileName}")) {
+            return Storage::disk('public')->download("uploads/{$fileName}");
+        } else {
+            return redirect()->back()->with(['error' => 'Il file non esiste nel server.']);
+        }
     }
 }

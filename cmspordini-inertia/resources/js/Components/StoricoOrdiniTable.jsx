@@ -1,11 +1,11 @@
 import React from "react";
-import "../../css/storicoOrdiniTable.css";
+import "../../css/table.css";
 import Pagination from "./Pagination";
 
 export default function StoricoOrdiniTable({ ordini }) {
     return (
-        <div className="table-container-storico">
-            <table>
+        <div id="table-container">
+            <table id="table-content">
                 <thead>
                     <tr>
                         <th>Data Ordine</th>
