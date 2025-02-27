@@ -1,39 +1,26 @@
 import React, { useState } from "react";
-import "../../css/table.css";
-import "../../css/gestioneClientiTable.css";
-import "./Pagination";
-import ModificaCliente from "./ModificaCliente";
-import { router } from "@inertiajs/react";
+import Table from "./Table";
 
-export default function GestioneClientiTable({ clienti }) {
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [cliente, setCliente] = useState({});
-
-    const handleEdit = (cliente) => {
-        setCliente(cliente);
-        setIsEditModalOpen(true);
-    };
-
-    const handleDelete = (IDcliente) => {
-        router.delete(`/operatore/gestione-clienti/cancellazione/${IDcliente}`);
-    };
-
+export default function GestioneClientiTable({
+    clienti,
+    handleEdit,
+    handleDelete,
+}) {
     return (
-        <div id="table-container">
-            <table id="table-content">
-                <thead>
-                    <tr>
-                        <th>Ragione Sociale</th>
-                        <th>Nome</th>
-                        <th>Cognome</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>Azioni</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {clienti.map((cliente) => (
-                        <tr key={cliente.IDcliente}>
+        <Table.Layout data={clienti}>
+            <Table.Content>
+                <Table.Head>
+                    <th>Ragione Sociale</th>
+                    <th>Nome</th>
+                    <th>Cognome</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Azioni</th>
+                </Table.Head>
+                <Table.Body
+                    data={clienti.data}
+                    renderRow={(cliente) => (
+                        <>
                             <td>
                                 <a onClick={() => handleEdit(cliente)}>
                                     {cliente.ragione_sociale}
@@ -95,17 +82,10 @@ export default function GestioneClientiTable({ clienti }) {
                                     </svg>
                                 </button>
                             </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            {isEditModalOpen && (
-                <ModificaCliente
-                    cliente={cliente}
-                    onClose={() => setIsEditModalOpen(false)}
-                />
-            )}
-        </div>
+                        </>
+                    )}
+                ></Table.Body>
+            </Table.Content>
+        </Table.Layout>
     );
 }

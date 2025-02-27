@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../Layouts/Layout";
 import "../../../css/gestioneClienti.css";
 import CreazioneCliente from "../../Components/CreazioneCliente";
-import GestioneClientiTable from "../../Components/GestioneClientiTable";
-import Pagination from "../../Components/Pagination";
+import GestioneClientiTable from "../../Components/Tables/GestioneClientiTable";
+import ModificaCliente from "../../Components/ModificaCliente";
+import { router } from "@inertiajs/react";
 
 export default function GestioneClienti({ clienti }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAddingModalOpen, setIsAddingModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedCliente, setSelectedCliente] = useState(null);
+
+    const handleEdit = (cliente) => {
+        setSelectedCliente(cliente);
+        setIsEditModalOpen(true);
+    };
+
+    const handleDelete = (IDcliente) => {
+        router.delete(`/operatore/gestione-clienti/cancellazione/${IDcliente}`);
+    };
+
+    useEffect(() => {
+        isAddingModalOpen || isEditModalOpen
+            ? (document.body.style.overflow = "hidden")
+            : (document.body.style.overflow = "auto");
+    }, [isAddingModalOpen, isEditModalOpen]);
 
     return (
         <div id="gestione-clienti-container">
@@ -14,7 +32,7 @@ export default function GestioneClienti({ clienti }) {
 
             <button
                 id="add-cliente-btn"
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => setIsAddingModalOpen(true)}
                 title="Aggiungi cliente"
             >
                 <svg
@@ -34,11 +52,21 @@ export default function GestioneClienti({ clienti }) {
                 {/* Aggiungi cliente */}
             </button>
 
-            <GestioneClientiTable clienti={clienti.data} />
-            {clienti.links?.length > 1 && <Pagination links={clienti.links} />}
+            <GestioneClientiTable
+                clienti={clienti}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+            />
 
-            {isModalOpen && (
-                <CreazioneCliente onClose={() => setIsModalOpen(false)} />
+            {isAddingModalOpen && (
+                <CreazioneCliente onClose={() => setIsAddingModalOpen(false)} />
+            )}
+
+            {isEditModalOpen && (
+                <ModificaCliente
+                    cliente={selectedCliente}
+                    onClose={() => setIsEditModalOpen(false)}
+                />
             )}
         </div>
     );

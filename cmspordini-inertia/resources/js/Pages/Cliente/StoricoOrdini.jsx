@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../../css/storicoOrdini.css";
 import Layout from "../../Layouts/Layout";
-import StoricoOrdiniTable from "../../Components/StoricoOrdiniTable";
+import StoricoOrdiniTable from "../../Components/Tables/StoricoOrdiniTable";
 import { router } from "@inertiajs/react";
 
 export default function StoricoOrdini({ ordini }) {

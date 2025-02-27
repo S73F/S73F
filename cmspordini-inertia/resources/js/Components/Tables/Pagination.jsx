@@ -1,7 +1,7 @@
 import React from "react";
 import { router } from "@inertiajs/react";
 import DOMPurify from "dompurify";
-import "../../css/pagination.css";
+import "../../../css/pagination.css";
 
 const Pagination = ({ links }) => {
     const handlePageChange = (url) => {

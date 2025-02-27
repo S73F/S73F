@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { router } from "@inertiajs/react";
 import Layout from "../../Layouts/Layout";
-import OrdiniClienteTable from "../../Components/OrdiniClienteTable";
+import OrdiniClienteTable from "../../Components/Tables/OrdiniClienteTable";
 
 export default function OrdiniClienti({ clienti, ordini }) {
     const [clienteID, setClienteID] = useState(null);
