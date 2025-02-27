@@ -1,30 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Layout from "../../Layouts/Layout";
 import "../../../css/gestioneClienti.css";
-import CreazioneCliente from "../../Components/CreazioneCliente";
+import CreazioneCliente from "../../Components/Modals/CreazioneCliente";
 import GestioneClientiTable from "../../Components/Tables/GestioneClientiTable";
-import ModificaCliente from "../../Components/ModificaCliente";
-import { router } from "@inertiajs/react";
+import ModificaCliente from "../../Components/Modals/ModificaCliente";
+import { useGestioneClienti } from "../../Hooks/Operatore/useGestioneClienti";
 
 export default function GestioneClienti({ clienti }) {
-    const [isAddingModalOpen, setIsAddingModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [selectedCliente, setSelectedCliente] = useState(null);
-
-    const handleEdit = (cliente) => {
-        setSelectedCliente(cliente);
-        setIsEditModalOpen(true);
-    };
-
-    const handleDelete = (IDcliente) => {
-        router.delete(`/operatore/gestione-clienti/cancellazione/${IDcliente}`);
-    };
-
-    useEffect(() => {
-        isAddingModalOpen || isEditModalOpen
-            ? (document.body.style.overflow = "hidden")
-            : (document.body.style.overflow = "auto");
-    }, [isAddingModalOpen, isEditModalOpen]);
+    const { modal, openModal, closeModal, handleDelete } = useGestioneClienti();
 
     return (
         <div id="gestione-clienti-container">
@@ -32,7 +15,7 @@ export default function GestioneClienti({ clienti }) {
 
             <button
                 id="add-cliente-btn"
-                onClick={() => setIsAddingModalOpen(true)}
+                onClick={() => openModal("creazione")}
                 title="Aggiungi cliente"
             >
                 <svg
@@ -54,18 +37,18 @@ export default function GestioneClienti({ clienti }) {
 
             <GestioneClientiTable
                 clienti={clienti}
-                handleEdit={handleEdit}
+                openModal={openModal}
                 handleDelete={handleDelete}
             />
 
-            {isAddingModalOpen && (
-                <CreazioneCliente onClose={() => setIsAddingModalOpen(false)} />
+            {modal.type === "creazione" && (
+                <CreazioneCliente onClose={() => closeModal()} />
             )}
 
-            {isEditModalOpen && (
+            {modal.type === "modifica" && (
                 <ModificaCliente
-                    cliente={selectedCliente}
-                    onClose={() => setIsEditModalOpen(false)}
+                    cliente={modal.cliente}
+                    onClose={() => closeModal()}
                 />
             )}
         </div>

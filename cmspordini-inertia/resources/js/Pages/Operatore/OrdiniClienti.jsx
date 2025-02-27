@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { router } from "@inertiajs/react";
+import React from "react";
 import Layout from "../../Layouts/Layout";
 import OrdiniClienteTable from "../../Components/Tables/OrdiniClienteTable";
+import "../../../css/storicoOrdini.css";
+import { useOrdiniClienti } from "../../Hooks/Operatore/useOrdiniClienti";
 
 export default function OrdiniClienti({ clienti, ordini }) {
-    const [clienteID, setClienteID] = useState(null);
-
-    const handleChange = (e) => {
-        setClienteID(e.target.value);
-    };
-
-    useEffect(() => {
-        if (clienteID) {
-            router.visit(`/operatore/ordini-clienti/${clienteID}`, {
-                method: "get",
-                preserveState: true,
-            });
-        }
-    }, [clienteID]);
+    const { handleChange } = useOrdiniClienti();
 
     return (
         <div id="orders-history">

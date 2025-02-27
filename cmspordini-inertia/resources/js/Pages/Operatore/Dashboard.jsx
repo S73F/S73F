@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Layout from "../../Layouts/Layout";
 import "../../../css/operatoreDashboard.css";
 import { Link } from "@inertiajs/react";
-import LavoriInCorso from "../../Components/LavoriInCorso";
-import LavoriNuovi from "../../Components/LavoriNuovi";
+import LavoriInCorso from "../../Components/Tables/LavoriInCorso";
+import LavoriNuovi from "../../Components/Tables/LavoriNuovi";
 import Notification from "../../Components/Notification";
+import { useDashboard } from "../../Hooks/Operatore/useDashboard";
 
 export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
-    const [tipoLavori, setTipoLavori] = useState("inCorso");
+    const { tipoLavori, setTipoLavori, handleFile, handleIncarico } =
+        useDashboard();
 
     return (
         <div id="dashboard-container-operatore">
@@ -43,10 +45,16 @@ export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
             </div>
 
             {tipoLavori === "inCorso" && (
-                <LavoriInCorso lavori={lavoriInCorso} />
+                <LavoriInCorso lavori={lavoriInCorso} handleFile={handleFile} />
             )}
 
-            {tipoLavori === "nuovi" && <LavoriNuovi lavori={lavoriNuovi} />}
+            {tipoLavori === "nuovi" && (
+                <LavoriNuovi
+                    lavori={lavoriNuovi}
+                    handleFile={handleFile}
+                    handleIncarico={handleIncarico}
+                />
+            )}
         </div>
     );
 }

@@ -123,3 +123,73 @@
     border: 2px solid var(--hover-color);
     color: var(--hover-color);
 }
+
+@media screen and (max-width: 1300px) {
+    #creazione-cliente-modal form {
+        gap: 0 2rem;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #creazione-cliente-modal form {
+        gap: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #creazione-cliente-modal {
+        max-height: 90vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    #creazione-cliente-title {
+        margin-top: 1rem;
+        margin-bottom: 2.5rem;
+        text-align: center;
+        z-index: 10;
+    }
+
+    #creazione-cliente-modal form {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+    }
+
+    #creazione-cliente-modal form .form-field {
+        width: 100%;
+    }
+
+    #cliente-submit-btn {
+        width: 100%;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    #creazione-cliente-modal {
+        max-height: 90vh;
+    }
+
+    #creazione-cliente-modal form {
+        width: 100%;
+        display: flex;
+    }
+
+    #creazione-cliente-modal form .form-field {
+        height: 4.5rem;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    #creazione-cliente-modal {
+        max-height: 95vh;
+    }
+}

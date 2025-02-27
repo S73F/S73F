@@ -7,7 +7,7 @@ const TableLayout = ({ title, data, children }) => {
         <div id="table-container">
             {title && <h3 className="table-title">{title}</h3>}
             {children}
-            {data.links?.length > 1 && <Pagination links={data.links} />}
+            {data.links?.length > 3 && <Pagination links={data.links} />}
         </div>
     );
 };

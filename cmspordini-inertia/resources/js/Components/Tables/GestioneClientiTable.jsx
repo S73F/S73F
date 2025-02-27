@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "./Table";
 
 export default function GestioneClientiTable({
     clienti,
-    handleEdit,
+    openModal,
     handleDelete,
 }) {
     return (
@@ -22,7 +22,11 @@ export default function GestioneClientiTable({
                     renderRow={(cliente) => (
                         <>
                             <td>
-                                <a onClick={() => handleEdit(cliente)}>
+                                <a
+                                    onClick={() =>
+                                        openModal("modifica", cliente)
+                                    }
+                                >
                                     {cliente.ragione_sociale}
                                 </a>
                             </td>
@@ -37,7 +41,9 @@ export default function GestioneClientiTable({
                             <td id="actions">
                                 <button
                                     id="edit-btn"
-                                    onClick={() => handleEdit(cliente)}
+                                    onClick={() =>
+                                        openModal("modifica", cliente)
+                                    }
                                     title="Modifica cliente"
                                 >
                                     <svg

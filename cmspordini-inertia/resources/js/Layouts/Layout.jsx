@@ -1,37 +1,12 @@
-import { Link, useForm, usePage } from "@inertiajs/react";
-import { ToastContainer, toast } from "react-toastify";
-import React, { useEffect } from "react";
+import { Link, usePage } from "@inertiajs/react";
+import { ToastContainer } from "react-toastify";
+import React from "react";
 import "../../css/layout.css";
+import { useLayout } from "../Hooks/Layouts/useLayout";
 
 export default function Layout({ children }) {
-    const { user, flash } = usePage().props;
-    const { post } = useForm();
-
-    useEffect(() => {
-        if (flash?.success) {
-            toast.success(flash.success);
-            history.replaceState({}, document.title);
-        }
-
-        if (flash?.error) {
-            toast.error(flash.error);
-            history.replaceState({}, document.title);
-        }
-
-        if (flash?.validation_errors) {
-            Object.values(flash.validation_errors).forEach((errors) => {
-                errors.forEach((error) => {
-                    toast.error(error);
-                });
-            });
-            history.replaceState({}, document.title);
-        }
-    }, [flash]);
-
-    const handleLogout = (event) => {
-        event.preventDefault();
-        post("/logout");
-    };
+    const { user } = usePage().props;
+    const { handleLogout } = useLayout();
 
     return (
         <div className="body-container">

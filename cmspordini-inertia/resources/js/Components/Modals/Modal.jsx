@@ -1,57 +1,28 @@
-import React from "react";
-import "../../css/creazioneCliente.css";
-import { useForm } from "@inertiajs/react";
-
-export default function CreazioneCliente({ onClose }) {
-    const { data, setData, post, processing } = useForm({
-        ragione_sociale: "",
-        nome: "",
-        cognome: "",
-        partitaIVA: "",
-        indirizzo: "",
-        citta: "",
-        cap: "",
-        provincia: "",
-        emailcliente: "",
-        username: "",
-        password: "",
-    });
-
-    const handleChange = (e) => {
-        setData(e.target.name, e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        post("/operatore/gestione-clienti", {
-            forceFormData: true,
-            onSuccess: onClose,
-            onError: () => {
-                console.log("Errore nella creazione del cliente");
-            },
-        });
+export const Modal = () => {
+    const modalOverlay = ({ onClose, children }) => {
+        return (
+            <div id="modal-overlay" onClick={onClose}>
+                {children}
+            </div>
+        );
     };
 
     return (
-        <div id="creazione-cliente-modal-overlay" onClick={onClose}>
-            <div
-                id="creazione-cliente-modal"
-                onClick={(e) => e.stopPropagation()}
-            >
+        <div id="modal-overlay" onClick={onClose}>
+            <div id="modal-content" onClick={(e) => e.stopPropagation()}>
                 <div id="modal-close--container">
                     <button id="modal-close" onClick={onClose}>
                         X
                     </button>
                 </div>
-                <h2 id="creazione-cliente-title">Creazione cliente</h2>
-                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                <h2 id="creazione-cliente-title">Modifica cliente</h2>
+                <form onSubmit={handleSubmit}>
                     <div className="form-field">
                         <label htmlFor="ragione_sociale">Ragione Sociale</label>
                         <input
                             type="text"
                             name="ragione_sociale"
-                            placeholder="Inserisci la ragione sociale"
-                            required
+                            placeholder={placeholderData.ragione_sociale}
                             value={data.ragione_sociale}
                             onChange={handleChange}
                         />
@@ -61,8 +32,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="nome"
-                            placeholder="Inserisci il nome"
-                            required
+                            placeholder={placeholderData.nome}
                             value={data.nome}
                             onChange={handleChange}
                         />
@@ -72,8 +42,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="cognome"
-                            placeholder="Inserisci il cognome"
-                            required
+                            placeholder={placeholderData.cognome}
                             value={data.cognome}
                             onChange={handleChange}
                         />
@@ -83,7 +52,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="partitaIVA"
-                            placeholder="Inserisci la partita IVA"
+                            placeholder={placeholderData.partitaIVA}
                             value={data.partitaIVA}
                             onChange={handleChange}
                         />
@@ -93,8 +62,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="indirizzo"
-                            placeholder="Inserisci l'indirizzo"
-                            required
+                            placeholder={placeholderData.indirizzo}
                             value={data.indirizzo}
                             onChange={handleChange}
                         />
@@ -104,8 +72,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="citta"
-                            placeholder="Inserisci la città"
-                            required
+                            placeholder={placeholderData.citta}
                             value={data.citta}
                             onChange={handleChange}
                         />
@@ -115,8 +82,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="number"
                             name="cap"
-                            placeholder="Inserisci il CAP"
-                            required
+                            placeholder={placeholderData.cap}
                             value={data.cap}
                             onChange={handleChange}
                         />
@@ -126,8 +92,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="provincia"
-                            placeholder="Inserisci la provincia"
-                            required
+                            placeholder={placeholderData.provincia}
                             value={data.provincia}
                             onChange={handleChange}
                         />
@@ -137,8 +102,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="emailcliente"
-                            placeholder="Inserisci l'email"
-                            required
+                            placeholder={placeholderData.emailcliente}
                             value={data.emailcliente}
                             onChange={handleChange}
                         />
@@ -148,8 +112,7 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="username"
-                            placeholder="Inserisci lo username"
-                            required
+                            placeholder={placeholderData.username}
                             value={data.username}
                             onChange={handleChange}
                         />
@@ -159,8 +122,6 @@ export default function CreazioneCliente({ onClose }) {
                         <input
                             type="text"
                             name="password"
-                            placeholder="Inserisci la password"
-                            required
                             value={data.password}
                             onChange={handleChange}
                         />
@@ -171,10 +132,10 @@ export default function CreazioneCliente({ onClose }) {
                         type="submit"
                         disabled={processing}
                     >
-                        Crea
+                        Modifica
                     </button>
                 </form>
             </div>
         </div>
     );
-}
+};

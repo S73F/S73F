@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../../../css/storicoOrdini.css";
 import Layout from "../../Layouts/Layout";
 import StoricoOrdiniTable from "../../Components/Tables/StoricoOrdiniTable";
-import { router } from "@inertiajs/react";
+import { useStoricoOrdini } from "../../Hooks/Cliente/useStoricoOrdini";
 
 export default function StoricoOrdini({ ordini }) {
-    const [tempo, setTempo] = useState(null);
-
-    const handleChange = (e) => {
-        setTempo(e.target.value);
-    };
-
-    useEffect(() => {
-        if (tempo) {
-            router.visit(`/cliente/ordini/storico/${tempo}`, {
-                method: "get",
-                preserveState: true,
-            });
-        }
-    }, [tempo]);
+    const { handleChange } = useStoricoOrdini();
 
     return (
         <div id="orders-history">

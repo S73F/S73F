@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../css/creazioneCliente.css";
+import "../../../css/creazioneCliente.css";
 import { useForm } from "@inertiajs/react";
 
 export default function ModificaCliente({ cliente, onClose }) {

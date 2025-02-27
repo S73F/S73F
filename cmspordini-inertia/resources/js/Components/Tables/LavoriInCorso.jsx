@@ -1,22 +1,7 @@
 import React from "react";
-import { toast } from "react-toastify";
-import Table from "./Tables/Table";
+import Table from "./Table";
 
-const LavoriInCorso = ({ lavori }) => {
-    const handleFile = (IDordine) => {
-        window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
-
-        setTimeout(() => {
-            toast.success("Download del file in corso...", {
-                position: "top-center",
-                autoClose: 2000,
-                closeOnClick: false,
-                pauseOnHover: false,
-                theme: "dark",
-            });
-        }, 1000);
-    };
-
+const LavoriInCorso = ({ lavori, handleFile }) => {
     return (
         <Table.Layout title={"Lavori in Corso"} data={lavori}>
             <Table.Content>

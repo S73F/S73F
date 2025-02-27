@@ -1,29 +1,21 @@
 import React from "react";
-import { useForm } from "@inertiajs/react";
 import "../../../css/login.css";
 import Layout from "../../Layouts/Layout";
+import { useLogin } from "../../Hooks/Auth/useLogin";
 
 export default function Login() {
-    const { data, setData, post } = useForm({
-        username: "",
-        password: "",
-    });
-
-    const submit = (e) => {
-        e.preventDefault();
-        post("/login");
-    };
+    const { data, handleChange, handleSubmit } = useLogin();
 
     return (
         <div className="login-container">
             <img src="assets/img/ODONTOTECNICA-LOGO.svg" />
 
-            <form onSubmit={submit}>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     name="username"
                     value={data.username}
-                    onChange={(e) => setData("username", e.target.value)}
+                    onChange={handleChange}
                     placeholder="Username"
                     required
                 />
@@ -32,7 +24,7 @@ export default function Login() {
                     type="password"
                     name="password"
                     value={data.password}
-                    onChange={(e) => setData("password", e.target.value)}
+                    onChange={handleChange}
                     placeholder="Password"
                     required
                 />

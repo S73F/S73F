@@ -130,9 +130,9 @@
     font-size: 18px;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     #upload-form-container {
         width: 95%;
         padding: 1.5rem;
     }
-}
+} */

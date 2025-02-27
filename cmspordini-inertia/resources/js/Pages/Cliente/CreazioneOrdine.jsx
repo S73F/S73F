@@ -1,37 +1,11 @@
-import React, { useState } from "react";
-import { useForm } from "@inertiajs/react";
+import React from "react";
 import Layout from "../../Layouts/Layout";
 import "../../../css/creazioneOrdine.css";
+import { useCreazioneOrdine } from "../../Hooks/Cliente/useCreazioneOrdine";
 
 export default function CreazioneOrdine() {
-    const { data, setData, post, processing } = useForm({
-        medico_ordinante: "",
-        paziente_nome: "",
-        paziente_cognome: "",
-        indirizzo_spedizione: "",
-        lavorazione: "",
-        colore: "",
-        data_cons: "",
-        ora_cons: "",
-        piattaforma: "",
-        note: "",
-        userfile: null,
-    });
-
-    const handleChange = (e) => {
-        setData(e.target.name, e.target.value);
-    };
-
-    const handleFileChange = (e) => {
-        setData("userfile", e.target.files[0]);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        post("/cliente/ordini/creazione", {
-            forceFormData: true, // Indica che c'è un file
-        });
-    };
+    const { data, handleChange, handleFileChange, handleSubmit, processing } =
+        useCreazioneOrdine();
 
     return (
         <div id="upload-form-container">
@@ -41,7 +15,7 @@ export default function CreazioneOrdine() {
                 onSubmit={handleSubmit}
                 encType="multipart/form-data"
             >
-                <div class="form-field">
+                <div className="form-field">
                     <label htmlFor="medico_ordinante">Medico ordinante</label>
                     <input
                         type="text"
@@ -53,7 +27,7 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div class="form-field">
+                <div className="form-field">
                     <label htmlFor="paziente_nome">Nome paziente</label>
                     <input
                         type="text"
@@ -65,7 +39,7 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div class="form-field">
+                <div className="form-field">
                     <label htmlFor="paziente_cognome">Cognome paziente</label>
                     <input
                         type="text"
@@ -77,7 +51,7 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div class="form-field">
+                <div className="form-field">
                     <label htmlFor="indirizzo_spedizione">
                         Indirizzo spedizione
                     </label>
@@ -91,7 +65,7 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div class="form-field">
+                <div className="form-field">
                     <label htmlFor="lavorazione">Lavorazione</label>
                     <input
                         type="text"
@@ -102,7 +76,7 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div class="form-field">
+                <div className="form-field">
                     <label htmlFor="colore">Colore</label>
                     <input
                         type="text"
@@ -114,7 +88,7 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div class="form-field">
+                <div className="form-field">
                     <label htmlFor="data_cons">Data consegna</label>
                     <input
                         type="date"
@@ -125,7 +99,7 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div class="form-field">
+                <div className="form-field">
                     <label htmlFor="ora_cons">Ora consegna</label>
                     <input
                         type="time"
@@ -136,7 +110,7 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div class="form-field-textarea">
+                <div className="form-field-textarea">
                     <label htmlFor="piattaforma">Piattaforma impianti</label>
                     <textarea
                         name="piattaforma"
@@ -146,7 +120,7 @@ export default function CreazioneOrdine() {
                     ></textarea>
                 </div>
 
-                <div class="form-field-textarea">
+                <div className="form-field-textarea">
                     <label htmlFor="note">Note</label>
                     <textarea
                         name="note"
@@ -156,7 +130,7 @@ export default function CreazioneOrdine() {
                     ></textarea>
                 </div>
 
-                <div class="form-field">
+                <div className="form-field">
                     <label id="send-file-text" htmlFor="userfile">
                         File allegato
                     </label>

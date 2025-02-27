@@ -1,11 +1,9 @@
 import React from "react";
 import Layout from "../../Layouts/Layout";
 import "../../../css/clienteDashboard.css";
-import { Link, usePage } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 
-export default function Dashboard() {
-    const { user } = usePage().props;
-
+export default function Dashboard({ user }) {
     return (
         <div id="main-container-cliente">
             <h2>Benvenuto {user.nome}</h2>

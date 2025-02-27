@@ -37,7 +37,7 @@
     border-color: var(--border-color);
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
     .pagination {
         flex-wrap: wrap;
     }
@@ -46,4 +46,4 @@
         padding: 6px 10px;
         font-size: 14px;
     }
-}
+} */
