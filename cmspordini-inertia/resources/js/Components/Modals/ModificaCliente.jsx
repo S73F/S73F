@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../../../css/creazioneCliente.css";
 import { useForm } from "@inertiajs/react";
+import Modal from "./Modal";
 
 export default function ModificaCliente({ cliente, onClose }) {
     const { data, setData, patch, processing } = useForm({
@@ -64,17 +64,8 @@ export default function ModificaCliente({ cliente, onClose }) {
     };
 
     return (
-        <div id="creazione-cliente-modal-overlay" onClick={onClose}>
-            <div
-                id="creazione-cliente-modal"
-                onClick={(e) => e.stopPropagation()}
-            >
-                <div id="modal-close--container">
-                    <button id="modal-close" onClick={onClose}>
-                        X
-                    </button>
-                </div>
-                <h2 id="creazione-cliente-title">Modifica cliente</h2>
+        <Modal.Overlay onClose={onClose}>
+            <Modal.Content title={"Modifica Cliente"} onClose={onClose}>
                 <form onSubmit={handleSubmit}>
                     <div className="form-field">
                         <label htmlFor="ragione_sociale">Ragione Sociale</label>
@@ -186,15 +177,11 @@ export default function ModificaCliente({ cliente, onClose }) {
                         />
                     </div>
 
-                    <button
-                        id="cliente-submit-btn"
-                        type="submit"
-                        disabled={processing}
-                    >
+                    <button id="submit-btn" type="submit" disabled={processing}>
                         Modifica
                     </button>
                 </form>
-            </div>
-        </div>
+            </Modal.Content>
+        </Modal.Overlay>
     );
 }

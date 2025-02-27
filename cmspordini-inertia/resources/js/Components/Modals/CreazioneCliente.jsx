@@ -1,23 +1,14 @@
 import React from "react";
-import "../../../css/creazioneCliente.css";
 import { useCreazioneCliente } from "../../Hooks/Components/useCreazioneCliente";
+import Modal from "./Modal";
 
 export default function CreazioneCliente({ onClose }) {
     const { data, processing, handleChange, handleSubmit } =
         useCreazioneCliente({ onSuccess: onClose });
 
     return (
-        <div id="creazione-cliente-modal-overlay" onClick={onClose}>
-            <div
-                id="creazione-cliente-modal"
-                onClick={(e) => e.stopPropagation()}
-            >
-                <div id="modal-close--container">
-                    <button id="modal-close" onClick={onClose}>
-                        X
-                    </button>
-                </div>
-                <h2 id="creazione-cliente-title">Creazione cliente</h2>
+        <Modal.Overlay onClose={onClose}>
+            <Modal.Content title={"Creazione Cliente"} onClose={onClose}>
                 <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <div className="form-field">
                         <label htmlFor="ragione_sociale">Ragione Sociale</label>
@@ -140,15 +131,11 @@ export default function CreazioneCliente({ onClose }) {
                         />
                     </div>
 
-                    <button
-                        id="cliente-submit-btn"
-                        type="submit"
-                        disabled={processing}
-                    >
+                    <button id="submit-btn" type="submit" disabled={processing}>
                         Crea
                     </button>
                 </form>
-            </div>
-        </div>
+            </Modal.Content>
+        </Modal.Overlay>
     );
 }
