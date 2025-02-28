@@ -1,7 +1,6 @@
 import { useForm } from "@inertiajs/react";
-import { toast } from "react-toastify";
 
-export const useLavorazione = ({ onSuccess = () => {} }) => {
+export const useLavorazione = ({ modalRef }) => {
     const { setData, post, processing } = useForm({
         userfile: null,
     });
@@ -15,15 +14,16 @@ export const useLavorazione = ({ onSuccess = () => {} }) => {
         e.preventDefault();
         post(`/operatore/ordini-clienti/caricamento-lavorazione/${IDordine}`, {
             forceFormData: true, // Indica che c'è un file
-            onSuccess: () => onSuccess(),
+            onSuccess: () => closeModal(),
             onError: (errors) => {
                 console.log(errors);
-
-                toast.error(errors.userfile);
-                toast.error("Errore nel caricamento della lavorazione");
             },
         });
     };
+
+    function closeModal() {
+        modalRef.current.close();
+    }
 
     return { handleFileChange, handleLavorazione, processing };
 };

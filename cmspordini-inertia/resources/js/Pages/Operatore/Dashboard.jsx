@@ -6,13 +6,11 @@ import LavoriInCorso from "../../Components/Tables/LavoriInCorso";
 import LavoriNuovi from "../../Components/Tables/LavoriNuovi";
 import Notification from "../../Components/Notification";
 import { useDashboard } from "../../Hooks/Operatore/useDashboard";
-import { useModal } from "../../Hooks/Components/Modals/useModal";
-import { Lavorazione } from "../../Components/Modals/Lavorazione";
+import Lavorazione from "../../Components/Modals/Lavorazione";
 
 export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
     const { tipoLavori, setTipoLavori, handleFile, handleIncarico } =
         useDashboard();
-    const { modal, openModal, closeModal } = useModal();
 
     return (
         <>
@@ -52,7 +50,6 @@ export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
                     <LavoriInCorso
                         lavori={lavoriInCorso}
                         handleFile={handleFile}
-                        openModal={openModal}
                     />
                 )}
 
@@ -64,13 +61,6 @@ export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
                     />
                 )}
             </div>
-
-            {modal.type === "caricamentoLavorazione" && (
-                <Lavorazione
-                    onClose={() => closeModal()}
-                    ordine={modal.param}
-                ></Lavorazione>
-            )}
         </>
     );
 }

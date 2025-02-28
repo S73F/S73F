@@ -73,6 +73,11 @@ class OperatoreController extends Controller
 
         return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti, "ordini" => $ordini]);
     }
+
+    public function showCreateClienteModal(){
+        return Inertia::render('Modals/CreazioneCliente');
+    }
+
     public function createCliente(Request $request)
     {
         try {
@@ -114,6 +119,12 @@ class OperatoreController extends Controller
             $errors = $e->validator->errors();
             return redirect()->back()->with(["error" => "Errore durante la creazione del cliente", "validation_errors" => $errors])->withErrors($errors)->withInput();
         }
+    }
+
+    public function showModificaClienteModal($IDCliente){
+        $cliente= Cliente::find($IDCliente);
+
+        return Inertia::render("Modals/ModificaCliente", ["cliente"=>$cliente]);
     }
 
     public function patchCliente(Request $request, $IDcliente)
@@ -168,6 +179,11 @@ class OperatoreController extends Controller
         return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente eliminato con successo']);
     }
 
+    public function showLavorazioneModal($IDordine){
+        $ordine = Ordine::with('cliente')->findOrFail($IDordine);
+        return Inertia::render('Modals/Lavorazione', ['ordine' => $ordine->IDordine]);
+    }
+
     public function caricaLavorazione($IDordine, Request $request){
         $ordine=Ordine::with('cliente')->findOrFail($IDordine);
 
@@ -196,7 +212,8 @@ class OperatoreController extends Controller
             }
         }catch (ValidationException $e){
             $errors = $e->validator->errors();
-            return back()->withErrors($errors)->withInput();
+
+            return redirect()->back()->with(["error" => "Errore durante il caricamento della lavorazione", "validation_errors" => $errors])->withErrors($errors)->withInput();
         }
     }
 }

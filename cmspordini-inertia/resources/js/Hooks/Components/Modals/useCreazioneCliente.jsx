@@ -1,6 +1,6 @@
 import { useForm } from "@inertiajs/react";
 
-export const useCreazioneCliente = ({ onSuccess = () => {} }) => {
+export const useCreazioneCliente = ({ modalRef }) => {
     const { data, setData, post, processing } = useForm({
         ragione_sociale: "",
         nome: "",
@@ -21,13 +21,17 @@ export const useCreazioneCliente = ({ onSuccess = () => {} }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post("/operatore/gestione-clienti", {
+        post("/operatore/gestione-clienti/creazione", {
             forceFormData: true,
-            onSuccess: () => onSuccess(),
+            onSuccess: () => closeModal(),
             onError: () => {
                 console.log("Errore nella creazione del cliente");
             },
         });
+    };
+
+    const closeModal = () => {
+        modalRef.current.close();
     };
 
     return { data, processing, handleChange, handleSubmit };

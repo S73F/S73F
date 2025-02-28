@@ -32,7 +32,9 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::get("/operatore/dashboard", [OperatoreController::class, "showDashboard"])->name("operatoreDashboard");
     Route::get('/operatore/lavori', [OrdineController::class, 'getLavori'])->name('getLavori');
     Route::get('/operatore/gestione-clienti', [OperatoreController::class, 'showGestioneClienti'])->name('showGestioneClienti');
-    Route::post('/operatore/gestione-clienti', [OperatoreController::class, 'createCliente'])->name('createCliente');
+    Route::get('/operatore/gestione-clienti/creazione', [OperatoreController::class, 'showCreateClienteModal'])->name('showCreateClienteModal');
+    Route::post('/operatore/gestione-clienti/creazione', [OperatoreController::class, 'createCliente'])->name('createCliente');
+    Route::get('/operatore/gestione-clienti/modifica/{id}', [OperatoreController::class, 'showModificaClienteModal'])->name('showModificaClienteModal');
     Route::patch('/operatore/gestione-clienti/modifica/{id}', [OperatoreController::class, 'patchCliente'])->name('patchCliente');
     Route::delete('/operatore/gestione-clienti/cancellazione/{id}', [OperatoreController::class, 'deleteCliente'])->name('deleteCliente');
     Route::get('/operatore/ordini-clienti', [OperatoreController::class, 'showOrdiniClienti'])->name('showOrdiniClienti');
@@ -40,5 +42,6 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::get('/operatore/ordini-clienti/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('operatoreGeneraPDF');
     Route::patch('/operatore/ordini-clienti/update/{id}', [OrdineController::class, 'aggiornaStato'])->name('aggiornaStato');
     Route::get('/operatore/ordini-clienti/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFile');
+    Route::get('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'showLavorazioneModal'])->name('showLavorazioneModal');
     Route::post('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'caricaLavorazione'])->name('caricaLavorazione');
 });

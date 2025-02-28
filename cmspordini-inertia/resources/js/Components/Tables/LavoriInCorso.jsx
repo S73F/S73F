@@ -1,8 +1,8 @@
 import React from "react";
 import Table from "./Table";
-import { useModal } from "../../Hooks/Components/Modals/useModal";
+import { ModalLink } from "@inertiaui/modal-react";
 
-const LavoriInCorso = ({ lavori, handleFile, openModal }) => {
+const LavoriInCorso = ({ lavori, handleFile }) => {
     return (
         <Table.Layout title={"Lavori in Corso"} data={lavori}>
             <Table.Content>
@@ -46,17 +46,11 @@ const LavoriInCorso = ({ lavori, handleFile, openModal }) => {
                             <td>
                                 {lavoro.operatore?.nome ?? ""}{" "}
                                 {lavoro.operatore?.cognome ?? ""} <hr />{" "}
-                                <button
-                                    className="btn-link"
-                                    onClick={() =>
-                                        openModal(
-                                            "caricamentoLavorazione",
-                                            lavoro.IDordine
-                                        )
-                                    }
+                                <ModalLink
+                                    href={`/operatore/ordini-clienti/caricamento-lavorazione/${lavoro.IDordine}`}
                                 >
                                     Carica lavorazione
-                                </button>
+                                </ModalLink>
                             </td>
                             <td id="inizio-lavorazione">
                                 {lavoro.data_inizioLavorazione

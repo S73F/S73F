@@ -1,5 +1,6 @@
 import React from "react";
 import Table from "./Table";
+import { ModalLink } from "@inertiaui/modal-react";
 
 export default function GestioneClientiTable({
     clienti,
@@ -22,13 +23,11 @@ export default function GestioneClientiTable({
                     renderRow={(cliente) => (
                         <>
                             <td>
-                                <a
-                                    onClick={() =>
-                                        openModal("modifica", cliente)
-                                    }
+                                <ModalLink
+                                    href={`/operatore/gestione-clienti/modifica/${cliente.IDcliente}`}
                                 >
                                     {cliente.ragione_sociale}
-                                </a>
+                                </ModalLink>
                             </td>
                             <td>{cliente.nome}</td>
                             <td>{cliente.cognome}</td>
@@ -39,11 +38,9 @@ export default function GestioneClientiTable({
                             </td>
                             <td>{cliente.username}</td>
                             <td id="actions">
-                                <button
+                                <ModalLink
                                     id="edit-btn"
-                                    onClick={() =>
-                                        openModal("modifica", cliente)
-                                    }
+                                    href={`/operatore/gestione-clienti/modifica/${cliente.IDcliente}`}
                                     title="Modifica cliente"
                                 >
                                     <svg
@@ -60,7 +57,7 @@ export default function GestioneClientiTable({
                                         <path d="M16 3l5 5L8 21H3v-5L16 3z" />
                                         <path d="M15 4l5 5" />
                                     </svg>
-                                </button>
+                                </ModalLink>
 
                                 <button
                                     id="delete-btn"

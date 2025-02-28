@@ -1,6 +1,6 @@
 import { useForm } from "@inertiajs/react";
 
-export const useModificaCliente = ({ cliente, onSuccess = () => {} }) => {
+export const useModificaCliente = ({ cliente, modalRef }) => {
     const { data, setData, patch, processing } = useForm({
         ragione_sociale: "",
         nome: "",
@@ -36,11 +36,15 @@ export const useModificaCliente = ({ cliente, onSuccess = () => {} }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         patch(`/operatore/gestione-clienti/modifica/${cliente.IDcliente}`, {
-            onSuccess: () => onSuccess(),
+            onSuccess: () => closeModal(),
             onError: () => {
                 console.log("Errore durante la modifica del cliente");
             },
         });
+    };
+
+    const closeModal = () => {
+        modalRef.current.close();
     };
 
     return {
