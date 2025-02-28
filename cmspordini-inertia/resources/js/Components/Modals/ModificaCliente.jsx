@@ -1,67 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "@inertiajs/react";
+import React from "react";
 import Modal from "./Modal";
+import { useModificaCliente } from "../../Hooks/Components/Modals/useModificaCliente";
 
 export default function ModificaCliente({ cliente, onClose }) {
-    const { data, setData, patch, processing } = useForm({
-        ragione_sociale: "",
-        nome: "",
-        cognome: "",
-        partitaIVA: "",
-        indirizzo: "",
-        citta: "",
-        cap: "",
-        provincia: "",
-        emailcliente: "",
-        username: "",
-        password: "",
-    });
-
-    const [placeholderData, setPlaceholderData] = useState({
-        ragione_sociale: cliente.ragione_sociale || "",
-        nome: cliente.nome || "",
-        cognome: cliente.cognome || "",
-        partitaIVA: cliente.partitaIVA || "",
-        indirizzo: cliente.indirizzo || "",
-        citta: cliente.citta || "",
-        cap: cliente.cap || "",
-        provincia: cliente.provincia || "",
-        emailcliente: cliente.emailcliente || "",
-        username: cliente.username || "",
-        password: "",
-    });
-
-    useEffect(() => {
-        if (cliente) {
-            setPlaceholderData({
-                ragione_sociale: cliente.ragione_sociale,
-                nome: cliente.nome,
-                cognome: cliente.cognome,
-                partitaIVA: cliente.partitaIVA,
-                indirizzo: cliente.indirizzo,
-                citta: cliente.citta,
-                cap: cliente.cap,
-                provincia: cliente.provincia,
-                emailcliente: cliente.emailcliente,
-                username: cliente.username,
-                password: "",
-            });
-        }
-    }, [cliente]);
-
-    const handleChange = (e) => {
-        setData(e.target.name, e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        patch(`/operatore/gestione-clienti/modifica/${cliente.IDcliente}`, {
-            onSuccess: onClose,
-            onError: () => {
-                console.log("Errore durante la modifica del cliente");
-            },
-        });
-    };
+    const { data, processing, placeholderData, handleChange, handleSubmit } =
+        useModificaCliente({ cliente, onSuccess: onClose });
 
     return (
         <Modal.Overlay onClose={onClose}>
@@ -72,8 +15,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="ragione_sociale"
-                            placeholder={placeholderData.ragione_sociale}
                             value={data.ragione_sociale}
+                            placeholder={placeholderData.ragione_sociale}
                             onChange={handleChange}
                         />
                     </div>
@@ -82,8 +25,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="nome"
-                            placeholder={placeholderData.nome}
                             value={data.nome}
+                            placeholder={placeholderData.nome}
                             onChange={handleChange}
                         />
                     </div>
@@ -92,8 +35,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="cognome"
-                            placeholder={placeholderData.cognome}
                             value={data.cognome}
+                            placeholder={placeholderData.cognome}
                             onChange={handleChange}
                         />
                     </div>
@@ -102,8 +45,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="partitaIVA"
-                            placeholder={placeholderData.partitaIVA}
                             value={data.partitaIVA}
+                            placeholder={placeholderData.partitaIVA}
                             onChange={handleChange}
                         />
                     </div>
@@ -112,8 +55,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="indirizzo"
-                            placeholder={placeholderData.indirizzo}
                             value={data.indirizzo}
+                            placeholder={placeholderData.indirizzo}
                             onChange={handleChange}
                         />
                     </div>
@@ -122,8 +65,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="citta"
-                            placeholder={placeholderData.citta}
                             value={data.citta}
+                            placeholder={placeholderData.citta}
                             onChange={handleChange}
                         />
                     </div>
@@ -132,8 +75,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="number"
                             name="cap"
-                            placeholder={placeholderData.cap}
                             value={data.cap}
+                            placeholder={placeholderData.cap}
                             onChange={handleChange}
                         />
                     </div>
@@ -142,8 +85,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="provincia"
-                            placeholder={placeholderData.provincia}
                             value={data.provincia}
+                            placeholder={placeholderData.provincia}
                             onChange={handleChange}
                         />
                     </div>
@@ -152,8 +95,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="emailcliente"
-                            placeholder={placeholderData.emailcliente}
                             value={data.emailcliente}
+                            placeholder={placeholderData.emailcliente}
                             onChange={handleChange}
                         />
                     </div>
@@ -162,8 +105,8 @@ export default function ModificaCliente({ cliente, onClose }) {
                         <input
                             type="text"
                             name="username"
-                            placeholder={placeholderData.username}
                             value={data.username}
+                            placeholder={placeholderData.username}
                             onChange={handleChange}
                         />
                     </div>
@@ -173,6 +116,7 @@ export default function ModificaCliente({ cliente, onClose }) {
                             type="text"
                             name="password"
                             value={data.password}
+                            placeholder={placeholderData.password}
                             onChange={handleChange}
                         />
                     </div>

@@ -5,9 +5,12 @@ import CreazioneCliente from "../../Components/Modals/CreazioneCliente";
 import GestioneClientiTable from "../../Components/Tables/GestioneClientiTable";
 import ModificaCliente from "../../Components/Modals/ModificaCliente";
 import { useGestioneClienti } from "../../Hooks/Operatore/useGestioneClienti";
+import { useModal } from "../../Hooks/Components/Modals/useModal";
 
 export default function GestioneClienti({ clienti }) {
-    const { modal, openModal, closeModal, handleDelete } = useGestioneClienti();
+    const { modal, openModal, closeModal } = useModal();
+    const { handleDelete } = useGestioneClienti();
+    // const { modal, openModal, closeModal, handleDelete } = useGestioneClienti();
 
     return (
         <div id="gestione-clienti-container">
@@ -47,7 +50,7 @@ export default function GestioneClienti({ clienti }) {
 
             {modal.type === "modifica" && (
                 <ModificaCliente
-                    cliente={modal.cliente}
+                    cliente={modal.param}
                     onClose={() => closeModal()}
                 />
             )}

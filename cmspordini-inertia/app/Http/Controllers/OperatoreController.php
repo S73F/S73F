@@ -159,12 +159,44 @@ class OperatoreController extends Controller
         }
     }
 
-    public function delete($IDCliente)
+    public function deleteCliente($IDCliente)
     {
         $cliente = Cliente::findOrFail($IDCliente);
 
         $cliente->delete();
 
         return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente eliminato con successo']);
+    }
+
+    public function caricaLavorazione($IDordine, Request $request){
+        $ordine=Ordine::with('cliente')->findOrFail($IDordine);
+
+        try{
+        $request->validate([
+            'userfile' => 'required|file|mimes:zip,pdf,stl',
+            ], [
+                'required' => "L'inserimento del file è obbligatorio.",
+                'mimes' => 'Il file deve avere uno dei seguenti formati: :values.',
+            ]);
+
+            if ($request->hasFile('userfile') && $request->file('userfile')->isValid()) {
+                $file = $request->file('userfile');
+                $extension = $file->getClientOriginalExtension();
+                $newFileName = $ordine->cliente->ragione_sociale . "_" . strtoupper($ordine->PazienteCognome) . "_" . strtoupper($ordine->PazienteNome) . "_{$ordine->IDordine}_FINALE.{$extension}";
+
+                // Salva il file nella cartella storage/app/public/uploads
+                $file->storeAs('uploads', $newFileName, 'public');
+
+                // Aggiorna l'ordine con il nome del file
+                $ordine->update([
+                    'file_fin' => 1,
+                    'file_fin_nome' => $newFileName,
+                ]);
+                return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata con successo!']);
+            }
+        }catch (ValidationException $e){
+            $errors = $e->validator->errors();
+            return back()->withErrors($errors)->withInput();
+        }
     }
 }

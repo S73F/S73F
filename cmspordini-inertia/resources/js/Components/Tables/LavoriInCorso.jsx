@@ -1,7 +1,8 @@
 import React from "react";
 import Table from "./Table";
+import { useModal } from "../../Hooks/Components/Modals/useModal";
 
-const LavoriInCorso = ({ lavori, handleFile }) => {
+const LavoriInCorso = ({ lavori, handleFile, openModal }) => {
     return (
         <Table.Layout title={"Lavori in Corso"} data={lavori}>
             <Table.Content>
@@ -45,7 +46,17 @@ const LavoriInCorso = ({ lavori, handleFile }) => {
                             <td>
                                 {lavoro.operatore?.nome ?? ""}{" "}
                                 {lavoro.operatore?.cognome ?? ""} <hr />{" "}
-                                <a href="">Carica lavorazione</a>
+                                <button
+                                    className="btn-link"
+                                    onClick={() =>
+                                        openModal(
+                                            "caricamentoLavorazione",
+                                            lavoro.IDordine
+                                        )
+                                    }
+                                >
+                                    Carica lavorazione
+                                </button>
                             </td>
                             <td id="inizio-lavorazione">
                                 {lavoro.data_inizioLavorazione

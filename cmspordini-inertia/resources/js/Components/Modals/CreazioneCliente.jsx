@@ -1,5 +1,5 @@
 import React from "react";
-import { useCreazioneCliente } from "../../Hooks/Components/useCreazioneCliente";
+import { useCreazioneCliente } from "../../Hooks/Components/Modals/useCreazioneCliente";
 import Modal from "./Modal";
 
 export default function CreazioneCliente({ onClose }) {
