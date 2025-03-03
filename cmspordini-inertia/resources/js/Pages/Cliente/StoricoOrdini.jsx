@@ -32,7 +32,8 @@ export default function StoricoOrdini({ ordini }) {
                 </option>
             </select>
 
-            {ordini?.data.length > 0 && <StoricoOrdiniTable ordini={ordini} />}
+            {ordini?.length > 0 && <StoricoOrdiniTable ordini={ordini} />}
+            {/* {ordini?.data.length > 0 && <StoricoOrdiniTable ordini={ordini} />} */}
         </div>
     );
 }

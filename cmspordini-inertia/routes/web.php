@@ -25,7 +25,7 @@ Route::group(['middleware' => "auth:cliente"], function () {
     Route::post('/cliente/ordini/creazione', [OrdineController::class, 'creazione'])->name('creazioneOrdine');
     Route::get("/cliente/ordini/storico", [OrdineController::class, "showStorico"])->name("paginaStoricoOrdini");
     Route::get("/cliente/ordini/storico/{tempo}", [OrdineController::class, "getStorico"])->name("tabellaStoricoOrdini");
-    Route::get('/cliente/ordini/{id}', [OrdineController::class, 'generaPDF'])->name('clienteGeneraPDF');
+    Route::get('/cliente/ordini/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('clienteGeneraPDF');
 });
 
 Route::group(['middleware' => "auth:operatore"], function () {

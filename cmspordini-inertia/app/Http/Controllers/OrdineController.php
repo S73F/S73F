@@ -107,6 +107,7 @@ class OrdineController extends Controller
         }
 
         $ordini = $query->select(
+            'IDordine',
             'data',
             'medicoOrdinante',
             'PazienteNome',
@@ -115,7 +116,7 @@ class OrdineController extends Controller
             'data_inizioLavorazione',
             'stato',
             'data_spedizione'
-        )->orderBy('data', "desc")->paginate(10);
+        )->orderBy('data', "desc")->get();
 
         return Inertia::render('Cliente/StoricoOrdini', ['ordini' => $ordini]);
     }
