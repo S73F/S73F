@@ -1,4 +1,4 @@
-import { useForm } from "@inertiajs/react";
+import { router, useForm } from "@inertiajs/react";
 
 export const useLavorazione = ({ modalRef }) => {
     const { setData, post, processing } = useForm({

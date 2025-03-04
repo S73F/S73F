@@ -8,8 +8,13 @@ import Notification from "../../Components/Notification";
 import { useDashboard } from "../../Hooks/Operatore/useDashboard";
 
 export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
-    const { tipoLavori, setTipoLavori, handleFile, handleIncarico } =
-        useDashboard();
+    const {
+        tipoLavori,
+        setTipoLavori,
+        handleFile,
+        handleIncarico,
+        handleFileFinale,
+    } = useDashboard();
 
     return (
         <>
@@ -49,15 +54,19 @@ export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
                     <LavoriInCorso
                         lavori={lavoriInCorso}
                         handleFile={handleFile}
+                        handleIncarico={handleIncarico}
+                        handleFileFinale={handleFileFinale}
                     />
                 )}
 
                 {tipoLavori === "nuovi" && (
-                    <LavoriNuovi
-                        lavori={lavoriNuovi}
-                        handleFile={handleFile}
-                        handleIncarico={handleIncarico}
-                    />
+                    <>
+                        <LavoriNuovi
+                            lavori={lavoriNuovi}
+                            handleFile={handleFile}
+                            handleIncarico={handleIncarico}
+                        />
+                    </>
                 )}
             </div>
         </>

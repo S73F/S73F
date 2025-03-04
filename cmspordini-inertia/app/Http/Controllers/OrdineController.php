@@ -63,19 +63,16 @@ class OrdineController extends Controller
                 'data_cons' => $request->data_cons,
                 'ora_cons' => $request->ora_cons,
                 'stato' => 0,
+                'fileok'=>0,
                 'note' => $request->note ?? '',
                 'note_int' => '',
-                'note_ulti_mod' => now(),
-                'utente_modifica' => '-',
-                'fileok' => 0,
-                'file_fin' => 0,
             ]);
 
             // Gestione del file
             if ($request->hasFile('userfile') && $request->file('userfile')->isValid()) {
                 $file = $request->file('userfile');
                 $extension = $file->getClientOriginalExtension();
-                $newFileName = Auth::guard('cliente')->user()->ragione_sociale . "_{$request->paziente_cognome}_{$request->paziente_nome}_{$ordine->IDordine}.{$extension}";
+                $newFileName = Auth::guard('cliente')->user()->ragione_sociale . "_" . strtoupper($request->paziente_cognome) . "_" . strtoupper($request->paziente_nome) . "_" . $ordine->IDordine . "." . $extension;
 
                 // Salva il file nella cartella storage/app/public/uploads
                 $file->storeAs('uploads', $newFileName, 'public');
@@ -133,14 +130,35 @@ class OrdineController extends Controller
     public function aggiornaStato($IDordine, Request $request)
     {
         $ordine = Ordine::find($IDordine);
-        $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
 
-        return redirect()->intended('/operatore/dashboard')->with('success', 'Hai preso in carico il lavoro.');
+        if($ordine->stato==0){
+            $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
+            return redirect()->intended('/operatore/dashboard')->with('success', 'Hai preso in carico il lavoro.');
+        }else{
+            $ordine->update(['stato'=>2, 'data_spedizione'=>now()]);
+            return redirect()->intended('/operatore/dashboard')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
+        }
+
     }
 
     public function downloadFile($id)
     {
         $fileName = Ordine::where('IDordine', $id)->value('nomefile');
+
+        if (!$fileName) {
+            return redirect()->back()->with(['error' => 'File non trovato nel database.']);
+        }
+
+        if (Storage::disk('public')->exists("uploads/{$fileName}")) {
+            return Storage::disk('public')->download("uploads/{$fileName}");
+        } else {
+            return redirect()->back()->with(['error' => 'Il file non esiste nel server.']);
+        }
+    }
+
+    public function downloadFileFinale($id)
+    {
+        $fileName = Ordine::where('IDordine', $id)->value('file_fin_nome');
 
         if (!$fileName) {
             return redirect()->back()->with(['error' => 'File non trovato nel database.']);

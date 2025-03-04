@@ -3,13 +3,27 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const useDashboard = () => {
-    const [tipoLavori, setTipoLavori] = useState("inCorso");
+    const [tipoLavori, setTipoLavori] = useState("nuovi");
 
     const handleFile = (IDordine) => {
         window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
 
         setTimeout(() => {
             toast.success("Download del file in corso...", {
+                position: "top-center",
+                autoClose: 2000,
+                closeOnClick: false,
+                pauseOnHover: false,
+                theme: "dark",
+            });
+        }, 1000);
+    };
+
+    const handleFileFinale = (IDordine) => {
+        window.location.href = `/operatore/ordini-clienti/download-finale/${IDordine}`;
+
+        setTimeout(() => {
+            toast.success("Download del file finale in corso...", {
                 position: "top-center",
                 autoClose: 2000,
                 closeOnClick: false,
@@ -28,5 +42,6 @@ export const useDashboard = () => {
         setTipoLavori,
         handleFile,
         handleIncarico,
+        handleFileFinale,
     };
 };

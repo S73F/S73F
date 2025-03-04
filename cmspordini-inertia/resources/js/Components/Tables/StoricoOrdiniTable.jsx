@@ -3,24 +3,22 @@ import "../../../css/tableStyles.css";
 import DataTable from "react-data-table-component";
 import useStoricoOrdiniTable from "../../Hooks/Components/Tables/useStoricoOrdiniTable";
 import StoricoOrdiniTableExpanded from "./StoricoOrdiniTableExpanded";
+import { SearchBox } from "./SearchBox";
 
 export default function StoricoOrdiniTable({ ordini }) {
-    const { records, columns, handleFilter } = useStoricoOrdiniTable(ordini);
+    const { records, columns, handleFilter } = useStoricoOrdiniTable({
+        ordini,
+    });
 
     return (
         <>
-            <div id="search-box-container">
-                <input
-                    type="text"
-                    placeholder="Ricerca"
-                    onChange={handleFilter}
-                />
-            </div>
+            <SearchBox handleFilter={handleFilter} />
             <DataTable
                 className="custom-table"
                 columns={columns}
                 data={records}
                 expandableRows
+                expandOnRowClicked
                 expandableRowsComponent={StoricoOrdiniTableExpanded}
                 pagination
                 paginationComponentOptions={{

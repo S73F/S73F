@@ -42,6 +42,7 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::get('/operatore/ordini-clienti/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('operatoreGeneraPDF');
     Route::patch('/operatore/ordini-clienti/update/{id}', [OrdineController::class, 'aggiornaStato'])->name('aggiornaStato');
     Route::get('/operatore/ordini-clienti/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFile');
+    Route::get('/operatore/ordini-clienti/download-finale/{id}', [OrdineController::class, 'downloadFileFinale'])->name('downloadFileFinale');
     Route::get('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'showLavorazioneModal'])->name('showLavorazioneModal');
     Route::post('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'caricaLavorazione'])->name('caricaLavorazione');
 });

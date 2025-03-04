@@ -73,11 +73,10 @@ div .custom-table div {
     justify-content: center;
 }
 
-/* .custom-table div.rdt_TableHeadRow .rdt_TableCol .rdt_TableCol_Sortable div {
+.custom-table .last-modified {
+    color: red;
+    font-weight: 600;
 }
-
-.custom-table div.rdt_TableHeadRow .rdt_TableCol .rdt_TableCol_Sortable span {
-} */
 
 .custom-table .rdt_TableRow {
     border-bottom: 1px solid #ddd;
@@ -97,16 +96,20 @@ div .custom-table div {
 
 .custom-table .rdt_TableHeadRow div {
     padding: 0.2rem;
+    line-height: 1rem;
 }
 
 .custom-table .rdt_TableCell {
-    padding: 1rem;
+    padding: 0.8rem;
 }
 
 .custom-table .rdt_TableHeadRow div,
 .custom-table .rdt_TableCell div {
     width: 100%;
     text-align: center;
+}
+
+.hr-row {
     display: flex;
     flex-direction: column;
 }
@@ -121,15 +124,15 @@ div .custom-table div {
     background-color: var(--main-bg-color);
 }
 
-/* .rdt_ExpanderRow .custom-table div .rdt_Table .rdt_TableHead {
-    background-color: var(--hover-color);
-    height: 2.5rem;
-    font-size: 12px;
-}
+.rdt_ExpanderRow .custom-table div .rdt_Table .rdt_TableHead,
 .rdt_ExpanderRow .custom-table div .rdt_Table .rdt_TableCol {
     height: 2.5rem;
     font-size: 12px;
-} */
+}
+
+.rdt_ExpanderRow .custom-table div.rdt_TableHeadRow div {
+    background-color: rgb(114, 119, 114);
+}
 
 .rdt_Pagination {
     margin-top: 1rem;
@@ -159,6 +162,7 @@ div .custom-table div {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+#dashboard-container-operatore div .rdt_Pagination div button:hover,
 #orders-history div .rdt_Pagination div button:hover {
     background-color: var(--btn-color);
     color: white;

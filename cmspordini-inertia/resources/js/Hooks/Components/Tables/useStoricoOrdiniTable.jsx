@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState, useMemo } from "react";
 
-export default function useStoricoOrdiniTable(ordini) {
+export default function useStoricoOrdiniTable({ ordini }) {
     const columns = useMemo(
         () => [
             {

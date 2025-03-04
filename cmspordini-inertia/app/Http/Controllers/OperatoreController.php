@@ -16,9 +16,9 @@ class OperatoreController extends Controller
 {
     public function showDashboard()
     {
-        $lavoriInCorso = Ordine::with(["cliente", "operatore"])->where("stato", '!=', 0)->orderBy('data_inizioLavorazione', 'desc')->paginate(10);
+        $lavoriInCorso = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where("stato", 1)->orderBy('data_inizioLavorazione', 'desc')->get();
 
-        $lavoriNuovi = Ordine::with(["cliente", "operatore"])->where('stato', 0)->orderBy('data', 'desc')->get();
+        $lavoriNuovi = Ordine::with(["cliente:IDcliente,ragione_sociale", "operatore:IDoperatore,nome,cognome"])->where('stato', 0)->orderBy('data', 'desc')->get();
 
         return Inertia::render("Operatore/Dashboard", [
             "lavoriInCorso" => $lavoriInCorso,
@@ -205,6 +205,7 @@ class OperatoreController extends Controller
 
                 // Aggiorna l'ordine con il nome del file
                 $ordine->update([
+                    'note_ulti_mod'=>now(),
                     'file_fin' => 1,
                     'file_fin_nome' => $newFileName,
                 ]);
