@@ -27,7 +27,7 @@ export default function OrdiniClienti({ clienti, ordini }) {
                 ))}
             </select>
 
-            {ordini?.data.length > 0 && <OrdiniClienteTable ordini={ordini} />}
+            {ordini?.length > 0 && <OrdiniClienteTable ordini={ordini} />}
         </div>
     );
 }

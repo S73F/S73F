@@ -60,13 +60,11 @@ export default function Dashboard({ user, lavoriInCorso, lavoriNuovi }) {
                 )}
 
                 {tipoLavori === "nuovi" && (
-                    <>
-                        <LavoriNuovi
-                            lavori={lavoriNuovi}
-                            handleFile={handleFile}
-                            handleIncarico={handleIncarico}
-                        />
-                    </>
+                    <LavoriNuovi
+                        lavori={lavoriNuovi}
+                        handleFile={handleFile}
+                        handleIncarico={handleIncarico}
+                    />
                 )}
             </div>
         </>

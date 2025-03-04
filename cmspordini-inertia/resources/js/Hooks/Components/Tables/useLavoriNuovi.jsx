@@ -3,25 +3,17 @@ import React, { useEffect, useMemo, useState } from "react";
 export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(() => [
         {
-            name: (
-                <div className="hr-row">
-                    {" "}
-                    Richiedente
-                    <hr />
-                    Ragione sociale
-                </div>
-            ),
-            cell: (row) => (
-                <div className="hr-row">
-                    {row.medicoOrdinante}
-                    <hr />
-                    {row.cliente.ragione_sociale}
-                </div>
-            ),
+            name: "Richiedente",
+            selector: (row) => row.medicoOrdinante,
+            sortable: true,
         },
         {
             name: "Paziente",
-            selector: (row) => `${row.PazienteCognome} ${row.PazienteNome}`,
+            cell: (row) => (
+                <a>
+                    {row.PazienteCognome} {row.PazienteNome}
+                </a>
+            ),
             sortable: true,
         },
         {
@@ -72,11 +64,20 @@ export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
         const searchText = event.target.value.toLowerCase();
 
         const newLavori = lavori.filter((row) => {
+            const pazienteCognomeNome =
+                row.PazienteCognome + " " + row.PazienteNome;
+            const pazienteNomeCognome =
+                row.PazienteNome + " " + row.PazienteCognome;
+
             return (
                 row.medicoOrdinante.toLowerCase().includes(searchText) ||
-                row.PazienteNome.toLowerCase().includes(searchText) ||
-                row.PazienteCognome.toLowerCase().includes(searchText) ||
-                row.data.includes(searchText)
+                pazienteCognomeNome.toLowerCase().includes(searchText) ||
+                pazienteNomeCognome.toLowerCase().includes(searchText) ||
+                row.data.includes(searchText) ||
+                row.cliente.ragione_sociale
+                    .toLowerCase()
+                    .includes(searchText) ||
+                row.cliente.emailcliente.toLowerCase().includes(searchText)
             );
         });
 

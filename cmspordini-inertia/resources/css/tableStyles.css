@@ -170,14 +170,6 @@ div .custom-table div {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
-.rdt_Pagination .active {
-    background: var(--btn-color);
-    color: white;
-    font-weight: bold;
-    transform: scale(1.15); /* Pulsante attivo più grande */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
 .rdt_Pagination button:disabled {
     pointer-events: none;
     border-color: var(--border-color);

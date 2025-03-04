@@ -1,10 +1,8 @@
 import React from "react";
-import Table from "./Table";
-import { ModalLink } from "@inertiaui/modal-react";
 import { useLavoriInCorso } from "../../Hooks/Components/Tables/useLavoriInCorso";
 import DataTable from "react-data-table-component";
 import { SearchBox } from "./SearchBox";
-import LavoriInCorsoExpanded from "./LavoriInCorsoExpanded";
+import LavoriExpanded from "./LavoriExpanded";
 
 const LavoriInCorso = ({
     lavori,
@@ -29,7 +27,7 @@ const LavoriInCorso = ({
                 data={records}
                 expandableRows
                 expandOnRowClicked
-                expandableRowsComponent={LavoriInCorsoExpanded}
+                expandableRowsComponent={LavoriExpanded}
                 pagination
                 paginationComponentOptions={{
                     rowsPerPageText: "Righe per pagina",
@@ -37,7 +35,6 @@ const LavoriInCorso = ({
                     selectAllRowsItem: true,
                     selectAllRowsItemText: "Tutte",
                 }}
-                fixedHeader
             />
         </>
     );

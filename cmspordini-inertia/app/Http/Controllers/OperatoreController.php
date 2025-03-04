@@ -18,7 +18,7 @@ class OperatoreController extends Controller
     {
         $lavoriInCorso = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where("stato", 1)->orderBy('data_inizioLavorazione', 'desc')->get();
 
-        $lavoriNuovi = Ordine::with(["cliente:IDcliente,ragione_sociale", "operatore:IDoperatore,nome,cognome"])->where('stato', 0)->orderBy('data', 'desc')->get();
+        $lavoriNuovi = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where('stato', 0)->orderBy('data', 'desc')->get();
 
         return Inertia::render("Operatore/Dashboard", [
             "lavoriInCorso" => $lavoriInCorso,
@@ -69,12 +69,17 @@ class OperatoreController extends Controller
                 'file_fin_nome'
             )
             ->orderByDesc('data')
-            ->paginate(10);
+            ->get();
 
-        return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti, "ordini" => $ordini]);
+        if ($IDcliente) {
+            return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti, "ordini" => $ordini]);
+        }
+
+        return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti]);
     }
 
-    public function showCreateClienteModal(){
+    public function showCreateClienteModal()
+    {
         return Inertia::render('Modals/CreazioneCliente');
     }
 
@@ -121,10 +126,11 @@ class OperatoreController extends Controller
         }
     }
 
-    public function showModificaClienteModal($IDCliente){
-        $cliente= Cliente::find($IDCliente);
+    public function showModificaClienteModal($IDCliente)
+    {
+        $cliente = Cliente::find($IDCliente);
 
-        return Inertia::render("Modals/ModificaCliente", ["cliente"=>$cliente]);
+        return Inertia::render("Modals/ModificaCliente", ["cliente" => $cliente]);
     }
 
     public function patchCliente(Request $request, $IDcliente)
@@ -179,17 +185,19 @@ class OperatoreController extends Controller
         return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente eliminato con successo']);
     }
 
-    public function showLavorazioneModal($IDordine){
+    public function showLavorazioneModal($IDordine)
+    {
         $ordine = Ordine::with('cliente')->findOrFail($IDordine);
         return Inertia::render('Modals/Lavorazione', ['ordine' => $ordine->IDordine]);
     }
 
-    public function caricaLavorazione($IDordine, Request $request){
-        $ordine=Ordine::with('cliente')->findOrFail($IDordine);
+    public function caricaLavorazione($IDordine, Request $request)
+    {
+        $ordine = Ordine::with('cliente')->findOrFail($IDordine);
 
-        try{
-        $request->validate([
-            'userfile' => 'required|file|mimes:zip,pdf,stl',
+        try {
+            $request->validate([
+                'userfile' => 'required|file|mimes:zip,pdf,stl',
             ], [
                 'required' => "L'inserimento del file è obbligatorio.",
                 'mimes' => 'Il file deve avere uno dei seguenti formati: :values.',
@@ -205,13 +213,13 @@ class OperatoreController extends Controller
 
                 // Aggiorna l'ordine con il nome del file
                 $ordine->update([
-                    'note_ulti_mod'=>now(),
+                    'note_ulti_mod' => now(),
                     'file_fin' => 1,
                     'file_fin_nome' => $newFileName,
                 ]);
                 return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata con successo!']);
             }
-        }catch (ValidationException $e){
+        } catch (ValidationException $e) {
             $errors = $e->validator->errors();
 
             return redirect()->back()->with(["error" => "Errore durante il caricamento della lavorazione", "validation_errors" => $errors])->withErrors($errors)->withInput();
