@@ -1,5 +1,6 @@
 #search-box-container {
     width: 100%;
+    height: 3rem;
     display: flex;
     justify-content: end;
     margin-bottom: 1rem;
@@ -7,6 +8,7 @@
 
 #search-box-container input {
     width: 20rem;
+    height: 100%;
     padding: 0.8rem 1rem;
     border-radius: 10px;
     border: 1px solid var(--border-color);
@@ -92,6 +94,7 @@ div .custom-table div {
     color: #333;
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 .custom-table .rdt_TableHeadRow div {
@@ -175,4 +178,40 @@ div .custom-table div {
     border-color: var(--border-color);
     opacity: 0.6;
     box-shadow: none;
+}
+
+#gestione-clienti-interactions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+}
+
+#gestione-clienti-interactions #search-box-container {
+    margin: 0;
+}
+
+#gestione-clienti-interactions {
+    margin: 1rem;
+}
+
+#gestione-clienti-interactions #add-cliente {
+    text-decoration: none;
+    width: 3rem;
+    height: 3rem;
+    font-size: 5rem;
+    background-color: var(--btn-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.1s ease-in;
+}
+
+#gestione-clienti-interactions #add-cliente:hover {
+    transform: scale(1.05);
 }

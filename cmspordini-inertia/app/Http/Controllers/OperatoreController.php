@@ -29,7 +29,7 @@ class OperatoreController extends Controller
     public function showGestioneClienti()
     {
         try {
-            $clienti = Cliente::orderBy('IDcliente', 'desc')->paginate(10);
+            $clienti = Cliente::orderBy('IDcliente', 'desc')->get();
             return Inertia::render('Operatore/GestioneClienti', ["clienti" => $clienti]);
         } catch (\Exception $e) {
             return redirect()->back()->with(["error" => "Errore durante il recupero dei clienti"]);
