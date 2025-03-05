@@ -63,7 +63,7 @@ class OrdineController extends Controller
                 'data_cons' => $request->data_cons,
                 'ora_cons' => $request->ora_cons,
                 'stato' => 0,
-                'fileok'=>0,
+                'fileok' => 0,
                 'note' => $request->note ?? '',
                 'note_int' => '',
             ]);
@@ -118,6 +118,13 @@ class OrdineController extends Controller
         return Inertia::render('Cliente/StoricoOrdini', ['ordini' => $ordini]);
     }
 
+    public function getNumeroLavori()
+    {
+        $numeroLavoriNuovi = Ordine::where('stato', 0)->count();
+
+        return $numeroLavoriNuovi;
+    }
+
     public function generaPDF($id)
     {
         $ordine = Ordine::with('cliente')->find($id);
@@ -131,14 +138,13 @@ class OrdineController extends Controller
     {
         $ordine = Ordine::find($IDordine);
 
-        if($ordine->stato==0){
+        if ($ordine->stato == 0) {
             $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
             return redirect()->intended('/operatore/dashboard')->with('success', 'Hai preso in carico il lavoro.');
-        }else{
-            $ordine->update(['stato'=>2, 'data_spedizione'=>now()]);
+        } else {
+            $ordine->update(['stato' => 2, 'data_spedizione' => now()]);
             return redirect()->intended('/operatore/dashboard')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
         }
-
     }
 
     public function downloadFile($id)

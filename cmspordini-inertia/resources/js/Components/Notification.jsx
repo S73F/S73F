@@ -8,7 +8,7 @@ const notificationLayout = ({ children }) => {
 const lavoriNuoviNotification = ({ lavoriNuovi, onClick }) => {
     return (
         <div id="lavori-nuovi-btn" onClick={onClick}>
-            {lavoriNuovi.length}
+            {lavoriNuovi}
         </div>
     );
 };

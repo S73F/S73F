@@ -1,12 +1,22 @@
-import { ModalLink } from "@inertiaui/modal-react";
 import React, { useEffect, useMemo, useState } from "react";
+import { router } from "@inertiajs/react";
+import { ModalLink } from "@inertiaui/modal-react";
 
-export const useLavoriInCorso = ({
-    lavori,
-    handleFile,
-    handleIncarico,
-    handleFileFinale,
-}) => {
+export const useLavoriInCorso = ({ handleFile, handleFileFinale }) => {
+    const [lavori, setLavori] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("/operatore/lavori/inCorso")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Lavori ricevuti: ", data);
+                setLavori(data.lavori);
+            })
+            .catch((error) => console.log(error))
+            .finally(() => setLoading(false));
+    }, []);
+
     const columns = useMemo(
         () => [
             {
@@ -109,12 +119,6 @@ export const useLavoriInCorso = ({
         []
     );
 
-    const [records, setRecords] = useState(lavori);
-
-    useEffect(() => {
-        setRecords(lavori);
-    }, [lavori]);
-
     const handleFilter = (event) => {
         const searchText = event.target.value.toLowerCase();
 
@@ -151,5 +155,21 @@ export const useLavoriInCorso = ({
         setRecords(newLavori);
     };
 
-    return { records, columns, handleFilter };
+    function handleIncarico(IDordine) {
+        router.patch(`/operatore/ordini-clienti/update/${IDordine}`);
+
+        setLavori((prevLavori) => {
+            if (!prevLavori || prevLavori.length === 0) {
+                console.error("Dati non disponibili");
+                return prevLavori;
+            }
+
+            const updatedLavori = prevLavori.filter(
+                (row) => row.IDordine !== IDordine
+            );
+            return updatedLavori;
+        });
+    }
+
+    return { loading, lavori, columns, handleFilter };
 };

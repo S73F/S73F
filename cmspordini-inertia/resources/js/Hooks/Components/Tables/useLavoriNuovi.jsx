@@ -1,6 +1,21 @@
+import { router } from "@inertiajs/react";
 import React, { useEffect, useMemo, useState } from "react";
 
-export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
+export const useLavoriNuovi = ({ handleFile }) => {
+    const [lavori, setLavori] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("/operatore/lavori/nuovi")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Lavori ricevuti: ", data);
+                setLavori(data.lavori);
+            })
+            .catch((error) => console.log(error))
+            .finally(() => setLoading(false));
+    }, []);
+
     const columns = useMemo(() => [
         {
             name: "Richiedente",
@@ -54,12 +69,6 @@ export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
         },
     ]);
 
-    const [records, setRecords] = useState(lavori);
-
-    useEffect(() => {
-        setRecords(lavori);
-    }, [lavori]);
-
     const handleFilter = (event) => {
         const searchText = event.target.value.toLowerCase();
 
@@ -81,8 +90,24 @@ export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
             );
         });
 
-        setRecords(newLavori);
+        setLavori(newLavori);
     };
 
-    return { records, columns, handleFilter };
+    function handleIncarico(IDordine) {
+        router.patch(`/operatore/ordini-clienti/update/${IDordine}`);
+
+        setLavori((prevLavori) => {
+            if (!prevLavori || prevLavori.length === 0) {
+                console.error("Dati non disponibili");
+                return prevLavori;
+            }
+
+            const updatedLavori = prevLavori.filter(
+                (row) => row.IDordine !== IDordine
+            );
+            return updatedLavori;
+        });
+    }
+
+    return { loading, lavori, columns, handleFilter };
 };

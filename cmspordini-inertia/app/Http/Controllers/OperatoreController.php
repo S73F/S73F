@@ -16,14 +16,22 @@ class OperatoreController extends Controller
 {
     public function showDashboard()
     {
-        $lavoriInCorso = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where("stato", 1)->orderBy('data_inizioLavorazione', 'desc')->get();
+        return Inertia::render("Operatore/Dashboard");
+    }
 
-        $lavoriNuovi = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where('stato', 0)->orderBy('data', 'desc')->get();
+    public function showLavori($tipo)
+    {
+        if ($tipo == "nuovi") {
+            $lavori = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where('stato', 0)->orderBy('data', 'desc')->get();
 
-        return Inertia::render("Operatore/Dashboard", [
-            "lavoriInCorso" => $lavoriInCorso,
-            "lavoriNuovi" => $lavoriNuovi
-        ]);
+        }
+
+        if ($tipo == "inCorso") {
+            $lavori = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where('stato', 1)->orderBy('data_inizioLavorazione', 'desc')->get();
+
+        }
+
+        return response()->json(["lavori" => $lavori]);
     }
 
     public function showGestioneClienti()
@@ -224,5 +232,10 @@ class OperatoreController extends Controller
 
             return redirect()->back()->with(["error" => "Errore durante il caricamento della lavorazione", "validation_errors" => $errors])->withErrors($errors)->withInput();
         }
+    }
+
+    public function getAuthenticatedUser()
+    {
+        return response()->json(Auth::user());
     }
 }

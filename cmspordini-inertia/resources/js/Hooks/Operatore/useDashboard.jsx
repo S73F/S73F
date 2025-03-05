@@ -1,9 +1,30 @@
 import { router } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export const useDashboard = () => {
-    const [tipoLavori, setTipoLavori] = useState("nuovi");
+    const [tipoLavori, setTipoLavori] = useState("inCorso");
+    const [numeroLavoriNuovi, setNumeroLavoriNuovi] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("/operatore/lavori/contatore-nuovi")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then((data) => {
+                setNumeroLavoriNuovi(data);
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error("Errore nel recupero dei lavori nuovi:", error);
+                setNumeroLavoriNuovi(0);
+            })
+            .finally(() => setLoading(false));
+    }, []);
 
     const handleFile = (IDordine) => {
         window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
@@ -33,15 +54,12 @@ export const useDashboard = () => {
         }, 1000);
     };
 
-    const handleIncarico = (IDordine) => {
-        router.patch(`/operatore/ordini-clienti/update/${IDordine}`);
-    };
-
     return {
         tipoLavori,
         setTipoLavori,
         handleFile,
-        handleIncarico,
         handleFileFinale,
+        numeroLavoriNuovi,
+        loading,
     };
 };
