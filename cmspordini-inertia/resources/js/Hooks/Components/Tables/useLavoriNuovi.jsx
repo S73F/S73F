@@ -1,20 +1,7 @@
-import { router } from "@inertiajs/react";
 import React, { useEffect, useMemo, useState } from "react";
 
-export const useLavoriNuovi = ({ handleFile }) => {
-    const [lavori, setLavori] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetch("/operatore/lavori/nuovi")
-            .then((response) => response.json())
-            .then((data) => {
-                console.log("Lavori ricevuti: ", data);
-                setLavori(data.lavori);
-            })
-            .catch((error) => console.log(error))
-            .finally(() => setLoading(false));
-    }, []);
+export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
+    const [records, setRecords] = useState([]);
 
     const columns = useMemo(() => [
         {
@@ -61,13 +48,17 @@ export const useLavoriNuovi = ({ handleFile }) => {
             cell: (row) => (
                 <button
                     className="btn-link"
-                    onClick={() => handleIncarico(row.IDordine)}
+                    onClick={() => handleIncarico(row.IDordine, 0)}
                 >
                     Accetta incarico
                 </button>
             ),
         },
     ]);
+
+    useEffect(() => {
+        setRecords(lavori ?? []);
+    }, [lavori]);
 
     const handleFilter = (event) => {
         const searchText = event.target.value.toLowerCase();
@@ -90,24 +81,8 @@ export const useLavoriNuovi = ({ handleFile }) => {
             );
         });
 
-        setLavori(newLavori);
+        setRecords(newLavori);
     };
 
-    function handleIncarico(IDordine) {
-        router.patch(`/operatore/ordini-clienti/update/${IDordine}`);
-
-        setLavori((prevLavori) => {
-            if (!prevLavori || prevLavori.length === 0) {
-                console.error("Dati non disponibili");
-                return prevLavori;
-            }
-
-            const updatedLavori = prevLavori.filter(
-                (row) => row.IDordine !== IDordine
-            );
-            return updatedLavori;
-        });
-    }
-
-    return { loading, lavori, columns, handleFilter };
+    return { columns, records, handleFilter };
 };

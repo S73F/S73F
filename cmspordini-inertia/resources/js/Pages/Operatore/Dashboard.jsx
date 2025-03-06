@@ -13,6 +13,9 @@ export default function Dashboard({ user }) {
         setTipoLavori,
         handleFile,
         handleFileFinale,
+        handleIncarico,
+        lavori,
+        setLavori,
         numeroLavoriNuovi,
         loading,
     } = useDashboard();
@@ -55,13 +58,21 @@ export default function Dashboard({ user }) {
 
                 {tipoLavori === "inCorso" && (
                     <LavoriInCorso
+                        lavori={lavori}
                         handleFile={handleFile}
                         handleFileFinale={handleFileFinale}
+                        handleIncarico={handleIncarico}
+                        loading={loading}
                     />
                 )}
 
                 {tipoLavori === "nuovi" && (
-                    <LavoriNuovi handleFile={handleFile} />
+                    <LavoriNuovi
+                        lavori={lavori}
+                        handleFile={handleFile}
+                        handleIncarico={handleIncarico}
+                        loading={loading}
+                    />
                 )}
             </div>
         </>

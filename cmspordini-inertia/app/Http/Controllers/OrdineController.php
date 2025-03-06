@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ordine;
+use ErrorException;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -138,12 +140,24 @@ class OrdineController extends Controller
     {
         $ordine = Ordine::find($IDordine);
 
-        if ($ordine->stato == 0) {
-            $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
-            return redirect()->intended('/operatore/dashboard')->with('success', 'Hai preso in carico il lavoro.');
-        } else {
-            $ordine->update(['stato' => 2, 'data_spedizione' => now()]);
-            return redirect()->intended('/operatore/dashboard')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
+        if (!$ordine) {
+            return redirect()->back()->withErrors('Ordine non trovato');
+        }
+
+        try {
+            switch ($ordine->stato) {
+                case 0:
+                    $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
+                    return redirect()->intended('/operatore/dashboard')->with('success', 'Hai preso in carico il lavoro.');
+                case 1:
+                    $ordine->update(['stato' => 2, 'data_spedizione' => now()]);
+                    return redirect()->intended('/operatore/dashboard')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
+                default:
+                    throw new Exception("Stato dell'ordine non valido.");
+            }
+        } catch (Exception $e) {
+            $errors = $e->getMessage();
+            return redirect()->back()->with('error', 'ATTENZIONE: si è verificato un errore. Riprova più tardi.')->withErrors($errors);
         }
     }
 

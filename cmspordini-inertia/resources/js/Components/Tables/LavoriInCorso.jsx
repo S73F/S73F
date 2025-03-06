@@ -4,10 +4,18 @@ import DataTable from "react-data-table-component";
 import { SearchBox } from "./SearchBox";
 import LavoriExpanded from "./LavoriExpanded";
 
-const LavoriInCorso = ({ handleFile, handleFileFinale }) => {
-    const { loading, lavori, columns, handleFilter } = useLavoriInCorso({
+const LavoriInCorso = ({
+    lavori,
+    handleFile,
+    handleFileFinale,
+    handleIncarico,
+    loading,
+}) => {
+    const { columns, records, handleFilter } = useLavoriInCorso({
+        lavori,
         handleFile,
         handleFileFinale,
+        handleIncarico,
     });
 
     if (loading) {
@@ -26,7 +34,7 @@ const LavoriInCorso = ({ handleFile, handleFileFinale }) => {
                 <DataTable
                     className="custom-table"
                     columns={columns}
-                    data={lavori}
+                    data={records}
                     expandableRows
                     expandOnRowClicked
                     expandableRowsComponent={LavoriExpanded}

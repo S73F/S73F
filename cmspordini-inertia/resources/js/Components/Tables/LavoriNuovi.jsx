@@ -1,13 +1,15 @@
-import React, { useMemo } from "react";
+import React from "react";
 import "../../../css/tableStyles.css";
 import DataTable from "react-data-table-component";
 import { useLavoriNuovi } from "../../Hooks/Components/Tables/useLavoriNuovi";
 import { SearchBox } from "./SearchBox";
 import LavoriExpanded from "./LavoriExpanded";
 
-const LavoriNuovi = ({ handleFile }) => {
-    const { loading, lavori, columns, handleFilter } = useLavoriNuovi({
+const LavoriNuovi = ({ lavori, handleFile, handleIncarico, loading }) => {
+    const { columns, records, handleFilter } = useLavoriNuovi({
+        lavori,
         handleFile,
+        handleIncarico,
     });
 
     if (loading) {
@@ -26,7 +28,7 @@ const LavoriNuovi = ({ handleFile }) => {
                 <DataTable
                     className="custom-table"
                     columns={columns}
-                    data={lavori}
+                    data={records}
                     expandableRows
                     expandableRowsComponent={LavoriExpanded}
                     expandOnRowClicked

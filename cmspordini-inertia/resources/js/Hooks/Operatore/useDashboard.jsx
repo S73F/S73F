@@ -4,26 +4,27 @@ import { toast } from "react-toastify";
 
 export const useDashboard = () => {
     const [tipoLavori, setTipoLavori] = useState("inCorso");
-    const [numeroLavoriNuovi, setNumeroLavoriNuovi] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [lavori, setLavori] = useState([]);
+    const [numeroLavoriNuovi, setNumeroLavoriNuovi] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        fetch("/operatore/lavori/contatore-nuovi")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.text();
-            })
+        setLoading(true);
+        fetch(`/operatore/lavori/${tipoLavori}`)
+            .then((response) => response.json())
             .then((data) => {
-                setNumeroLavoriNuovi(data);
-                console.log(data);
+                console.log("Lavori ricevuti: ", data);
+                setLavori(data.lavori);
             })
-            .catch((error) => {
-                console.error("Errore nel recupero dei lavori nuovi:", error);
-                setNumeroLavoriNuovi(0);
-            })
+            .catch((error) => console.log(error))
             .finally(() => setLoading(false));
+    }, [tipoLavori]);
+
+    useEffect(() => {
+        fetch(`/operatore/lavori/contatore-nuovi`)
+            .then((response) => response.text())
+            .then((data) => setNumeroLavoriNuovi(data))
+            .catch((error) => console.log(error));
     }, []);
 
     const handleFile = (IDordine) => {
@@ -54,11 +55,44 @@ export const useDashboard = () => {
         }, 1000);
     };
 
+    function handleIncarico(IDordine, stato) {
+        router.patch(
+            `/operatore/ordini-clienti/update/${IDordine}`,
+            {},
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setLavori((prevLavori) => {
+                        if (!prevLavori || prevLavori.length === 0) {
+                            console.error("Dati non disponibili");
+                            return prevLavori;
+                        }
+
+                        const updatedLavori = prevLavori.filter(
+                            (row) => row.IDordine !== IDordine
+                        );
+
+                        if (stato === 0)
+                            setNumeroLavoriNuovi(prevLavori.length - 1);
+
+                        return updatedLavori;
+                    });
+                },
+                onError: (errors) => {
+                    console.log(errors);
+                },
+            }
+        );
+    }
+
     return {
         tipoLavori,
         setTipoLavori,
         handleFile,
         handleFileFinale,
+        handleIncarico,
+        lavori,
+        setLavori,
         numeroLavoriNuovi,
         loading,
     };
