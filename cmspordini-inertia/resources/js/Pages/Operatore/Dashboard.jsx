@@ -15,7 +15,6 @@ export default function Dashboard({ user }) {
         handleFileFinale,
         handleIncarico,
         lavori,
-        setLavori,
         numeroLavoriNuovi,
         loading,
     } = useDashboard();

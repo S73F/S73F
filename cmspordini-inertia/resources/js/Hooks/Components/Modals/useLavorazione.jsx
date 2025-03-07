@@ -14,7 +14,10 @@ export const useLavorazione = ({ modalRef }) => {
         e.preventDefault();
         post(`/operatore/ordini-clienti/caricamento-lavorazione/${IDordine}`, {
             forceFormData: true, // Indica che c'è un file
-            onSuccess: () => closeModal(),
+            preserveScroll: true,
+            onSuccess: () => {
+                closeModal();
+            },
             onError: (errors) => {
                 console.log(errors);
             },
@@ -25,5 +28,5 @@ export const useLavorazione = ({ modalRef }) => {
         modalRef.current.close();
     }
 
-    return { handleFileChange, handleLavorazione, processing };
+    return { handleFileChange, handleLavorazione, processing, closeModal };
 };

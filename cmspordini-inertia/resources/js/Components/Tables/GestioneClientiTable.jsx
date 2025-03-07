@@ -4,10 +4,9 @@ import { SearchBox } from "./SearchBox";
 import DataTable from "react-data-table-component";
 import { ModalLink } from "@inertiaui/modal-react";
 
-export default function GestioneClientiTable({ clienti, handleDelete }) {
+export default function GestioneClientiTable({ clienti }) {
     const { records, columns, handleFilter } = useGestioneClientiTable({
         clienti,
-        handleDelete,
     });
 
     return (

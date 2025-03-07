@@ -23,6 +23,11 @@
     max-width: 80%;
 }
 
+.im-modal-wrapper:has(#eliminazione-cliente-container),
+.im-modal-wrapper:has(#caricamento-lavorazione-container) {
+    max-width: 50%;
+}
+
 .im-modal-container form {
     display: flex;
     flex-direction: row;
@@ -61,6 +66,26 @@
 
 #btns-container {
     width: 100%;
+}
+
+#eliminazione-cliente-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#eliminazione-cliente-container p {
+    font-size: 1.2rem;
+}
+
+#caricamento-lavorazione-container .form-field {
+    margin: 0 auto;
+    width: 60%;
+}
+
+#cliente-cognome-nome {
+    font-weight: 600;
 }
 
 .modal-form-btn {

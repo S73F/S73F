@@ -40,7 +40,7 @@ class OperatoreController extends Controller
         try {
             $clienti = Cliente::orderBy('IDcliente', 'desc')->get();
             return Inertia::render('Operatore/GestioneClienti', ["clienti" => $clienti]);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect()->back()->with(["error" => "Errore durante il recupero dei clienti"]);
         }
     }
@@ -190,8 +190,15 @@ class OperatoreController extends Controller
             return redirect()->back()->with(["error" => "Errore durante la modifica del cliente", "validation_errors" => $errors])->withErrors($errors)->withInput();
         } catch (Exception $e) {
             $error = $e->getMessage();
-            return redirect()->back()->with("error", "Errore durante la modifica del cliente")->withErrors($error);
+            return redirect()->back()->with("error", $error)->withErrors($error);
         }
+    }
+
+    public function showEliminazioneClienteModal($IDCliente)
+    {
+        $cliente = Cliente::find($IDCliente);
+
+        return Inertia::render("Modals/EliminazioneCliente", ["cliente" => $cliente]);
     }
 
     public function deleteCliente($IDCliente)
@@ -240,7 +247,7 @@ class OperatoreController extends Controller
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();
 
-            return redirect()->back()->with(["error" => "Errore durante il caricamento della lavorazione", "validation_errors" => $errors])->withErrors($errors)->withInput();
+            return redirect()->back()->with("error", "Errore durante il caricamento della lavorazione")->withErrors($errors)->withInput();
         }
     }
 

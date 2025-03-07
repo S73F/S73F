@@ -39,7 +39,8 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::post('/operatore/gestione-clienti/creazione', [OperatoreController::class, 'createCliente'])->name('createCliente');
     Route::get('/operatore/gestione-clienti/modifica/{id}', [OperatoreController::class, 'showModificaClienteModal'])->name('showModificaClienteModal');
     Route::patch('/operatore/gestione-clienti/modifica/{id}', [OperatoreController::class, 'patchCliente'])->name('patchCliente');
-    Route::delete('/operatore/gestione-clienti/cancellazione/{id}', [OperatoreController::class, 'deleteCliente'])->name('deleteCliente');
+    Route::get('/operatore/gestione-clienti/eliminazione/{id}', [OperatoreController::class, 'showEliminazioneClienteModal'])->name('showEliminazioneClienteModal');
+    Route::delete('/operatore/gestione-clienti/eliminazione/{id}', [OperatoreController::class, 'deleteCliente'])->name('deleteCliente');
     Route::get('/operatore/ordini-clienti', [OperatoreController::class, 'showOrdiniClienti'])->name('showOrdiniClienti');
     Route::get('/operatore/ordini-clienti/{id}', [OperatoreController::class, 'showOrdiniCliente'])->name('showOrdiniCliente');
     Route::get('/operatore/ordini-clienti/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('operatoreGeneraPDF');

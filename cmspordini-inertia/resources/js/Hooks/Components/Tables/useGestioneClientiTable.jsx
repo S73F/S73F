@@ -1,7 +1,7 @@
 import { ModalLink } from "@inertiaui/modal-react";
 import React, { useEffect, useMemo, useState } from "react";
 
-export const useGestioneClientiTable = ({ clienti, handleDelete }) => {
+export const useGestioneClientiTable = ({ clienti }) => {
     const columns = useMemo(
         () => [
             {
@@ -61,9 +61,9 @@ export const useGestioneClientiTable = ({ clienti, handleDelete }) => {
                             </svg>
                         </ModalLink>
 
-                        <button
+                        <ModalLink
                             id="delete-btn"
-                            onClick={() => handleDelete(row.IDcliente)}
+                            href={`/operatore/gestione-clienti/eliminazione/${row.IDcliente}`}
                             title="Elimina cliente"
                         >
                             <svg
@@ -83,12 +83,12 @@ export const useGestioneClientiTable = ({ clienti, handleDelete }) => {
                                 <path d="M14 11v6" />
                                 <path d="M4 6l1 14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l1-14" />
                             </svg>
-                        </button>
+                        </ModalLink>
                     </div>
                 ),
             },
         ],
-        [handleDelete]
+        []
     );
 
     const [records, setRecords] = useState(clienti);
