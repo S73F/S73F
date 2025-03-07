@@ -1,4 +1,4 @@
-#table-container {
+/* #table-container {
     width: 100%;
     overflow-x: auto;
     margin-bottom: 1rem;
@@ -106,4 +106,4 @@
 #edit-btn:hover svg,
 #delete-btn:hover svg {
     color: var(--hover-color);
-}
+} */

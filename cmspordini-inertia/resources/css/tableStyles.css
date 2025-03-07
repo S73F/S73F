@@ -222,6 +222,27 @@ div .custom-table div {
     color: var(--main-color);
 }
 
+#edit-btn,
+#delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#edit-btn svg,
+#delete-btn svg {
+    margin: auto;
+    vertical-align: middle;
+    color: var(--main-color);
+    transition: color 0.2s ease-in-out;
+}
+
+#edit-btn:hover svg,
+#delete-btn:hover svg {
+    color: var(--hover-color);
+}
+
 #loading-spinner {
     display: flex;
     justify-content: center;

@@ -1,16 +1,17 @@
 import React, { useRef } from "react";
 import { useCreazioneCliente } from "../../Hooks/Components/Modals/useCreazioneCliente";
 import { Modal } from "@inertiaui/modal-react";
+import "../../../css/modal.css";
 
 export default function CreazioneCliente() {
     const modalRef = useRef(null);
 
-    const { data, processing, handleChange, handleSubmit } =
+    const { data, processing, handleChange, handleSubmit, handleDelete } =
         useCreazioneCliente({ modalRef });
 
     return (
         <Modal ref={modalRef}>
-            <h3>Creazione cliente</h3>
+            <h3 id="modal-title">Creazione cliente</h3>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="form-field">
                     <label htmlFor="ragione_sociale">Ragione Sociale</label>
@@ -133,9 +134,24 @@ export default function CreazioneCliente() {
                     />
                 </div>
 
-                <button id="submit-btn" type="submit" disabled={processing}>
-                    Crea
-                </button>
+                <div id="btns-container">
+                    <button
+                        id="modal-submit-btn"
+                        className="modal-form-btn"
+                        type="submit"
+                        disabled={processing}
+                    >
+                        Crea
+                    </button>
+                    <button
+                        id="modal-reset-btn"
+                        className="modal-form-btn"
+                        type="reset"
+                        onClick={handleDelete}
+                    >
+                        Cancella
+                    </button>
+                </div>
             </form>
         </Modal>
     );

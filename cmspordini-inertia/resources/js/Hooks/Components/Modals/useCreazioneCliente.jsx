@@ -30,9 +30,25 @@ export const useCreazioneCliente = ({ modalRef }) => {
         });
     };
 
+    const handleDelete = () => {
+        setData({
+            ragione_sociale: "",
+            nome: "",
+            cognome: "",
+            partitaIVA: "",
+            indirizzo: "",
+            citta: "",
+            cap: "",
+            provincia: "",
+            emailcliente: "",
+            username: "",
+            password: "",
+        });
+    };
+
     const closeModal = () => {
         modalRef.current.close();
     };
 
-    return { data, processing, handleChange, handleSubmit };
+    return { data, processing, handleChange, handleSubmit, handleDelete };
 };

@@ -37,9 +37,25 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
         e.preventDefault();
         patch(`/operatore/gestione-clienti/modifica/${cliente.IDcliente}`, {
             onSuccess: () => closeModal(),
-            onError: () => {
-                console.log("Errore durante la modifica del cliente");
+            onError: (errors) => {
+                console.log(errors);
             },
+        });
+    };
+
+    const handleDelete = () => {
+        setData({
+            ragione_sociale: "",
+            nome: "",
+            cognome: "",
+            partitaIVA: "",
+            indirizzo: "",
+            citta: "",
+            cap: "",
+            provincia: "",
+            emailcliente: "",
+            username: "",
+            password: "",
         });
     };
 
@@ -53,5 +69,7 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
         placeholderData,
         handleChange,
         handleSubmit,
+        handleDelete,
+        closeModal,
     };
 };

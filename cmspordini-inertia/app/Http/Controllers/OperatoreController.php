@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Ordine;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -166,21 +167,30 @@ class OperatoreController extends Controller
                 'string' => 'Il campo :attribute deve contenere una stringa di testo.'
             ]);
 
-
-            $cliente->fill(array_filter($validatedData, function ($value) {
+            $data = array_filter($validatedData, function ($value) {
                 return $value !== null && $value !== '';
-            }));
+            });
 
-            if (!empty($validatedData['password'])) {
-                $cliente->password = bcrypt($validatedData['password']);
+            if (!empty($data)) {
+                $cliente->fill($data);
+
+                if (!empty($validatedData['password'])) {
+                    $cliente->password = bcrypt($validatedData['password']);
+                }
+
+                $cliente->update();
+            } else {
+                throw new Exception("Non è stato modificato alcun dato");
             }
 
-            $cliente->update();
 
             return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente modificato con successo!']);
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();
             return redirect()->back()->with(["error" => "Errore durante la modifica del cliente", "validation_errors" => $errors])->withErrors($errors)->withInput();
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            return redirect()->back()->with("error", "Errore durante la modifica del cliente")->withErrors($error);
         }
     }
 

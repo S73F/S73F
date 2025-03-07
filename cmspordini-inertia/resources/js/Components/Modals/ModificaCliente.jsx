@@ -1,15 +1,24 @@
 import React, { useRef } from "react";
 import { useModificaCliente } from "../../Hooks/Components/Modals/useModificaCliente";
 import { Modal } from "@inertiaui/modal-react";
+import "../../../css/modal.css";
 
 export default function ModificaCliente({ cliente }) {
     const modalRef = useRef(null);
 
-    const { data, processing, placeholderData, handleChange, handleSubmit } =
-        useModificaCliente({ cliente, modalRef });
+    const {
+        data,
+        processing,
+        placeholderData,
+        handleChange,
+        handleSubmit,
+        handleDelete,
+        closeModal,
+    } = useModificaCliente({ cliente, modalRef });
 
     return (
         <Modal ref={modalRef}>
+            <h3 id="modal-title">Modifica cliente</h3>
             <form onSubmit={handleSubmit}>
                 <div className="form-field">
                     <label htmlFor="ragione_sociale">Ragione Sociale</label>
@@ -122,9 +131,32 @@ export default function ModificaCliente({ cliente }) {
                     />
                 </div>
 
-                <button id="submit-btn" type="submit" disabled={processing}>
-                    Modifica
-                </button>
+                <div id="btns-container">
+                    <button
+                        id="modal-submit-btn"
+                        className="modal-form-btn"
+                        type="submit"
+                        disabled={processing}
+                    >
+                        Modifica
+                    </button>
+                    <button
+                        id="modal-reset-btn"
+                        className="modal-form-btn"
+                        type="reset"
+                        onClick={handleDelete}
+                    >
+                        Cancella
+                    </button>
+                    <button
+                        id="modal-close-btn"
+                        className="modal-form-btn"
+                        type="button"
+                        onClick={closeModal}
+                    >
+                        Chiudi
+                    </button>
+                </div>
             </form>
         </Modal>
     );
