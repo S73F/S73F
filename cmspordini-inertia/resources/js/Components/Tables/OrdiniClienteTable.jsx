@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+import React from "react";
+import "../../../css/table.css";
 import DataTable from "react-data-table-component";
 import { useOrdiniClientiTable } from "../../Hooks/Components/Tables/useOrdiniClienteTable";
 import { SearchBox } from "./SearchBox";

@@ -2,20 +2,16 @@ import React from "react";
 import Layout from "../../Layouts/Layout";
 import "../../../css/operatoreDashboard.css";
 import { Link } from "@inertiajs/react";
-import LavoriInCorso from "../../Components/Tables/LavoriInCorso";
-import LavoriNuovi from "../../Components/Tables/LavoriNuovi";
 import Notification from "../../Components/Notification";
 import { useDashboard } from "../../Hooks/Operatore/useDashboard";
+import { Lavori } from "../../Components/Tables/Lavori";
 
 export default function Dashboard({ user }) {
     const {
         tipoLavori,
         setTipoLavori,
-        handleFile,
-        handleFileFinale,
-        handleIncarico,
-        lavori,
         numeroLavoriNuovi,
+        setNumeroLavoriNuovi,
         loading,
     } = useDashboard();
 
@@ -37,14 +33,13 @@ export default function Dashboard({ user }) {
                         >
                             Nuovi lavori
                         </button>
-                        {!loading && numeroLavoriNuovi >= 0 && (
-                            <Notification.Layout>
-                                <Notification.LavoriNuovi
-                                    lavoriNuovi={numeroLavoriNuovi}
-                                    onClick={() => setTipoLavori("nuovi")}
-                                ></Notification.LavoriNuovi>
-                            </Notification.Layout>
-                        )}
+                        <Notification.Layout>
+                            <Notification.LavoriNuovi
+                                lavoriNuovi={numeroLavoriNuovi}
+                                onClick={() => setTipoLavori("nuovi")}
+                                loading={loading}
+                            ></Notification.LavoriNuovi>
+                        </Notification.Layout>
                         <button
                             className="btns-lavori"
                             id="btn-lavori-in-corso"
@@ -55,24 +50,10 @@ export default function Dashboard({ user }) {
                     </div>
                 </div>
 
-                {tipoLavori === "inCorso" && (
-                    <LavoriInCorso
-                        lavori={lavori}
-                        handleFile={handleFile}
-                        handleFileFinale={handleFileFinale}
-                        handleIncarico={handleIncarico}
-                        loading={loading}
-                    />
-                )}
-
-                {tipoLavori === "nuovi" && (
-                    <LavoriNuovi
-                        lavori={lavori}
-                        handleFile={handleFile}
-                        handleIncarico={handleIncarico}
-                        loading={loading}
-                    />
-                )}
+                <Lavori
+                    tipoLavori={tipoLavori}
+                    setNumeroLavoriNuovi={setNumeroLavoriNuovi}
+                />
             </div>
         </>
     );

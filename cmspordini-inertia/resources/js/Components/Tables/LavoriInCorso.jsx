@@ -1,4 +1,5 @@
 import React from "react";
+import "../../../css/table.css";
 import { useLavoriInCorso } from "../../Hooks/Components/Tables/useLavoriInCorso";
 import DataTable from "react-data-table-component";
 import { SearchBox } from "./SearchBox";

@@ -30,7 +30,7 @@ export default function EliminazioneCliente({ cliente }) {
                 <div id="btns-container">
                     <button
                         type="submit"
-                        id="modal-submit-btn"
+                        id="modal-submit-danger-btn"
                         className="modal-form-btn"
                         onClick={handleDelete}
                     >

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../../css/tableStyles.css";
+import "../../../css/table.css";
 import DataTable from "react-data-table-component";
 import useStoricoOrdiniTable from "../../Hooks/Components/Tables/useStoricoOrdiniTable";
 import StoricoOrdiniTableExpanded from "./StoricoOrdiniTableExpanded";

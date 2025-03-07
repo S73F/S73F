@@ -17,6 +17,7 @@ export const useLavorazione = ({ modalRef }) => {
             preserveScroll: true,
             onSuccess: () => {
                 closeModal();
+                router.visit("/operatore/dashboard");
             },
             onError: (errors) => {
                 console.log(errors);

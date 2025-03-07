@@ -146,7 +146,7 @@ export default function ModificaCliente({ cliente }) {
                         type="reset"
                         onClick={handleDelete}
                     >
-                        Cancella
+                        Azzera
                     </button>
                     <button
                         id="modal-close-btn"

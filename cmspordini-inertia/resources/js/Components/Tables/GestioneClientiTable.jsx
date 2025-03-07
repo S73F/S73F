@@ -3,6 +3,7 @@ import { useGestioneClientiTable } from "../../Hooks/Components/Tables/useGestio
 import { SearchBox } from "./SearchBox";
 import DataTable from "react-data-table-component";
 import { ModalLink } from "@inertiaui/modal-react";
+import "../../../css/table.css";
 
 export default function GestioneClientiTable({ clienti }) {
     const { records, columns, handleFilter } = useGestioneClientiTable({

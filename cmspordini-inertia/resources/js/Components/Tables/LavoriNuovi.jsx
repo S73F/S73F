@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../css/tableStyles.css";
+import "../../../css/table.css";
 import DataTable from "react-data-table-component";
 import { useLavoriNuovi } from "../../Hooks/Components/Tables/useLavoriNuovi";
 import { SearchBox } from "./SearchBox";

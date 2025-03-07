@@ -63,7 +63,7 @@
 #btns-container #btn-nuovi-lavori:hover ~ #notification-layout,
 #notification-layout:hover {
     box-shadow: none;
-    transform: scale(1.03);
+    transform: scale(1.1);
     cursor: pointer;
     border: 2px solid var(--main-color);
 }

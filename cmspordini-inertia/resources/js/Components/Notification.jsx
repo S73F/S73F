@@ -5,10 +5,11 @@ const notificationLayout = ({ children }) => {
     return <button id="notification-layout">{children}</button>;
 };
 
-const lavoriNuoviNotification = ({ lavoriNuovi, onClick }) => {
+const lavoriNuoviNotification = ({ lavoriNuovi, onClick, loading }) => {
     return (
         <div id="lavori-nuovi-btn" onClick={onClick}>
-            {lavoriNuovi}
+            {loading && <div id="lavori-spinner" />}
+            {!loading && lavoriNuovi}
         </div>
     );
 };
