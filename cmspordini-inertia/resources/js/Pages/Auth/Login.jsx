@@ -8,7 +8,7 @@ export default function Login() {
 
     return (
         <div className="login-container">
-            <img src="assets/img/ODONTOTECNICA-LOGO.svg" />
+            <img src="/assets/img/ODONTOTECNICA-LOGO.svg" />
 
             <form onSubmit={handleSubmit}>
                 <input

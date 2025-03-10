@@ -30,5 +30,12 @@ export const useCreazioneOrdine = () => {
         });
     };
 
-    return { data, handleChange, handleFileChange, handleSubmit, processing };
+    return {
+        data,
+        setData,
+        handleChange,
+        handleFileChange,
+        handleSubmit,
+        processing,
+    };
 };

@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../Layouts/Layout";
 import "../../../css/creazioneOrdine.css";
 import { useCreazioneOrdine } from "../../Hooks/Cliente/useCreazioneOrdine";
+import Tiptap from "../../Components/Tiptap";
 
 export default function CreazioneOrdine() {
-    const { data, handleChange, handleFileChange, handleSubmit, processing } =
-        useCreazioneOrdine();
+    const {
+        data,
+        setData,
+        handleChange,
+        handleFileChange,
+        handleSubmit,
+        processing,
+    } = useCreazioneOrdine();
+
+    const handleEditorContentSave = (tipo, html) => {
+        setData(tipo, html);
+        console.log(html);
+    };
 
     return (
         <div id="upload-form-container">
-            <h2>Spedisci nuovo ordine</h2>
+            <h2 id="creazione-ordine-title">Spedisci nuovo ordine</h2>
             <form
                 id="form-ordine"
                 onSubmit={handleSubmit}
@@ -65,7 +77,12 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <div className="form-field">
+                <Tiptap
+                    tipo={"lavorazione"}
+                    onEditorContentSave={handleEditorContentSave}
+                    title={"Lavorazione"}
+                />
+                {/* <div className="form-field">
                     <label htmlFor="lavorazione">Lavorazione</label>
                     <input
                         type="text"
@@ -74,7 +91,7 @@ export default function CreazioneOrdine() {
                         value={data.lavorazione}
                         onChange={handleChange}
                     />
-                </div>
+                </div> */}
 
                 <div className="form-field">
                     <label htmlFor="colore">Colore</label>
@@ -120,7 +137,13 @@ export default function CreazioneOrdine() {
                     ></textarea>
                 </div>
 
-                <div className="form-field-textarea">
+                <Tiptap
+                    tipo={"note"}
+                    onEditorContentSave={handleEditorContentSave}
+                    title={"Note"}
+                />
+
+                {/* <div className="form-field-textarea">
                     <label htmlFor="note">Note</label>
                     <textarea
                         name="note"
@@ -128,7 +151,7 @@ export default function CreazioneOrdine() {
                         value={data.note}
                         onChange={handleChange}
                     ></textarea>
-                </div>
+                </div>  */}
 
                 <div className="form-field">
                     <label id="send-file-text" htmlFor="userfile">

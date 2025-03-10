@@ -33,7 +33,7 @@ class OrdineController extends Controller
                 'paziente_nome' => 'required|string|max:50',
                 'paziente_cognome' => 'required|string|max:50',
                 'indirizzo_spedizione' => 'required|string|max:50',
-                'lavorazione' => 'required|string|max:250',
+                'lavorazione' => 'required|string|max:1000',
                 'colore' => 'required|string|max:100',
                 'piattaforma' => 'nullable|string',
                 'data_cons' => 'required|date',
