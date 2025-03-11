@@ -72,13 +72,15 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <Tiptap.Container>
-                    <Tiptap.Title title={"Lavorazione"} />
-                    <Tiptap.Editor
-                        onEditorContentSave={handleEditorContentSave}
-                        tipo={"lavorazione"}
-                    />
-                </Tiptap.Container>
+                <div id="first-tiptap">
+                    <Tiptap.Container>
+                        <Tiptap.Title title={"Lavorazione"} />
+                        <Tiptap.Editor
+                            onEditorContentSave={handleEditorContentSave}
+                            tipo={"lavorazione"}
+                        />
+                    </Tiptap.Container>
+                </div>
 
                 <div className="field-group">
                     <div className="form-field">

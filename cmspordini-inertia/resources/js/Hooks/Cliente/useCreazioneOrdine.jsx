@@ -32,7 +32,6 @@ export const useCreazioneOrdine = () => {
 
     const handleEditorContentSave = (tipo, html) => {
         setData(tipo, html);
-        console.log(html);
     };
 
     return {

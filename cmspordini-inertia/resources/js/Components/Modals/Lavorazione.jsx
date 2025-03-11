@@ -2,33 +2,49 @@ import React, { useRef } from "react";
 import { Modal } from "@inertiaui/modal-react";
 import { useLavorazione } from "../../Hooks/Components/Modals/useLavorazione";
 import "../../../css/modal.css";
+import Tiptap from "../Tiptap";
 
-const Lavorazione = ({ ordine }) => {
+const Lavorazione = ({ ordine, note_int }) => {
     const modalRef = useRef(null);
 
-    const { handleFileChange, handleLavorazione, processing, closeModal } =
-        useLavorazione({
-            modalRef,
-        });
+    const {
+        handleFileChange,
+        handleEditorContentSave,
+        handleLavorazione,
+        processing,
+        closeModal,
+    } = useLavorazione({
+        modalRef,
+    });
 
     return (
         <Modal ref={modalRef}>
             <h2 id="modal-title">Modifica Lavorazione</h2>
-            <h3>Carica file</h3>
             <div id="modal-lavorazione-container">
                 <form
+                    id="lavorazione-form"
                     onSubmit={(e) => handleLavorazione(e, ordine)}
                     encType="multipart/form-data"
                 >
+                    <h3 className="modal-subtitle">Carica file</h3>
                     <div className="form-field">
                         <input
                             id="userfile"
                             name="userfile"
                             type="file"
                             onChange={handleFileChange}
-                            required
                         />
                     </div>
+
+                    <h3 className="modal-subtitle">Note</h3>
+                    <Tiptap.Container>
+                        <Tiptap.Editor
+                            onEditorContentSave={handleEditorContentSave}
+                            tipo={"note_int"}
+                            htmlContent={note_int}
+                        />
+                    </Tiptap.Container>
+
                     <div id="btns-container">
                         <button
                             type="submit"
@@ -47,7 +63,6 @@ const Lavorazione = ({ ordine }) => {
                             Chiudi
                         </button>
                     </div>
-                    <h3>Note</h3>
                 </form>
             </div>
         </Modal>

@@ -135,9 +135,9 @@ class OperatoreController extends Controller
         }
     }
 
-    public function showModificaClienteModal($IDCliente)
+    public function showModificaClienteModal($IDcliente)
     {
-        $cliente = Cliente::find($IDCliente);
+        $cliente = Cliente::find($IDcliente);
 
         return Inertia::render("Modals/ModificaCliente", ["cliente" => $cliente]);
     }
@@ -213,7 +213,7 @@ class OperatoreController extends Controller
     public function showLavorazioneModal($IDordine)
     {
         $ordine = Ordine::with('cliente')->findOrFail($IDordine);
-        return Inertia::render('Modals/Lavorazione', ['ordine' => $ordine->IDordine]);
+        return Inertia::render('Modals/Lavorazione', ['ordine' => $ordine->IDordine, 'note_int' => $ordine->note_int]);
     }
 
     public function caricaLavorazione($IDordine, Request $request)
@@ -222,13 +222,37 @@ class OperatoreController extends Controller
 
         try {
             $request->validate([
-                'userfile' => 'required|file|mimes:zip,pdf,stl',
+                'userfile' => 'nullable|file|mimes:zip,pdf,stl',
             ], [
-                'required' => "L'inserimento del file è obbligatorio.",
                 'mimes' => 'Il file deve avere uno dei seguenti formati: :values.',
             ]);
 
-            if ($request->hasFile('userfile') && $request->file('userfile')->isValid()) {
+            if (empty($request->note_int) && !$request->hasFile('userfile')) {
+                throw new Exception("Non hai modificato la lavorazione");
+            }
+
+            if (!empty($request->note_int) && $request->hasFile('userfile') && $request->file('userfile')->isValid()) {
+                $file = $request->file('userfile');
+                $extension = $file->getClientOriginalExtension();
+                $newFileName = $ordine->cliente->ragione_sociale . "_" . strtoupper($ordine->PazienteCognome) . "_" . strtoupper($ordine->PazienteNome) . "_{$ordine->IDordine}_FINALE.{$extension}";
+
+                // Salva il file nella cartella storage/app/public/uploads
+                $file->storeAs('uploads', $newFileName, 'public');
+
+                // Aggiorna l'ordine con il nome del file
+                $ordine->update([
+                    'note_ulti_mod' => now(),
+                    'file_fin' => 1,
+                    'file_fin_nome' => $newFileName,
+                    'note_int' => $request->note_int
+                ]);
+
+                if ($request->has('note_int')) {
+                    return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata e note modificate con successo!']);
+                }
+            }
+
+            if (empty($request->note_int) && $request->hasFile('userfile') && $request->file('userfile')->isValid()) {
                 $file = $request->file('userfile');
                 $extension = $file->getClientOriginalExtension();
                 $newFileName = $ordine->cliente->ragione_sociale . "_" . strtoupper($ordine->PazienteCognome) . "_" . strtoupper($ordine->PazienteNome) . "_{$ordine->IDordine}_FINALE.{$extension}";
@@ -242,12 +266,28 @@ class OperatoreController extends Controller
                     'file_fin' => 1,
                     'file_fin_nome' => $newFileName,
                 ]);
-                return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata con successo!']);
+
+                if ($request->has('note_int')) {
+                    return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata con successo!']);
+                }
+            }
+
+            if (!$request->hasFile('userfile') && !empty($request->note_int)) {
+                $ordine->update([
+                    'note_ulti_mod' => now(),
+                    'note_int' => $request->note_int
+                ]);
+
+                return redirect()->intended('/operatore/dashboard')->with(['success' => 'Note modificate con successo!']);
             }
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();
 
             return redirect()->back()->with(["error" => "Errore durante il caricamento della lavorazione", "validation_errors" => $errors])->withErrors($errors)->withInput();
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+
+            return redirect()->back()->with("error", $error)->withErrors($error)->withInput();
         }
     }
 

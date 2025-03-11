@@ -130,6 +130,13 @@
     width: 26%;
 }
 
+#first-tiptap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
 /* @media (max-width: 768px) {
     #upload-form-container {
         width: 95%;

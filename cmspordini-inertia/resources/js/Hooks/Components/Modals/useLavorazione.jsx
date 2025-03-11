@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 export const useLavorazione = ({ modalRef }) => {
     const { setData, post, processing } = useForm({
         userfile: null,
+        note_int: null,
     });
 
     const handleFileChange = (e) => {
@@ -20,16 +21,25 @@ export const useLavorazione = ({ modalRef }) => {
                 closeModal();
                 router.visit("/operatore/dashboard");
             },
-            onError: (errors) => {
-                console.log(errors);
-                toast.error(errors);
+            onError: (error) => {
+                console.log(error);
             },
         });
+    };
+
+    const handleEditorContentSave = (tipo, html) => {
+        setData(tipo, html);
     };
 
     function closeModal() {
         modalRef.current.close();
     }
 
-    return { handleFileChange, handleLavorazione, processing, closeModal };
+    return {
+        handleFileChange,
+        handleEditorContentSave,
+        handleLavorazione,
+        processing,
+        closeModal,
+    };
 };

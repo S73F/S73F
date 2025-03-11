@@ -27,11 +27,7 @@ export const useLavoriInCorso = ({
             {
                 name: "Paziente",
                 selector: (row) => row.PazienteCognome,
-                cell: (row) => (
-                    <div className="hr-row">
-                        <a href="">{`${row.PazienteCognome} ${row.PazienteNome}`}</a>
-                    </div>
-                ),
+                cell: (row) => `${row.PazienteCognome} ${row.PazienteNome}`,
                 sortable: true,
             },
             {
@@ -101,7 +97,7 @@ export const useLavoriInCorso = ({
                 cell: (row) => (
                     <>
                         <ModalLink
-                            title="Carica lavorazione"
+                            title="Modifica lavorazione"
                             href={`/operatore/ordini-clienti/caricamento-lavorazione/${row.IDordine}`}
                         >
                             <FontAwesomeIcon icon={faPenToSquare} size="2xl" />

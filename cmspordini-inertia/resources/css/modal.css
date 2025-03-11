@@ -13,7 +13,7 @@
 
 #modal-title {
     font-size: 2rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--btn-color);
     margin: 1rem 0 2.5rem;
     text-align: center;
@@ -37,6 +37,21 @@
     padding: 0 1rem;
 }
 
+.im-modal-container #lavorazione-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin: 0;
+}
+
 .im-modal-container .form-field {
     display: flex;
     flex-direction: column;
@@ -57,6 +72,10 @@
     font-size: 1rem;
     width: 100%;
     transition: border 0.3s ease-in-out;
+}
+
+.im-modal-container .form-field input[type="file"] {
+    margin-bottom: 1rem;
 }
 
 .im-modal-container .form-field input:focus {
