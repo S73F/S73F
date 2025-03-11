@@ -6,6 +6,7 @@ export const useEliminazioneCliente = ({ cliente, modalRef }) => {
         router.delete(
             `/operatore/gestione-clienti/eliminazione/${cliente.IDcliente}`,
             {
+                preserveScroll: true,
                 onSuccess: () => closeModal(),
                 onError: (errors) => {
                     console.log(errors);
