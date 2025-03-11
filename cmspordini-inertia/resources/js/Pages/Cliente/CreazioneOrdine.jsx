@@ -7,7 +7,6 @@ import Tiptap from "../../Components/Tiptap";
 export default function CreazioneOrdine() {
     const {
         data,
-        setData,
         handleChange,
         handleFileChange,
         handleSubmit,

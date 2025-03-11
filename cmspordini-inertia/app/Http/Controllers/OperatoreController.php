@@ -247,7 +247,7 @@ class OperatoreController extends Controller
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();
 
-            return redirect()->back()->with("error", "Errore durante il caricamento della lavorazione")->withErrors($errors)->withInput();
+            return redirect()->back()->with(["error" => "Errore durante il caricamento della lavorazione", "validation_errors" => $errors])->withErrors($errors)->withInput();
         }
     }
 

@@ -24,7 +24,7 @@
 }
 
 .im-modal-wrapper:has(#eliminazione-cliente-container),
-.im-modal-wrapper:has(#caricamento-lavorazione-container) {
+.im-modal-wrapper:has(#modal-lavorazione-container) {
     max-width: 50%;
 }
 
@@ -79,7 +79,7 @@
     font-size: 1.2rem;
 }
 
-#caricamento-lavorazione-container .form-field {
+#modal-lavorazione-container .form-field {
     margin: 0 auto;
     width: 60%;
 }

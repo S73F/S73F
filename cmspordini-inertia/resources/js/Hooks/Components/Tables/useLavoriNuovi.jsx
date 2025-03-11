@@ -1,3 +1,9 @@
+import {
+    faFilePdf,
+    faFileZipper,
+    faSquareCheck,
+} from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useMemo, useState } from "react";
 
 export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
@@ -26,31 +32,33 @@ export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
         {
             name: "Allegati",
             cell: (row) => (
-                <div className="hr-row">
+                <>
                     <button
+                        title="File sorgente"
                         className="btn-link"
                         onClick={() => handleFile(row.IDordine)}
                     >
-                        File
+                        <FontAwesomeIcon icon={faFileZipper} size="2xl" />
                     </button>
-                    <hr />
                     <a
+                        title="File PDF"
                         href={`/operatore/ordini-clienti/pdf/${row.IDordine}`}
                         target="_blank"
                     >
-                        PDF
+                        <FontAwesomeIcon icon={faFilePdf} size="2xl" />
                     </a>
-                </div>
+                </>
             ),
         },
         {
             name: "Azioni",
             cell: (row) => (
                 <button
+                    title="Accetta incarico"
                     className="btn-link"
                     onClick={() => handleIncarico(row.IDordine, 0)}
                 >
-                    Accetta incarico
+                    <FontAwesomeIcon icon={faSquareCheck} size="2xl" />
                 </button>
             ),
         },

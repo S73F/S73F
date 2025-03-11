@@ -13,8 +13,9 @@ const Lavorazione = ({ ordine }) => {
 
     return (
         <Modal ref={modalRef}>
-            <h3 id="modal-title">Caricamento Lavorazione</h3>
-            <div id="caricamento-lavorazione-container">
+            <h2 id="modal-title">Modifica Lavorazione</h2>
+            <h3>Carica file</h3>
+            <div id="modal-lavorazione-container">
                 <form
                     onSubmit={(e) => handleLavorazione(e, ordine)}
                     encType="multipart/form-data"
@@ -46,6 +47,7 @@ const Lavorazione = ({ ordine }) => {
                             Chiudi
                         </button>
                     </div>
+                    <h3>Note</h3>
                 </form>
             </div>
         </Modal>

@@ -1,4 +1,5 @@
 import { router, useForm } from "@inertiajs/react";
+import { toast } from "react-toastify";
 
 export const useLavorazione = ({ modalRef }) => {
     const { setData, post, processing } = useForm({
@@ -21,6 +22,7 @@ export const useLavorazione = ({ modalRef }) => {
             },
             onError: (errors) => {
                 console.log(errors);
+                toast.error(errors);
             },
         });
     };

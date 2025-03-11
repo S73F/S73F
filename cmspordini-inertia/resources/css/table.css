@@ -95,6 +95,7 @@ div .custom-table div {
     display: flex;
     justify-content: center;
     text-align: center;
+    gap: 0.5rem;
 }
 
 .custom-table .rdt_TableHeadRow div {

@@ -1,5 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ModalLink } from "@inertiaui/modal-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faFilePdf,
+    faFileZipper,
+    faPenToSquare,
+    faShareFromSquare,
+} from "@fortawesome/free-regular-svg-icons";
+import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 
 export const useLavoriInCorso = ({
     lavori,
@@ -58,53 +66,57 @@ export const useLavoriInCorso = ({
             {
                 name: "Allegati",
                 cell: (row) => (
-                    <div className="hr-row allegati">
+                    <>
                         <button
+                            title="File sorgente"
                             className="btn-link"
                             onClick={() => handleFile(row.IDordine)}
                         >
-                            Sorgente
+                            <FontAwesomeIcon icon={faFileZipper} size="2xl" />
                         </button>
-                        <hr />
                         <a
+                            title="File PDF"
                             href={`/operatore/ordini-clienti/pdf/${row.IDordine}`}
                             target="_blank"
                         >
-                            Pdf
+                            <FontAwesomeIcon icon={faFilePdf} size="2xl" />
                         </a>
                         {row.file_fin === 1 && (
-                            <>
-                                <hr />
-                                <button
-                                    className="btn-link"
-                                    onClick={() =>
-                                        handleFileFinale(row.IDordine)
-                                    }
-                                >
-                                    Finale
-                                </button>
-                            </>
+                            <button
+                                title="File finale"
+                                className="btn-link"
+                                onClick={() => handleFileFinale(row.IDordine)}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faFileZipperSolid}
+                                    size="2xl"
+                                />
+                            </button>
                         )}
-                    </div>
+                    </>
                 ),
             },
             {
                 name: "Azioni",
                 cell: (row) => (
-                    <div className="hr-row">
+                    <>
                         <ModalLink
+                            title="Carica lavorazione"
                             href={`/operatore/ordini-clienti/caricamento-lavorazione/${row.IDordine}`}
                         >
-                            Carica lavorazione
+                            <FontAwesomeIcon icon={faPenToSquare} size="2xl" />
                         </ModalLink>
-                        <hr />
                         <button
+                            title="Spedisci lavoro"
                             className="btn-link"
                             onClick={() => handleIncarico(row.IDordine)}
                         >
-                            Spedisci lavoro
+                            <FontAwesomeIcon
+                                icon={faShareFromSquare}
+                                size="2xl"
+                            />
                         </button>
-                    </div>
+                    </>
                 ),
             },
         ],
