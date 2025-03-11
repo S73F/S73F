@@ -220,6 +220,7 @@ div .custom-table div {
     font-size: 2rem;
     font-weight: 600;
     color: var(--main-color);
+    text-align: center;
 }
 
 #edit-btn,

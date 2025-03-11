@@ -5,8 +5,25 @@
     padding: 15px;
     background: white;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    /* border-radius: 8px; */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#tiptap-container-50 {
+    width: 39%;
+    margin: 1rem 1.5rem;
+    padding: 15px;
+    background: white;
+    border: 1px solid var(--border-color);
+    /* border-radius: 8px; */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#tiptap-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin: 0.5rem 0 1rem 0;
 }
 
 #toolbar {

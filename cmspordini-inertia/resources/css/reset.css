@@ -94,7 +94,8 @@ video {
 }
 
 /* Excludes Tiptap editor */
-#tiptap-container * {
+#tiptap-container *,
+#tiptap-container-50 * {
     all: revert;
 }
 

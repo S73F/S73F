@@ -11,13 +11,9 @@ export default function CreazioneOrdine() {
         handleChange,
         handleFileChange,
         handleSubmit,
+        handleEditorContentSave,
         processing,
     } = useCreazioneOrdine();
-
-    const handleEditorContentSave = (tipo, html) => {
-        setData(tipo, html);
-        console.log(html);
-    };
 
     return (
         <div id="upload-form-container">
@@ -77,81 +73,67 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <Tiptap
-                    tipo={"lavorazione"}
-                    onEditorContentSave={handleEditorContentSave}
-                    title={"Lavorazione"}
-                />
-                {/* <div className="form-field">
-                    <label htmlFor="lavorazione">Lavorazione</label>
-                    <input
-                        type="text"
-                        name="lavorazione"
-                        placeholder="Descrivi la lavorazione ed elementi interessati"
-                        value={data.lavorazione}
-                        onChange={handleChange}
+                <Tiptap.Container>
+                    <Tiptap.Title title={"Lavorazione"} />
+                    <Tiptap.Editor
+                        onEditorContentSave={handleEditorContentSave}
+                        tipo={"lavorazione"}
                     />
-                </div> */}
+                </Tiptap.Container>
 
-                <div className="form-field">
-                    <label htmlFor="colore">Colore</label>
-                    <input
-                        type="text"
-                        name="colore"
-                        placeholder="Inserisci il colore"
-                        required
-                        value={data.colore}
-                        onChange={handleChange}
-                    />
+                <div className="field-group">
+                    <div className="form-field">
+                        <label htmlFor="colore">Colore</label>
+                        <input
+                            type="text"
+                            name="colore"
+                            placeholder="Inserisci il colore"
+                            required
+                            value={data.colore}
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <div className="form-field">
+                        <label htmlFor="data_cons">Data consegna</label>
+                        <input
+                            type="date"
+                            name="data_cons"
+                            required
+                            value={data.data_cons}
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <div className="form-field">
+                        <label htmlFor="ora_cons">Ora consegna</label>
+                        <input
+                            type="time"
+                            name="ora_cons"
+                            required
+                            value={data.ora_cons}
+                            onChange={handleChange}
+                        />
+                    </div>
                 </div>
 
-                <div className="form-field">
-                    <label htmlFor="data_cons">Data consegna</label>
-                    <input
-                        type="date"
-                        name="data_cons"
-                        required
-                        value={data.data_cons}
-                        onChange={handleChange}
-                    />
+                <div className="field-group">
+                    <Tiptap.HalfContainer>
+                        <Tiptap.Title title={"Piattaforma impianti"} />
+                        <Tiptap.Editor
+                            onEditorContentSave={handleEditorContentSave}
+                            tipo={"piattaforma"}
+                        />
+                    </Tiptap.HalfContainer>
+
+                    <Tiptap.HalfContainer>
+                        <Tiptap.Title title={"Note"} />
+                        <Tiptap.Editor
+                            onEditorContentSave={handleEditorContentSave}
+                            tipo={"note"}
+                        />
+                    </Tiptap.HalfContainer>
                 </div>
-
-                <div className="form-field">
-                    <label htmlFor="ora_cons">Ora consegna</label>
-                    <input
-                        type="time"
-                        name="ora_cons"
-                        required
-                        value={data.ora_cons}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="form-field-textarea">
-                    <label htmlFor="piattaforma">Piattaforma impianti</label>
-                    <textarea
-                        name="piattaforma"
-                        placeholder="Inserisci la piattaforma impianti"
-                        value={data.piattaforma}
-                        onChange={handleChange}
-                    ></textarea>
-                </div>
-
-                <Tiptap
-                    tipo={"note"}
-                    onEditorContentSave={handleEditorContentSave}
-                    title={"Note"}
-                />
-
-                {/* <div className="form-field-textarea">
-                    <label htmlFor="note">Note</label>
-                    <textarea
-                        name="note"
-                        placeholder="Inserisci eventuali note"
-                        value={data.note}
-                        onChange={handleChange}
-                    ></textarea>
-                </div>  */}
 
                 <div className="form-field">
                     <label id="send-file-text" htmlFor="userfile">

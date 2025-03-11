@@ -117,6 +117,19 @@
     font-size: 18px;
 }
 
+.field-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#upload-form-container form .field-group .form-field,
+#upload-form-container form .field-group .form-field,
+#upload-form-container form .field-group .form-field {
+    width: 26%;
+}
+
 /* @media (max-width: 768px) {
     #upload-form-container {
         width: 95%;

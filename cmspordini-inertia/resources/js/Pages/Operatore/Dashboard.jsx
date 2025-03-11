@@ -50,10 +50,12 @@ export default function Dashboard({ user }) {
                     </div>
                 </div>
 
-                <Lavori
-                    tipoLavori={tipoLavori}
-                    setNumeroLavoriNuovi={setNumeroLavoriNuovi}
-                />
+                <div id="dashboard-table-container">
+                    <Lavori
+                        tipoLavori={tipoLavori}
+                        setNumeroLavoriNuovi={setNumeroLavoriNuovi}
+                    />
+                </div>
             </div>
         </>
     );

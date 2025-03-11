@@ -148,7 +148,7 @@
         <h3 class="section-title">Dettagli Lavorazione</h3>
         <p>Lavorazione: <strong>{!! $ordine->lavorazione !!}</strong></p>
         <p>Colorazione: <strong>{{ $ordine->colore }}</strong></p>
-        <p>Piattaforma Impianti: <strong>{{ $ordine->piattaforma }}</strong></p>
+        <p>Piattaforma Impianti: <strong>{!! $ordine->piattaforma !!}</strong></p>
         <p>Data di Consegna: <strong>{{ $ordine->data_cons }} alle {{ $ordine->ora_cons }}</strong></p>
 
         @if($ordine->note)
