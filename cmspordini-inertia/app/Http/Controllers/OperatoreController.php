@@ -38,53 +38,45 @@ class OperatoreController extends Controller
     public function showGestioneClienti()
     {
         try {
-            $clienti = Cliente::orderBy('IDcliente', 'desc')->get();
+            $clienti = Cliente::select('IDcliente', 'ragione_sociale', 'nome', 'cognome', 'emailcliente', 'username')->orderBy('IDcliente', 'desc')->get();
             return Inertia::render('Operatore/GestioneClienti', ["clienti" => $clienti]);
         } catch (Exception $e) {
             return redirect()->back()->with(["error" => "Errore durante il recupero dei clienti"]);
         }
     }
 
-    public function showOrdiniClienti()
+    public function showOrdiniCliente($IDcliente = null)
     {
-        $clienti = Cliente::get();
-
-        return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti]);
-    }
-
-    public function showOrdiniCliente($IDcliente)
-    {
-        $clienti = Cliente::get();
-
-        $ordini = Ordine::where('IDcliente', $IDcliente)
-            ->with([
-                'operatore' => function ($query) {
-                    $query->select('IDoperatore', 'nome', 'cognome');
-                },
-                'cliente' => function ($query) {
-                    $query->select('IDcliente', 'ragione_sociale');
-                }
-            ])
-            ->select(
-                'IDordine',
-                'IDcliente',
-                'IDoperatore',
-                'medicoOrdinante',
-                'PazienteNome',
-                'PazienteCognome',
-                'data',
-                'data_inizioLavorazione',
-                'data_spedizione',
-                'file_fin_nome'
-            )
-            ->orderByDesc('data')
-            ->get();
+        $clienti = Cliente::select('IDcliente', 'ragione_sociale')->get();
+        $ordini = [];
 
         if ($IDcliente) {
-            return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti, "ordini" => $ordini]);
+            $ordini = Ordine::where('IDcliente', $IDcliente)
+                ->with([
+                    'operatore' => function ($query) {
+                        $query->select('IDoperatore', 'nome', 'cognome');
+                    },
+                    'cliente' => function ($query) {
+                        $query->select('IDcliente', 'ragione_sociale');
+                    }
+                ])
+                ->select(
+                    'IDordine',
+                    'IDoperatore',
+                    'medicoOrdinante',
+                    'PazienteNome',
+                    'PazienteCognome',
+                    'data',
+                    'data_inizioLavorazione',
+                    'data_spedizione',
+                    'file_fin',
+                )
+                ->orderByDesc('data')
+                ->get();
+
         }
 
-        return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti]);
+        return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti, "ordini" => $ordini]);
     }
 
     public function showCreateClienteModal()

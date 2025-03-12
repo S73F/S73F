@@ -1,6 +1,8 @@
-import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useMemo, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
+import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 export const useOrdiniClientiTable = ({ ordini }) => {
     const columns = useMemo(
@@ -49,12 +51,34 @@ export const useOrdiniClientiTable = ({ ordini }) => {
             {
                 name: "Allegati",
                 cell: (row) => (
-                    <a
-                        href={`/operatore/ordini-clienti/pdf/${row.IDordine}`}
-                        target="_blank"
-                    >
-                        <FontAwesomeIcon icon={faFilePdf} size="2xl" />
-                    </a>
+                    <>
+                        <button
+                            title="File sorgente"
+                            className="btn-link"
+                            onClick={() => handleFile(row.IDordine)}
+                        >
+                            <FontAwesomeIcon icon={faFileZipper} size="2xl" />
+                        </button>
+                        <a
+                            title="File PDF"
+                            href={`/operatore/ordini-clienti/pdf/${row.IDordine}`}
+                            target="_blank"
+                        >
+                            <FontAwesomeIcon icon={faFilePdf} size="2xl" />
+                        </a>
+                        {row.file_fin === 1 && (
+                            <button
+                                title="File finale"
+                                className="btn-link"
+                                onClick={() => handleFileFinale(row.IDordine)}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faFileZipperSolid}
+                                    size="2xl"
+                                />
+                            </button>
+                        )}
+                    </>
                 ),
             },
         ],
@@ -94,6 +118,34 @@ export const useOrdiniClientiTable = ({ ordini }) => {
 
         setRecords(newOrdini);
     };
+
+    function handleFile(IDordine) {
+        window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
+
+        setTimeout(() => {
+            toast.success("Download del file in corso...", {
+                position: "top-center",
+                autoClose: 2000,
+                closeOnClick: false,
+                pauseOnHover: false,
+                theme: "dark",
+            });
+        }, 1000);
+    }
+
+    function handleFileFinale(IDordine) {
+        window.location.href = `/operatore/ordini-clienti/download-finale/${IDordine}`;
+
+        setTimeout(() => {
+            toast.success("Download del file finale in corso...", {
+                position: "top-center",
+                autoClose: 2000,
+                closeOnClick: false,
+                pauseOnHover: false,
+                theme: "dark",
+            });
+        }, 1000);
+    }
 
     return { records, columns, handleFilter };
 };

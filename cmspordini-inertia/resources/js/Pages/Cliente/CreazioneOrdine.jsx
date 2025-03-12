@@ -7,6 +7,7 @@ import Tiptap from "../../Components/Tiptap";
 export default function CreazioneOrdine() {
     const {
         data,
+        editorKey,
         handleChange,
         handleFileChange,
         handleSubmit,
@@ -77,6 +78,7 @@ export default function CreazioneOrdine() {
                     <Tiptap.Container>
                         <Tiptap.Title title={"Lavorazione"} />
                         <Tiptap.Editor
+                            key={editorKey}
                             onEditorContentSave={handleEditorContentSave}
                             tipo={"lavorazione"}
                         />
@@ -123,6 +125,7 @@ export default function CreazioneOrdine() {
                     <Tiptap.HalfContainer>
                         <Tiptap.Title title={"Piattaforma impianti"} />
                         <Tiptap.Editor
+                            key={editorKey}
                             onEditorContentSave={handleEditorContentSave}
                             tipo={"piattaforma"}
                         />
@@ -131,6 +134,7 @@ export default function CreazioneOrdine() {
                     <Tiptap.HalfContainer>
                         <Tiptap.Title title={"Note"} />
                         <Tiptap.Editor
+                            key={editorKey}
                             onEditorContentSave={handleEditorContentSave}
                             tipo={"note"}
                         />
@@ -150,12 +154,24 @@ export default function CreazioneOrdine() {
                     />
                 </div>
 
-                <button id="submit-btn" type="submit" disabled={processing}>
-                    Invia ordine
-                </button>
-                <button type="reset" onClick={handleReset}>
-                    Resetta campi
-                </button>
+                <div id="btns-container">
+                    <button
+                        className="cliente-form-btn"
+                        id="cliente-submit-btn"
+                        type="submit"
+                        disabled={processing}
+                    >
+                        Invia ordine
+                    </button>
+                    <button
+                        className="cliente-form-btn"
+                        id="cliente-reset-btn"
+                        type="reset"
+                        onClick={handleReset}
+                    >
+                        Azzera
+                    </button>
+                </div>
             </form>
         </div>
     );

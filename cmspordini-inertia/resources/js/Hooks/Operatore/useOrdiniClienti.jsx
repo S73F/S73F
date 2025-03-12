@@ -11,8 +11,9 @@ export const useOrdiniClienti = () => {
     useEffect(() => {
         if (clienteID) {
             router.visit(`/operatore/ordini-clienti/${clienteID}`, {
-                method: "get",
+                only: ["ordini"],
                 preserveState: true,
+                replace: true,
             });
         }
     }, [clienteID]);

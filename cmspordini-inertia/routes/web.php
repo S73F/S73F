@@ -43,7 +43,7 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::patch('/operatore/gestione-clienti/modifica/{id}', [OperatoreController::class, 'patchCliente'])->name('patchCliente');
     Route::get('/operatore/gestione-clienti/eliminazione/{id}', [OperatoreController::class, 'showEliminazioneClienteModal'])->name('showEliminazioneClienteModal');
     Route::delete('/operatore/gestione-clienti/eliminazione/{id}', [OperatoreController::class, 'deleteCliente'])->name('deleteCliente');
-    Route::get('/operatore/ordini-clienti', [OperatoreController::class, 'showOrdiniClienti'])->name('showOrdiniClienti');
+    Route::get('/operatore/ordini-clienti', [OperatoreController::class, 'showOrdiniCliente'])->name('showOrdiniCliente');
     Route::get('/operatore/ordini-clienti/{id}', [OperatoreController::class, 'showOrdiniCliente'])->name('showOrdiniCliente');
     Route::get('/operatore/ordini-clienti/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('operatoreGeneraPDF');
     Route::patch('/operatore/ordini-clienti/update/{id}', [OrdineController::class, 'aggiornaStato'])->name('aggiornaStato');
