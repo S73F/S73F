@@ -11,8 +11,9 @@ export const useStoricoOrdini = () => {
     useEffect(() => {
         if (tempo) {
             router.visit(`/cliente/ordini/storico/${tempo}`, {
-                method: "get",
+                only: ["ordini"],
                 preserveState: true,
+                replace: true,
             });
         }
     }, [tempo]);

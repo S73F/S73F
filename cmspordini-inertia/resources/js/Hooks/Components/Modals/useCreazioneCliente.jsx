@@ -22,6 +22,7 @@ export const useCreazioneCliente = ({ modalRef }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         post("/operatore/gestione-clienti/creazione", {
+            only: ["clienti", "flash"],
             preserveScroll: true,
             forceFormData: true,
             onSuccess: () => closeModal(),

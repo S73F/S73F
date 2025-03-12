@@ -95,27 +95,31 @@ class OrdineController extends Controller
         }
     }
 
-    public function getStorico($tempo)
+    public function getStorico($tempo = null)
     {
-        $idCliente = Auth::guard('cliente')->user()->IDcliente;
+        $ordini = [];
 
-        $query = Ordine::where('IDcliente', $idCliente);
+        if ($tempo !== null) {
+            $idCliente = Auth::guard('cliente')->user()->IDcliente;
 
-        if ($tempo !== "tutto") {
-            $query->whereBetween("data", [now()->subDays($tempo), now()]);
+            $query = Ordine::where('IDcliente', $idCliente);
+
+            if ($tempo !== "tutto") {
+                $query->whereBetween("data", [now()->subDays($tempo), now()]);
+            }
+
+            $ordini = $query->select(
+                'IDordine',
+                'data',
+                'medicoOrdinante',
+                'PazienteNome',
+                'PazienteCognome',
+                'IndirizzoSpedizione',
+                'data_inizioLavorazione',
+                'stato',
+                'data_spedizione'
+            )->orderBy('data', "desc")->get();
         }
-
-        $ordini = $query->select(
-            'IDordine',
-            'data',
-            'medicoOrdinante',
-            'PazienteNome',
-            'PazienteCognome',
-            'IndirizzoSpedizione',
-            'data_inizioLavorazione',
-            'stato',
-            'data_spedizione'
-        )->orderBy('data', "desc")->get();
 
         return Inertia::render('Cliente/StoricoOrdini', ['ordini' => $ordini]);
     }
