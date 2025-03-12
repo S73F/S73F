@@ -34,6 +34,22 @@ export const useCreazioneOrdine = () => {
         setData(tipo, html);
     };
 
+    const handleReset = () => {
+        setData({
+            medico_ordinante: "",
+            paziente_nome: "",
+            paziente_cognome: "",
+            indirizzo_spedizione: "",
+            lavorazione: "",
+            colore: "",
+            data_cons: "",
+            ora_cons: "",
+            piattaforma: "",
+            note: "",
+            userfile: null,
+        });
+    };
+
     return {
         data,
         setData,
@@ -41,6 +57,7 @@ export const useCreazioneOrdine = () => {
         handleFileChange,
         handleSubmit,
         handleEditorContentSave,
+        handleReset,
         processing,
     };
 };

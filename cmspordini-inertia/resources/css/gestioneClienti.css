@@ -4,6 +4,7 @@
     margin: 3rem 0;
     background: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,8 +22,6 @@
     background: none;
     border: none;
     cursor: pointer;
-    /* display: flex;
-    flex-direction: column; */
 }
 
 #add-cliente-btn svg {

@@ -6,6 +6,7 @@ import {
     faFileZipper,
     faPenToSquare,
     faShareFromSquare,
+    faSquareMinus,
 } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 
@@ -43,13 +44,12 @@ export const useLavoriInCorso = ({
                 name: <div>Inizio lavorazione</div>,
                 selector: (row) => row.data_inizioLavorazione,
                 cell: (row) => (
-                    <div className="hr-row">
+                    <div>
                         {row.data_inizioLavorazione
                             ? row.data_inizioLavorazione
                             : ""}
                         {row.note_ulti_mod && (
-                            <div className="last-modified">
-                                <hr />
+                            <div id="last-modified">
                                 {`Ultima modifica:`}
                                 <br />
                                 {row.note_ulti_mod}
@@ -102,16 +102,25 @@ export const useLavoriInCorso = ({
                         >
                             <FontAwesomeIcon icon={faPenToSquare} size="2xl" />
                         </ModalLink>
-                        <button
-                            title="Spedisci lavoro"
+                        {row.file_fin === 1 && (
+                            <button
+                                title="Spedisci lavoro"
+                                className="btn-link"
+                                onClick={() => handleIncarico(row.IDordine)}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faShareFromSquare}
+                                    size="2xl"
+                                />
+                            </button>
+                        )}
+                        <ModalLink
+                            title="Elimina lavoro"
                             className="btn-link"
-                            onClick={() => handleIncarico(row.IDordine)}
+                            href={`/operatore/lavori/eliminazione/${row.IDordine}`}
                         >
-                            <FontAwesomeIcon
-                                icon={faShareFromSquare}
-                                size="2xl"
-                            />
-                        </button>
+                            <FontAwesomeIcon icon={faSquareMinus} size="2xl" />
+                        </ModalLink>
                     </>
                 ),
             },

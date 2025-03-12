@@ -11,6 +11,7 @@ export default function CreazioneOrdine() {
         handleFileChange,
         handleSubmit,
         handleEditorContentSave,
+        handleReset,
         processing,
     } = useCreazioneOrdine();
 
@@ -151,6 +152,9 @@ export default function CreazioneOrdine() {
 
                 <button id="submit-btn" type="submit" disabled={processing}>
                     Invia ordine
+                </button>
+                <button type="reset" onClick={handleReset}>
+                    Resetta campi
                 </button>
             </form>
         </div>

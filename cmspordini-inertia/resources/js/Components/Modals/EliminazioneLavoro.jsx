@@ -1,32 +1,20 @@
 import React, { useRef } from "react";
 import { Modal } from "@inertiaui/modal-react";
-import { useEliminazioneCliente } from "../../Hooks/Components/Modals/useEliminazioneCliente";
-import "../../../css/modal.css";
+import "../../../css/Modal.css";
+import { useEliminazioneLavoro } from "../../Hooks/Components/Modals/useEliminazioneLavoro";
 
-export default function EliminazioneCliente({ cliente }) {
+export default function EliminazioneLavoro({ IDordine }) {
     const modalRef = useRef(null);
-    const { handleDelete, closeModal } = useEliminazioneCliente({
-        cliente,
+    const { handleDelete, closeModal } = useEliminazioneLavoro({
+        IDordine,
         modalRef,
     });
 
     return (
         <Modal ref={modalRef}>
-            <h3 id="modal-title">Eliminazione cliente</h3>
+            <h3 id="modal-title">Eliminazione lavoro</h3>
             <div id="eliminazione-container">
-                <p>
-                    Sei sicuro di voler eliminare il cliente
-                    <span id="cliente-cognome-nome">
-                        {cliente.cognome && cliente.nome
-                            ? " " + cliente.cognome + " " + cliente.nome
-                            : cliente.cognome && !cliente.nome
-                            ? " " + cliente.cognome
-                            : !cliente.cognome && cliente.nome
-                            ? " " + cliente.nome
-                            : ""}
-                    </span>
-                    ?
-                </p>
+                <p>Sei sicuro di voler eliminare il lavoro?</p>
                 <div id="btns-container">
                     <button
                         type="submit"

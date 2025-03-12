@@ -167,7 +167,12 @@ const TiptapToolbar = ({ editor }) => {
     );
 };
 
-const TiptapEditor = ({ onEditorContentSave, tipo, htmlContent }) => {
+const TiptapEditor = ({
+    onEditorContentSave,
+    onEditorContentDelete,
+    tipo,
+    htmlContent,
+}) => {
     let content = "";
     htmlContent ? (content = htmlContent) : (content = "");
 

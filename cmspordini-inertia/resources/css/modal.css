@@ -23,7 +23,7 @@
     max-width: 80%;
 }
 
-.im-modal-wrapper:has(#eliminazione-cliente-container),
+.im-modal-wrapper:has(#eliminazione-container),
 .im-modal-wrapper:has(#modal-lavorazione-container) {
     max-width: 50%;
 }
@@ -87,14 +87,14 @@
     width: 100%;
 }
 
-#eliminazione-cliente-container {
+#eliminazione-container {
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 2rem;
 }
 
-#eliminazione-cliente-container p {
+#eliminazione-container p {
     font-size: 1.2rem;
 }
 

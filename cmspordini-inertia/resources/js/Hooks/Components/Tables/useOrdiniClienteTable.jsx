@@ -1,3 +1,5 @@
+import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useMemo, useState } from "react";
 
 export const useOrdiniClientiTable = ({ ordini }) => {
@@ -51,7 +53,7 @@ export const useOrdiniClientiTable = ({ ordini }) => {
                         href={`/operatore/ordini-clienti/pdf/${row.IDordine}`}
                         target="_blank"
                     >
-                        PDF
+                        <FontAwesomeIcon icon={faFilePdf} size="2xl" />
                     </a>
                 ),
             },

@@ -210,6 +210,22 @@ class OperatoreController extends Controller
         return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente eliminato con successo']);
     }
 
+    public function showEliminazioneOrdineModal($IDordine)
+    {
+        $ordine = Ordine::find($IDordine);
+
+        return Inertia::render("Modals/EliminazioneLavoro", ["IDordine" => $ordine->IDordine]);
+    }
+
+    public function deleteOrdine($IDordine)
+    {
+        $ordine = Ordine::findOrFail($IDordine);
+
+        $ordine->delete();
+
+        return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavoro eliminato con successo']);
+    }
+
     public function showLavorazioneModal($IDordine)
     {
         $ordine = Ordine::with('cliente')->findOrFail($IDordine);
@@ -240,12 +256,35 @@ class OperatoreController extends Controller
                 $file->storeAs('uploads', $newFileName, 'public');
 
                 // Aggiorna l'ordine con il nome del file
-                $ordine->update([
-                    'note_ulti_mod' => now(),
-                    'file_fin' => 1,
-                    'file_fin_nome' => $newFileName,
-                    'note_int' => $request->note_int
-                ]);
+                if (Auth::user()->cognome && Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->cognome . " " . Auth::user()->nome,
+                        'note_ulti_mod' => now(),
+                        'file_fin' => 1,
+                        'file_fin_nome' => $newFileName,
+                        'note_int' => $request->note_int
+                    ]);
+                }
+
+                if (!Auth::user()->cognome && Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->nome,
+                        'note_ulti_mod' => now(),
+                        'file_fin' => 1,
+                        'file_fin_nome' => $newFileName,
+                        'note_int' => $request->note_int
+                    ]);
+                }
+
+                if (Auth::user()->cognome && !Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->cognome,
+                        'note_ulti_mod' => now(),
+                        'file_fin' => 1,
+                        'file_fin_nome' => $newFileName,
+                        'note_int' => $request->note_int
+                    ]);
+                }
 
                 if ($request->has('note_int')) {
                     return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata e note modificate con successo!']);
@@ -261,11 +300,32 @@ class OperatoreController extends Controller
                 $file->storeAs('uploads', $newFileName, 'public');
 
                 // Aggiorna l'ordine con il nome del file
-                $ordine->update([
-                    'note_ulti_mod' => now(),
-                    'file_fin' => 1,
-                    'file_fin_nome' => $newFileName,
-                ]);
+                if (Auth::user()->cognome && Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->cognome . " " . Auth::user()->nome,
+                        'note_ulti_mod' => now(),
+                        'file_fin' => 1,
+                        'file_fin_nome' => $newFileName,
+                    ]);
+                }
+
+                if (!Auth::user()->cognome && Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->nome,
+                        'note_ulti_mod' => now(),
+                        'file_fin' => 1,
+                        'file_fin_nome' => $newFileName,
+                    ]);
+                }
+
+                if (Auth::user()->cognome && !Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->cognome,
+                        'note_ulti_mod' => now(),
+                        'file_fin' => 1,
+                        'file_fin_nome' => $newFileName,
+                    ]);
+                }
 
                 if ($request->has('note_int')) {
                     return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata con successo!']);
@@ -273,10 +333,29 @@ class OperatoreController extends Controller
             }
 
             if (!$request->hasFile('userfile') && !empty($request->note_int)) {
-                $ordine->update([
-                    'note_ulti_mod' => now(),
-                    'note_int' => $request->note_int
-                ]);
+                if (Auth::user()->cognome && Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->cognome . " " . Auth::user()->nome,
+                        'note_ulti_mod' => now(),
+                        'note_int' => $request->note_int
+                    ]);
+                }
+
+                if (!Auth::user()->cognome && Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->nome,
+                        'note_ulti_mod' => now(),
+                        'note_int' => $request->note_int
+                    ]);
+                }
+
+                if (Auth::user()->cognome && !Auth::user()->nome) {
+                    $ordine->update([
+                        'utente_modifica' => Auth::user()->cognome,
+                        'note_ulti_mod' => now(),
+                        'note_int' => $request->note_int
+                    ]);
+                }
 
                 return redirect()->intended('/operatore/dashboard')->with(['success' => 'Note modificate con successo!']);
             }

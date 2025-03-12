@@ -2,8 +2,10 @@ import {
     faFilePdf,
     faFileZipper,
     faSquareCheck,
+    faSquareMinus,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ModalLink } from "@inertiaui/modal-react";
 import React, { useEffect, useMemo, useState } from "react";
 
 export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
@@ -53,13 +55,22 @@ export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
         {
             name: "Azioni",
             cell: (row) => (
-                <button
-                    title="Accetta incarico"
-                    className="btn-link"
-                    onClick={() => handleIncarico(row.IDordine, 0)}
-                >
-                    <FontAwesomeIcon icon={faSquareCheck} size="2xl" />
-                </button>
+                <>
+                    <button
+                        title="Accetta incarico"
+                        className="btn-link"
+                        onClick={() => handleIncarico(row.IDordine, 0)}
+                    >
+                        <FontAwesomeIcon icon={faSquareCheck} size="2xl" />
+                    </button>
+                    <ModalLink
+                        title="Elimina lavoro"
+                        className="btn-link"
+                        href={`/operatore/lavori/eliminazione/${row.IDordine}`}
+                    >
+                        <FontAwesomeIcon icon={faSquareMinus} size="2xl" />
+                    </ModalLink>
+                </>
             ),
         },
     ]);
