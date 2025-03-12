@@ -23,12 +23,12 @@ class OperatoreController extends Controller
     public function showLavori($tipo)
     {
         if ($tipo == "nuovi") {
-            $lavori = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where('stato', 0)->orderBy('data', 'desc')->get();
+            $lavori = Ordine::select("IDordine", "IDcliente", "medicoOrdinante", "PazienteNome", "PazienteCognome", "data")->with(["cliente:IDcliente,ragione_sociale,emailcliente"])->where('stato', 0)->orderBy('data', 'desc')->get();
 
         }
 
         if ($tipo == "inCorso") {
-            $lavori = Ordine::with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where('stato', 1)->orderBy('data_inizioLavorazione', 'desc')->get();
+            $lavori = Ordine::select("IDordine", "IDcliente", "IDoperatore", "medicoOrdinante", "PazienteNome", "PazienteCognome", "data", "data_inizioLavorazione", "note_ulti_mod", "file_fin")->with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where('stato', 1)->orderBy('data_inizioLavorazione', 'desc')->get();
 
         }
 
