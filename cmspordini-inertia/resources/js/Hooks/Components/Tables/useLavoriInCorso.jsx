@@ -8,7 +8,10 @@ import {
     faShareFromSquare,
     faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
-import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
+import {
+    faFileZipper as faFileZipperSolid,
+    faRotateLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const useLavoriInCorso = ({
     lavori,
@@ -96,6 +99,13 @@ export const useLavoriInCorso = ({
                 name: "Azioni",
                 cell: (row) => (
                     <>
+                        <button
+                            title="Annulla incarico"
+                            className="btn-link"
+                            onClick={() => handleIncarico(row.IDordine, "back")}
+                        >
+                            <FontAwesomeIcon icon={faRotateLeft} size="2xl" />
+                        </button>
                         <ModalLink
                             title="Modifica lavorazione"
                             href={`/operatore/ordini-clienti/caricamento-lavorazione/${row.IDordine}`}

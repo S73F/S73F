@@ -213,7 +213,7 @@ class OperatoreController extends Controller
 
         $stato = $request->query('stato', "nuovi");
 
-        $redirectUrl = ($stato == 0)
+        $redirectUrl = ($stato == 'nuovi')
             ? '/operatore/dashboard?tipo=nuovi'
             : '/operatore/dashboard?tipo=inCorso';
 

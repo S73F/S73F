@@ -30,9 +30,9 @@ export const useLavori = ({}) => {
         }, 1000);
     };
 
-    function handleIncarico(IDordine) {
+    function handleIncarico(IDordine, option = "forward") {
         router.patch(
-            `/operatore/ordini-clienti/update/${IDordine}`,
+            `/operatore/ordini-clienti/update/${IDordine}/${option}`,
             {},
             {
                 only: ["lavori", "flash", "numLavoriNuovi"],

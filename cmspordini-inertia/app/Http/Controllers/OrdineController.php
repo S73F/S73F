@@ -140,7 +140,7 @@ class OrdineController extends Controller
         return $pdf->stream("ordine_{$ordine->IDordine}.pdf");
     }
 
-    public function aggiornaStato($IDordine, Request $request)
+    public function aggiornaStato(Request $request, $IDordine, $option = "forward")
     {
         $ordine = Ordine::find($IDordine);
 
@@ -149,15 +149,20 @@ class OrdineController extends Controller
         }
 
         try {
-            switch ($ordine->stato) {
-                case 0:
-                    $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
-                    return redirect('/operatore/dashboard?tipo=nuovi')->with('success', 'Hai preso in carico il lavoro.');
-                case 1:
-                    $ordine->update(['stato' => 2, 'data_spedizione' => now()]);
-                    return redirect('/operatore/dashboard?tipo=inCorso')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
-                default:
-                    throw new Exception("Stato dell'ordine non valido.");
+            if ($option == "forward") {
+                switch ($ordine->stato) {
+                    case 0:
+                        $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
+                        return redirect('/operatore/dashboard?tipo=nuovi')->with('success', 'Hai preso in carico il lavoro.');
+                    case 1:
+                        $ordine->update(['stato' => 2, 'data_spedizione' => now()]);
+                        return redirect('/operatore/dashboard?tipo=inCorso')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
+                    default:
+                        throw new Exception("Stato dell'ordine non valido.");
+                }
+            } else {
+                $ordine->update(['data_inizioLavorazione' => null, 'stato' => 0, 'data_spedizione' => null, "note_int" => "", 'note_ulti_mod' => null, 'utente_modifica' => "-", "file_fin" => 0, 'file_fin_nome' => null]);
+                return redirect('/operatore/dashboard?tipo=inCorso')->with('success', "Hai annullato l'incarico e ripristinato l'ordine.");
             }
         } catch (Exception $e) {
             $errors = $e->getMessage();

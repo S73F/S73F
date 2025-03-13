@@ -59,7 +59,7 @@ export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                     <button
                         title="Accetta incarico"
                         className="btn-link"
-                        onClick={() => handleIncarico(row.IDordine, 0)}
+                        onClick={() => handleIncarico(row.IDordine)}
                     >
                         <FontAwesomeIcon icon={faSquareCheck} size="2xl" />
                     </button>

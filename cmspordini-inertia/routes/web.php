@@ -45,7 +45,8 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::get('/operatore/ordini-clienti', [OperatoreController::class, 'showOrdiniCliente'])->name('paginaOrdiniCliente');
     Route::get('/operatore/ordini-clienti/{id}', [OperatoreController::class, 'showOrdiniCliente'])->name('tabellaOrdiniCliente');
     Route::get('/operatore/ordini-clienti/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('operatoreGeneraPDF');
-    Route::patch('/operatore/ordini-clienti/update/{id}', [OrdineController::class, 'aggiornaStato'])->name('aggiornaStato');
+    Route::patch('/operatore/ordini-clienti/update/{id}/{option}', [OrdineController::class, 'aggiornaStato'])->name('aggiornaStato');
+    // Route::patch('/operatore/ordini-clienti/update/{id}', [OrdineController::class, 'aggiornaStato'])->name('aggiornaStato');
     Route::get('/operatore/ordini-clienti/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFile');
     Route::get('/operatore/ordini-clienti/download-finale/{id}', [OrdineController::class, 'downloadFileFinale'])->name('downloadFileFinale');
     Route::get('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'showLavorazioneModal'])->name('showLavorazioneModal');
