@@ -241,35 +241,14 @@ class OperatoreController extends Controller
                 throw new Exception("Non hai modificato la lavorazione");
             }
 
-            // Ottieni l'utente autenticato
+            // Ottiene l'operatore autenticato
             $operatore = Auth::guard('operatore')->user();
-
             // Determina il nome dell'utente
             $utenteModifica = trim(($operatore->cognome ?? '') . ' ' . ($operatore->nome ?? ''));
+            $fileCaricato = false;
+            $noteModificate = false;
 
-            if (!empty($request->note_int) && $request->hasFile('userfile') && $request->file('userfile')->isValid()) {
-                $file = $request->file('userfile');
-                $extension = $file->getClientOriginalExtension();
-                $newFileName = $ordine->cliente->ragione_sociale . "_" . strtoupper($ordine->PazienteCognome) . "_" . strtoupper($ordine->PazienteNome) . "_{$ordine->IDordine}_FINALE.{$extension}";
-
-                // Salva il file nella cartella storage/app/public/uploads
-                $file->storeAs('uploads', $newFileName, 'public');
-
-                // Aggiorna l'ordine con il nome del file
-                $ordine->update([
-                    'utente_modifica' => $utenteModifica,
-                    'note_ulti_mod' => now(),
-                    'file_fin' => 1,
-                    'file_fin_nome' => $newFileName,
-                    'note_int' => $request->note_int
-                ]);
-
-                if ($request->has('note_int')) {
-                    return redirect()->intended('/operatore/dashboard?tipo=inCorso')->with(['success' => 'Lavorazione caricata e note modificate con successo!']);
-                }
-            }
-
-            if (empty($request->note_int) && $request->hasFile('userfile') && $request->file('userfile')->isValid()) {
+            if ($request->hasFile('userfile') && $request->file('userfile')->isValid()) {
                 $file = $request->file('userfile');
                 $extension = $file->getClientOriginalExtension();
                 $newFileName = $ordine->cliente->ragione_sociale . "_" . strtoupper($ordine->PazienteCognome) . "_" . strtoupper($ordine->PazienteNome) . "_{$ordine->IDordine}_FINALE.{$extension}";
@@ -285,20 +264,28 @@ class OperatoreController extends Controller
                     'file_fin_nome' => $newFileName,
                 ]);
 
-                if ($request->has('note_int')) {
-                    return redirect()->intended('/operatore/dashboard?tipo=inCorso')->with(['success' => 'Lavorazione caricata con successo!']);
-                }
+                $fileCaricato = true;
             }
 
-            if (!$request->hasFile('userfile') && !empty($request->note_int)) {
+            if (!empty($request->note_int)) {
                 $ordine->update([
                     'utente_modifica' => $utenteModifica,
                     'note_ulti_mod' => now(),
                     'note_int' => $request->note_int
                 ]);
 
-                return redirect()->intended('/operatore/dashboard?tipo=inCorso')->with(['success' => 'Note modificate con successo!']);
+                $noteModificate = true;
             }
+
+            if ($fileCaricato && $noteModificate) {
+                $message = "Lavorazione caricata e note modificate con successo!";
+            } elseif ($fileCaricato) {
+                $message = "Lavorazione caricata con successo!";
+            } else {
+                $message = "Note modificate con successo!";
+            }
+
+            return redirect()->intended('/operatore/dashboard?tipo=inCorso')->with(['success' => $message]);
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();
 
