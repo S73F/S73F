@@ -1,7 +1,4 @@
-import {
-    faPenToSquare,
-    faSquareMinus,
-} from "@fortawesome/free-regular-svg-icons";
+import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ModalLink } from "@inertiaui/modal-react";
 import React, { useEffect, useMemo, useState } from "react";
@@ -58,7 +55,7 @@ export const useGestioneClientiTable = ({ clienti }) => {
                             href={`/operatore/gestione-clienti/eliminazione/${row.IDcliente}`}
                             title="Elimina cliente"
                         >
-                            <FontAwesomeIcon icon={faSquareMinus} size="2xl" />
+                            <FontAwesomeIcon icon={faTrashCan} size="2xl" />
                         </ModalLink>
                     </div>
                 ),

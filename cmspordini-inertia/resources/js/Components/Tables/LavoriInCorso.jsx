@@ -10,7 +10,6 @@ const LavoriInCorso = ({
     handleFile,
     handleFileFinale,
     handleIncarico,
-    loading,
 }) => {
     const { columns, records, handleFilter } = useLavoriInCorso({
         lavori,
@@ -19,37 +18,27 @@ const LavoriInCorso = ({
         handleIncarico,
     });
 
-    if (loading) {
-        return (
-            <div id="loading-spinner">
-                <div id="spinner"></div>
-            </div>
-        );
-    }
-
-    if (!loading && lavori) {
-        return (
-            <>
-                <h3 id="table-title">Lavori in corso</h3>
-                <SearchBox handleFilter={handleFilter} />
-                <DataTable
-                    className="custom-table"
-                    columns={columns}
-                    data={records}
-                    expandableRows
-                    expandOnRowClicked
-                    expandableRowsComponent={LavoriExpanded}
-                    pagination
-                    paginationComponentOptions={{
-                        rowsPerPageText: "Righe per pagina",
-                        rangeSeparatorText: "di",
-                        selectAllRowsItem: true,
-                        selectAllRowsItemText: "Tutte",
-                    }}
-                />
-            </>
-        );
-    }
+    return (
+        <>
+            <h3 id="table-title">Lavori in corso</h3>
+            <SearchBox handleFilter={handleFilter} />
+            <DataTable
+                className="custom-table"
+                columns={columns}
+                data={records}
+                expandableRows
+                expandOnRowClicked
+                expandableRowsComponent={LavoriExpanded}
+                pagination
+                paginationComponentOptions={{
+                    rowsPerPageText: "Righe per pagina",
+                    rangeSeparatorText: "di",
+                    selectAllRowsItem: true,
+                    selectAllRowsItemText: "Tutte",
+                }}
+            />
+        </>
+    );
 };
 
 export default LavoriInCorso;

@@ -1,13 +1,16 @@
 import { router } from "@inertiajs/react";
 
-export const useEliminazioneLavoro = ({ IDordine, modalRef }) => {
+export const useEliminazioneLavoro = ({ ordine, stato, modalRef }) => {
     const handleDelete = (e) => {
         e.preventDefault();
-        router.delete(`/operatore/lavori/eliminazione/${IDordine}`, {
+        router.delete(`/operatore/lavori/eliminazione/${ordine}`, {
+            only: ["lavori", "flash", "numLavoriNuovi"],
             preserveScroll: true,
+            preserveState: true,
+            data: { stato: stato },
+
             onSuccess: () => {
                 closeModal();
-                router.visit("/operatore/dashboard");
             },
             onError: (errors) => {
                 console.log(errors);

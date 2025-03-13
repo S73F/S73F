@@ -1,24 +1,7 @@
 import { router } from "@inertiajs/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export const useLavori = ({ tipoLavori, setNumeroLavoriNuovi }) => {
-    const [lavori, setLavori] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        setLoading(true);
-        axios
-            .get(`/operatore/lavori/${tipoLavori}`, { withCredentials: true })
-            .then(({ data }) => {
-                console.log("Lavori ricevuti: ", data);
-                setLavori(data.lavori);
-            })
-            .catch((error) => console.log(error))
-            .finally(() => setLoading(false));
-    }, [tipoLavori]);
-
+export const useLavori = ({}) => {
     const handleFile = (IDordine) => {
         window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
 
@@ -47,38 +30,21 @@ export const useLavori = ({ tipoLavori, setNumeroLavoriNuovi }) => {
         }, 1000);
     };
 
-    function handleIncarico(IDordine, stato) {
+    function handleIncarico(IDordine) {
         router.patch(
             `/operatore/ordini-clienti/update/${IDordine}`,
             {},
             {
+                only: ["lavori", "flash", "numLavoriNuovi"],
                 preserveScroll: true,
-                onSuccess: () => {
-                    setLavori((prevLavori) => {
-                        if (!prevLavori || prevLavori.length === 0) {
-                            console.error("Dati non disponibili");
-                            return prevLavori;
-                        }
-                        const updatedLavori = prevLavori.filter(
-                            (row) => row.IDordine !== IDordine
-                        );
-                        if (stato === 0)
-                            setNumeroLavoriNuovi(prevLavori.length - 1);
-                        return updatedLavori;
-                    });
-                },
-                onError: (errors) => {
-                    console.log(errors);
-                },
+                preserveState: true,
             }
         );
     }
 
     return {
-        lavori,
         handleFile,
         handleFileFinale,
         handleIncarico,
-        loading,
     };
 };

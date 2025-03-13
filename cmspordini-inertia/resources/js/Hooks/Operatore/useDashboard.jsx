@@ -1,29 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { router } from "@inertiajs/react";
 
 export const useDashboard = () => {
-    const [tipoLavori, setTipoLavori] = useState("inCorso");
-    const [numeroLavoriNuovi, setNumeroLavoriNuovi] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        axios
-            .get(`/operatore/lavori/contatore-nuovi`, { withCredentials: true })
-            .then(({ data }) => {
-                setNumeroLavoriNuovi(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
-    }, []);
+    const handleLavori = (tipo) => {
+        router.visit(`/operatore/dashboard`, {
+            preserveScroll: true,
+            preserveState: true,
+            replace: true,
+            data: { tipo: tipo },
+            only: ["tipo", "lavori"],
+        });
+    };
 
     return {
-        tipoLavori,
-        setTipoLavori,
-        numeroLavoriNuovi,
-        setNumeroLavoriNuovi,
-        loading,
+        handleLavori,
     };
 };

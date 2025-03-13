@@ -2,7 +2,7 @@ import {
     faFilePdf,
     faFileZipper,
     faSquareCheck,
-    faSquareMinus,
+    faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ModalLink } from "@inertiaui/modal-react";
@@ -68,7 +68,7 @@ export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                         className="btn-link"
                         href={`/operatore/lavori/eliminazione/${row.IDordine}`}
                     >
-                        <FontAwesomeIcon icon={faSquareMinus} size="2xl" />
+                        <FontAwesomeIcon icon={faTrashCan} size="2xl" />
                     </ModalLink>
                 </>
             ),

@@ -1,7 +1,6 @@
 import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
 import { renderApp } from "@inertiaui/modal-react";
-import { putConfig } from "@inertiaui/modal-react";
 
 createInertiaApp({
     resolve: (name) => {

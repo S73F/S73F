@@ -7,24 +7,18 @@ use App\Models\Ordine;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
 
 class OperatoreController extends Controller
 {
-    public function showDashboard()
+    public function showDashboard(Request $request)
     {
-        return Inertia::render("Operatore/Dashboard");
-    }
+        $tipo = $request->query('tipo', "nuovi");
+        $lavori = [];
 
-    public function showLavori($tipo)
-    {
         if ($tipo == "nuovi") {
             $lavori = Ordine::select("IDordine", "IDcliente", "medicoOrdinante", "PazienteNome", "PazienteCognome", "data")->with(["cliente:IDcliente,ragione_sociale,emailcliente"])->where('stato', 0)->orderBy('data', 'desc')->get();
-
         }
 
         if ($tipo == "inCorso") {
@@ -32,7 +26,9 @@ class OperatoreController extends Controller
 
         }
 
-        return response()->json(["lavori" => $lavori]);
+        $numLavoriNuovi = Ordine::where('stato', 0)->count();
+
+        return Inertia::render("Operatore/Dashboard", ["tipo" => $tipo, "lavori" => $lavori, "numLavoriNuovi" => $numLavoriNuovi]);
     }
 
     public function showGestioneClienti()
@@ -188,7 +184,7 @@ class OperatoreController extends Controller
 
     public function showEliminazioneClienteModal($IDCliente)
     {
-        $cliente = Cliente::find($IDCliente);
+        $cliente = Cliente::select('IDcliente', 'nome', 'cognome')->find($IDCliente);
 
         return Inertia::render("Modals/EliminazioneCliente", ["cliente" => $cliente]);
     }
@@ -199,34 +195,40 @@ class OperatoreController extends Controller
 
         $cliente->delete();
 
-        return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente eliminato con successo']);
+        return redirect('/operatore/gestione-clienti')->with(['success' => 'Cliente eliminato con successo']);
     }
 
     public function showEliminazioneOrdineModal($IDordine)
     {
-        $ordine = Ordine::find($IDordine);
+        $ordine = Ordine::select('IDordine', 'stato')->find($IDordine);
 
-        return Inertia::render("Modals/EliminazioneLavoro", ["IDordine" => $ordine->IDordine]);
+        return Inertia::render("Modals/EliminazioneLavoro", ["ordine" => $ordine->IDordine, "stato" => $ordine->stato]);
     }
 
-    public function deleteOrdine($IDordine)
+    public function deleteOrdine($IDordine, Request $request)
     {
         $ordine = Ordine::findOrFail($IDordine);
 
         $ordine->delete();
 
-        return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavoro eliminato con successo']);
+        $stato = $request->query('stato', "nuovi");
+
+        $redirectUrl = ($stato == 0)
+            ? '/operatore/dashboard?tipo=nuovi'
+            : '/operatore/dashboard?tipo=inCorso';
+
+        return redirect($redirectUrl)->with('success', 'Lavoro eliminato con successo');
     }
 
     public function showLavorazioneModal($IDordine)
     {
-        $ordine = Ordine::with('cliente')->findOrFail($IDordine);
+        $ordine = Ordine::select('IDordine', 'note_int')->findOrFail($IDordine);
         return Inertia::render('Modals/Lavorazione', ['ordine' => $ordine->IDordine, 'note_int' => $ordine->note_int]);
     }
 
     public function caricaLavorazione($IDordine, Request $request)
     {
-        $ordine = Ordine::with('cliente')->findOrFail($IDordine);
+        $ordine = Ordine::select('IDordine', 'IDcliente', 'PazienteNome', 'PazienteCognome', 'utente_modifica', 'note_ulti_mod', 'file_fin', 'file_fin_nome', 'note_int')->with(['cliente:IDcliente,ragione_sociale'])->findOrFail($IDordine);
 
         try {
             $request->validate([
@@ -239,6 +241,12 @@ class OperatoreController extends Controller
                 throw new Exception("Non hai modificato la lavorazione");
             }
 
+            // Ottieni l'utente autenticato
+            $operatore = Auth::guard('operatore')->user();
+
+            // Determina il nome dell'utente
+            $utenteModifica = trim(($operatore->cognome ?? '') . ' ' . ($operatore->nome ?? ''));
+
             if (!empty($request->note_int) && $request->hasFile('userfile') && $request->file('userfile')->isValid()) {
                 $file = $request->file('userfile');
                 $extension = $file->getClientOriginalExtension();
@@ -248,38 +256,16 @@ class OperatoreController extends Controller
                 $file->storeAs('uploads', $newFileName, 'public');
 
                 // Aggiorna l'ordine con il nome del file
-                if (Auth::user()->cognome && Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->cognome . " " . Auth::user()->nome,
-                        'note_ulti_mod' => now(),
-                        'file_fin' => 1,
-                        'file_fin_nome' => $newFileName,
-                        'note_int' => $request->note_int
-                    ]);
-                }
-
-                if (!Auth::user()->cognome && Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->nome,
-                        'note_ulti_mod' => now(),
-                        'file_fin' => 1,
-                        'file_fin_nome' => $newFileName,
-                        'note_int' => $request->note_int
-                    ]);
-                }
-
-                if (Auth::user()->cognome && !Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->cognome,
-                        'note_ulti_mod' => now(),
-                        'file_fin' => 1,
-                        'file_fin_nome' => $newFileName,
-                        'note_int' => $request->note_int
-                    ]);
-                }
+                $ordine->update([
+                    'utente_modifica' => $utenteModifica,
+                    'note_ulti_mod' => now(),
+                    'file_fin' => 1,
+                    'file_fin_nome' => $newFileName,
+                    'note_int' => $request->note_int
+                ]);
 
                 if ($request->has('note_int')) {
-                    return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata e note modificate con successo!']);
+                    return redirect()->intended('/operatore/dashboard?tipo=inCorso')->with(['success' => 'Lavorazione caricata e note modificate con successo!']);
                 }
             }
 
@@ -292,64 +278,26 @@ class OperatoreController extends Controller
                 $file->storeAs('uploads', $newFileName, 'public');
 
                 // Aggiorna l'ordine con il nome del file
-                if (Auth::user()->cognome && Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->cognome . " " . Auth::user()->nome,
-                        'note_ulti_mod' => now(),
-                        'file_fin' => 1,
-                        'file_fin_nome' => $newFileName,
-                    ]);
-                }
-
-                if (!Auth::user()->cognome && Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->nome,
-                        'note_ulti_mod' => now(),
-                        'file_fin' => 1,
-                        'file_fin_nome' => $newFileName,
-                    ]);
-                }
-
-                if (Auth::user()->cognome && !Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->cognome,
-                        'note_ulti_mod' => now(),
-                        'file_fin' => 1,
-                        'file_fin_nome' => $newFileName,
-                    ]);
-                }
+                $ordine->update([
+                    'utente_modifica' => $utenteModifica,
+                    'note_ulti_mod' => now(),
+                    'file_fin' => 1,
+                    'file_fin_nome' => $newFileName,
+                ]);
 
                 if ($request->has('note_int')) {
-                    return redirect()->intended('/operatore/dashboard')->with(['success' => 'Lavorazione caricata con successo!']);
+                    return redirect()->intended('/operatore/dashboard?tipo=inCorso')->with(['success' => 'Lavorazione caricata con successo!']);
                 }
             }
 
             if (!$request->hasFile('userfile') && !empty($request->note_int)) {
-                if (Auth::user()->cognome && Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->cognome . " " . Auth::user()->nome,
-                        'note_ulti_mod' => now(),
-                        'note_int' => $request->note_int
-                    ]);
-                }
+                $ordine->update([
+                    'utente_modifica' => $utenteModifica,
+                    'note_ulti_mod' => now(),
+                    'note_int' => $request->note_int
+                ]);
 
-                if (!Auth::user()->cognome && Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->nome,
-                        'note_ulti_mod' => now(),
-                        'note_int' => $request->note_int
-                    ]);
-                }
-
-                if (Auth::user()->cognome && !Auth::user()->nome) {
-                    $ordine->update([
-                        'utente_modifica' => Auth::user()->cognome,
-                        'note_ulti_mod' => now(),
-                        'note_int' => $request->note_int
-                    ]);
-                }
-
-                return redirect()->intended('/operatore/dashboard')->with(['success' => 'Note modificate con successo!']);
+                return redirect()->intended('/operatore/dashboard?tipo=inCorso')->with(['success' => 'Note modificate con successo!']);
             }
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();

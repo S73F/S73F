@@ -8,6 +8,7 @@ export const useEliminazioneCliente = ({ cliente, modalRef }) => {
             {
                 only: ["clienti", "flash"],
                 preserveScroll: true,
+                preserveState: true,
                 onSuccess: () => closeModal(),
                 onError: (errors) => {
                     console.log(errors);

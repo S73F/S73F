@@ -38,6 +38,7 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
         patch(`/operatore/gestione-clienti/modifica/${cliente.IDcliente}`, {
             only: ["clienti", "flash"],
             preserveScroll: true,
+            preserveState: true,
             onSuccess: () => closeModal(),
             onError: (errors) => {
                 console.log(errors);

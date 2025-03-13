@@ -15,11 +15,12 @@ export const useLavorazione = ({ modalRef }) => {
     const handleLavorazione = (e, IDordine) => {
         e.preventDefault();
         post(`/operatore/ordini-clienti/caricamento-lavorazione/${IDordine}`, {
+            only: ["lavori", "flash"],
             forceFormData: true, // Indica che c'è un file
             preserveScroll: true,
+            preserveState: true,
             onSuccess: () => {
                 closeModal();
-                router.visit("/operatore/dashboard");
             },
             onError: (error) => {
                 console.log(error);

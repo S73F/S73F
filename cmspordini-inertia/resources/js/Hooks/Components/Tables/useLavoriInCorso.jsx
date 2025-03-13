@@ -6,7 +6,7 @@ import {
     faFileZipper,
     faPenToSquare,
     faShareFromSquare,
-    faSquareMinus,
+    faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 
@@ -119,7 +119,7 @@ export const useLavoriInCorso = ({
                             className="btn-link"
                             href={`/operatore/lavori/eliminazione/${row.IDordine}`}
                         >
-                            <FontAwesomeIcon icon={faSquareMinus} size="2xl" />
+                            <FontAwesomeIcon icon={faTrashCan} size="2xl" />
                         </ModalLink>
                     </>
                 ),

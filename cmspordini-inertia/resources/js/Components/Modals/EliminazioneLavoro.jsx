@@ -3,11 +3,12 @@ import { Modal } from "@inertiaui/modal-react";
 import "../../../css/Modal.css";
 import { useEliminazioneLavoro } from "../../Hooks/Components/Modals/useEliminazioneLavoro";
 
-export default function EliminazioneLavoro({ IDordine }) {
+export default function EliminazioneLavoro({ ordine, stato }) {
     const modalRef = useRef(null);
     const { handleDelete, closeModal } = useEliminazioneLavoro({
-        IDordine,
+        ordine,
         modalRef,
+        stato,
     });
 
     return (

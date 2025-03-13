@@ -6,14 +6,8 @@ import Notification from "../../Components/Notification";
 import { useDashboard } from "../../Hooks/Operatore/useDashboard";
 import { Lavori } from "../../Components/Tables/Lavori";
 
-export default function Dashboard({ user }) {
-    const {
-        tipoLavori,
-        setTipoLavori,
-        numeroLavoriNuovi,
-        setNumeroLavoriNuovi,
-        loading,
-    } = useDashboard();
+export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
+    const { handleLavori } = useDashboard();
 
     return (
         <>
@@ -29,21 +23,20 @@ export default function Dashboard({ user }) {
                         <button
                             className="btns-lavori"
                             id="btn-nuovi-lavori"
-                            onClick={() => setTipoLavori("nuovi")}
+                            onClick={() => handleLavori("nuovi")}
                         >
                             Nuovi lavori
                         </button>
                         <Notification.Layout>
                             <Notification.LavoriNuovi
-                                lavoriNuovi={numeroLavoriNuovi}
-                                onClick={() => setTipoLavori("nuovi")}
-                                loading={loading}
+                                lavoriNuovi={numLavoriNuovi}
+                                onClick={() => handleLavori("nuovi")}
                             ></Notification.LavoriNuovi>
                         </Notification.Layout>
                         <button
                             className="btns-lavori"
                             id="btn-lavori-in-corso"
-                            onClick={() => setTipoLavori("inCorso")}
+                            onClick={() => handleLavori("inCorso")}
                         >
                             Lavori in corso
                         </button>
@@ -51,10 +44,7 @@ export default function Dashboard({ user }) {
                 </div>
 
                 <div id="dashboard-table-container">
-                    <Lavori
-                        tipoLavori={tipoLavori}
-                        setNumeroLavoriNuovi={setNumeroLavoriNuovi}
-                    />
+                    <Lavori lavori={lavori} tipoLavori={tipo} />
                 </div>
             </div>
         </>

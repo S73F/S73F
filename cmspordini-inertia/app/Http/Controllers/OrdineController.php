@@ -152,10 +152,10 @@ class OrdineController extends Controller
             switch ($ordine->stato) {
                 case 0:
                     $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
-                    return redirect()->intended('/operatore/dashboard')->with('success', 'Hai preso in carico il lavoro.');
+                    return redirect('/operatore/dashboard?tipo=nuovi')->with('success', 'Hai preso in carico il lavoro.');
                 case 1:
                     $ordine->update(['stato' => 2, 'data_spedizione' => now()]);
-                    return redirect()->intended('/operatore/dashboard')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
+                    return redirect('/operatore/dashboard?tipo=inCorso')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
                 default:
                     throw new Exception("Stato dell'ordine non valido.");
             }
