@@ -1,0 +1,109 @@
+#table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.table-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+#table-content {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.199);
+}
+
+#table-content thead tr th {
+    background-color: var(--btn-color);
+    border: 1px solid var(--btn-color);
+    color: white;
+    padding: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+#table-content tbody tr {
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease-in-out;
+}
+
+#table-content tbody tr:hover {
+    background-color: rgba(0, 165, 95, 0.1);
+}
+
+#table-content tbody tr td {
+    padding: 0.8rem 0.6rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--main-color);
+    border: 1px solid var(--border-color);
+    white-space: nowrap;
+    vertical-align: middle;
+    line-height: 1.2rem;
+}
+
+#table-content tbody tr td:first-child {
+    max-width: 14rem;
+    text-wrap: wrap;
+}
+
+#table-content tbody tr td a {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--main-color);
+    transition: color 0.1s ease-in;
+}
+
+#table-content tbody tr td a:hover {
+    color: var(--hover-color);
+    cursor: pointer;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--main-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease-in;
+}
+
+.btn-link:hover {
+    color: var(--hover-color);
+}
+
+.actions {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#edit-btn,
+#delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#edit-btn svg,
+#delete-btn svg {
+    margin: auto;
+    vertical-align: middle;
+    color: var(--main-color);
+    transition: color 0.2s ease-in-out;
+}
+
+#edit-btn:hover svg,
+#delete-btn:hover svg {
+    color: var(--hover-color);
+}

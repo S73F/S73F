@@ -1,0 +1,32 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+    --main-bg-color: #f5f5f5;
+    --main-font-family: "Raleway", "Helvetica", sans-serif;
+    --main-color: rgb(60, 59, 59);
+    --hover-color: rgb(0, 165, 95);
+    --border-color: #cfcfcf;
+    --btn-color: rgb(0, 165, 95);
+    --font-size-small: 0.8rem;
+    --letter-spacing: 2.4px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    position: relative;
+    font-family: var(--main-font-family);
+}

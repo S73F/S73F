@@ -1,0 +1,80 @@
+#dashboard-container-operatore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 7rem;
+}
+
+#main-container-operatore {
+    width: 40rem;
+    height: 20rem;
+    margin: 4rem 0;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-container-operatore h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--main-color);
+    margin-bottom: 2.5rem;
+}
+
+#btns-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+}
+
+#btns-container a,
+#btns-container .btns-lavori {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 13rem;
+    height: 3rem;
+    background-color: var(--btn-color);
+    color: white;
+    border: none;
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: all 0.1s ease-in;
+    font-weight: 500;
+    margin: 0;
+}
+
+#btns-container a:hover,
+#btns-container .btns-lavori:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #888;
+    transform: scale(1.03);
+}
+
+#btns-container #btn-nuovi-lavori:hover ~ #notification-layout,
+#notification-layout:hover {
+    box-shadow: none;
+    transform: scale(1.03);
+    cursor: pointer;
+    border: 2px solid var(--main-color);
+}
+
+#btns-container .btns-lavori {
+    color: var(--main-color);
+    background-color: white;
+    border: 1px solid var(--main-color);
+}
+
+#btns-container .btns-lavori:hover {
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+}
