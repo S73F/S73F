@@ -1,0 +1,271 @@
+#search-box-container {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    justify-content: end;
+    margin-bottom: 1rem;
+}
+
+#search-box-container input {
+    width: 20rem;
+    height: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    outline: none;
+    font-size: 16px;
+    transition: all 0.1s ease-in;
+    background-color: #fff;
+    color: #333;
+    text-align: center;
+
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23999" class="bi bi-search" viewBox="0 0 16 16"%3E%3Cpath d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85a1.007 1.007 0 0 0-.115-.098zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"%3E%3C/path%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: 1rem;
+    background-size: 16px;
+}
+
+#search-box-container input:focus {
+    border-color: var(--btn-color);
+    box-shadow: 0 0 5px var(--btn-color);
+}
+
+div .custom-table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+div .custom-table div {
+    border-radius: 0;
+}
+
+.custom-table a,
+.custom-table .btn-link {
+    background: none;
+    border: none;
+    color: var(--main-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.1s ease-in;
+    font-family: "Raleway", "Helvetica", sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.custom-table .btn-link:hover {
+    color: var(--hover-color);
+}
+
+.custom-table a:hover {
+    color: var(--hover-color);
+}
+
+.custom-table div.rdt_TableHeadRow div {
+    background-color: var(--btn-color);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.custom-table #last-modified {
+    color: red;
+    font-weight: 600;
+    margin-top: 0.3rem;
+}
+
+.custom-table .rdt_TableRow {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.custom-table .rdt_TableRow:hover {
+    background-color: #f1f1f1;
+}
+
+.custom-table .rdt_TableCell {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.custom-table .rdt_TableHeadRow div {
+    padding: 0.2rem;
+    line-height: 1rem;
+}
+
+.custom-table .rdt_TableCell {
+    padding: 0.8rem;
+}
+
+.custom-table .rdt_TableHeadRow div,
+.custom-table .rdt_TableCell div {
+    width: 100%;
+    text-align: center;
+}
+
+.hr-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-table .rdt_TableHeadRow div hr,
+.custom-table .rdt_TableCell div hr {
+    width: 100%;
+}
+
+.rdt_ExpanderRow .custom-table div .rdt_Table {
+    padding-left: 3rem;
+    background-color: var(--main-bg-color);
+}
+
+.rdt_ExpanderRow .custom-table div .rdt_Table .rdt_TableHead,
+.rdt_ExpanderRow .custom-table div .rdt_Table .rdt_TableCol {
+    height: 2.5rem;
+    font-size: 12px;
+}
+
+.rdt_ExpanderRow .custom-table div.rdt_TableHeadRow div {
+    background-color: rgb(114, 119, 114);
+}
+
+.rdt_Pagination {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.rdt_Pagination button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 14px;
+    margin: 0 5px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    color: var(--btn-color);
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.1s ease-in;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#dashboard-container-operatore div .rdt_Pagination div button:hover,
+#orders-history div .rdt_Pagination div button:hover,
+#gestione-clienti-container div .rdt_Pagination div button:hover {
+    background-color: var(--btn-color);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.rdt_Pagination button:disabled {
+    pointer-events: none;
+    border-color: var(--border-color);
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+#gestione-clienti-interactions {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+}
+
+#gestione-clienti-interactions #search-box-container {
+    margin: 0;
+}
+
+#gestione-clienti-interactions {
+    margin: 1rem;
+}
+
+#gestione-clienti-interactions #add-cliente {
+    text-decoration: none;
+    width: 3rem;
+    height: 3rem;
+    font-size: 5rem;
+    background-color: var(--btn-color);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.1s ease-in;
+}
+
+#gestione-clienti-interactions #add-cliente:hover {
+    transform: scale(1.05);
+}
+
+#table-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--main-color);
+    text-align: center;
+}
+
+#edit-btn,
+#delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#edit-btn svg,
+#delete-btn svg {
+    margin: auto;
+    vertical-align: middle;
+    color: var(--main-color);
+    transition: color 0.2s ease-in-out;
+}
+
+#edit-btn:hover svg,
+#delete-btn:hover svg {
+    color: var(--hover-color);
+}
+
+#loading-spinner {
+    display: flex;
+    justify-content: center;
+}
+
+#spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid var(--btn-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
