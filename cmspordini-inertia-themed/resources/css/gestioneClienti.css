@@ -1,0 +1,36 @@
+#gestione-clienti-container {
+    width: 95%;
+    padding: 2rem;
+    margin: 3rem 0;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#gestione-clienti-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem;
+}
+
+#add-cliente-btn {
+    margin-bottom: 1.3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#add-cliente-btn svg {
+    margin: auto;
+    vertical-align: middle;
+    color: var(--main-color);
+    transition: color 0.2s ease-in-out;
+}
+
+#add-cliente-btn:hover svg {
+    color: var(--hover-color);
+}
