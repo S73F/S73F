@@ -4,7 +4,7 @@ import Layout from "../../Layouts/Layout";
 import { useLogin } from "../../Hooks/Auth/useLogin";
 
 export default function Login() {
-    const { data, handleChange, handleSubmit } = useLogin();
+    const { data, processing, handleChange, handleSubmit } = useLogin();
 
     return (
         <div className="login-container">
@@ -29,7 +29,9 @@ export default function Login() {
                     required
                 />
 
-                <button type="submit">Login</button>
+                <button type="submit" disabled={processing}>
+                    Login
+                </button>
             </form>
         </div>
     );

@@ -1,7 +1,7 @@
 import { useForm } from "@inertiajs/react";
 
 export const useLogin = () => {
-    const { data, setData, post } = useForm({
+    const { data, processing, setData, post } = useForm({
         username: "",
         password: "",
     });
@@ -15,5 +15,5 @@ export const useLogin = () => {
         post("/login");
     };
 
-    return { data, handleChange, handleSubmit };
+    return { data, processing, handleChange, handleSubmit };
 };

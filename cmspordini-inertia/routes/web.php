@@ -6,7 +6,6 @@ use App\Http\Controllers\OperatoreController;
 use App\Http\Controllers\OrdineController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 Route::group(['middleware' => RedirectIfAuthenticated::class], function () {
     Route::get('/', function () {
