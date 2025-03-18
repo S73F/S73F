@@ -17,7 +17,7 @@ export default function Login() {
                     value={data.username}
                     onChange={handleChange}
                     placeholder="Username"
-                    required
+                    // required
                 />
 
                 <input
@@ -26,7 +26,7 @@ export default function Login() {
                     value={data.password}
                     onChange={handleChange}
                     placeholder="Password"
-                    required
+                    // required
                 />
 
                 <button type="submit" disabled={processing}>

@@ -1,4 +1,5 @@
 import { useForm } from "@inertiajs/react";
+import { toast } from "react-toastify";
 
 export const useLogin = () => {
     const { data, processing, setData, post } = useForm({
@@ -12,7 +13,14 @@ export const useLogin = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post("/login");
+
+        data.username !== "" && data.password !== ""
+            ? post("/login")
+            : data.username === "" && data.password !== ""
+            ? toast.error("Il campo username è obbligatorio")
+            : data.username !== "" && data.password === ""
+            ? toast.error("Il campo password è obbligatorio")
+            : toast.error("I campi username e password sono obbligatori");
     };
 
     return { data, processing, handleChange, handleSubmit };
