@@ -74,10 +74,16 @@ export default function Layout({ ListItems, children }) {
                 }}
             >
                 <Box
-                    component="img"
-                    src="/assets/img/ODONTOTECNICA-LOGO.svg"
-                    sx={{ width: 150 }}
-                />
+                    component="a"
+                    href="https://www.centromedicosanpietro.it/"
+                    target="_blank"
+                >
+                    <Box
+                        component="img"
+                        src="/assets/img/ODONTOTECNICA-LOGO.svg"
+                        sx={{ width: 150 }}
+                    />
+                </Box>
             </Box>
         </Box>
     );
