@@ -2,10 +2,8 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -14,7 +12,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Edit, History, Home as HomeIcon, Logout } from "@mui/icons-material";
+import { Home as HomeIcon, Logout as LogoutIcon } from "@mui/icons-material";
 import { Link } from "@inertiajs/react";
 import { ToastContainer } from "react-toastify";
 import { useLayout } from "../Hooks/Layouts/useLayout";
@@ -59,7 +57,7 @@ export default function Layout({ ListItems, children }) {
                 <ListItem disablePadding>
                     <ListItemButton onClick={handleLogout}>
                         <ListItemIcon>
-                            <Logout />
+                            <LogoutIcon />
                         </ListItemIcon>
                         <ListItemText primary="Logout" />
                     </ListItemButton>

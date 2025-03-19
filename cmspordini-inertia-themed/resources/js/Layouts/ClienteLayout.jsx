@@ -7,7 +7,7 @@ import {
     ListItemText,
 } from "@mui/material";
 import Layout from "./Layout";
-import { History as HistoryIcon, Home as HomeIcon } from "@mui/icons-material";
+import { History as HistoryIcon } from "@mui/icons-material";
 
 export default function ClienteLayout({ children }) {
     const ListItems = (

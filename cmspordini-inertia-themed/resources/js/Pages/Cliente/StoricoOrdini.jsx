@@ -17,14 +17,14 @@ export default function StoricoOrdini({ ordini }) {
 
     return (
         <Paper
-            elevation={10}
+            elevation={5}
             sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
                 minWidth: { xs: "50%", lg: "90%" },
-                minHeight: { xs: `calc(80vh - 48px)`, sm: `calc(90vh - 64px)` },
+                minHeight: { xs: `calc(65vh - 48px)`, sm: `calc(75vh - 64px)` },
                 p: 8,
             }}
         >

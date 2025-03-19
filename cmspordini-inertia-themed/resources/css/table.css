@@ -85,8 +85,13 @@ div .custom-table div {
 .custom-table .rdt_TableRow {
     border-bottom: 1px solid #ddd;
     transition: background-color 0.2s ease-in-out;
-    height: 6rem;
+    height: 5rem;
 }
+/* .custom-table .rdt_TableRow {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s ease-in-out;
+    height: 6rem;
+} */
 
 .custom-table .rdt_TableRow:hover {
     background-color: #f1f1f1;

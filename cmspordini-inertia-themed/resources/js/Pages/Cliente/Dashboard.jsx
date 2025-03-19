@@ -14,7 +14,7 @@ export default function Dashboard({ user }) {
                 justifyContent: "center",
                 textAlign: "center",
                 minWidth: "90%",
-                minHeight: { xs: `calc(80vh - 48px)`, sm: `calc(90vh - 64px)` },
+                minHeight: { xs: `calc(65vh - 48px)`, sm: `calc(75vh - 64px)` },
                 p: 4,
             }}
         >
