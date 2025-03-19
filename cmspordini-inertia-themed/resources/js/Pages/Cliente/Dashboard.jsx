@@ -19,7 +19,9 @@ export default function Dashboard({ user }) {
             }}
         >
             <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
-                Benvenuto {user.nome}
+                {user?.nome
+                    ? `Benvenuto ${user?.nome}`
+                    : `Benvenuto ${user?.cognome ?? "Utente"}`}
             </Typography>
 
             <Button

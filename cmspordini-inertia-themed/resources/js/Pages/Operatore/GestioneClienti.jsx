@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../../Layouts/Layout";
 import "../../../css/gestioneClienti.css";
 import GestioneClientiTable from "../../Components/Tables/GestioneClientiTable";
+import OperatoreLayout from "../../Layouts/OperatoreLayout";
 
 export default function GestioneClienti({ clienti }) {
     return (
@@ -13,4 +13,4 @@ export default function GestioneClienti({ clienti }) {
     );
 }
 
-GestioneClienti.layout = (page) => <Layout>{page}</Layout>;
+GestioneClienti.layout = (page) => <OperatoreLayout>{page}</OperatoreLayout>;

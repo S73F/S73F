@@ -1,9 +1,9 @@
 import React from "react";
-import Layout from "../../Layouts/Layout";
 import OrdiniClienteTable from "../../Components/Tables/OrdiniClienteTable";
 import "../../../css/storicoOrdini.css";
 import { useOrdiniClienti } from "../../Hooks/Operatore/useOrdiniClienti";
 import { Typography } from "@mui/material";
+import OperatoreLayout from "../../Layouts/OperatoreLayout";
 
 export default function OrdiniClienti({ clienti, ordini }) {
     const { handleChange } = useOrdiniClienti();
@@ -42,4 +42,4 @@ export default function OrdiniClienti({ clienti, ordini }) {
     );
 }
 
-OrdiniClienti.layout = (page) => <Layout>{page}</Layout>;
+OrdiniClienti.layout = (page) => <OperatoreLayout>{page}</OperatoreLayout>;

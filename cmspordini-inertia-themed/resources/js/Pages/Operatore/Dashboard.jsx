@@ -1,10 +1,10 @@
 import React from "react";
-import Layout from "../../Layouts/Layout";
 import "../../../css/operatoreDashboard.css";
 import { Link } from "@inertiajs/react";
 import Notification from "../../Components/Notification";
 import { useDashboard } from "../../Hooks/Operatore/useDashboard";
 import { Lavori } from "../../Components/Tables/Lavori";
+import OperatoreLayout from "../../Layouts/OperatoreLayout";
 
 export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
     const { handleLavori } = useDashboard();
@@ -13,7 +13,11 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
         <>
             <div id="dashboard-container-operatore">
                 <div id="main-container-operatore">
-                    <h2>Benvenuto {user.nome}</h2>
+                    {user?.nome ? (
+                        <h2>Benvenuto {user?.nome}</h2>
+                    ) : (
+                        <h2>Benvenuto {user?.cognome ?? "Utente"}</h2>
+                    )}
 
                     <div id="btns-container">
                         <Link href="/operatore/gestione-clienti">
@@ -51,4 +55,4 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
     );
 }
 
-Dashboard.layout = (page) => <Layout>{page}</Layout>;
+Dashboard.layout = (page) => <OperatoreLayout>{page}</OperatoreLayout>;

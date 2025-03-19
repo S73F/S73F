@@ -87,11 +87,6 @@ div .custom-table div {
     transition: background-color 0.2s ease-in-out;
     height: 5rem;
 }
-/* .custom-table .rdt_TableRow {
-    border-bottom: 1px solid #ddd;
-    transition: background-color 0.2s ease-in-out;
-    height: 6rem;
-} */
 
 .custom-table .rdt_TableRow:hover {
     background-color: #f1f1f1;
@@ -201,7 +196,7 @@ div .custom-table div {
     width: 3rem;
     height: 3rem;
     font-size: 5rem;
-    background-color: var(--btn-color);
+    background-color: #1976d2;
     color: white;
     display: flex;
     justify-content: center;
@@ -240,7 +235,7 @@ div .custom-table div {
 
 #edit-btn:hover svg,
 #delete-btn:hover svg {
-    color: var(--hover-color);
+    color: #1976d2;
 }
 
 #loading-spinner {
@@ -250,7 +245,7 @@ div .custom-table div {
 
 #spinner {
     border: 8px solid #f3f3f3;
-    border-top: 8px solid var(--btn-color);
+    border-top: 8px solid #1976d2;
     border-radius: 50%;
     width: 50px;
     height: 50px;

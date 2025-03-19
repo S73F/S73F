@@ -10,6 +10,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
+import { ToastContainer } from "react-toastify";
 
 export default function Login() {
     const { data, processing, handleChange, handleSubmit } = useLogin();
@@ -84,6 +85,8 @@ export default function Login() {
                     </Button>
                 </Box>
             </Paper>
+
+            <ToastContainer position="bottom-right" closeOnClick={true} />
         </Container>
     );
 }

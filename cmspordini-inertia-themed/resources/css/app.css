@@ -30,3 +30,11 @@ body {
     position: relative;
     font-family: var(--main-font-family);
 }
+
+html body #nprogress .bar {
+    z-index: 9999;
+}
+
+.im-dialog {
+    z-index: 9998;
+}
