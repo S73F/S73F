@@ -78,6 +78,7 @@ export default function Login() {
                         sx={{ mt: 3, mb: 2 }}
                         loading={processing}
                         disabled={processing}
+                        size="large"
                     >
                         Accedi
                     </Button>
