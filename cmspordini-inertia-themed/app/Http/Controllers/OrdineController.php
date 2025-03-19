@@ -19,11 +19,6 @@ class OrdineController extends Controller
         return Inertia::render("Cliente/CreazioneOrdine");
     }
 
-    public function showStorico()
-    {
-        return Inertia::render("Cliente/StoricoOrdini");
-    }
-
     public function creazione(Request $request)
     {
         try {
@@ -119,9 +114,12 @@ class OrdineController extends Controller
                 'stato',
                 'data_spedizione'
             )->orderBy('data', "desc")->get();
+
+            return Inertia::render('Cliente/StoricoOrdini', ['ordini' => $ordini]);
+        } else {
+            return Inertia::render('Cliente/StoricoOrdini');
         }
 
-        return Inertia::render('Cliente/StoricoOrdini', ['ordini' => $ordini]);
     }
 
     public function getNumeroLavori()

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Layout from "../../Layouts/Layout";
 import "../../../css/creazioneOrdine.css";
 import { useCreazioneOrdine } from "../../Hooks/Cliente/useCreazioneOrdine";
 import Tiptap from "../../Components/Tiptap";
+import ClienteLayout from "../../Layouts/ClienteLayout";
 
 export default function CreazioneOrdine() {
     const {
@@ -177,4 +177,4 @@ export default function CreazioneOrdine() {
     );
 }
 
-CreazioneOrdine.layout = (page) => <Layout>{page}</Layout>;
+CreazioneOrdine.layout = (page) => <ClienteLayout>{page}</ClienteLayout>;

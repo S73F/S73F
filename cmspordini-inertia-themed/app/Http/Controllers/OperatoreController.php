@@ -70,9 +70,11 @@ class OperatoreController extends Controller
                 ->orderByDesc('data')
                 ->get();
 
+            return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti, "ordini" => $ordini]);
+        } else {
+            return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti]);
         }
 
-        return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti, "ordini" => $ordini]);
     }
 
     public function showCreateClienteModal()

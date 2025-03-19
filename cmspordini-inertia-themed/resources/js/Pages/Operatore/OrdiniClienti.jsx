@@ -3,6 +3,7 @@ import Layout from "../../Layouts/Layout";
 import OrdiniClienteTable from "../../Components/Tables/OrdiniClienteTable";
 import "../../../css/storicoOrdini.css";
 import { useOrdiniClienti } from "../../Hooks/Operatore/useOrdiniClienti";
+import { Typography } from "@mui/material";
 
 export default function OrdiniClienti({ clienti, ordini }) {
     const { handleChange } = useOrdiniClienti();
@@ -28,6 +29,15 @@ export default function OrdiniClienti({ clienti, ordini }) {
             </select>
 
             {ordini?.length > 0 && <OrdiniClienteTable ordini={ordini} />}
+            {ordini?.length === 0 && (
+                <Typography
+                    variant="h5"
+                    component={"p"}
+                    sx={{ mt: 4, textAlign: "center" }}
+                >
+                    Nessun ordine trovato
+                </Typography>
+            )}
         </div>
     );
 }

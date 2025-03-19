@@ -1,4 +1,4 @@
-#orders-history {
+/* #orders-history {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,7 +30,7 @@
 #selector:focus {
     box-shadow: 0 0 5px var(--btn-color);
     outline: none;
-}
+} */
 
 /* @media only screen and (max-width: 768px) {
     #selector {

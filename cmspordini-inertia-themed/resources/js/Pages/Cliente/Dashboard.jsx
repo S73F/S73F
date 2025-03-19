@@ -1,19 +1,39 @@
 import React from "react";
-import Layout from "../../Layouts/Layout";
-import "../../../css/clienteDashboard.css";
 import { Link } from "@inertiajs/react";
+import ClienteLayout from "../../Layouts/ClienteLayout";
+import { Box, Button, Paper, Typography } from "@mui/material";
 
 export default function Dashboard({ user }) {
     return (
-        <div id="main-container-cliente">
-            <h2>Benvenuto {user.nome}</h2>
+        <Paper
+            elevation={5}
+            sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                minWidth: "90%",
+                minHeight: { xs: `calc(80vh - 48px)`, sm: `calc(90vh - 64px)` },
+                p: 4,
+            }}
+        >
+            <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
+                Benvenuto {user.nome}
+            </Typography>
 
-            <div id="btns-container-cliente">
-                <Link href="/cliente/ordini/creazione">Nuovo ordine</Link>
-                <Link href="/cliente/ordini/storico">Storico ordini</Link>
-            </div>
-        </div>
+            <Button
+                size="large"
+                component={Link}
+                href="/cliente/ordini/creazione"
+                variant="contained"
+                color="primary"
+                sx={{ fontWeight: "bold", px: 3, py: 1 }}
+            >
+                Crea ordine
+            </Button>
+        </Paper>
     );
 }
 
-Dashboard.layout = (page) => <Layout>{page}</Layout>;
+Dashboard.layout = (page) => <ClienteLayout>{page}</ClienteLayout>;

@@ -1,4 +1,4 @@
-header {
+#layout-header {
     background-color: var(--main-bg-color);
     font-family: var(--main-font-family);
     background-color: #ffffff;
@@ -10,7 +10,7 @@ header {
     border: 1px solid var(--border-color);
 }
 
-h1 {
+#layout-header h1 {
     font-size: 12.8px;
     font-weight: 800;
     letter-spacing: 4px;
@@ -52,14 +52,14 @@ h1 {
     color: var(--hover-color);
 }
 
-main {
+#layout-main {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 90vh;
 }
 
-footer {
+#layout-footer {
     font-family: var(--main-font-family);
     position: absolute;
     bottom: 1rem;
@@ -69,18 +69,18 @@ footer {
     font-size: 0.6rem;
 }
 
-footer,
-footer p a {
+#layout-footer,
+#layout-footer p a {
     text-decoration: none;
     transition: all 0.1s ease-in;
 }
 
-footer:hover,
-footer p a:hover {
+#layout-footer:hover,
+#layout-footer p a:hover {
     color: var(--hover-color);
     cursor: pointer;
 }
 
-footer p a:visited {
+#layout-footer p a:visited {
     color: inherit;
 }
