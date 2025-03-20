@@ -15,7 +15,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
-import { Button } from "@mui/material";
+import { Button, TablePagination } from "@mui/material";
 
 function Row({ ordine }) {
     const [open, setOpen] = useState(false);
@@ -41,7 +41,9 @@ function Row({ ordine }) {
                 </TableCell>
                 <TableCell align="center">{ordine.medicoOrdinante}</TableCell>
                 <TableCell align="center">
-                    {ordine.data_inizioLavorazione}
+                    {ordine.data_inizioLavorazione
+                        ? ordine.data_inizioLavorazione
+                        : "-"}
                 </TableCell>
                 <TableCell align="center">
                     {ordine.stato === 0
@@ -50,7 +52,9 @@ function Row({ ordine }) {
                         ? "In lavorazione"
                         : "Spedito"}
                 </TableCell>
-                <TableCell align="center">{ordine.data_spedizione}</TableCell>
+                <TableCell align="center">
+                    {ordine.data_spedizione ? ordine.data_spedizione : "-"}
+                </TableCell>
                 <TableCell align="center">
                     <Button
                         component="a"
@@ -64,7 +68,7 @@ function Row({ ordine }) {
             <TableRow>
                 <TableCell
                     style={{ paddingBottom: 0, paddingTop: 0 }}
-                    colSpan={6}
+                    colSpan={7}
                 >
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{ margin: 1 }}>
@@ -80,7 +84,7 @@ function Row({ ordine }) {
                                     <TableRow>
                                         <TableCell>Nome paziente</TableCell>
                                         <TableCell>Cognome paziente</TableCell>
-                                        <TableCell align="center">
+                                        <TableCell>
                                             Indirizzo di spedizione
                                         </TableCell>
                                     </TableRow>
@@ -93,7 +97,7 @@ function Row({ ordine }) {
                                         <TableCell>
                                             {ordine.PazienteCognome}
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell>
                                             {ordine.IndirizzoSpedizione}
                                         </TableCell>
                                     </TableRow>
@@ -108,58 +112,85 @@ function Row({ ordine }) {
 }
 
 export default function CollapsibleTable({ ordini }) {
-    console.log(ordini);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     return (
-        <TableContainer component={Paper}>
-            <Table aria-label="collapsible table">
-                <TableHead sx={{ bgcolor: "#1976d2" }}>
-                    <TableRow>
-                        <TableCell />
-                        <TableCell
-                            sx={{ color: "#fff", fontWeight: "bold" }}
-                            align="center"
-                        >
-                            Data Ordine
-                        </TableCell>
-                        <TableCell
-                            sx={{ color: "#fff", fontWeight: "bold" }}
-                            align="center"
-                        >
-                            Richiedente
-                        </TableCell>
-                        <TableCell
-                            sx={{ color: "#fff", fontWeight: "bold" }}
-                            align="center"
-                        >
-                            Inizio lavoro
-                        </TableCell>
-                        <TableCell
-                            sx={{ color: "#fff", fontWeight: "bold" }}
-                            align="center"
-                        >
-                            Stato lavoro
-                        </TableCell>
-                        <TableCell
-                            sx={{ color: "#fff", fontWeight: "bold" }}
-                            align="center"
-                        >
-                            Spedizione
-                        </TableCell>
-                        <TableCell
-                            sx={{ color: "#fff", fontWeight: "bold" }}
-                            align="center"
-                        >
-                            PDF
-                        </TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {ordini.map((ordine) => (
-                        <Row key={ordine.IDordine} ordine={ordine} />
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Box sx={{ width: "100%" }}>
+            <TableContainer component={Paper}>
+                <Table aria-label="collapsible table">
+                    <TableHead sx={{ bgcolor: "#1976d2" }}>
+                        <TableRow>
+                            <TableCell />
+                            <TableCell
+                                sx={{ color: "#fff", fontWeight: "bold" }}
+                                align="center"
+                            >
+                                Data Ordine
+                            </TableCell>
+                            <TableCell
+                                sx={{ color: "#fff", fontWeight: "bold" }}
+                                align="center"
+                            >
+                                Richiedente
+                            </TableCell>
+                            <TableCell
+                                sx={{ color: "#fff", fontWeight: "bold" }}
+                                align="center"
+                            >
+                                Data inizio lavorazione
+                            </TableCell>
+                            <TableCell
+                                sx={{ color: "#fff", fontWeight: "bold" }}
+                                align="center"
+                            >
+                                Stato lavoro
+                            </TableCell>
+                            <TableCell
+                                sx={{ color: "#fff", fontWeight: "bold" }}
+                                align="center"
+                            >
+                                Data spedizione
+                            </TableCell>
+                            <TableCell
+                                sx={{ color: "#fff", fontWeight: "bold" }}
+                                align="center"
+                            >
+                                PDF
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {(rowsPerPage > 0
+                            ? ordini.slice(
+                                  page * rowsPerPage,
+                                  page * rowsPerPage + rowsPerPage
+                              )
+                            : ordini
+                        ).map((ordine) => (
+                            <Row key={ordine.IDordine} ordine={ordine} />
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={ordini.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+        </Box>
     );
 }
