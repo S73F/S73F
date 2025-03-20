@@ -23,9 +23,13 @@ export default function StoricoOrdini({ ordini }) {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                minWidth: { xs: "50%", lg: "90%" },
-                minHeight: { xs: `calc(65vh - 48px)`, sm: `calc(75vh - 64px)` },
-                p: 8,
+                minWidth: "100%",
+                maxWidth: "70vh",
+                minHeight: {
+                    xs: `calc(90vh - 48px)`,
+                    sm: `calc(90vh - 64px)`,
+                },
+                p: 5,
             }}
         >
             <Typography
@@ -36,7 +40,7 @@ export default function StoricoOrdini({ ordini }) {
                 Storico ordini
             </Typography>
 
-            <FormControl sx={{ width: "80%" }}>
+            <FormControl sx={{ width: "80%", mb: 4 }}>
                 <InputLabel id="storico-ordini-selector-label">
                     Lasso di tempo
                 </InputLabel>

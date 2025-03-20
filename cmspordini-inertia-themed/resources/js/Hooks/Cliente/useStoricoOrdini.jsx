@@ -13,6 +13,7 @@ export const useStoricoOrdini = () => {
             router.visit(`/cliente/ordini/storico/${tempo}`, {
                 only: ["ordini"],
                 preserveState: true,
+                preserveScroll: true,
                 replace: true,
             });
         }

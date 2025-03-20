@@ -13,6 +13,7 @@ export const useOrdiniClienti = () => {
             router.visit(`/operatore/ordini-clienti/${clienteID}`, {
                 only: ["ordini"],
                 preserveState: true,
+                preserveScroll: true,
                 replace: true,
             });
         }
