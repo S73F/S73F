@@ -2,22 +2,11 @@ import React from "react";
 import { Link } from "@inertiajs/react";
 import ClienteLayout from "../../Layouts/ClienteLayout";
 import { Box, Button, Paper, Typography } from "@mui/material";
+import { PaperContainer } from "../../Components/PaperContainer";
 
 export default function Dashboard({ user }) {
     return (
-        <Paper
-            elevation={5}
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                minWidth: "90%",
-                minHeight: { xs: `calc(65vh - 48px)`, sm: `calc(75vh - 64px)` },
-                p: 4,
-            }}
-        >
+        <PaperContainer>
             <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
                 {user?.nome
                     ? `Benvenuto ${user?.nome}`
@@ -34,7 +23,7 @@ export default function Dashboard({ user }) {
             >
                 Crea ordine
             </Button>
-        </Paper>
+        </PaperContainer>
     );
 }
 

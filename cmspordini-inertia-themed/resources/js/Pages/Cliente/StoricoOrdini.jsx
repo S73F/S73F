@@ -1,5 +1,4 @@
 import React from "react";
-// import "../../../css/storicoOrdini.css";
 import StoricoOrdiniTable from "../../Components/Tables/StoricoOrdiniTable";
 import { useStoricoOrdini } from "../../Hooks/Cliente/useStoricoOrdini";
 import ClienteLayout from "../../Layouts/ClienteLayout";
@@ -7,31 +6,16 @@ import {
     FormControl,
     InputLabel,
     MenuItem,
-    Paper,
     Select,
     Typography,
 } from "@mui/material";
+import { PaperContainer } from "../../Components/PaperContainer";
 
 export default function StoricoOrdini({ ordini }) {
     const { handleChange } = useStoricoOrdini();
 
     return (
-        <Paper
-            elevation={5}
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minWidth: "100%",
-                maxWidth: "70vh",
-                minHeight: {
-                    xs: `calc(90vh - 48px)`,
-                    sm: `calc(90vh - 64px)`,
-                },
-                p: 5,
-            }}
-        >
+        <PaperContainer>
             <Typography
                 variant="h4"
                 component="h2"
@@ -67,7 +51,7 @@ export default function StoricoOrdini({ ordini }) {
                     Nessun ordine trovato
                 </Typography>
             )}
-        </Paper>
+        </PaperContainer>
     );
 }
 
