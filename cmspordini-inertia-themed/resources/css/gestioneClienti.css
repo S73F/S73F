@@ -24,12 +24,12 @@
     cursor: pointer;
 }
 
-#add-cliente-btn svg {
+/* #add-cliente-btn svg {
     margin: auto;
     vertical-align: middle;
     color: var(--main-color);
     transition: color 0.2s ease-in-out;
-}
+} */
 
 #add-cliente-btn:hover svg {
     color: var(--hover-color);
