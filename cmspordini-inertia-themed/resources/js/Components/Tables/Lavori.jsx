@@ -7,8 +7,6 @@ import { Box, Typography } from "@mui/material";
 export const Lavori = ({ tipoLavori, lavori }) => {
     const { handleFile, handleIncarico } = useLavori();
 
-    console.log(lavori);
-
     if (lavori?.length === 0) {
         return (
             <Typography
@@ -22,16 +20,16 @@ export const Lavori = ({ tipoLavori, lavori }) => {
     } else {
         return (
             <Box mt={8} width={"100%"}>
-                {tipoLavori === "inCorso" && (
-                    <LavoriInCorso
+                {tipoLavori === "nuovi" && (
+                    <LavoriNuovi
                         lavori={lavori}
                         handleFile={handleFile}
                         handleIncarico={handleIncarico}
                     />
                 )}
 
-                {tipoLavori === "nuovi" && (
-                    <LavoriNuovi
+                {tipoLavori === "inCorso" && (
+                    <LavoriInCorso
                         lavori={lavori}
                         handleFile={handleFile}
                         handleIncarico={handleIncarico}

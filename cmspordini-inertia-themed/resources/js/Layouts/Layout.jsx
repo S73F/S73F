@@ -89,14 +89,9 @@ export default function Layout({ ListItems, children }) {
                 >
                     <Box
                         component="img"
-                        src="/assets/img/cmsp_logo_blu.svg"
-                        sx={{ width: 150, "&:hover": { opacity: 0.7 } }}
-                    />
-                    {/* <Box
-                        component="img"
                         src="/assets/img/ODONTOTECNICA-LOGO.svg"
                         sx={{ width: 150 }}
-                    /> */}
+                    />
                 </Box>
             </Box>
         </Box>

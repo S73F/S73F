@@ -17,21 +17,21 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                 field: "Ragione sociale",
                 headerName: "Ragione sociale",
                 flex: 1,
-                minWidth: 180,
+                minWidth: 200,
                 headerClassName: "headerColumn",
             },
             {
                 field: "Medico ordinante",
                 headerName: "Medico ordinante",
                 flex: 1,
-                minWidth: 100,
+                minWidth: 200,
                 headerClassName: "headerColumn",
             },
             {
                 field: "Paziente",
                 headerName: "Paziente",
                 flex: 1,
-                minWidth: 100,
+                minWidth: 200,
                 headerClassName: "headerColumn",
             },
             {
@@ -62,7 +62,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                                 mr: 0.5,
                             }}
                         >
-                            <FontAwesomeIcon icon={faFileZipper} size="2xl" />
+                            <FontAwesomeIcon icon={faFileZipper} size="xl" />
                         </Link>
                         <Link
                             component="a"
@@ -75,7 +75,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                                 mr: 0.5,
                             }}
                         >
-                            <FontAwesomeIcon icon={faFilePdf} size="2xl" />
+                            <FontAwesomeIcon icon={faFilePdf} size="xl" />
                         </Link>
                     </>
                 ),
@@ -99,7 +99,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                                 mr: 0.5,
                             }}
                         >
-                            <FontAwesomeIcon icon={faSquareCheck} size="2xl" />
+                            <FontAwesomeIcon icon={faSquareCheck} size="xl" />
                         </Link>
                         <Link
                             component={ModalLink}
@@ -111,7 +111,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                                 mr: 0.5,
                             }}
                         >
-                            <FontAwesomeIcon icon={faTrashCan} size="2xl" />
+                            <FontAwesomeIcon icon={faTrashCan} size="xl" />
                         </Link>
                     </>
                 ),

@@ -63,7 +63,7 @@ const Table = ({ rows, columns }) => {
                     },
                     "& .MuiDataGrid-cell": {
                         whiteSpace: "normal",
-                        lineHeight: "1.4",
+                        lineHeight: "1.3",
                         wordBreak: "break-word",
                         display: "flex",
                         alignItems: "center",
