@@ -1,10 +1,39 @@
 import React, { useMemo } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
+import { FormControl, InputLabel, Select, Typography } from "@mui/material";
+
+const Layout = ({ title, inputLabel, handleChange, children }) => {
+    return (
+        <>
+            <Typography
+                variant="h4"
+                component="h2"
+                sx={{ mb: 4, textAlign: "center" }}
+            >
+                {title}
+            </Typography>
+
+            <FormControl sx={{ width: "80%", mb: 4 }}>
+                <InputLabel id="input-label">{inputLabel}</InputLabel>
+                <Select
+                    labelId="selector-label"
+                    id="selector"
+                    defaultValue=""
+                    label={inputLabel}
+                    onChange={handleChange}
+                    sx={{ textAlign: "left" }}
+                >
+                    {children}
+                </Select>
+            </FormControl>
+        </>
+    );
+};
 
 const paginationModel = { page: 0, pageSize: 5 };
 
-export default function DataTable({ rows, columns }) {
+const Table = ({ rows, columns }) => {
     return (
         <Paper sx={{ width: "100%", maxWidth: "100%" }}>
             <DataGrid
@@ -16,10 +45,15 @@ export default function DataTable({ rows, columns }) {
                 rowHeight={70}
                 sx={{
                     border: 0,
-                    "& .headerColumn": { bgcolor: "#1976d2", color: "#fff" },
+                    "& .headerColumn": {
+                        bgcolor: "#1976d2",
+                        color: "#fff",
+                    },
                     "& .MuiDataGrid-columnHeaderTitle": {
                         whiteSpace: "normal",
                         lineHeight: "1.2",
+                        wordBreak: "break-word",
+                        textAlign: "left",
                     },
                     "& .MuiDataGrid-cell": {
                         whiteSpace: "normal",
@@ -32,4 +66,6 @@ export default function DataTable({ rows, columns }) {
             />
         </Paper>
     );
-}
+};
+
+export const DataTable = { Layout, Table };

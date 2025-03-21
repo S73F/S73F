@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "@mui/material";
-import DataTable from "./DataTable";
+import { DataTable } from "./DataTable";
 
 const columns = [
     {
@@ -84,18 +84,18 @@ export default function StoricoOrdiniTable({ ordini }) {
                 "Data ordine": ordine.data,
                 Richiedente: ordine.medicoOrdinante,
                 Paziente: ordine.PazienteNome + " " + ordine.PazienteCognome,
-                "Data inizio lavorazione": ordine.data_inizioLavorazione,
+                "Data inizio lavorazione": ordine.data_inizioLavorazione || "-",
                 "Stato lavoro":
                     ordine.stato === 0
                         ? "Nuovo"
                         : ordine.stato === 1
                         ? "In lavorazione"
                         : "Spedito",
-                "Data spedizione": ordine.data_spedizione,
+                "Data spedizione": ordine.data_spedizione || "-",
                 "Indirizzo spedizione": ordine.IndirizzoSpedizione,
             })),
         [ordini]
     );
 
-    return <DataTable rows={mapOrders} columns={columns} />;
+    return <DataTable.Table rows={mapOrders} columns={columns} />;
 }

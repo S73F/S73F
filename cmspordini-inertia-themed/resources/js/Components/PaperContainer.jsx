@@ -12,7 +12,7 @@ export const PaperContainer = ({ children }) => {
                 justifyContent: "center",
                 textAlign: "center",
                 minWidth: "100%",
-                maxWidth: "70vh",
+                maxWidth: "65vh",
                 minHeight: {
                     xs: `calc(90vh - 48px)`,
                     sm: `calc(90vh - 64px)`,
