@@ -4,9 +4,7 @@ import LavoriNuovi from "./LavoriNuovi";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 
 export const Lavori = ({ tipoLavori, lavori }) => {
-    const { handleFile, handleFileFinale, handleIncarico } = useLavori({
-        // setUpdateNotification,
-    });
+    const { handleFile, handleIncarico } = useLavori();
 
     return (
         <>
@@ -14,7 +12,6 @@ export const Lavori = ({ tipoLavori, lavori }) => {
                 <LavoriInCorso
                     lavori={lavori}
                     handleFile={handleFile}
-                    handleFileFinale={handleFileFinale}
                     handleIncarico={handleIncarico}
                 />
             )}

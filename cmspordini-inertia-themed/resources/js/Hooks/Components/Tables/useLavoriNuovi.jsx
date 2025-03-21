@@ -38,7 +38,7 @@ export const useLavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                     <button
                         title="File sorgente"
                         className="btn-link"
-                        onClick={() => handleFile(row.IDordine)}
+                        onClick={() => handleFile("sorgente", row.IDordine)}
                     >
                         <FontAwesomeIcon icon={faFileZipper} size="2xl" />
                     </button>

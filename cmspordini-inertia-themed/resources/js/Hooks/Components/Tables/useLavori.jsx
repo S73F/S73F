@@ -1,9 +1,14 @@
 import { router } from "@inertiajs/react";
+import { useCallback } from "react";
 import { toast } from "react-toastify";
 
-export const useLavori = ({}) => {
-    const handleFile = (IDordine) => {
-        window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
+export const useLavori = () => {
+    const handleFile = useCallback((tipo, IDordine) => {
+        if (tipo === "sorgente") {
+            window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
+        } else if (tipo === "finale") {
+            window.location.href = `/operatore/ordini-clienti/download-finale/${IDordine}`;
+        }
 
         setTimeout(() => {
             toast.success("Download del file in corso...", {
@@ -14,23 +19,9 @@ export const useLavori = ({}) => {
                 theme: "dark",
             });
         }, 1000);
-    };
+    }, []);
 
-    const handleFileFinale = (IDordine) => {
-        window.location.href = `/operatore/ordini-clienti/download-finale/${IDordine}`;
-
-        setTimeout(() => {
-            toast.success("Download del file finale in corso...", {
-                position: "top-center",
-                autoClose: 2000,
-                closeOnClick: false,
-                pauseOnHover: false,
-                theme: "dark",
-            });
-        }, 1000);
-    };
-
-    function handleIncarico(IDordine, option = "forward") {
+    const handleIncarico = useCallback((IDordine, option = "forward") => {
         router.patch(
             `/operatore/ordini-clienti/update/${IDordine}/${option}`,
             {},
@@ -40,11 +31,10 @@ export const useLavori = ({}) => {
                 preserveState: true,
             }
         );
-    }
+    }, []);
 
     return {
         handleFile,
-        handleFileFinale,
         handleIncarico,
     };
 };

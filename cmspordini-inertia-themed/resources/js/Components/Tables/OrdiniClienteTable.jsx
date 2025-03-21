@@ -4,10 +4,10 @@ import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "@mui/material";
 import { DataTable } from "./DataTable";
-import { useOrdiniClientiTable } from "../../Hooks/Components/Tables/useOrdiniClienteTable";
+import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 
 export default function StoricoOrdiniTable({ ordini }) {
-    const { handleFile } = useOrdiniClientiTable();
+    const { handleFile } = useLavori();
 
     const columns = useMemo(
         () => [

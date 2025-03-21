@@ -69,7 +69,7 @@ export const useLavoriInCorso = ({
                         <button
                             title="File sorgente"
                             className="btn-link"
-                            onClick={() => handleFile(row.IDordine)}
+                            onClick={() => handleFile("sorgente", row.IDordine)}
                         >
                             <FontAwesomeIcon icon={faFileZipper} size="2xl" />
                         </button>
@@ -84,7 +84,9 @@ export const useLavoriInCorso = ({
                             <button
                                 title="File finale"
                                 className="btn-link"
-                                onClick={() => handleFileFinale(row.IDordine)}
+                                onClick={() =>
+                                    handleFile("finale", row.IDordine)
+                                }
                             >
                                 <FontAwesomeIcon
                                     icon={faFileZipperSolid}
