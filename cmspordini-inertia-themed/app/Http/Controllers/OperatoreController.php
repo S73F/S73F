@@ -212,7 +212,7 @@ class OperatoreController extends Controller
 
         $ordine->delete();
 
-        $stato = $request->query('stato', "nuovi");
+        $stato = $request->input('stato', "nuovi");
 
         $redirectUrl = ($stato == 'nuovi')
             ? '/operatore/dashboard?tipo=nuovi'
