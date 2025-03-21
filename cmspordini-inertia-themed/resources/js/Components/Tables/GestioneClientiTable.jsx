@@ -133,7 +133,7 @@ export default function GestioneClientiTable({ clienti }) {
                     flexDirection: "column",
                     alignItems: "center",
                     width: "100px",
-                    height: "60px",
+                    height: "40px",
                     mt: -2,
                     mb: 5,
                     textDecoration: "none",
@@ -142,7 +142,7 @@ export default function GestioneClientiTable({ clienti }) {
                     },
                 }}
             >
-                <AddBoxIcon sx={{ width: "60px", height: "60px" }} />
+                <AddBoxIcon sx={{ width: "40px", height: "40px" }} />
                 <Typography
                     component="h3"
                     variant="h3"

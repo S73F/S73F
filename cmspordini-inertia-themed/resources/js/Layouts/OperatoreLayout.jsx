@@ -23,7 +23,7 @@ export default function OperatoreLayout({ children }) {
                     <ListItemIcon>
                         <HistoryIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Storico ordini" />
+                    <ListItemText primary="Ordini clienti" />
                 </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
