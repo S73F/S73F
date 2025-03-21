@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import { FormControl, InputLabel, Select, Typography } from "@mui/material";
 
-const Layout = ({ title, inputLabel, handleChange, children }) => {
+const Layout = ({ title, children }) => {
     return (
         <>
             <Typography
@@ -13,7 +13,14 @@ const Layout = ({ title, inputLabel, handleChange, children }) => {
             >
                 {title}
             </Typography>
+            {children}
+        </>
+    );
+};
 
+const Selector = ({ inputLabel, handleChange, children }) => {
+    return (
+        <>
             <FormControl sx={{ width: "80%", mb: 4 }}>
                 <InputLabel id="input-label">{inputLabel}</InputLabel>
                 <Select
@@ -68,4 +75,4 @@ const Table = ({ rows, columns }) => {
     );
 };
 
-export const DataTable = { Layout, Table };
+export const DataTable = { Layout, Selector, Table };

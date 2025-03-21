@@ -17,14 +17,15 @@ export default function StoricoOrdini({ ordini }) {
 
     return (
         <PaperContainer>
-            <DataTable.Layout
-                title={"Storico ordini"}
-                inputLabel={"Lasso di tempo"}
-                handleChange={handleChange}
-            >
-                <MenuItem value={30}>30 giorni</MenuItem>
-                <MenuItem value={60}>60 giorni</MenuItem>
-                <MenuItem value={"tutto"}>Tutto</MenuItem>
+            <DataTable.Layout title={"Storico ordini"}>
+                <DataTable.Selector
+                    inputLabel={"Lasso di tempo"}
+                    handleChange={handleChange}
+                >
+                    <MenuItem value={30}>30 giorni</MenuItem>
+                    <MenuItem value={60}>60 giorni</MenuItem>
+                    <MenuItem value={"tutto"}>Tutto</MenuItem>
+                </DataTable.Selector>
             </DataTable.Layout>
 
             {ordini?.length > 0 && <StoricoOrdiniTable ordini={ordini} />}

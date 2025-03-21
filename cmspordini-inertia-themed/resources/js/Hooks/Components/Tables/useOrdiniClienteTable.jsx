@@ -147,5 +147,6 @@ export const useOrdiniClientiTable = ({ ordini }) => {
         }, 1000);
     }
 
-    return { records, columns, handleFilter };
+    // return { records, columns, handleFilter };
+    return { handleFile, handleFileFinale };
 };
