@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../css/gestioneClienti.css";
 import GestioneClientiTable from "../../Components/Tables/GestioneClientiTable";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
 import { PaperContainer } from "../../Components/PaperContainer";

@@ -1,6 +1,5 @@
 import React from "react";
 import OrdiniClienteTable from "../../Components/Tables/OrdiniClienteTable";
-import "../../../css/storicoOrdini.css";
 import { useOrdiniClienti } from "../../Hooks/Operatore/useOrdiniClienti";
 import { MenuItem, Typography } from "@mui/material";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";

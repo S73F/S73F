@@ -1,5 +1,4 @@
 import React from "react";
-import "../../../css/operatoreDashboard.css";
 import Notification from "../../Components/Notification";
 import { useDashboard } from "../../Hooks/Operatore/useDashboard";
 import { Lavori } from "../../Components/Tables/Lavori";

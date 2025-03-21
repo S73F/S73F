@@ -1,6 +1,4 @@
 import React from "react";
-import "../../../css/login.css";
-import Layout from "../../Layouts/Layout";
 import { useLogin } from "../../Hooks/Auth/useLogin";
 import {
     Box,
