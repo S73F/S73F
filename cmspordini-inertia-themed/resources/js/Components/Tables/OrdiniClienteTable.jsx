@@ -1,33 +1,3 @@
-// import React from "react";
-// import "../../../css/table.css";
-// import DataTable from "react-data-table-component";
-// import { useOrdiniClientiTable } from "../../Hooks/Components/Tables/useOrdiniClienteTable";
-// import { SearchBox } from "./SearchBox";
-
-// export default function OrdiniClienteTable({ ordini }) {
-//     const { records, columns, handleFilter } = useOrdiniClientiTable({
-//         ordini,
-//     });
-
-//     return (
-//         <>
-//             <SearchBox handleFilter={handleFilter} />
-//             <DataTable
-//                 className="custom-table"
-//                 columns={columns}
-//                 data={records}
-//                 pagination
-//                 paginationComponentOptions={{
-//                     rowsPerPageText: "Righe per pagina",
-//                     rangeSeparatorText: "di",
-//                     selectAllRowsItem: true,
-//                     selectAllRowsItemText: "Tutte",
-//                 }}
-//             />
-//         </>
-//     );
-// }
-
 import React, { useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
@@ -37,7 +7,7 @@ import { DataTable } from "./DataTable";
 import { useOrdiniClientiTable } from "../../Hooks/Components/Tables/useOrdiniClienteTable";
 
 export default function StoricoOrdiniTable({ ordini }) {
-    const { handleFile, handleFileFinale } = useOrdiniClientiTable({ ordini });
+    const { handleFile, handleFileFinale } = useOrdiniClientiTable();
 
     const columns = [
         {
@@ -99,6 +69,7 @@ export default function StoricoOrdiniTable({ ordini }) {
                         sx={{
                             color: "inherit",
                             "&:hover": { color: "#1976d2 " },
+                            mr: 0.5,
                         }}
                     >
                         <FontAwesomeIcon icon={faFileZipper} size="2xl" />
@@ -111,6 +82,7 @@ export default function StoricoOrdiniTable({ ordini }) {
                         sx={{
                             color: "inherit",
                             "&:hover": { color: "#1976d2 " },
+                            mr: 0.5,
                         }}
                     >
                         <FontAwesomeIcon icon={faFilePdf} size="2xl" />
