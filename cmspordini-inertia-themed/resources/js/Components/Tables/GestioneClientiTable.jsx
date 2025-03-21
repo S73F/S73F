@@ -7,9 +7,10 @@ import {
     faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "@mui/material";
+import { Container, Link, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { ModalLink } from "@inertiaui/modal-react";
+import { AddBox as AddBoxIcon } from "@mui/icons-material";
 
 export default function GestioneClientiTable({ clienti }) {
     const columns = useMemo(
@@ -45,7 +46,7 @@ export default function GestioneClientiTable({ clienti }) {
                 field: "emailcliente",
                 headerName: "Email",
                 flex: 1,
-                minWidth: 100,
+                minWidth: 250,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
                     <Link
@@ -121,45 +122,37 @@ export default function GestioneClientiTable({ clienti }) {
         [clienti]
     );
 
-    return <DataTable.Table rows={mapOrders} columns={columns} />;
+    return (
+        <>
+            <Link
+                component={ModalLink}
+                href={`/operatore/gestione-clienti/creazione`}
+                title="Crea cliente"
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "100px",
+                    height: "60px",
+                    mt: -2,
+                    mb: 5,
+                    textDecoration: "none",
+                    "&:hover": {
+                        opacity: "0.8",
+                    },
+                }}
+            >
+                <AddBoxIcon sx={{ width: "60px", height: "60px" }} />
+                <Typography
+                    component="h3"
+                    variant="h3"
+                    fontSize={18}
+                    fontWeight={500}
+                >
+                    Crea cliente
+                </Typography>
+            </Link>
+            <DataTable.Table rows={mapOrders} columns={columns} />
+        </>
+    );
 }
-
-// import React from "react";
-// import { useGestioneClientiTable } from "../../Hooks/Components/Tables/useGestioneClientiTable";
-// import { SearchBox } from "./SearchBox";
-// import DataTable from "react-data-table-component";
-// import { ModalLink } from "@inertiaui/modal-react";
-// import "../../../css/table.css";
-
-// export default function GestioneClientiTable({ clienti }) {
-//     const { records, columns, handleFilter } = useGestioneClientiTable({
-//         clienti,
-//     });
-
-//     return (
-//         <>
-//             <div id="gestione-clienti-interactions">
-//                 <SearchBox handleFilter={handleFilter} />
-//                 <ModalLink
-//                     id="add-cliente"
-//                     href={"/operatore/gestione-clienti/creazione"}
-//                     title="Aggiungi cliente"
-//                 >
-//                     +
-//                 </ModalLink>
-//             </div>
-//             <DataTable
-//                 className="custom-table"
-//                 columns={columns}
-//                 data={records}
-//                 pagination
-//                 paginationComponentOptions={{
-//                     rowsPerPageText: "Righe per pagina",
-//                     rangeSeparatorText: "di",
-//                     selectAllRowsItem: true,
-//                     selectAllRowsItemText: "Tutte",
-//                 }}
-//             />
-//         </>
-//     );
-// }

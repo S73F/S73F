@@ -51,7 +51,6 @@ const Table = ({ rows, columns }) => {
                 headerHeight={70}
                 rowHeight={70}
                 sx={{
-                    border: 0,
                     "& .headerColumn": {
                         bgcolor: "#1976d2",
                         color: "#fff",
