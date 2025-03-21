@@ -65,7 +65,7 @@ export default function StoricoOrdiniTable({ ordini }) {
                     <Link
                         component="button"
                         title="File sorgente"
-                        onClick={() => handleFile(params.row.id)}
+                        onClick={() => handleFile("sorgente", params.row.id)}
                         sx={{
                             color: "inherit",
                             "&:hover": { color: "#1976d2 " },
@@ -91,7 +91,7 @@ export default function StoricoOrdiniTable({ ordini }) {
                         <Link
                             component="button"
                             title="File finale"
-                            onClick={() => handleFileFinale(params.row.id)}
+                            onClick={() => handleFile("finale", params.row.id)}
                             sx={{
                                 color: "inherit",
                                 "&:hover": { color: "#1976d2 " },

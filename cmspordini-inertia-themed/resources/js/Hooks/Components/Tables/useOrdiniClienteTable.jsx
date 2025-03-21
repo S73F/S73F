@@ -1,8 +1,12 @@
 import { toast } from "react-toastify";
 
 export const useOrdiniClientiTable = () => {
-    function handleFile(IDordine) {
-        window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
+    function handleFile(tipo, IDordine) {
+        tipo === "sorgente"
+            ? (window.location.href = `/operatore/ordini-clienti/download/${IDordine}`)
+            : tipo === "finale"
+            ? (window.location.href = `/operatore/ordini-clienti/download-finale/${IDordine}`)
+            : null;
 
         setTimeout(() => {
             toast.success("Download del file in corso...", {
@@ -15,21 +19,7 @@ export const useOrdiniClientiTable = () => {
         }, 1000);
     }
 
-    function handleFileFinale(IDordine) {
-        window.location.href = `/operatore/ordini-clienti/download-finale/${IDordine}`;
-
-        setTimeout(() => {
-            toast.success("Download del file finale in corso...", {
-                position: "top-center",
-                autoClose: 2000,
-                closeOnClick: false,
-                pauseOnHover: false,
-                theme: "dark",
-            });
-        }, 1000);
-    }
-
-    return { handleFile, handleFileFinale };
+    return { handleFile };
 };
 
 // import React, { useEffect, useMemo, useState } from "react";
