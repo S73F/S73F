@@ -7,11 +7,19 @@ import OperatoreLayout from "../../Layouts/OperatoreLayout";
 import { PaperContainer } from "../../Components/PaperContainer";
 import { Button, Stack, Typography } from "@mui/material";
 import {
-    AssignmentTurnedIn as AssignmentTurnedInIcon,
     Loop as LoopIcon,
     NewReleases as NewReleasesIcon,
     CheckCircle as CheckCircleIcon,
 } from "@mui/icons-material";
+
+const buttonStyles = {
+    fontWeight: "bold",
+    px: 3,
+    py: 1,
+    width: 170,
+    textAlign: "left",
+    gap: 1,
+};
 
 export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
     const { handleLavori } = useDashboard();
@@ -31,14 +39,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     onClick={() => handleLavori("nuovi")}
                     variant="contained"
                     color="primary"
-                    sx={{
-                        fontWeight: "bold",
-                        px: 3,
-                        py: 1,
-                        width: 170,
-                        textAlign: "left",
-                        gap: 1,
-                    }}
+                    sx={buttonStyles}
                 >
                     Lavori nuovi
                 </Button>
@@ -48,14 +49,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     onClick={() => handleLavori("inCorso")}
                     variant="contained"
                     color="primary"
-                    sx={{
-                        fontWeight: "bold",
-                        px: 3,
-                        py: 1,
-                        width: 170,
-                        textAlign: "left",
-                        gap: 1,
-                    }}
+                    sx={buttonStyles}
                 >
                     Lavori in corso
                 </Button>
@@ -65,18 +59,13 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     onClick={() => handleLavori("terminati")}
                     variant="contained"
                     color="primary"
-                    sx={{
-                        fontWeight: "bold",
-                        px: 3,
-                        py: 1,
-                        width: 160,
-                        textAlign: "left",
-                        gap: 1,
-                    }}
+                    sx={buttonStyles}
                 >
                     Lavori terminati
                 </Button>
             </Stack>
+
+            <Lavori lavori={lavori} tipoLavori={tipo} />
         </PaperContainer>
     );
 

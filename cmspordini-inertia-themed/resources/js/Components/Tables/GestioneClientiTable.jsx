@@ -19,7 +19,7 @@ export default function GestioneClientiTable({ clienti }) {
                 field: "ragione_sociale",
                 headerName: "Ragione sociale",
                 flex: 1,
-                minWidth: 150,
+                minWidth: 180,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
                     <Link

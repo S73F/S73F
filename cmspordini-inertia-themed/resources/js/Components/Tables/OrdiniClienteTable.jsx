@@ -119,7 +119,6 @@ export default function StoricoOrdiniTable({ ordini }) {
         () =>
             ordini.map((ordine) => ({
                 id: ordine.IDordine,
-                "Data ordine": ordine.data,
                 Dottore: ordine.medicoOrdinante,
                 Paziente: ordine.PazienteCognome + " " + ordine.PazienteNome,
                 "Data ordine": ordine.data || "-",
