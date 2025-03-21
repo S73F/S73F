@@ -39,37 +39,6 @@ export default function OrdiniClienti({ clienti, ordini }) {
                 </Typography>
             )}
         </PaperContainer>
-
-        // <div id="orders-history">
-        //     <h2 id="orders-history-title">Storico ordini</h2>
-
-        //     <select
-        //         id="selector"
-        //         name="cliente"
-        //         onChange={handleChange}
-        //         defaultValue=""
-        //     >
-        //         <option disabled value="">
-        //             Cliente
-        //         </option>
-        //         {clienti.map((cliente) => (
-        //             <option key={cliente.IDcliente} value={cliente.IDcliente}>
-        //                 {cliente.ragione_sociale}
-        //             </option>
-        //         ))}
-        //     </select>
-
-        //     {ordini?.length > 0 && <OrdiniClienteTable ordini={ordini} />}
-        //     {ordini?.length === 0 && (
-        //         <Typography
-        //             variant="h5"
-        //             component={"p"}
-        //             sx={{ mt: 4, textAlign: "center" }}
-        //         >
-        //             Nessun ordine trovato
-        //         </Typography>
-        //     )}
-        // </div>
     );
 }
 

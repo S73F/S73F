@@ -2,14 +2,25 @@ import React from "react";
 import "../../../css/gestioneClienti.css";
 import GestioneClientiTable from "../../Components/Tables/GestioneClientiTable";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
+import { PaperContainer } from "../../Components/PaperContainer";
+import { DataTable } from "../../Components/Tables/DataTable";
 
 export default function GestioneClienti({ clienti }) {
     return (
-        <div id="gestione-clienti-container">
-            <h1 id="gestione-clienti-title">Gestione Clienti</h1>
+        <PaperContainer>
+            <DataTable.Layout title={"Gestione clienti"} />
 
-            <GestioneClientiTable clienti={clienti} />
-        </div>
+            {clienti?.length > 0 && <GestioneClientiTable clienti={clienti} />}
+            {clienti?.length === 0 && (
+                <Typography
+                    variant="h5"
+                    component={"p"}
+                    sx={{ mt: 4, textAlign: "center" }}
+                >
+                    Nessun cliente trovato
+                </Typography>
+            )}
+        </PaperContainer>
     );
 }
 
