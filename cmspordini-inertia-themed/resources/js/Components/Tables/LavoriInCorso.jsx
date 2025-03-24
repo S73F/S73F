@@ -155,21 +155,23 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                         >
                             <FontAwesomeIcon icon={faPenToSquare} size="xl" />
                         </Link>
-                        <Link
-                            component="button"
-                            title="Spedisci lavorazione"
-                            onClick={() => handleIncarico(params.row.id)}
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
-                        >
-                            <FontAwesomeIcon
-                                icon={faShareFromSquare}
-                                size="xl"
-                            />
-                        </Link>
+                        {params.row.file_fin === 1 && (
+                            <Link
+                                component="button"
+                                title="Spedisci lavorazione"
+                                onClick={() => handleIncarico(params.row.id)}
+                                sx={{
+                                    color: "inherit",
+                                    "&:hover": { color: "#1976d2 " },
+                                    mr: 0.5,
+                                }}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faShareFromSquare}
+                                    size="xl"
+                                />
+                            </Link>
+                        )}
                         <Link
                             component={ModalLink}
                             title="Elimina lavoro"
