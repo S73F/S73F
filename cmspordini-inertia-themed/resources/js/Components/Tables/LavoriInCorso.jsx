@@ -10,7 +10,7 @@ import {
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DataTable } from "./DataTable";
-import { Link } from "@mui/material";
+import { Box, Container, Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
 import { iconStyle } from "../../styles/styles";
 
@@ -52,16 +52,37 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                 minWidth: 170,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <div>
+                    <Box
+                        id="last-modified"
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                        }}
+                    >
                         {params.row.data_inizioLavorazione}
                         {params.row.note_ulti_mod && (
-                            <div id="last-modified">
-                                {`Ultima modifica:`}
-                                <br />
-                                {params.row.note_ulti_mod}
-                            </div>
+                            <Box
+                                sx={{
+                                    color: "#ff0000",
+                                }}
+                            >
+                                <Typography
+                                    component="p"
+                                    variant="p"
+                                    fontWeight={500}
+                                >
+                                    Ultima modifica:
+                                </Typography>
+                                <Typography
+                                    component="p"
+                                    variant="p"
+                                    fontWeight={500}
+                                >
+                                    {params.row.note_ulti_mod}
+                                </Typography>
+                            </Box>
                         )}
-                    </div>
+                    </Box>
                 ),
             },
             {
