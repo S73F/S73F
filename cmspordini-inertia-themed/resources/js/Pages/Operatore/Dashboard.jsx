@@ -4,7 +4,7 @@ import { useDashboard } from "../../Hooks/Operatore/useDashboard";
 import { Lavori } from "../../Components/Tables/Lavori";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
 import { PaperContainer } from "../../Components/PaperContainer";
-import { Button, Stack, Typography } from "@mui/material";
+import { Badge, Button, Stack, Typography } from "@mui/material";
 import {
     Loop as LoopIcon,
     NewReleases as NewReleasesIcon,
@@ -35,18 +35,29 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                 spacing={{ xs: 2, md: 2, lg: 3 }}
                 justifyContent="center"
             >
-                <Button
-                    startIcon={<NewReleasesIcon />}
-                    size="large"
-                    onClick={() => handleLavori("nuovi")}
-                    variant="contained"
-                    color="primary"
-                    sx={buttonStyles}
-                    disabled={tipo === "nuovi"}
-                    loading={loadingButton === "nuovi"}
+                <Badge
+                    badgeContent={numLavoriNuovi}
+                    color="secondary"
+                    showZero={false}
+                    anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                    }}
                 >
-                    Lavori nuovi
-                </Button>
+                    <Button
+                        startIcon={<NewReleasesIcon />}
+                        size="large"
+                        onClick={() => handleLavori("nuovi")}
+                        variant="contained"
+                        color="primary"
+                        sx={buttonStyles}
+                        disabled={tipo === "nuovi"}
+                        loading={loadingButton === "nuovi"}
+                    >
+                        Lavori nuovi
+                    </Button>
+                </Badge>
+
                 <Button
                     startIcon={<LoopIcon />}
                     size="large"

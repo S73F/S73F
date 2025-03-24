@@ -49,7 +49,7 @@ const Table = ({ rows, columns }) => {
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[5, 10, 25, 50]}
                 columnHeaderHeight={70}
-                rowHeight={85}
+                rowHeight={90}
                 sx={{
                     "& .headerColumn": {
                         bgcolor: "#1976d2",
@@ -63,7 +63,7 @@ const Table = ({ rows, columns }) => {
                     },
                     "& .MuiDataGrid-cell": {
                         whiteSpace: "normal",
-                        lineHeight: "1.3",
+                        lineHeight: "1.4",
                         wordBreak: "break-word",
                         display: "flex",
                         alignItems: "center",

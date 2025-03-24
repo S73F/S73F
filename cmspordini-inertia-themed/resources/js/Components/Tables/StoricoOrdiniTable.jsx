@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "@mui/material";
+import { Chip, Link } from "@mui/material";
 import { DataTable } from "./DataTable";
-import { iconStyle } from "../../styles/styles";
+import { chipStyle, circleStyles, iconStyle } from "../../styles/styles";
+import { Circle } from "@mui/icons-material";
 
 const columns = [
     {
@@ -35,11 +36,39 @@ const columns = [
         headerClassName: "headerColumn",
     },
     {
-        field: "Stato lavoro",
+        field: "stato",
         headerName: "Stato lavoro",
         flex: 1,
         minWidth: 100,
         headerClassName: "headerColumn",
+        renderCell: (params) => (
+            <>
+                {params.row.stato === 0 && (
+                    <Chip
+                        label="Nuovo"
+                        icon={<Circle sx={circleStyles.nuovo} />}
+                        color="primary"
+                        sx={chipStyle}
+                    />
+                )}
+                {params.row.stato === 1 && (
+                    <Chip
+                        label="In corso"
+                        icon={<Circle sx={circleStyles.inCorso} />}
+                        color="primary"
+                        sx={chipStyle}
+                    />
+                )}
+                {params.row.stato === 2 && (
+                    <Chip
+                        label="Spedito"
+                        icon={<Circle sx={circleStyles.spedito} />}
+                        color="primary"
+                        sx={chipStyle}
+                    />
+                )}
+            </>
+        ),
     },
     {
         field: "Data spedizione",
@@ -86,12 +115,7 @@ export default function StoricoOrdiniTable({ ordini }) {
                 Richiedente: ordine.medicoOrdinante,
                 Paziente: ordine.PazienteNome + " " + ordine.PazienteCognome,
                 "Data inizio lavorazione": ordine.data_inizioLavorazione || "-",
-                "Stato lavoro":
-                    ordine.stato === 0
-                        ? "Nuovo"
-                        : ordine.stato === 1
-                        ? "In lavorazione"
-                        : "Spedito",
+                stato: ordine.stato,
                 "Data spedizione": ordine.data_spedizione || "-",
                 "Indirizzo spedizione": ordine.IndirizzoSpedizione,
             })),
