@@ -21,14 +21,17 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                 field: "medicoOrdinante",
                 headerName: "Medico ordinante",
                 flex: 1,
-                minWidth: 200,
+                minWidth: 240,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <div>
-                        {params.row.medicoOrdinante}
-                        <br />
-                        {params.row.ragione_sociale}
-                    </div>
+                    <Box>
+                        <Typography component="p" variant="p">
+                            {params.row.medicoOrdinante}
+                        </Typography>
+                        <Typography component="p" variant="p">
+                            {params.row.ragione_sociale}
+                        </Typography>
+                    </Box>
                 ),
             },
             {
@@ -59,7 +62,9 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                             flexDirection: "column",
                         }}
                     >
-                        {params.row.data_inizioLavorazione}
+                        <Typography component="p" variant="p">
+                            {params.row.data_inizioLavorazione}
+                        </Typography>
                         {params.row.note_ulti_mod && (
                             <Box
                                 sx={{
@@ -89,7 +94,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                 field: "Allegati",
                 headerName: "Allegati",
                 flex: 1,
-                minWidth: 120,
+                minWidth: 100,
                 headerClassName: "headerColumn",
                 sortable: false,
                 renderCell: (params) => (
