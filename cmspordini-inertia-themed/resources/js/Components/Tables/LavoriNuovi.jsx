@@ -2,9 +2,9 @@ import React, { useMemo } from "react";
 import { DataTable } from "./DataTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+    faCircleCheck,
     faFilePdf,
     faFileZipper,
-    faSquareCheck,
     faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "@mui/material";
@@ -88,7 +88,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                             onClick={() => handleIncarico(params.row.id)}
                             sx={iconStyle}
                         >
-                            <FontAwesomeIcon icon={faSquareCheck} size="xl" />
+                            <FontAwesomeIcon icon={faCircleCheck} size="xl" />
                         </Link>
                         <Link
                             component={ModalLink}
