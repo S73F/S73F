@@ -48,7 +48,7 @@ const Table = ({ rows, columns }) => {
                 columns={columns}
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[5, 10, 25, 50]}
-                headerHeight={70}
+                columnHeaderHeight={70}
                 rowHeight={85}
                 sx={{
                     "& .headerColumn": {

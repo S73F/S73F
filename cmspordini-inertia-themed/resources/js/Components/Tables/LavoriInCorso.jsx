@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DataTable } from "./DataTable";
 import { Box, Container, Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
-import { iconStyle } from "../../styles/styles";
+import { anchorStyle, iconStyle } from "../../styles/styles";
 
 const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(
@@ -28,7 +28,12 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                         <Typography component="p" variant="p">
                             {params.row.medicoOrdinante}
                         </Typography>
-                        <Typography component="p" variant="p">
+                        <Typography
+                            component={ModalLink}
+                            variant="p"
+                            href={`/operatore/gestione-clienti/modifica/${params.row.idCliente}`}
+                            sx={anchorStyle}
+                        >
                             {params.row.ragione_sociale}
                         </Typography>
                     </Box>
@@ -189,6 +194,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
         () =>
             lavori.map((lavoro) => ({
                 id: lavoro.IDordine,
+                idCliente: lavoro.IDcliente,
                 ragione_sociale: lavoro.cliente.ragione_sociale,
                 medicoOrdinante: lavoro.medicoOrdinante,
                 Paziente: lavoro.PazienteCognome + " " + lavoro.PazienteNome,

@@ -7,19 +7,29 @@ import {
     faFileZipper,
     faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
-import { iconStyle } from "../../styles/styles";
+import { anchorStyle, iconStyle } from "../../styles/styles";
 
 const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(
         () => [
             {
-                field: "Ragione sociale",
+                field: "ragione_sociale",
                 headerName: "Ragione sociale",
                 flex: 1,
                 minWidth: 200,
                 headerClassName: "headerColumn",
+                renderCell: (params) => (
+                    <Typography
+                        component={ModalLink}
+                        variant="p"
+                        href={`/operatore/gestione-clienti/modifica/${params.row.idCliente}`}
+                        sx={anchorStyle}
+                    >
+                        {params.row.ragione_sociale}
+                    </Typography>
+                ),
             },
             {
                 field: "Medico ordinante",
@@ -109,7 +119,8 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
         () =>
             lavori.map((lavoro) => ({
                 id: lavoro.IDordine,
-                "Ragione sociale": lavoro.cliente.ragione_sociale,
+                idCliente: lavoro.IDcliente,
+                ragione_sociale: lavoro.cliente.ragione_sociale,
                 "Medico ordinante": lavoro.medicoOrdinante,
                 Paziente: lavoro.PazienteCognome + " " + lavoro.PazienteNome,
                 "Data ordine": lavoro.data || "-",

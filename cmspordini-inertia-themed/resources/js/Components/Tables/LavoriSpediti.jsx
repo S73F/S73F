@@ -4,7 +4,8 @@ import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 import { Box, Link, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
-import { iconStyle } from "../../styles/styles";
+import { anchorStyle, iconStyle } from "../../styles/styles";
+import { ModalLink } from "@inertiaui/modal-react";
 
 export default function LavoriSpediti({ lavori, handleFile, isWindowed }) {
     const columns = useMemo(
@@ -20,7 +21,12 @@ export default function LavoriSpediti({ lavori, handleFile, isWindowed }) {
                         <Typography component="p" variant="p">
                             {params.row.medicoOrdinante}
                         </Typography>
-                        <Typography component="p" variant="p">
+                        <Typography
+                            component={ModalLink}
+                            variant="p"
+                            href={`/operatore/gestione-clienti/modifica/${params.row.idCliente}`}
+                            sx={anchorStyle}
+                        >
                             {params.row.ragione_sociale}
                         </Typography>
                     </Box>
@@ -116,6 +122,7 @@ export default function LavoriSpediti({ lavori, handleFile, isWindowed }) {
         () =>
             lavori.map((lavoro) => ({
                 id: lavoro.IDordine,
+                idCliente: lavoro.IDcliente,
                 medicoOrdinante: lavoro.medicoOrdinante,
                 ragione_sociale: lavoro.cliente.ragione_sociale,
                 Paziente: lavoro.PazienteCognome + " " + lavoro.PazienteNome,

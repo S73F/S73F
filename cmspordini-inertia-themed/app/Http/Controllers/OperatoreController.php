@@ -61,6 +61,7 @@ class OperatoreController extends Controller
                 ->select(
                     'IDordine',
                     'IDoperatore',
+                    'IDcliente',
                     'medicoOrdinante',
                     'PazienteNome',
                     'PazienteCognome',
@@ -76,7 +77,6 @@ class OperatoreController extends Controller
         } else {
             return Inertia::render('Operatore/OrdiniClienti', ["clienti" => $clienti]);
         }
-
     }
 
     public function showCreateClienteModal()
@@ -120,7 +120,7 @@ class OperatoreController extends Controller
                 'password' => bcrypt($request->password),
             ]);
 
-            return redirect()->intended('/operatore/gestione-clienti')->with(['success' => 'Cliente creato con successo!', 'newCliente' => $cliente]);
+            return redirect('/operatore/gestione-clienti')->with(['success' => 'Cliente creato con successo!', 'newCliente' => $cliente]);
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();
             return redirect()->back()->with(["error" => "Errore durante la creazione del cliente", "validation_errors" => $errors])->withErrors($errors)->withInput();
@@ -289,7 +289,7 @@ class OperatoreController extends Controller
                 $message = "Note modificate con successo!";
             }
 
-            return redirect()->intended('/operatore/dashboard?tipo=inCorso')->with(['success' => $message]);
+            return redirect('/operatore/dashboard?tipo=inCorso')->with(['success' => $message]);
         } catch (ValidationException $e) {
             $errors = $e->validator->errors();
 

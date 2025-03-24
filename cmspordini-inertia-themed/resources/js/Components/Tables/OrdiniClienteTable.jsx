@@ -2,10 +2,11 @@ import React, { useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
-import { iconStyle } from "../../styles/styles";
+import { anchorStyle, iconStyle } from "../../styles/styles";
+import { ModalLink } from "@inertiaui/modal-react";
 
 export default function OrdiniClienteTable({ ordini }) {
     const { handleFile } = useLavori();
@@ -13,11 +14,26 @@ export default function OrdiniClienteTable({ ordini }) {
     const columns = useMemo(
         () => [
             {
-                field: "Medico ordinante",
+                field: "medicoOrdinante",
                 headerName: "Medico ordinante",
                 flex: 1,
-                minWidth: 100,
+                minWidth: 240,
                 headerClassName: "headerColumn",
+                renderCell: (params) => (
+                    <Box display="flex" flexDirection="column" gap={0.5}>
+                        <Typography component="p" variant="p">
+                            {params.row.medicoOrdinante}
+                        </Typography>
+                        <Typography
+                            component={ModalLink}
+                            variant="p"
+                            href={`/operatore/gestione-clienti/modifica/${params.row.idCliente}`}
+                            sx={anchorStyle}
+                        >
+                            {params.row.ragione_sociale}
+                        </Typography>
+                    </Box>
+                ),
             },
             {
                 field: "Paziente",
@@ -109,7 +125,9 @@ export default function OrdiniClienteTable({ ordini }) {
         () =>
             ordini.map((ordine) => ({
                 id: ordine.IDordine,
-                "Medico ordinante": ordine.medicoOrdinante,
+                idCliente: ordine.IDcliente,
+                medicoOrdinante: ordine.medicoOrdinante,
+                ragione_sociale: ordine.cliente?.ragione_sociale,
                 Paziente: ordine.PazienteCognome + " " + ordine.PazienteNome,
                 "Data ordine": ordine.data || "-",
                 "Data inizio lavorazione": ordine.data_inizioLavorazione || "-",
