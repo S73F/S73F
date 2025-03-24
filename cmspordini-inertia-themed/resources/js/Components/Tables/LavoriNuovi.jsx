@@ -10,7 +10,7 @@ import {
 import { Link } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
 
-const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
+const LavoriNuovi = ({ lavori, handleFile, handleIncarico, iconStyle }) => {
     const columns = useMemo(
         () => [
             {
@@ -56,11 +56,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                             onClick={() =>
                                 handleFile("sorgente", params.row.id)
                             }
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faFileZipper} size="xl" />
                         </Link>
@@ -69,11 +65,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                             title="File PDF"
                             href={`/operatore/ordini-clienti/pdf/${params.row.id}`}
                             target="_blank"
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faFilePdf} size="xl" />
                         </Link>
@@ -93,11 +85,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                             component="button"
                             title="Accetta incarico"
                             onClick={() => handleIncarico(params.row.id)}
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faSquareCheck} size="xl" />
                         </Link>
@@ -105,11 +93,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                             component={ModalLink}
                             title="Elimina lavoro"
                             href={`/operatore/lavori/eliminazione/${params.row.id}`}
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faTrashCan} size="xl" />
                         </Link>

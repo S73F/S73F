@@ -13,7 +13,7 @@ import { DataTable } from "./DataTable";
 import { Link } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
 
-const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
+const LavoriInCorso = ({ lavori, handleFile, handleIncarico, iconStyle }) => {
     const columns = useMemo(
         () => [
             {
@@ -78,11 +78,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                             onClick={() =>
                                 handleFile("sorgente", params.row.id)
                             }
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faFileZipper} size="xl" />
                         </Link>
@@ -91,11 +87,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                             title="File PDF"
                             href={`/operatore/ordini-clienti/pdf/${params.row.id}`}
                             target="_blank"
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faFilePdf} size="xl" />
                         </Link>
@@ -106,10 +98,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                                 onClick={() =>
                                     handleFile("finale", params.row.id)
                                 }
-                                sx={{
-                                    color: "inherit",
-                                    "&:hover": { color: "#1976d2 " },
-                                }}
+                                sx={iconStyle}
                             >
                                 <FontAwesomeIcon
                                     icon={faFileZipperSolid}
@@ -135,11 +124,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                             onClick={() =>
                                 handleIncarico(params.row.id, "back")
                             }
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faRotateLeft} size="xl" />
                         </Link>
@@ -147,11 +132,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                             component={ModalLink}
                             href={`/operatore/ordini-clienti/caricamento-lavorazione/${params.row.id}`}
                             title="Modifica lavorazione"
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faPenToSquare} size="xl" />
                         </Link>
@@ -160,11 +141,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                                 component="button"
                                 title="Spedisci lavorazione"
                                 onClick={() => handleIncarico(params.row.id)}
-                                sx={{
-                                    color: "inherit",
-                                    "&:hover": { color: "#1976d2 " },
-                                    mr: 0.5,
-                                }}
+                                sx={iconStyle}
                             >
                                 <FontAwesomeIcon
                                     icon={faShareFromSquare}
@@ -176,11 +153,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                             component={ModalLink}
                             title="Elimina lavoro"
                             href={`/operatore/lavori/eliminazione/${params.row.id}`}
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faTrashCan} size="xl" />
                         </Link>

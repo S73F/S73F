@@ -17,7 +17,6 @@ const buttonStyles = {
     py: 1,
     width: 170,
     textAlign: "left",
-    gap: 1,
 };
 
 export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
@@ -33,7 +32,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
 
             <Stack
                 direction={{ xs: "column", md: "row" }}
-                spacing={{ xs: 2, md: 2, lg: 4 }}
+                spacing={{ xs: 2, md: 2, lg: 3 }}
                 justifyContent="center"
             >
                 <Button
