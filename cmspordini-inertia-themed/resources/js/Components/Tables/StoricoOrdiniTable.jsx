@@ -3,7 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
 import { Chip, Link } from "@mui/material";
 import { DataTable } from "./DataTable";
-import { chipStyle, circleStyles, iconStyle } from "../../styles/styles";
+import {
+    chipColors,
+    chipStyle,
+    circleStyles,
+    iconStyle,
+} from "../../styles/styles";
 import { Circle } from "@mui/icons-material";
 
 const columns = [
@@ -49,7 +54,7 @@ const columns = [
                         icon={<Circle sx={circleStyles.nuovo} />}
                         sx={{
                             ...chipStyle,
-                            backgroundColor: "#ffe6e6", // ad esempio per "Nuovo"
+                            ...chipColors.nuovo,
                         }}
                     />
                 )}
@@ -59,7 +64,7 @@ const columns = [
                         icon={<Circle sx={circleStyles.inCorso} />}
                         sx={{
                             ...chipStyle,
-                            backgroundColor: "#ffedb5", // ad esempio per "In corso"
+                            ...chipColors.inCorso,
                         }}
                     />
                 )}
@@ -69,7 +74,7 @@ const columns = [
                         icon={<Circle sx={circleStyles.spedito} />}
                         sx={{
                             ...chipStyle,
-                            backgroundColor: "#b5ffb5", // ad esempio per "Spedito"
+                            ...chipColors.spedito,
                         }}
                     />
                 )}

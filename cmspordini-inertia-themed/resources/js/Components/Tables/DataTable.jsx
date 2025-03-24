@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import { FormControl, InputLabel, Select, Typography } from "@mui/material";
+import { dataTableStyle } from "../../styles/styles";
 
 const Layout = ({ title, children }) => {
     return (
@@ -50,25 +51,7 @@ const Table = ({ rows, columns }) => {
                 pageSizeOptions={[5, 10, 25, 50]}
                 columnHeaderHeight={70}
                 rowHeight={90}
-                sx={{
-                    "& .headerColumn": {
-                        bgcolor: "#1976d2",
-                        color: "#fff",
-                    },
-                    "& .MuiDataGrid-columnHeaderTitle": {
-                        whiteSpace: "normal",
-                        lineHeight: "1.2",
-                        wordBreak: "break-word",
-                        textAlign: "left",
-                    },
-                    "& .MuiDataGrid-cell": {
-                        whiteSpace: "normal",
-                        lineHeight: "1.4",
-                        wordBreak: "break-word",
-                        display: "flex",
-                        alignItems: "center",
-                    },
-                }}
+                sx={dataTableStyle}
             />
         </Paper>
     );
