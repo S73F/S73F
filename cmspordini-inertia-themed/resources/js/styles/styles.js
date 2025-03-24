@@ -11,13 +11,20 @@ export const anchorStyle = {
 };
 
 export const chipStyle = {
-    width: 100,
+    height: 32,
+    fontWeight: 550,
+    fontSize: "0.875rem",
+    width: 120,
+    borderRadius: "16px",
+    pl: 0.5,
+    pr: 0.5,
     display: "flex",
-    justifyContent: "left",
+    alignItems: "center",
+    backgroundColor: "#e3f2fd",
 };
 
 export const circleStyles = {
     nuovo: { fill: "#ff0000", width: 20 },
-    inCorso: { fill: "#ffff00", width: 20 },
+    inCorso: { fill: "#ffdd00", width: 20 },
     spedito: { fill: "#00ff00", width: 20 },
 };

@@ -39,7 +39,7 @@ const columns = [
         field: "stato",
         headerName: "Stato lavoro",
         flex: 1,
-        minWidth: 100,
+        minWidth: 130,
         headerClassName: "headerColumn",
         renderCell: (params) => (
             <>
@@ -47,24 +47,30 @@ const columns = [
                     <Chip
                         label="Nuovo"
                         icon={<Circle sx={circleStyles.nuovo} />}
-                        color="primary"
-                        sx={chipStyle}
+                        sx={{
+                            ...chipStyle,
+                            backgroundColor: "#ffe6e6", // ad esempio per "Nuovo"
+                        }}
                     />
                 )}
                 {params.row.stato === 1 && (
                     <Chip
                         label="In corso"
                         icon={<Circle sx={circleStyles.inCorso} />}
-                        color="primary"
-                        sx={chipStyle}
+                        sx={{
+                            ...chipStyle,
+                            backgroundColor: "#ffedb5", // ad esempio per "In corso"
+                        }}
                     />
                 )}
                 {params.row.stato === 2 && (
                     <Chip
                         label="Spedito"
                         icon={<Circle sx={circleStyles.spedito} />}
-                        color="primary"
-                        sx={chipStyle}
+                        sx={{
+                            ...chipStyle,
+                            backgroundColor: "#b5ffb5", // ad esempio per "Spedito"
+                        }}
                     />
                 )}
             </>
