@@ -2,11 +2,13 @@ import React from "react";
 import LavoriInCorso from "./LavoriInCorso";
 import LavoriNuovi from "./LavoriNuovi";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import LavoriSpediti from "./LavoriSpediti";
 
 export const Lavori = ({ tipoLavori, lavori }) => {
     const { handleFile, handleIncarico } = useLavori();
+    const theme = useTheme();
+    const isWindowed = useMediaQuery(theme.breakpoints.down("lg"));
 
     if (lavori?.length === 0) {
         return (
@@ -38,7 +40,11 @@ export const Lavori = ({ tipoLavori, lavori }) => {
                 )}
 
                 {tipoLavori === "spediti" && (
-                    <LavoriSpediti lavori={lavori} handleFile={handleFile} />
+                    <LavoriSpediti
+                        lavori={lavori}
+                        handleFile={handleFile}
+                        isWindowed={isWindowed}
+                    />
                 )}
             </Box>
         );
