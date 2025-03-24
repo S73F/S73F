@@ -4,11 +4,8 @@ import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "@mui/material";
 import { DataTable } from "./DataTable";
-import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 
-export default function OrdiniClienteTable({ ordini }) {
-    const { handleFile } = useLavori();
-
+export default function LavoriSpediti({ lavori, handleFile }) {
     const columns = useMemo(
         () => [
             {
@@ -115,24 +112,29 @@ export default function OrdiniClienteTable({ ordini }) {
         []
     );
 
-    const mapOrders = useMemo(
+    const mapLavori = useMemo(
         () =>
-            ordini.map((ordine) => ({
-                id: ordine.IDordine,
-                "Medico ordinante": ordine.medicoOrdinante,
-                Paziente: ordine.PazienteCognome + " " + ordine.PazienteNome,
-                "Data ordine": ordine.data || "-",
-                "Data inizio lavorazione": ordine.data_inizioLavorazione || "-",
-                "Data spedizione": ordine.data_spedizione || "-",
-                Operatore: ordine.operatore
-                    ? `${ordine.operatore?.cognome || ""} ${
-                          ordine.operatore?.nome || ""
+            lavori.map((lavoro) => ({
+                id: lavoro.IDordine,
+                "Medico ordinante": lavoro.medicoOrdinante,
+                Paziente: lavoro.PazienteCognome + " " + lavoro.PazienteNome,
+                "Data ordine": lavoro.data || "-",
+                "Data inizio lavorazione": lavoro.data_inizioLavorazione || "-",
+                "Data spedizione": lavoro.data_spedizione || "-",
+                Operatore: lavoro.operatore
+                    ? `${lavoro.operatore?.cognome || ""} ${
+                          lavoro.operatore?.nome || ""
                       }`
                     : "Nessun operatore",
-                file_fin: ordine.file_fin,
+                file_fin: lavoro.file_fin,
             })),
-        [ordini]
+        [lavori]
     );
 
-    return <DataTable.Table rows={mapOrders} columns={columns} />;
+    return (
+        <>
+            <DataTable.Layout title={"Lavori spediti"} />
+            <DataTable.Table rows={mapLavori} columns={columns} />;
+        </>
+    );
 }

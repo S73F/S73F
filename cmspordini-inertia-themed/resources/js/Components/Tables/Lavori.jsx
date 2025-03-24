@@ -3,6 +3,7 @@ import LavoriInCorso from "./LavoriInCorso";
 import LavoriNuovi from "./LavoriNuovi";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 import { Box, Typography } from "@mui/material";
+import LavoriSpediti from "./LavoriSpediti";
 
 export const Lavori = ({ tipoLavori, lavori }) => {
     const { handleFile, handleIncarico } = useLavori();
@@ -34,6 +35,10 @@ export const Lavori = ({ tipoLavori, lavori }) => {
                         handleFile={handleFile}
                         handleIncarico={handleIncarico}
                     />
+                )}
+
+                {tipoLavori === "spediti" && (
+                    <LavoriSpediti lavori={lavori} handleFile={handleFile} />
                 )}
             </Box>
         );

@@ -18,11 +18,14 @@ class OperatoreController extends Controller
         $lavori = [];
 
         if ($tipo == "nuovi") {
-            $lavori = Ordine::select("IDordine", "IDcliente", "medicoOrdinante", "PazienteNome", "PazienteCognome", "data")->with(["cliente:IDcliente,ragione_sociale,emailcliente"])->where('stato', 0)->orderBy('data', 'desc')->get();
+            $lavori = Ordine::select("IDordine", "IDcliente", "medicoOrdinante", "PazienteNome", "PazienteCognome", "data")->with(["cliente:IDcliente,ragione_sociale"])->where('stato', 0)->orderBy('data', 'desc')->get();
         }
 
         if ($tipo == "inCorso") {
-            $lavori = Ordine::select("IDordine", "IDcliente", "IDoperatore", "medicoOrdinante", "PazienteNome", "PazienteCognome", "data", "data_inizioLavorazione", "note_ulti_mod", "file_fin")->with(["cliente:IDcliente,ragione_sociale,emailcliente", "operatore:IDoperatore,nome,cognome"])->where('stato', 1)->orderBy('data_inizioLavorazione', 'desc')->get();
+            $lavori = Ordine::select("IDordine", "IDcliente", "IDoperatore", "medicoOrdinante", "PazienteNome", "PazienteCognome", "data", "data_inizioLavorazione", "note_ulti_mod", "file_fin")->with(["cliente:IDcliente,ragione_sociale", "operatore:IDoperatore,nome,cognome"])->where('stato', 1)->orderBy('data_inizioLavorazione', 'desc')->get();
+        }
+        if ($tipo == "spediti") {
+            $lavori = Ordine::select("IDordine", "IDcliente", "IDoperatore", "medicoOrdinante", "PazienteNome", "PazienteCognome", "data", "data_inizioLavorazione", "data_spedizione", "file_fin")->with(["cliente:IDcliente,ragione_sociale", "operatore:IDoperatore,nome,cognome"])->where('stato', 2)->orderBy('data_spedizione', 'desc')->get();
         }
 
         $numLavoriNuovi = Ordine::where('stato', 0)->count();

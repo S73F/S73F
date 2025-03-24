@@ -8,7 +8,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import {
     Loop as LoopIcon,
     NewReleases as NewReleasesIcon,
-    CheckCircle as CheckCircleIcon,
+    Mail as MailIcon,
 } from "@mui/icons-material";
 
 const buttonStyles = {
@@ -57,16 +57,16 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     Lavori in corso
                 </Button>
                 <Button
-                    startIcon={<CheckCircleIcon />}
+                    startIcon={<MailIcon />}
                     size="large"
-                    onClick={() => handleLavori("terminati")}
+                    onClick={() => handleLavori("spediti")}
                     variant="contained"
                     color="primary"
                     sx={buttonStyles}
-                    disabled={tipo === "terminati"}
-                    loading={loadingButton === "terminati"}
+                    disabled={tipo === "spediti"}
+                    loading={loadingButton === "spediti"}
                 >
-                    Lavori terminati
+                    Lavori spediti
                 </Button>
             </Stack>
 
