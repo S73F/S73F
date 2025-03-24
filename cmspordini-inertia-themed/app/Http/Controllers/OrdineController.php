@@ -154,7 +154,7 @@ class OrdineController extends Controller
                         return redirect('/operatore/dashboard?tipo=nuovi')->with('success', 'Hai preso in carico il lavoro.');
                     case 1:
                         $ordine->update(['stato' => 2, 'data_spedizione' => now()]);
-                        return redirect('/operatore/dashboard?tipo=inCorso')->with('success', 'Hai contrassegnato il lavoro come "SPEDITO".');
+                        return redirect('/operatore/dashboard?tipo=inCorso')->with('success', 'Hai spedito la lavorazione.');
                     default:
                         throw new Exception("Stato dell'ordine non valido.");
                 }
