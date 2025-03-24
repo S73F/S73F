@@ -4,8 +4,9 @@ import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "@mui/material";
 import { DataTable } from "./DataTable";
+import { iconStyle } from "../../styles/styles";
 
-export default function LavoriSpediti({ lavori, handleFile, iconStyle }) {
+export default function LavoriSpediti({ lavori, handleFile }) {
     const columns = useMemo(
         () => [
             {

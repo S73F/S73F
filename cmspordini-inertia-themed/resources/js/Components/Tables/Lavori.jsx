@@ -5,12 +5,6 @@ import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 import { Box, Typography } from "@mui/material";
 import LavoriSpediti from "./LavoriSpediti";
 
-const iconStyle = {
-    color: "inherit",
-    "&:hover": { color: "#1976d2" },
-    mr: 0.5,
-};
-
 export const Lavori = ({ tipoLavori, lavori }) => {
     const { handleFile, handleIncarico } = useLavori();
 
@@ -32,7 +26,6 @@ export const Lavori = ({ tipoLavori, lavori }) => {
                         lavori={lavori}
                         handleFile={handleFile}
                         handleIncarico={handleIncarico}
-                        iconStyle={iconStyle}
                     />
                 )}
 
@@ -41,16 +34,11 @@ export const Lavori = ({ tipoLavori, lavori }) => {
                         lavori={lavori}
                         handleFile={handleFile}
                         handleIncarico={handleIncarico}
-                        iconStyle={iconStyle}
                     />
                 )}
 
                 {tipoLavori === "spediti" && (
-                    <LavoriSpediti
-                        lavori={lavori}
-                        handleFile={handleFile}
-                        iconStyle={iconStyle}
-                    />
+                    <LavoriSpediti lavori={lavori} handleFile={handleFile} />
                 )}
             </Box>
         );

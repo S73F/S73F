@@ -12,8 +12,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DataTable } from "./DataTable";
 import { Link } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
+import { iconStyle } from "../../styles/styles";
 
-const LavoriInCorso = ({ lavori, handleFile, handleIncarico, iconStyle }) => {
+const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(
         () => [
             {

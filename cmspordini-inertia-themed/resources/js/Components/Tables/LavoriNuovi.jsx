@@ -9,8 +9,9 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
+import { iconStyle } from "../../styles/styles";
 
-const LavoriNuovi = ({ lavori, handleFile, handleIncarico, iconStyle }) => {
+const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(
         () => [
             {

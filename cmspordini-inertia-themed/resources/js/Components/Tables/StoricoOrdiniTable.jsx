@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "@mui/material";
 import { DataTable } from "./DataTable";
+import { iconStyle } from "../../styles/styles";
 
 const columns = [
     {
@@ -67,9 +68,9 @@ const columns = [
                 href={`/cliente/ordini/pdf/${params.row.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                sx={{ color: "inherit", "&:hover": { color: "#1976d2 " } }}
+                sx={iconStyle}
             >
-                <FontAwesomeIcon icon={faFilePdf} size="2xl" />
+                <FontAwesomeIcon icon={faFilePdf} size="xl" />
             </Link>
         ),
         headerClassName: "headerColumn",

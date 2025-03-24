@@ -5,6 +5,7 @@ import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-i
 import { Link } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
+import { iconStyle } from "../../styles/styles";
 
 export default function OrdiniClienteTable({ ordini }) {
     const { handleFile } = useLavori();
@@ -69,26 +70,18 @@ export default function OrdiniClienteTable({ ordini }) {
                             onClick={() =>
                                 handleFile("sorgente", params.row.id)
                             }
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
-                            <FontAwesomeIcon icon={faFileZipper} size="2xl" />
+                            <FontAwesomeIcon icon={faFileZipper} size="xl" />
                         </Link>
                         <Link
                             component="a"
                             title="File PDF"
                             href={`/operatore/ordini-clienti/pdf/${params.row.id}`}
                             target="_blank"
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
-                            <FontAwesomeIcon icon={faFilePdf} size="2xl" />
+                            <FontAwesomeIcon icon={faFilePdf} size="xl" />
                         </Link>
                         {params.row.file_fin === 1 && (
                             <Link
@@ -97,14 +90,11 @@ export default function OrdiniClienteTable({ ordini }) {
                                 onClick={() =>
                                     handleFile("finale", params.row.id)
                                 }
-                                sx={{
-                                    color: "inherit",
-                                    "&:hover": { color: "#1976d2 " },
-                                }}
+                                sx={iconStyle}
                             >
                                 <FontAwesomeIcon
                                     icon={faFileZipperSolid}
-                                    size="2xl"
+                                    size="xl"
                                 />
                             </Link>
                         )}

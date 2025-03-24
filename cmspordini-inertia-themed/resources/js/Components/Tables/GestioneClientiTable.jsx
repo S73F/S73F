@@ -11,6 +11,8 @@ import { Container, Link, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { ModalLink } from "@inertiaui/modal-react";
 import { AddBox as AddBoxIcon } from "@mui/icons-material";
+import { anchorStyle } from "../../styles/styles";
+import { iconStyle } from "../../styles/styles";
 
 export default function GestioneClientiTable({ clienti }) {
     const columns = useMemo(
@@ -25,11 +27,7 @@ export default function GestioneClientiTable({ clienti }) {
                     <Link
                         component={ModalLink}
                         href={`/operatore/gestione-clienti/modifica/${params.row.id}`}
-                        sx={{
-                            color: "inherit",
-                            textDecoration: "none",
-                            "&:hover": { color: "#1976d2 " },
-                        }}
+                        sx={anchorStyle}
                     >
                         {params.row.ragione_sociale}
                     </Link>
@@ -52,11 +50,7 @@ export default function GestioneClientiTable({ clienti }) {
                     <Link
                         component="a"
                         href={`mailto:${params.row.emailcliente}`}
-                        sx={{
-                            color: "inherit",
-                            textDecoration: "none",
-                            "&:hover": { color: "#1976d2 " },
-                        }}
+                        sx={anchorStyle}
                     >
                         {params.row.emailcliente}
                     </Link>
@@ -83,25 +77,17 @@ export default function GestioneClientiTable({ clienti }) {
                             component={ModalLink}
                             href={`/operatore/gestione-clienti/modifica/${params.row.id}`}
                             title="Modifica cliente"
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
-                            <FontAwesomeIcon icon={faPenToSquare} size="2xl" />
+                            <FontAwesomeIcon icon={faPenToSquare} size="xl" />
                         </Link>
                         <Link
                             component={ModalLink}
                             href={`/operatore/gestione-clienti/eliminazione/${params.row.id}`}
                             title="Elimina cliente"
-                            sx={{
-                                color: "inherit",
-                                "&:hover": { color: "#1976d2 " },
-                                mr: 0.5,
-                            }}
+                            sx={iconStyle}
                         >
-                            <FontAwesomeIcon icon={faTrashCan} size="2xl" />
+                            <FontAwesomeIcon icon={faTrashCan} size="xl" />
                         </Link>
                     </>
                 ),
