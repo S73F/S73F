@@ -10,15 +10,7 @@ import {
     NewReleases as NewReleasesIcon,
     Mail as MailIcon,
 } from "@mui/icons-material";
-import { badgeStyle } from "../../styles/styles";
-
-const buttonStyles = {
-    fontWeight: "bold",
-    px: 3,
-    py: 1,
-    width: 170,
-    textAlign: "left",
-};
+import { badgeStyle, buttonStyles } from "../../styles/styles";
 
 export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
     const { handleLavori, loadingButton } = useDashboard();

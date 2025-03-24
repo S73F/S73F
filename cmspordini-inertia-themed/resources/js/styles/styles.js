@@ -69,3 +69,11 @@ export const badgeStyle = {
         fontWeight: "600",
     },
 };
+
+export const buttonStyles = {
+    fontWeight: "bold",
+    px: 3,
+    py: 1,
+    width: 170,
+    textAlign: "left",
+};
