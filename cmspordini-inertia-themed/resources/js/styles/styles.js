@@ -48,14 +48,14 @@ export const chipStyle = {
 
 export const chipColors = {
     nuovo: { backgroundColor: "#ffe6e6" },
-    inCorso: { backgroundColor: "#ffedb5" },
+    inCorso: { backgroundColor: "#fffbb5" },
     spedito: { backgroundColor: "#b5ffb5" },
 };
 
 export const circleStyles = {
     nuovo: { fill: "#ff0000", width: 20 },
-    inCorso: { fill: "#ffdd00", width: 20 },
-    spedito: { fill: "#00ff00", width: 20 },
+    inCorso: { fill: "#ffbf00", width: 20 },
+    spedito: { fill: "#00c400", width: 20 },
 };
 
 export const badgeStyle = {
