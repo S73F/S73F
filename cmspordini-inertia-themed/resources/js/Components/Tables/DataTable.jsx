@@ -49,7 +49,7 @@ const Table = ({ rows, columns }) => {
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[5, 10, 25, 50]}
                 headerHeight={70}
-                rowHeight={70}
+                rowHeight={85}
                 sx={{
                     "& .headerColumn": {
                         bgcolor: "#1976d2",

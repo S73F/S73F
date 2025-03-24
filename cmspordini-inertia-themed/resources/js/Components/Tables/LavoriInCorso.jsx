@@ -24,7 +24,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                 minWidth: 240,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <Box>
+                    <Box display="flex" flexDirection="column" gap={0.5}>
                         <Typography component="p" variant="p">
                             {params.row.medicoOrdinante}
                         </Typography>
@@ -38,14 +38,14 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                 field: "Paziente",
                 headerName: "Paziente",
                 flex: 1,
-                minWidth: 150,
+                minWidth: 170,
                 headerClassName: "headerColumn",
             },
             {
                 field: "Operatore",
                 headerName: "Operatore",
                 flex: 1,
-                minWidth: 130,
+                minWidth: 110,
                 headerClassName: "headerColumn",
             },
             {
@@ -55,13 +55,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                 minWidth: 170,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <Box
-                        id="last-modified"
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    >
+                    <Box display="flex" flexDirection="column" gap={0.5}>
                         <Typography component="p" variant="p">
                             {params.row.data_inizioLavorazione}
                         </Typography>
