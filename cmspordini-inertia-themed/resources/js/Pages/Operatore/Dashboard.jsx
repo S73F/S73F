@@ -21,7 +21,7 @@ const buttonStyles = {
 };
 
 export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
-    const { handleLavori } = useDashboard();
+    const { handleLavori, loadingButton } = useDashboard();
 
     return (
         <PaperContainer>
@@ -39,6 +39,8 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     variant="contained"
                     color="primary"
                     sx={buttonStyles}
+                    disabled={tipo === "nuovi"}
+                    loading={loadingButton === "nuovi"}
                 >
                     Lavori nuovi
                 </Button>
@@ -49,6 +51,8 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     variant="contained"
                     color="primary"
                     sx={buttonStyles}
+                    disabled={tipo === "inCorso"}
+                    loading={loadingButton === "inCorso"}
                 >
                     Lavori in corso
                 </Button>
@@ -59,6 +63,8 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     variant="contained"
                     color="primary"
                     sx={buttonStyles}
+                    disabled={tipo === "terminati"}
+                    loading={loadingButton === "terminati"}
                 >
                     Lavori terminati
                 </Button>
