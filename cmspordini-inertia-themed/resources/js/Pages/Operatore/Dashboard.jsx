@@ -31,7 +31,11 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     : `Benvenuto ${user?.cognome ?? "Utente"}`}
             </Typography>
 
-            <Stack direction="row" spacing={2} justifyContent="center">
+            <Stack
+                direction={{ xs: "column", md: "row" }}
+                spacing={{ xs: 2, md: 2, lg: 4 }}
+                justifyContent="center"
+            >
                 <Button
                     startIcon={<NewReleasesIcon />}
                     size="large"
