@@ -7,7 +7,7 @@ import { PaperContainer } from "../../Components/PaperContainer";
 import { Box, Button, Grid2, TextField, Typography } from "@mui/material";
 import { DataTable } from "../../Components/Tables/DataTable";
 
-export default function CreazioneOrdine() {
+export default function CreazioneOrdine({ InputLabelProps = {} }) {
     const {
         data,
         editorKey,
@@ -149,6 +149,12 @@ export default function CreazioneOrdine() {
                                     type="date"
                                     name="data_cons"
                                     required
+                                    slotProps={{
+                                        inputLabel: {
+                                            ...InputLabelProps,
+                                            shrink: true,
+                                        },
+                                    }}
                                     value={data.data_cons}
                                     onChange={handleChange}
                                 />
@@ -167,6 +173,12 @@ export default function CreazioneOrdine() {
                                     type="time"
                                     name="ora_cons"
                                     required
+                                    slotProps={{
+                                        inputLabel: {
+                                            ...InputLabelProps,
+                                            shrink: true,
+                                        },
+                                    }}
                                     value={data.ora_cons}
                                     onChange={handleChange}
                                 />
