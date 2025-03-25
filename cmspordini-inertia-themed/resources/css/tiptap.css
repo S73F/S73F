@@ -1,5 +1,5 @@
 /* Stile generale del contenitore */
-#tiptap-container {
+/* #tiptap-container {
     width: 100%;
     padding: 15px;
     background: white;
@@ -82,4 +82,4 @@
 
 #editor-container .ProseMirror-focused {
     outline: none;
-}
+} */

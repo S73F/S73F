@@ -94,8 +94,7 @@ video {
 }
 
 /* Excludes Tiptap editor */
-#tiptap-container *,
-#tiptap-container-50 * {
+.MuiTiptap-RichTextContent-root * {
     all: revert;
 }
 
