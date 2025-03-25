@@ -37,7 +37,7 @@ export const chipStyle = {
     height: 32,
     fontWeight: 550,
     fontSize: "0.875rem",
-    width: 120,
+    width: 110,
     borderRadius: "16px",
     pl: 0.5,
     pr: 0.5,

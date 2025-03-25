@@ -7,6 +7,7 @@ import { DataTable } from "./DataTable";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 import { anchorStyle, iconStyle } from "../../styles/styles";
 import { ModalLink } from "@inertiaui/modal-react";
+import { StatusChip } from "../StatusChip";
 
 export default function OrdiniClienteTable({ ordini }) {
     const { handleFile } = useLavori();
@@ -17,7 +18,7 @@ export default function OrdiniClienteTable({ ordini }) {
                 field: "medicoOrdinante",
                 headerName: "Medico ordinante",
                 flex: 1,
-                minWidth: 240,
+                minWidth: 220,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
                     <Box display="flex" flexDirection="column" gap={0.5}>
@@ -39,8 +40,22 @@ export default function OrdiniClienteTable({ ordini }) {
                 field: "Paziente",
                 headerName: "Paziente",
                 flex: 1,
-                minWidth: 100,
+                minWidth: 170,
                 headerClassName: "headerColumn",
+            },
+            {
+                field: "stato",
+                headerName: "Stato lavoro",
+                flex: 1,
+                minWidth: 130,
+                headerClassName: "headerColumn",
+                renderCell: (params) => (
+                    <>
+                        {params.row.stato === 0 && <StatusChip.Nuovo />}
+                        {params.row.stato === 1 && <StatusChip.InCorso />}
+                        {params.row.stato === 2 && <StatusChip.Spedito />}
+                    </>
+                ),
             },
             {
                 field: "Data ordine",
@@ -74,7 +89,7 @@ export default function OrdiniClienteTable({ ordini }) {
                 field: "Allegati",
                 headerName: "Allegati",
                 flex: 1,
-                minWidth: 100,
+                minWidth: 90,
                 headerClassName: "headerColumn",
                 sortable: false,
                 filterable: false,
@@ -129,6 +144,7 @@ export default function OrdiniClienteTable({ ordini }) {
                 medicoOrdinante: ordine.medicoOrdinante,
                 ragione_sociale: ordine.cliente?.ragione_sociale,
                 Paziente: ordine.PazienteCognome + " " + ordine.PazienteNome,
+                stato: ordine.stato,
                 "Data ordine": ordine.data || "-",
                 "Data inizio lavorazione": ordine.data_inizioLavorazione || "-",
                 "Data spedizione": ordine.data_spedizione || "-",

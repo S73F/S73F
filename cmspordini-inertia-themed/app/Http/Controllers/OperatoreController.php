@@ -65,6 +65,7 @@ class OperatoreController extends Controller
                     'medicoOrdinante',
                     'PazienteNome',
                     'PazienteCognome',
+                    'stato',
                     'data',
                     'data_inizioLavorazione',
                     'data_spedizione',

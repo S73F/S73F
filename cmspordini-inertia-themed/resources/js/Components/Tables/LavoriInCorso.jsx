@@ -21,7 +21,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                 field: "medicoOrdinante",
                 headerName: "Medico ordinante",
                 flex: 1,
-                minWidth: 240,
+                minWidth: 220,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
                     <Box display="flex" flexDirection="column" gap={0.5}>

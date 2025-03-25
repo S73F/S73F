@@ -10,6 +10,7 @@ import {
     iconStyle,
 } from "../../styles/styles";
 import { Circle } from "@mui/icons-material";
+import { StatusChip } from "../StatusChip";
 
 const columns = [
     {
@@ -34,13 +35,6 @@ const columns = [
         headerClassName: "headerColumn",
     },
     {
-        field: "Data inizio lavorazione",
-        headerName: "Data inizio lavorazione",
-        flex: 1,
-        minWidth: 100,
-        headerClassName: "headerColumn",
-    },
-    {
         field: "stato",
         headerName: "Stato lavoro",
         flex: 1,
@@ -48,38 +42,18 @@ const columns = [
         headerClassName: "headerColumn",
         renderCell: (params) => (
             <>
-                {params.row.stato === 0 && (
-                    <Chip
-                        label="Nuovo"
-                        icon={<Circle sx={circleStyles.nuovo} />}
-                        sx={{
-                            ...chipStyle,
-                            ...chipColors.nuovo,
-                        }}
-                    />
-                )}
-                {params.row.stato === 1 && (
-                    <Chip
-                        label="In corso"
-                        icon={<Circle sx={circleStyles.inCorso} />}
-                        sx={{
-                            ...chipStyle,
-                            ...chipColors.inCorso,
-                        }}
-                    />
-                )}
-                {params.row.stato === 2 && (
-                    <Chip
-                        label="Spedito"
-                        icon={<Circle sx={circleStyles.spedito} />}
-                        sx={{
-                            ...chipStyle,
-                            ...chipColors.spedito,
-                        }}
-                    />
-                )}
+                {params.row.stato === 0 && <StatusChip.Nuovo />}
+                {params.row.stato === 1 && <StatusChip.InCorso />}
+                {params.row.stato === 2 && <StatusChip.Spedito />}
             </>
         ),
+    },
+    {
+        field: "Data inizio lavorazione",
+        headerName: "Data inizio lavorazione",
+        flex: 1,
+        minWidth: 100,
+        headerClassName: "headerColumn",
     },
     {
         field: "Data spedizione",
