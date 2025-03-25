@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export const useCreazioneOrdine = () => {
     const [editorKey, setEditorKey] = useState(0);
+    const [fileName, setFileName] = useState("");
 
     const { data, setData, post, processing } = useForm({
         medico_ordinante: "",
@@ -22,8 +23,17 @@ export const useCreazioneOrdine = () => {
         setData(e.target.name, e.target.value);
     };
 
-    const handleFileChange = (e) => {
+    const handleFile = (e) => {
         setData("userfile", e.target.files[0]);
+    };
+
+    const handleFileChange = (event) => {
+        if (event.target.files.length > 0) {
+            setFileName(event.target.files[0].name);
+        } else {
+            setFileName("");
+        }
+        handleFile(event);
     };
 
     const handleSubmit = (e) => {
@@ -57,6 +67,7 @@ export const useCreazioneOrdine = () => {
         data,
         setData,
         editorKey,
+        fileName,
         handleChange,
         handleFileChange,
         handleSubmit,
