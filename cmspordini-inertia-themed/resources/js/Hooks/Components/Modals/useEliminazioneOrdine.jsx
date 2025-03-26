@@ -1,6 +1,6 @@
 import { router } from "@inertiajs/react";
 
-export const useEliminazioneLavoro = ({ ordine, stato, modalRef }) => {
+export const useEliminazioneOrdine = ({ ordine, stato, modalRef }) => {
     const handleDelete = (e) => {
         e.preventDefault();
         router.delete(`/operatore/lavori/eliminazione/${ordine}`, {

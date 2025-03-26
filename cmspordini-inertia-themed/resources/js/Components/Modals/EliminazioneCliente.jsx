@@ -4,7 +4,7 @@ import { useEliminazioneCliente } from "../../Hooks/Components/Modals/useElimina
 import "../../../css/modal.css";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { ContentContainer } from "../ContentContainer";
-import { modalFormBtnStyle } from "../../styles/styles";
+import { formBtnStyle } from "../../styles/styles";
 
 export default function EliminazioneCliente({ cliente }) {
     const modalRef = useRef(null);
@@ -33,7 +33,7 @@ export default function EliminazioneCliente({ cliente }) {
                         variant="contained"
                         color="error"
                         onClick={handleDelete}
-                        sx={modalFormBtnStyle}
+                        sx={formBtnStyle}
                     >
                         Si
                     </Button>
@@ -41,7 +41,7 @@ export default function EliminazioneCliente({ cliente }) {
                         variant="outlined"
                         color="secondary"
                         onClick={closeModal}
-                        sx={modalFormBtnStyle}
+                        sx={formBtnStyle}
                     >
                         No
                     </Button>

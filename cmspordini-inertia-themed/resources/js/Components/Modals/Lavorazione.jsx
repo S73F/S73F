@@ -4,7 +4,7 @@ import { useLavorazione } from "../../Hooks/Components/Modals/useLavorazione";
 import { Box, Button, Typography, Stack } from "@mui/material";
 import Tiptap from "../Tiptap";
 import { ContentContainer } from "../ContentContainer";
-import { modalFormBtnStyle } from "../../styles/styles";
+import { formBtnStyle } from "../../styles/styles";
 
 const Lavorazione = ({ ordine, note_int }) => {
     const modalRef = useRef(null);
@@ -66,7 +66,7 @@ const Lavorazione = ({ ordine, note_int }) => {
                             color="primary"
                             type="submit"
                             disabled={processing}
-                            sx={modalFormBtnStyle}
+                            sx={formBtnStyle}
                         >
                             Invia
                         </Button>
@@ -75,7 +75,7 @@ const Lavorazione = ({ ordine, note_int }) => {
                             color="secondary"
                             type="button"
                             onClick={closeModal}
-                            sx={modalFormBtnStyle}
+                            sx={formBtnStyle}
                         >
                             Chiudi
                         </Button>

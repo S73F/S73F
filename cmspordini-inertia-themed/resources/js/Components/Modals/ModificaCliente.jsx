@@ -4,7 +4,7 @@ import { Modal } from "@inertiaui/modal-react";
 import "../../../css/modal.css";
 import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
 import { ContentContainer } from "../ContentContainer";
-import { modalFormBtnStyle } from "../../styles/styles";
+import { formBtnStyle } from "../../styles/styles";
 
 export default function ModificaCliente({ cliente }) {
     const modalRef = useRef(null);
@@ -172,7 +172,7 @@ export default function ModificaCliente({ cliente }) {
                         color="primary"
                         type="submit"
                         disabled={processing}
-                        sx={modalFormBtnStyle}
+                        sx={formBtnStyle}
                     >
                         Modifica
                     </Button>
@@ -182,7 +182,7 @@ export default function ModificaCliente({ cliente }) {
                         color="secondary"
                         type="reset"
                         onClick={handleDelete}
-                        sx={modalFormBtnStyle}
+                        sx={formBtnStyle}
                     >
                         Azzera campi
                     </Button>
@@ -191,7 +191,7 @@ export default function ModificaCliente({ cliente }) {
                         variant="contained"
                         color="secondary"
                         onClick={closeModal}
-                        sx={modalFormBtnStyle}
+                        sx={formBtnStyle}
                     >
                         Chiudi
                     </Button>

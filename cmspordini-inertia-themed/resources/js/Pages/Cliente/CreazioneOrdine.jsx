@@ -4,7 +4,15 @@ import { useCreazioneOrdine } from "../../Hooks/Cliente/useCreazioneOrdine";
 import Tiptap from "../../Components/Tiptap";
 import ClienteLayout from "../../Layouts/ClienteLayout";
 import { ContentContainer } from "../../Components/ContentContainer";
-import { Box, Button, Grid2, TextField, Typography } from "@mui/material";
+import {
+    Box,
+    Button,
+    Grid2,
+    Stack,
+    TextField,
+    Typography,
+} from "@mui/material";
+import { formBtnStyle } from "../../styles/styles";
 
 export default function CreazioneOrdine({ InputLabelProps = {} }) {
     const {
@@ -30,8 +38,8 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                 >
                     <Grid2
                         container
-                        rowSpacing={4}
-                        columnSpacing={{ xs: 1, md: 2, md: 3 }}
+                        rowSpacing={{ xs: 3, md: 4 }}
+                        columnSpacing={{ xs: 1, md: 2, md: 4 }}
                     >
                         <Grid2 size={12}>
                             <Box
@@ -197,11 +205,31 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                         </Grid2>
                         <Grid2 size={12}>
                             <Box
+                                border="2px dashed #1976d2"
+                                margin="0 auto"
+                                display="flex"
+                                flexDirection="column"
+                                alignItems="center"
+                                justifyContent="center"
+                                borderRadius={2}
+                                p={3}
+                                textAlign="center"
                                 sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
+                                    width: { xs: "100%", md: "50%" },
                                 }}
                             >
+                                <Typography
+                                    mb={2}
+                                    color="error"
+                                    fontWeight={500}
+                                >
+                                    Si ricorda che è ammesso un solo file per
+                                    volta per prenotazione, qualora si debba
+                                    inviare più di un file per lo stesso
+                                    paziente dovrete provvedere a zippare tutti
+                                    i file e le cartelle in un unico archivio
+                                    compresso .ZIP
+                                </Typography>
                                 <Button
                                     fullWidth
                                     variant="outlined"
@@ -217,37 +245,45 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                     />
                                 </Button>
                                 {fileName && (
-                                    <Typography variant="body2" sx={{ mt: 1 }}>
+                                    <Typography mt={2}>
                                         File selezionato: {fileName}
                                     </Typography>
                                 )}
                             </Box>
                         </Grid2>
-                        <Grid2 size={{ xs: 12, md: 6 }}>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                type="submit"
-                                disabled={processing}
-                                sx={{ height: 50 }}
-                            >
-                                Invia ordine
-                            </Button>
-                        </Grid2>
-                        <Grid2 size={{ xs: 12, md: 6 }}>
-                            <Button
-                                fullWidth
-                                variant="outlined"
-                                color="secondary"
-                                type="reset"
-                                onClick={handleReset}
-                                sx={{ height: 50 }}
-                            >
-                                Azzera
-                            </Button>
-                        </Grid2>
                     </Grid2>
+                    <Stack
+                        sx={{
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: { xs: 3, md: 5 },
+                            justifyContent: "center",
+                            flexWrap: "wrap",
+                            mt: 4,
+                        }}
+                    >
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            disabled={processing}
+                            sx={formBtnStyle}
+                        >
+                            Invia ordine
+                        </Button>
+                        <Button
+                            fullWidth
+                            variant="outlined"
+                            color="secondary"
+                            type="reset"
+                            onClick={handleReset}
+                            sx={formBtnStyle}
+                        >
+                            Azzera
+                        </Button>
+                    </Stack>
                 </Box>
             </ContentContainer.Layout>
         </ContentContainer.Container>

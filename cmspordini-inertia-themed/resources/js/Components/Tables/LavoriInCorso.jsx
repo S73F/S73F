@@ -146,16 +146,6 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                 renderCell: (params) => (
                     <>
                         <Link
-                            component="button"
-                            title="Annulla incarico"
-                            onClick={() =>
-                                handleIncarico(params.row.id, "back")
-                            }
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faRotateLeft} size="xl" />
-                        </Link>
-                        <Link
                             component={ModalLink}
                             href={`/operatore/ordini-clienti/caricamento-lavorazione/${params.row.id}`}
                             title="Modifica lavorazione"
@@ -183,6 +173,16 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
                             sx={iconStyle}
                         >
                             <FontAwesomeIcon icon={faTrashCan} size="xl" />
+                        </Link>
+                        <Link
+                            component="button"
+                            title="Annulla incarico"
+                            onClick={() =>
+                                handleIncarico(params.row.id, "back")
+                            }
+                            sx={iconStyle}
+                        >
+                            <FontAwesomeIcon icon={faRotateLeft} size="xl" />
                         </Link>
                     </>
                 ),

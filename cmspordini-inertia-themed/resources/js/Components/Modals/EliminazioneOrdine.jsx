@@ -2,12 +2,12 @@ import React, { useRef } from "react";
 import { Modal } from "@inertiaui/modal-react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { ContentContainer } from "../ContentContainer";
-import { modalFormBtnStyle } from "../../styles/styles";
-import { useEliminazioneLavoro } from "../../Hooks/Components/Modals/useEliminazioneLavoro";
+import { formBtnStyle } from "../../styles/styles";
+import { useEliminazioneOrdine } from "../../Hooks/Components/Modals/useEliminazioneOrdine";
 
-export default function EliminazioneLavoro({ ordine, stato }) {
+export default function EliminazioneOrdine({ ordine, stato }) {
     const modalRef = useRef(null);
-    const { handleDelete, closeModal } = useEliminazioneLavoro({
+    const { handleDelete, closeModal } = useEliminazioneOrdine({
         ordine,
         modalRef,
         stato,
@@ -15,10 +15,11 @@ export default function EliminazioneLavoro({ ordine, stato }) {
 
     return (
         <Modal ref={modalRef}>
-            <ContentContainer.Layout title="Eliminazione lavoro" />
+            <ContentContainer.Layout title="Eliminazione ordine" />
             <Box sx={{ textAlign: "center" }}>
-                <Typography sx={{ mb: 3 }}>
-                    Sei sicuro di voler eliminare il lavoro?
+                <Typography>Sei sicuro di voler eliminare l'ordine?</Typography>
+                <Typography color="error" fontWeight="500" mb={3}>
+                    ATTENZIONE: l'eliminazione dell'ordine non è reversibile
                 </Typography>
                 <Stack
                     direction={{ xs: "column", sm: "row" }}
@@ -29,7 +30,7 @@ export default function EliminazioneLavoro({ ordine, stato }) {
                         variant="contained"
                         color="error"
                         onClick={handleDelete}
-                        sx={modalFormBtnStyle}
+                        sx={formBtnStyle}
                     >
                         Si
                     </Button>
@@ -37,7 +38,7 @@ export default function EliminazioneLavoro({ ordine, stato }) {
                         variant="outlined"
                         color="secondary"
                         onClick={closeModal}
-                        sx={modalFormBtnStyle}
+                        sx={formBtnStyle}
                     >
                         No
                     </Button>

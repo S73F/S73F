@@ -207,7 +207,7 @@ class OperatoreController extends Controller
     {
         $ordine = Ordine::select('IDordine', 'stato')->find($IDordine);
 
-        return Inertia::render("Modals/EliminazioneLavoro", ["ordine" => $ordine->IDordine, "stato" => $ordine->stato]);
+        return Inertia::render("Modals/EliminazioneOrdine", ["ordine" => $ordine->IDordine, "stato" => $ordine->stato]);
     }
 
     public function deleteOrdine($IDordine, Request $request)
