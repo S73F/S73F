@@ -1,70 +1,87 @@
 import React, { useRef } from "react";
 import { Modal } from "@inertiaui/modal-react";
 import { useLavorazione } from "../../Hooks/Components/Modals/useLavorazione";
-import "../../../css/modal.css";
+import { Box, Button, Typography, Stack } from "@mui/material";
 import Tiptap from "../Tiptap";
+import { ContentContainer } from "../ContentContainer";
+import { modalFormBtnStyle } from "../../styles/styles";
 
 const Lavorazione = ({ ordine, note_int }) => {
     const modalRef = useRef(null);
 
     const {
+        fileName,
         handleFileChange,
         handleEditorContentSave,
         handleLavorazione,
         processing,
         closeModal,
-    } = useLavorazione({
-        modalRef,
-    });
+    } = useLavorazione({ modalRef });
 
     return (
         <Modal ref={modalRef}>
-            <h2 id="modal-title">Modifica Lavorazione</h2>
-            <div id="modal-lavorazione-container">
+            <ContentContainer.Layout title="Modifica Lavorazione" />
+            <Box sx={{ textAlign: "center" }}>
                 <form
-                    id="lavorazione-form"
                     onSubmit={(e) => handleLavorazione(e, ordine)}
                     encType="multipart/form-data"
                 >
-                    <h3 className="modal-subtitle">Carica file</h3>
-                    <div className="form-field">
+                    <Typography variant="h6" sx={{ mb: 2 }}>
+                        Note
+                    </Typography>
+                    <Tiptap
+                        onEditorContentSave={handleEditorContentSave}
+                        tipo="note_int"
+                        htmlContent={note_int}
+                    />
+
+                    <Button
+                        fullWidth
+                        variant="outlined"
+                        component="label"
+                        sx={{ textTransform: "none", mt: 3 }}
+                    >
+                        Carica file lavorazione
                         <input
-                            id="userfile"
-                            name="userfile"
                             type="file"
+                            hidden
+                            name="userfile"
                             onChange={handleFileChange}
                         />
-                    </div>
+                    </Button>
+                    {fileName && (
+                        <Typography variant="body2" sx={{ mt: 1 }}>
+                            File selezionato: {fileName}
+                        </Typography>
+                    )}
 
-                    <h3 className="modal-subtitle">Note</h3>
-                    <Tiptap.Container>
-                        <Tiptap.Editor
-                            onEditorContentSave={handleEditorContentSave}
-                            tipo={"note_int"}
-                            htmlContent={note_int}
-                        />
-                    </Tiptap.Container>
-
-                    <div id="btns-container">
-                        <button
+                    <Stack
+                        direction={{ xs: "column", sm: "row" }}
+                        spacing={{ xs: 2, md: 3 }}
+                        justifyContent="center"
+                        sx={{ mt: 3 }}
+                    >
+                        <Button
+                            variant="contained"
+                            color="primary"
                             type="submit"
-                            id="modal-submit-btn"
-                            className="modal-form-btn"
                             disabled={processing}
+                            sx={modalFormBtnStyle}
                         >
                             Invia
-                        </button>
-                        <button
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            color="secondary"
                             type="button"
-                            id="modal-close-btn"
-                            className="modal-form-btn"
                             onClick={closeModal}
+                            sx={modalFormBtnStyle}
                         >
                             Chiudi
-                        </button>
-                    </div>
+                        </Button>
+                    </Stack>
                 </form>
-            </div>
+            </Box>
         </Modal>
     );
 };

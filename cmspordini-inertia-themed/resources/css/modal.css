@@ -11,7 +11,8 @@
 }
 
 .im-modal-wrapper {
-    max-width: 100%;
+    width: auto;
+    max-width: 90%;
     padding: 2rem;
 }
 

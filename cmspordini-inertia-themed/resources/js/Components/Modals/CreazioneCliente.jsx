@@ -229,47 +229,48 @@ export default function CreazioneCliente() {
                             />
                         </Box>
                     </Grid2>
-
-                    <Stack
-                        sx={{
-                            width: "100%",
-                            display: "flex",
-                            flexDirection: "row",
-                            gap: { xs: 3, md: 5 },
-                            justifyContent: "center",
-                            flexWrap: "wrap",
-                        }}
-                    >
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            disabled={processing}
-                            sx={modalFormBtnStyle}
-                        >
-                            Crea cliente
-                        </Button>
-                        <Button
-                            fullWidth
-                            variant="outlined"
-                            color="secondary"
-                            type="reset"
-                            onClick={handleDelete}
-                            sx={modalFormBtnStyle}
-                        >
-                            Azzera campi
-                        </Button>
-                        <Button
-                            fullWidth
-                            variant="contained"
-                            color="secondary"
-                            onClick={closeModal}
-                            sx={modalFormBtnStyle}
-                        >
-                            Chiudi
-                        </Button>
-                    </Stack>
                 </Grid2>
+
+                <Stack
+                    sx={{
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: { xs: 3, md: 5 },
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                        mt: 4,
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        disabled={processing}
+                        sx={modalFormBtnStyle}
+                    >
+                        Crea cliente
+                    </Button>
+                    <Button
+                        fullWidth
+                        variant="outlined"
+                        color="secondary"
+                        type="reset"
+                        onClick={handleDelete}
+                        sx={modalFormBtnStyle}
+                    >
+                        Azzera campi
+                    </Button>
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        color="secondary"
+                        onClick={closeModal}
+                        sx={modalFormBtnStyle}
+                    >
+                        Chiudi
+                    </Button>
+                </Stack>
             </Box>
         </Modal>
     );

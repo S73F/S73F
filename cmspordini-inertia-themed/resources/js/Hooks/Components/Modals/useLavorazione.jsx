@@ -1,15 +1,27 @@
 import { router, useForm } from "@inertiajs/react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const useLavorazione = ({ modalRef }) => {
+    const [fileName, setFileName] = useState("");
+
     const { setData, post, processing } = useForm({
         userfile: null,
         note_int: null,
     });
 
-    const handleFileChange = (e) => {
-        e.preventDefault();
-        setData("userfile", e.target.files[0]);
+    const handleFile = (event) => {
+        event.preventDefault();
+        setData("userfile", event.target.files[0]);
+    };
+
+    const handleFileChange = (event) => {
+        if (event.target.files.length > 0) {
+            setFileName(event.target.files[0].name);
+        } else {
+            setFileName("");
+        }
+        handleFile(event);
     };
 
     const handleLavorazione = (e, IDordine) => {
@@ -37,6 +49,7 @@ export const useLavorazione = ({ modalRef }) => {
     }
 
     return {
+        fileName,
         handleFileChange,
         handleEditorContentSave,
         handleLavorazione,

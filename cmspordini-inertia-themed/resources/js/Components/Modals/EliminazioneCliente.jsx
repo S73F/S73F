@@ -2,6 +2,9 @@ import React, { useRef } from "react";
 import { Modal } from "@inertiaui/modal-react";
 import { useEliminazioneCliente } from "../../Hooks/Components/Modals/useEliminazioneCliente";
 import "../../../css/modal.css";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import { ContentContainer } from "../ContentContainer";
+import { modalFormBtnStyle } from "../../styles/styles";
 
 export default function EliminazioneCliente({ cliente }) {
     const modalRef = useRef(null);
@@ -12,40 +15,38 @@ export default function EliminazioneCliente({ cliente }) {
 
     return (
         <Modal ref={modalRef}>
-            <h3 id="modal-title">Eliminazione cliente</h3>
-            <div id="eliminazione-container">
-                <p>
-                    Sei sicuro di voler eliminare il cliente
-                    <span id="cliente-cognome-nome">
-                        {cliente.cognome && cliente.nome
-                            ? " " + cliente.cognome + " " + cliente.nome
-                            : cliente.cognome && !cliente.nome
-                            ? " " + cliente.cognome
-                            : !cliente.cognome && cliente.nome
-                            ? " " + cliente.nome
-                            : ""}
-                    </span>
+            <ContentContainer.Layout title="Eliminazione cliente" />
+            <Box sx={{ textAlign: "center" }}>
+                <Typography sx={{ mb: 3 }}>
+                    Sei sicuro di voler eliminare{" "}
+                    <Typography component="span" sx={{ fontWeight: 500 }}>
+                        {cliente.ragione_sociale}
+                    </Typography>
                     ?
-                </p>
-                <div id="btns-container">
-                    <button
-                        type="submit"
-                        id="modal-submit-danger-btn"
-                        className="modal-form-btn"
+                </Typography>
+                <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={{ xs: 2, md: 3 }}
+                    justifyContent="center"
+                >
+                    <Button
+                        variant="contained"
+                        color="error"
                         onClick={handleDelete}
+                        sx={modalFormBtnStyle}
                     >
                         Si
-                    </button>
-                    <button
-                        type="button"
-                        id="modal-close-btn"
-                        className="modal-form-btn"
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        color="secondary"
                         onClick={closeModal}
+                        sx={modalFormBtnStyle}
                     >
                         No
-                    </button>
-                </div>
-            </div>
+                    </Button>
+                </Stack>
+            </Box>
         </Modal>
     );
 }

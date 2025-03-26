@@ -189,7 +189,7 @@ class OperatoreController extends Controller
 
     public function showEliminazioneClienteModal($IDCliente)
     {
-        $cliente = Cliente::select('IDcliente', 'nome', 'cognome')->find($IDCliente);
+        $cliente = Cliente::select('IDcliente', "ragione_sociale")->find($IDCliente);
 
         return Inertia::render("Modals/EliminazioneCliente", ["cliente" => $cliente]);
     }
