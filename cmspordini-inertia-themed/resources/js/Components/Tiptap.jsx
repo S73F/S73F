@@ -257,7 +257,7 @@ export default function Tiptap({
     };
 
     return (
-        <div style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "left", wordBreak: "break-word" }}>
             <RichTextEditor
                 ref={rteRef}
                 extensions={[

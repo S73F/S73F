@@ -4,21 +4,6 @@ import Paper from "@mui/material/Paper";
 import { FormControl, InputLabel, Select, Typography } from "@mui/material";
 import { dataTableStyle } from "../../styles/styles";
 
-const Layout = ({ title, children }) => {
-    return (
-        <>
-            <Typography
-                variant="h4"
-                component="h2"
-                sx={{ mb: 4, textAlign: "center" }}
-            >
-                {title}
-            </Typography>
-            {children}
-        </>
-    );
-};
-
 const Selector = ({ inputLabel, handleChange, children }) => {
     return (
         <>
@@ -57,4 +42,4 @@ const Table = ({ rows, columns }) => {
     );
 };
 
-export const DataTable = { Layout, Selector, Table };
+export const DataTable = { Selector, Table };

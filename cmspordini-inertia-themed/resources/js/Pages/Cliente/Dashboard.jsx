@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "@inertiajs/react";
 import ClienteLayout from "../../Layouts/ClienteLayout";
-import { Box, Button, Paper, Typography } from "@mui/material";
-import { PaperContainer } from "../../Components/PaperContainer";
+import { Button, Typography } from "@mui/material";
+import { ContentContainer } from "../../Components/ContentContainer";
 
 export default function Dashboard({ user }) {
     return (
-        <PaperContainer>
+        <ContentContainer.Container>
             <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
                 {user?.nome
                     ? `Benvenuto ${user?.nome}`
@@ -23,7 +23,7 @@ export default function Dashboard({ user }) {
             >
                 Crea ordine
             </Button>
-        </PaperContainer>
+        </ContentContainer.Container>
     );
 }
 

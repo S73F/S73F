@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -131,7 +132,7 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
 
     return (
         <>
-            <DataTable.Layout title={"Lavori nuovi"} />
+            <ContentContainer.Layout title={"Lavori nuovi"} />
             <DataTable.Table rows={mapLavoriNuovi} columns={columns} />;
         </>
     );

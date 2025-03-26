@@ -77,3 +77,8 @@ export const buttonStyles = {
     width: 170,
     textAlign: "left",
 };
+
+export const modalFormBtnStyle = {
+    width: { xs: "100%", sm: 100, md: 200 },
+    height: { xs: 50, sm: 70 },
+};

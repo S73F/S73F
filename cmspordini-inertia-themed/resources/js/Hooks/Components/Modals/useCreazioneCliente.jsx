@@ -53,5 +53,12 @@ export const useCreazioneCliente = ({ modalRef }) => {
         modalRef.current.close();
     };
 
-    return { data, processing, handleChange, handleSubmit, handleDelete };
+    return {
+        data,
+        processing,
+        handleChange,
+        handleSubmit,
+        handleDelete,
+        closeModal,
+    };
 };

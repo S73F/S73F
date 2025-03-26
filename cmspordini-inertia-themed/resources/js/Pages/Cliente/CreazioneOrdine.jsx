@@ -3,9 +3,8 @@ import "../../../css/creazioneOrdine.css";
 import { useCreazioneOrdine } from "../../Hooks/Cliente/useCreazioneOrdine";
 import Tiptap from "../../Components/Tiptap";
 import ClienteLayout from "../../Layouts/ClienteLayout";
-import { PaperContainer } from "../../Components/PaperContainer";
+import { ContentContainer } from "../../Components/ContentContainer";
 import { Box, Button, Grid2, TextField, Typography } from "@mui/material";
-import { DataTable } from "../../Components/Tables/DataTable";
 
 export default function CreazioneOrdine({ InputLabelProps = {} }) {
     const {
@@ -21,8 +20,8 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
     } = useCreazioneOrdine();
 
     return (
-        <PaperContainer>
-            <DataTable.Layout title={"Spedisci nuovo ordine"}>
+        <ContentContainer.Container>
+            <ContentContainer.Layout title={"Spedisci nuovo ordine"}>
                 <Box
                     component="form"
                     id="form-ordine"
@@ -32,7 +31,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                     <Grid2
                         container
                         rowSpacing={4}
-                        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                        columnSpacing={{ xs: 1, md: 2, md: 3 }}
                     >
                         <Grid2 size={12}>
                             <Box
@@ -52,7 +51,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 />
                             </Box>
                         </Grid2>
-                        <Grid2 size={6}>
+                        <Grid2 size={{ xs: 12, md: 6 }}>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -70,7 +69,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 />
                             </Box>
                         </Grid2>
-                        <Grid2 size={6}>
+                        <Grid2 size={{ xs: 12, md: 6 }}>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -114,7 +113,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 titolo={"Lavorazione"}
                             />
                         </Grid2>
-                        <Grid2 size={4}>
+                        <Grid2 size={{ xs: 12, md: 4 }}>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -132,7 +131,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 />
                             </Box>
                         </Grid2>
-                        <Grid2 size={4}>
+                        <Grid2 size={{ xs: 12, md: 4 }}>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -156,7 +155,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 />
                             </Box>
                         </Grid2>
-                        <Grid2 size={4}>
+                        <Grid2 size={{ xs: 12, md: 4 }}>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -180,7 +179,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 />
                             </Box>
                         </Grid2>
-                        <Grid2 size={6}>
+                        <Grid2 size={{ xs: 12, md: 6 }}>
                             <Tiptap
                                 key={editorKey}
                                 onEditorContentSave={handleEditorContentSave}
@@ -188,7 +187,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 titolo={"Piattaforma impianti"}
                             />
                         </Grid2>
-                        <Grid2 size={6}>
+                        <Grid2 size={{ xs: 12, md: 6 }}>
                             <Tiptap
                                 key={editorKey}
                                 onEditorContentSave={handleEditorContentSave}
@@ -224,7 +223,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 )}
                             </Box>
                         </Grid2>
-                        <Grid2 size={6}>
+                        <Grid2 size={{ xs: 12, md: 6 }}>
                             <Button
                                 fullWidth
                                 variant="contained"
@@ -236,7 +235,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 Invia ordine
                             </Button>
                         </Grid2>
-                        <Grid2 size={6}>
+                        <Grid2 size={{ xs: 12, md: 6 }}>
                             <Button
                                 fullWidth
                                 variant="outlined"
@@ -250,8 +249,8 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                         </Grid2>
                     </Grid2>
                 </Box>
-            </DataTable.Layout>
-        </PaperContainer>
+            </ContentContainer.Layout>
+        </ContentContainer.Container>
     );
 }
 

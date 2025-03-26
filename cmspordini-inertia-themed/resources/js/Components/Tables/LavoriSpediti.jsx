@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 import { Box, Link, Typography } from "@mui/material";
+import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
 import { anchorStyle, iconStyle } from "../../styles/styles";
 import { ModalLink } from "@inertiaui/modal-react";
@@ -144,7 +145,7 @@ export default function LavoriSpediti({ lavori, handleFile, isWindowed }) {
 
     return (
         <>
-            <DataTable.Layout title={"Lavori spediti"} />
+            <ContentContainer.Layout title={"Lavori spediti"} />
             <DataTable.Table rows={mapLavori} columns={columns} />;
         </>
     );

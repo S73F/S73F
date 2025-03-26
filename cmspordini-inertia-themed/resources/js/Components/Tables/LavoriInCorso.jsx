@@ -9,8 +9,9 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
-import { Box, Container, Link, Typography } from "@mui/material";
+import { Box, Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
 import { anchorStyle, iconStyle } from "../../styles/styles";
 
@@ -211,7 +212,7 @@ const LavoriInCorso = ({ lavori, handleFile, handleIncarico }) => {
 
     return (
         <>
-            <DataTable.Layout title={"Lavori in corso"} />
+            <ContentContainer.Layout title={"Lavori in corso"} />
             <DataTable.Table rows={mapLavoriInCorso} columns={columns} />;
         </>
     );

@@ -2,157 +2,275 @@ import React, { useRef } from "react";
 import { useCreazioneCliente } from "../../Hooks/Components/Modals/useCreazioneCliente";
 import { Modal } from "@inertiaui/modal-react";
 import "../../../css/modal.css";
+import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
+import { ContentContainer } from "../ContentContainer";
+import { modalFormBtnStyle } from "../../styles/styles";
 
 export default function CreazioneCliente() {
     const modalRef = useRef(null);
 
-    const { data, processing, handleChange, handleSubmit, handleDelete } =
-        useCreazioneCliente({ modalRef });
+    const {
+        data,
+        processing,
+        handleChange,
+        handleSubmit,
+        handleDelete,
+        closeModal,
+    } = useCreazioneCliente({ modalRef });
 
     return (
         <Modal ref={modalRef}>
-            <h3 id="modal-title">Creazione cliente</h3>
-            <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <div className="form-field">
-                    <label htmlFor="ragione_sociale">Ragione Sociale</label>
-                    <input
-                        type="text"
-                        name="ragione_sociale"
-                        placeholder="Inserisci la ragione sociale"
-                        required
-                        value={data.ragione_sociale}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="nome">Nome</label>
-                    <input
-                        type="text"
-                        name="nome"
-                        placeholder="Inserisci il nome"
-                        required
-                        value={data.nome}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="cognome">Cognome</label>
-                    <input
-                        type="text"
-                        name="cognome"
-                        placeholder="Inserisci il cognome"
-                        required
-                        value={data.cognome}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="partita_iva">Partita IVA</label>
-                    <input
-                        type="text"
-                        name="partitaIVA"
-                        placeholder="Inserisci la partita IVA"
-                        value={data.partitaIVA}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="indirizzo">Indirizzo</label>
-                    <input
-                        type="text"
-                        name="indirizzo"
-                        placeholder="Inserisci l'indirizzo"
-                        required
-                        value={data.indirizzo}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="citta">Città</label>
-                    <input
-                        type="text"
-                        name="citta"
-                        placeholder="Inserisci la città"
-                        required
-                        value={data.citta}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="cap">CAP</label>
-                    <input
-                        type="number"
-                        name="cap"
-                        placeholder="Inserisci il CAP"
-                        required
-                        value={data.cap}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="provincia">Provincia</label>
-                    <input
-                        type="text"
-                        name="provincia"
-                        placeholder="Inserisci la provincia"
-                        required
-                        value={data.provincia}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="emailcliente">Email</label>
-                    <input
-                        type="text"
-                        name="emailcliente"
-                        placeholder="Inserisci l'email"
-                        required
-                        value={data.emailcliente}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="Inserisci lo username"
-                        required
-                        value={data.username}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-field">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="text"
-                        name="password"
-                        placeholder="Inserisci la password"
-                        required
-                        value={data.password}
-                        onChange={handleChange}
-                    />
-                </div>
+            <ContentContainer.Layout title={"Creazione cliente"} />
+            <Box
+                component="form"
+                onSubmit={handleSubmit}
+                encType="multipart/form-data"
+            >
+                <Grid2
+                    container
+                    rowSpacing={4}
+                    columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                >
+                    <Grid2 size={12}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Ragione sociale"
+                                name="ragione_sociale"
+                                variant="outlined"
+                                required
+                                value={data.ragione_sociale}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 6 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Nome"
+                                name="nome"
+                                variant="outlined"
+                                required
+                                value={data.nome}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 6 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Cognome"
+                                name="cognome"
+                                variant="outlined"
+                                required
+                                value={data.cognome}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={12}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Partita IVA"
+                                name="partitaIVA"
+                                variant="outlined"
+                                required
+                                value={data.partitaIVA}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 4 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Indirizzo"
+                                name="indirizzo"
+                                variant="outlined"
+                                required
+                                value={data.indirizzo}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 4 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Città"
+                                name="citta"
+                                variant="outlined"
+                                required
+                                value={data.citta}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 2 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Cap"
+                                name="cap"
+                                variant="outlined"
+                                required
+                                value={data.cap}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 2 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Provincia"
+                                name="provincia"
+                                variant="outlined"
+                                required
+                                value={data.provincia}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 4 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Email"
+                                name="emailcliente"
+                                variant="outlined"
+                                required
+                                value={data.emailcliente}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 4 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Username"
+                                name="username"
+                                variant="outlined"
+                                required
+                                value={data.username}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
+                    <Grid2 size={{ xs: 12, md: 4 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
+                        >
+                            <TextField
+                                fullWidth
+                                label="Password"
+                                name="password"
+                                variant="outlined"
+                                required
+                                value={data.password}
+                                onChange={handleChange}
+                            />
+                        </Box>
+                    </Grid2>
 
-                <div id="btns-container">
-                    <button
-                        id="modal-submit-btn"
-                        className="modal-form-btn"
-                        type="submit"
-                        disabled={processing}
+                    <Stack
+                        sx={{
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: { xs: 3, md: 5 },
+                            justifyContent: "center",
+                            flexWrap: "wrap",
+                        }}
                     >
-                        Crea
-                    </button>
-                    <button
-                        id="modal-reset-btn"
-                        className="modal-form-btn"
-                        type="reset"
-                        onClick={handleDelete}
-                    >
-                        Cancella
-                    </button>
-                </div>
-            </form>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            disabled={processing}
+                            sx={modalFormBtnStyle}
+                        >
+                            Crea cliente
+                        </Button>
+                        <Button
+                            fullWidth
+                            variant="outlined"
+                            color="secondary"
+                            type="reset"
+                            onClick={handleDelete}
+                            sx={modalFormBtnStyle}
+                        >
+                            Azzera campi
+                        </Button>
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            color="secondary"
+                            onClick={closeModal}
+                            sx={modalFormBtnStyle}
+                        >
+                            Chiudi
+                        </Button>
+                    </Stack>
+                </Grid2>
+            </Box>
         </Modal>
     );
 }

@@ -1,7 +1,22 @@
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import React from "react";
 
-export const PaperContainer = ({ children }) => {
+const Layout = ({ title, children }) => {
+    return (
+        <>
+            <Typography
+                variant="h4"
+                component="h2"
+                sx={{ mb: 4, textAlign: "center" }}
+            >
+                {title}
+            </Typography>
+            {children}
+        </>
+    );
+};
+
+const Container = ({ children }) => {
     return (
         <Paper
             elevation={5}
@@ -23,4 +38,9 @@ export const PaperContainer = ({ children }) => {
             {children}
         </Paper>
     );
+};
+
+export const ContentContainer = {
+    Layout,
+    Container,
 };
