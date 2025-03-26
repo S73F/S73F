@@ -17,7 +17,9 @@ export default function EliminazioneOrdine({ ordine, stato }) {
         <Modal ref={modalRef}>
             <ContentContainer.Layout title="Eliminazione ordine" />
             <Box sx={{ textAlign: "center" }}>
-                <Typography>Sei sicuro di voler eliminare l'ordine?</Typography>
+                <Typography mb={1}>
+                    Sei sicuro di voler eliminare l'ordine?
+                </Typography>
                 <Typography color="error" fontWeight="500" mb={3}>
                     ATTENZIONE: l'eliminazione dell'ordine non è reversibile
                 </Typography>

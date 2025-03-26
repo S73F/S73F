@@ -17,12 +17,15 @@ export default function EliminazioneCliente({ cliente }) {
         <Modal ref={modalRef}>
             <ContentContainer.Layout title="Eliminazione cliente" />
             <Box sx={{ textAlign: "center" }}>
-                <Typography sx={{ mb: 3 }}>
+                <Typography sx={{ mb: 1 }}>
                     Sei sicuro di voler eliminare{" "}
                     <Typography component="span" sx={{ fontWeight: 500 }}>
                         {cliente.ragione_sociale}
                     </Typography>
                     ?
+                </Typography>
+                <Typography color="error" fontWeight="500" mb={3}>
+                    ATTENZIONE: l'eliminazione del cliente non è reversibile
                 </Typography>
                 <Stack
                     direction={{ xs: "column", sm: "row" }}
