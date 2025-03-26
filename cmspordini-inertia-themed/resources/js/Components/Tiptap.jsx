@@ -208,7 +208,7 @@
 // export default Tiptap;
 
 import React, { useRef, useState } from "react";
-import { Box, Button, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import ColorLensIcon from "@mui/icons-material/ColorLens";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -216,6 +216,7 @@ import Strike from "@tiptap/extension-strike";
 import Italic from "@tiptap/extension-italic";
 import TextStyle from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
+import Placeholder from "@tiptap/extension-placeholder";
 import {
     MenuButtonBold,
     MenuButtonItalic,
@@ -262,10 +263,11 @@ export default function Tiptap({
                 extensions={[
                     StarterKit,
                     Underline,
-                    Strike,
-                    Italic,
                     TextStyle,
                     Color,
+                    Placeholder.configure({
+                        placeholder: titolo,
+                    }),
                 ]}
                 content={htmlContent || ""}
                 onUpdate={handleEditorUpdate} // Auto-save ad ogni modifica

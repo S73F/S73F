@@ -1,5 +1,6 @@
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const useCreazioneOrdine = () => {
     const [editorKey, setEditorKey] = useState(0);
@@ -38,10 +39,14 @@ export const useCreazioneOrdine = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post("/cliente/ordini/creazione", {
-            preserveScroll: true,
-            forceFormData: true, // Indica che c'è un file
-        });
+        if (fileName) {
+            post("/cliente/ordini/creazione", {
+                preserveScroll: true,
+                forceFormData: true, // Indica che c'è un file
+            });
+        } else {
+            toast.error("Il caricamento del file allegato è obbligatorio");
+        }
     };
 
     const handleEditorContentSave = (tipo, html) => {

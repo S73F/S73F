@@ -31,7 +31,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                 >
                     <Grid2
                         container
-                        rowSpacing={3}
+                        rowSpacing={4}
                         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                     >
                         <Grid2 size={12}>
@@ -181,37 +181,19 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                             </Box>
                         </Grid2>
                         <Grid2 size={6}>
-                            {/* <Tiptap.Container>
-                                <Tiptap.Title title={"Piattaforma impianti"} />
-                                <Tiptap.Editor
-                                    key={editorKey}
-                                    onEditorContentSave={
-                                        handleEditorContentSave
-                                    }
-                                    tipo={"piattaforma"}
-                                />
-                            </Tiptap.Container> */}
                             <Tiptap
                                 key={editorKey}
                                 onEditorContentSave={handleEditorContentSave}
                                 tipo={"piattaforma"}
+                                titolo={"Piattaforma impianti"}
                             />
                         </Grid2>
                         <Grid2 size={6}>
-                            {/* <Tiptap.Container>
-                                <Tiptap.Title title={"Note"} />
-                                <Tiptap.Editor
-                                    key={editorKey}
-                                    onEditorContentSave={
-                                        handleEditorContentSave
-                                    }
-                                    tipo={"note"}
-                                />
-                            </Tiptap.Container> */}
                             <Tiptap
                                 key={editorKey}
                                 onEditorContentSave={handleEditorContentSave}
                                 tipo={"note"}
+                                titolo={"Note"}
                             />
                         </Grid2>
                         <Grid2 size={12}>
@@ -232,7 +214,6 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                         type="file"
                                         hidden
                                         name="userfile"
-                                        required
                                         onChange={handleFileChange}
                                     />
                                 </Button>
