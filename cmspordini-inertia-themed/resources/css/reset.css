@@ -4,6 +4,16 @@
    Modified to exclude Tiptap editor
 */
 
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html {
+    box-sizing: inherit;
+}
+
 html,
 body,
 div,
