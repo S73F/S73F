@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Operatore;
 use App\Models\Ordine;
 use ErrorException;
 use Exception;
@@ -12,7 +13,7 @@ use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 
-class OrdineController extends Controller
+class OrdineController extends MailController
 {
     public function showCreazione()
     {
@@ -21,6 +22,8 @@ class OrdineController extends Controller
 
     public function creazione(Request $request)
     {
+        $mailOperatori = Operatore::pluck("emailoperatore");
+
         try {
             // Validazione dei dati
             $request->validate([
@@ -30,10 +33,10 @@ class OrdineController extends Controller
                 'indirizzo_spedizione' => 'required|string|max:50',
                 'lavorazione' => 'required|string|max:1000',
                 'colore' => 'required|string|max:100',
-                'piattaforma' => 'nullable|string',
+                'piattaforma' => 'nullable|string|max:1000',
                 'data_cons' => 'required|date',
                 'ora_cons' => 'required',
-                'note' => 'nullable|string',
+                'note' => 'nullable|string|max:1000',
                 'userfile' => 'required|file|mimes:zip,pdf,stl',
             ], [
                 'required' => 'Il campo :attribute è obbligatorio.',
@@ -79,10 +82,13 @@ class OrdineController extends Controller
                     'fileok' => 1,
                     'nomefile' => $newFileName,
                 ]);
-                return redirect()->intended('/cliente/dashboard')->with(['success' => 'Ordine creato e file caricato con successo!']);
-            } else {
-                return redirect()->intended('/cliente/dashboard')->with(['success' => 'Ordine creato con successo!']);
+
+                MailController::sendOrdineCreatoEmail(Auth::guard('cliente')->user()->emailcliente, Auth::guard('cliente')->user()->ragione_sociale, $numero, $anno, $mailOperatori);
+                return redirect('/cliente/dashboard')->with(['success' => 'Ordine creato e file caricato con successo!']);
             }
+            // else {
+            //     return redirect()->intended('/cliente/dashboard')->with(['success' => 'Ordine creato con successo!']);
+            // }
         } catch (ValidationException $e) {
             // Log tramite toast degli errori
             $errors = $e->validator->errors();
