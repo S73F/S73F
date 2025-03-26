@@ -121,7 +121,7 @@ export default function GestioneClientiTable({ clienti }) {
                     width: "100px",
                     height: "40px",
                     mt: -2,
-                    mb: 5,
+                    mb: 6,
                     textDecoration: "none",
                     "&:hover": {
                         opacity: "0.8",
