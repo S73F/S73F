@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Infogeneration">
-    <title>Conferma Spedizione</title>
+    <title>Conferma ricezione</title>
     <style>
         body {
             background-color: #f4f4f4;
@@ -63,11 +63,11 @@
     <div class="email-container">
         <div class="header">
             <img src="{{ $message->embed(public_path() . '/assets/img/ODONTOTECNICA-LOGO.png') }}" />
-
-            <!-- <img src="{{ asset('assets/img/lab-odontotecnico.webp') }}" alt="Logo CMSP"> -->
         </div>
         <div class="content">
-            <p>Il tuo ordine è stato creato con successo e verrà processato il prima possibile.</p>
+            <p>Hai ricevuto un nuovo ordine da parte di {{ $ragioneSociale }}.</p>
+            <p>Per visualizzarlo, dovrai accedere alla sezione "Lavori nuovi" all'interno della tua dashboard operatore.
+            </p>
         </div>
         <div class="footer">
             <p>&copy; 2025 Centro Medico San Pietro. Tutti i diritti riservati.</p>

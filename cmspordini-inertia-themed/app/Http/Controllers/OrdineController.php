@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CreazioneOrdineMailJob;
+use App\Jobs\TermineOrdineMailJob;
 use App\Models\Operatore;
 use App\Models\Ordine;
-use ErrorException;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,8 +14,9 @@ use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
+use Log;
 
-class OrdineController extends MailController
+class OrdineController extends Controller
 {
     public function showCreazione()
     {
@@ -22,7 +25,6 @@ class OrdineController extends MailController
 
     public function creazione(Request $request)
     {
-        $mailOperatori = Operatore::pluck("emailoperatore");
 
         try {
             // Validazione dei dati
@@ -83,7 +85,11 @@ class OrdineController extends MailController
                     'nomefile' => $newFileName,
                 ]);
 
-                MailController::sendOrdineCreatoEmail(Auth::guard('cliente')->user()->emailcliente, Auth::guard('cliente')->user()->ragione_sociale, $numero, $anno, $mailOperatori);
+                $mailOperatori = Operatore::pluck("emailoperatore");
+
+
+                dispatch(new CreazioneOrdineMailJob(['mailCliente' => Auth::guard('cliente')->user()->emailcliente, 'ragioneSociale' => Auth::guard('cliente')->user()->ragione_sociale, 'numero' => $numero, 'anno' => $anno, 'mailOperatori' => $mailOperatori]));
+
                 return redirect('/cliente/dashboard')->with(['success' => 'Ordine creato e file caricato con successo!']);
             }
             // else {
@@ -146,7 +152,7 @@ class OrdineController extends MailController
 
     public function aggiornaStato(Request $request, $IDordine, $option = "forward")
     {
-        $ordine = Ordine::find($IDordine);
+        $ordine = Ordine::select('IDordine', 'IDoperatore', 'IDcliente', 'numero', 'data', 'stato')->with(['operatore:IDoperatore,nome,cognome', 'cliente:IDcliente,emailcliente'])->find($IDordine);
 
         if (!$ordine) {
             return redirect()->back()->withErrors('Ordine non trovato');
@@ -157,18 +163,24 @@ class OrdineController extends MailController
                 switch ($ordine->stato) {
                     case 0:
                         $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
+
                         return redirect('/operatore/dashboard?tipo=nuovi')->with('success', 'Hai preso in carico il lavoro.');
                     case 1:
                         $ordine->update(['stato' => 2, 'data_spedizione' => now()]);
+
+                        dispatch(new TermineOrdineMailJob(['mailCliente' => $ordine->cliente->emailcliente, 'numero' => $ordine->numero, 'anno' => Carbon::parse($ordine->data)->format('Y'), 'nomeOperatore' => $ordine->operatore->nome, 'cognomeOperatore' => $ordine->operatore->cognome]));
+
                         return redirect('/operatore/dashboard?tipo=inCorso')->with('success', 'Hai spedito la lavorazione.');
                     default:
-                        throw new Exception("Stato dell'ordine non valido.");
+                        throw new Exception();
                 }
             } else {
                 $ordine->update(['data_inizioLavorazione' => null, 'stato' => 0, 'data_spedizione' => null, "note_int" => "", 'note_ulti_mod' => null, 'utente_modifica' => "-", "file_fin" => 0, 'file_fin_nome' => null]);
                 return redirect('/operatore/dashboard?tipo=inCorso')->with('success', "Hai annullato l'incarico e ripristinato l'ordine.");
             }
         } catch (Exception $e) {
+            Log::error($e->getMessage());
+
             $errors = $e->getMessage();
             return redirect()->back()->with('error', 'ATTENZIONE: si è verificato un errore. Riprova più tardi.')->withErrors($errors);
         }

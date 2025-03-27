@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Infogeneration">
-    <title>Conferma Ricezione</title>
+    <title>Conferma termine ordine</title>
     <style>
         body {
             background-color: #f4f4f4;
@@ -65,8 +65,9 @@
             <img src="{{ $message->embed(public_path() . '/assets/img/ODONTOTECNICA-LOGO.png') }}" />
         </div>
         <div class="content">
-            <p>Hai ricevuto un nuovo ordine da parte di {{ $ragioneSociale }}.</p>
-            <p>Per visualizzarlo, dovrai accedere alla sezione "Lavori nuovi" all'interno della tua dashboard operatore.
+            <p>Il tuo ordine n°{{ $numero }}/{{ $anno }} è stato elaborato con successo da {{ $cognomeOperatore ?? '' }}
+                {{ $nomeOperatore ?? '' }} ed è ora
+                disponibile il relativo file finale, scaricabile all'interno della pagina "storico ordini".
             </p>
         </div>
         <div class="footer">
