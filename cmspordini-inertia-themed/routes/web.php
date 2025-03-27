@@ -25,6 +25,8 @@ Route::group(['middleware' => "auth:cliente"], function () {
     Route::post('/cliente/ordini/creazione', [OrdineController::class, 'creazione'])->name('creazioneOrdine');
     Route::get("/cliente/ordini/storico/{tempo?}", [OrdineController::class, "getStorico"])->name("tabellaStoricoOrdini");
     Route::get('/cliente/ordini/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('clienteGeneraPDF');
+    Route::get('/cliente/ordini/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFileCliente');
+    Route::get('/cliente/ordini/download-finale/{id}', [OrdineController::class, 'downloadFileFinale'])->name('downloadFileFinaleCliente');
 });
 
 Route::group(['middleware' => "auth:operatore"], function () {
@@ -44,8 +46,8 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::get('/operatore/ordini-clienti/{id?}', [OperatoreController::class, 'showOrdiniCliente'])->name('tabellaOrdiniCliente');
     Route::get('/operatore/ordini-clienti/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('operatoreGeneraPDF');
     Route::patch('/operatore/ordini-clienti/update/{id}/{option}', [OrdineController::class, 'aggiornaStato'])->name('aggiornaStato');
-    Route::get('/operatore/ordini-clienti/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFile');
-    Route::get('/operatore/ordini-clienti/download-finale/{id}', [OrdineController::class, 'downloadFileFinale'])->name('downloadFileFinale');
+    Route::get('/operatore/ordini-clienti/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFileOperatore');
+    Route::get('/operatore/ordini-clienti/download-finale/{id}', [OrdineController::class, 'downloadFileFinale'])->name('downloadFileFinaleOperatore');
     Route::get('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'showLavorazioneModal'])->name('showLavorazioneModal');
     Route::post('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'caricaLavorazione'])->name('caricaLavorazione');
 });

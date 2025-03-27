@@ -158,10 +158,10 @@
             </div>
         @endif
 
-        @if ($ordine->utente_modifica !== "-")
+        @if ($ordine->utente_modifica && $ordine->utente_modifica !== "-")
             <h3 class="section-title">Ultima Modifica</h3>
             <p class="last-modified">L'ultima modifica è stata effettuata da:
-                <strong>{{ $ordine->utente_modifica }}</strong>
+                <strong>{{ $ordine->utente_modifica }}</strong> il <strong>{{ $ordine->note_ulti_mod }}</strong>
             </p>
         @endif
 

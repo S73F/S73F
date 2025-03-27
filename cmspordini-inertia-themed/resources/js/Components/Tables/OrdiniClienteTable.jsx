@@ -99,7 +99,11 @@ export default function OrdiniClienteTable({ ordini }) {
                             component="button"
                             title="File sorgente"
                             onClick={() =>
-                                handleFile("sorgente", params.row.id)
+                                handleFile(
+                                    "operatore",
+                                    "sorgente",
+                                    params.row.id
+                                )
                             }
                             sx={iconStyle}
                         >
@@ -119,7 +123,11 @@ export default function OrdiniClienteTable({ ordini }) {
                                 component="button"
                                 title="File finale"
                                 onClick={() =>
-                                    handleFile("finale", params.row.id)
+                                    handleFile(
+                                        "operatore",
+                                        "finale",
+                                        params.row.id
+                                    )
                                 }
                                 sx={iconStyle}
                             >

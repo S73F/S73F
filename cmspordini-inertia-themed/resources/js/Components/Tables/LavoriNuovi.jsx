@@ -66,7 +66,11 @@ const LavoriNuovi = ({ lavori, handleFile, handleIncarico }) => {
                             component="button"
                             title="File sorgente"
                             onClick={() =>
-                                handleFile("sorgente", params.row.id)
+                                handleFile(
+                                    "operatore",
+                                    "sorgente",
+                                    params.row.id
+                                )
                             }
                             sx={iconStyle}
                         >

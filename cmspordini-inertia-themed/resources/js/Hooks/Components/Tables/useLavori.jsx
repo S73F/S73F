@@ -3,11 +3,21 @@ import { useCallback } from "react";
 import { toast } from "react-toastify";
 
 export const useLavori = () => {
-    const handleFile = useCallback((tipo, IDordine) => {
-        if (tipo === "sorgente") {
-            window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
-        } else if (tipo === "finale") {
-            window.location.href = `/operatore/ordini-clienti/download-finale/${IDordine}`;
+    const handleFile = useCallback((user, tipo, IDordine) => {
+        if (user === "operatore") {
+            if (tipo === "sorgente") {
+                window.location.href = `/operatore/ordini-clienti/download/${IDordine}`;
+            } else if (tipo === "finale") {
+                window.location.href = `/operatore/ordini-clienti/download-finale/${IDordine}`;
+            }
+        }
+
+        if (user === "cliente") {
+            if (tipo === "sorgente") {
+                window.location.href = `/cliente/ordini/download/${IDordine}`;
+            } else if (tipo === "finale") {
+                window.location.href = `/cliente/ordini/download-finale/${IDordine}`;
+            }
         }
 
         setTimeout(() => {

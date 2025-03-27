@@ -124,7 +124,8 @@ class OrdineController extends Controller
                 'IndirizzoSpedizione',
                 'data_inizioLavorazione',
                 'stato',
-                'data_spedizione'
+                'data_spedizione',
+                'file_fin'
             )->orderBy('data', "desc")->get();
 
             return Inertia::render('Cliente/StoricoOrdini', ['ordini' => $ordini]);
@@ -143,9 +144,16 @@ class OrdineController extends Controller
 
     public function generaPDF($id)
     {
-        $ordine = Ordine::with('cliente')->find($id);
+        $fields = ['IDordine', 'IDcliente', 'numero', 'data', 'medicoOrdinante', 'PazienteNome', 'PazienteCognome', 'IndirizzoSpedizione', 'lavorazione', 'colore', 'piattaforma', 'data_cons', 'ora_cons', 'note'];
 
-        $pdf = Pdf::loadView("cliente.ordinePDF", compact("ordine"));
+        if (Auth::guard('operatore')->check()) {
+            $fields = array_merge($fields, ['utente_modifica', 'note_int', 'note_ulti_mod']);
+        }
+
+        $ordine = Ordine::select($fields)->with('cliente:IDcliente,ragione_sociale,indirizzo,citta,provincia')->find($id);
+
+
+        $pdf = Pdf::loadView("PDF.ordinePDF", compact("ordine"));
 
         return $pdf->stream("ordine_{$ordine->IDordine}.pdf");
     }
