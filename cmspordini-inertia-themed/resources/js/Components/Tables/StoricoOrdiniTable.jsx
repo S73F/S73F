@@ -7,6 +7,7 @@ import { DataTable } from "./DataTable";
 import { iconStyle } from "../../styles/styles";
 import { StatusChip } from "../StatusChip";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
+import { Allegati } from "../TableFields";
 
 export default function StoricoOrdiniTable({ ordini }) {
     const { handleFile } = useLavori();
@@ -77,69 +78,13 @@ export default function StoricoOrdiniTable({ ordini }) {
                 headerClassName: "headerColumn",
                 sortable: false,
                 renderCell: (params) => (
-                    <>
-                        <Link
-                            component="button"
-                            title="File sorgente"
-                            onClick={() =>
-                                handleFile("cliente", "sorgente", params.row.id)
-                            }
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faFileZipper} size="xl" />
-                        </Link>
-                        <Link
-                            component="a"
-                            title="File PDF"
-                            href={`/cliente/ordini/pdf/${params.row.id}`}
-                            target="_blank"
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faFilePdf} size="xl" />
-                        </Link>
-                        {params.row.stato === 2 &&
-                            params.row.file_fin === 1 && (
-                                <Link
-                                    component="button"
-                                    title="File finale"
-                                    onClick={() =>
-                                        handleFile(
-                                            "cliente",
-                                            "finale",
-                                            params.row.id
-                                        )
-                                    }
-                                    sx={iconStyle}
-                                >
-                                    <FontAwesomeIcon
-                                        icon={faFileZipperSolid}
-                                        size="xl"
-                                    />
-                                </Link>
-                            )}
-                    </>
+                    <Allegati
+                        rowParams={params.row}
+                        user={"cliente"}
+                        handleFile={handleFile}
+                    />
                 ),
             },
-            // {
-            //     field: "PDF",
-            //     headerName: "PDF",
-            //     flex: 1,
-            //     maxWidth: 100,
-            //     sortable: false,
-            //     filterable: false,
-            //     renderCell: (params) => (
-            //         <Link
-            //             component="a"
-            //             href={`/cliente/ordini/pdf/${params.row.id}`}
-            //             target="_blank"
-            //             rel="noopener noreferrer"
-            //             sx={iconStyle}
-            //         >
-            //             <FontAwesomeIcon icon={faFilePdf} size="xl" />
-            //         </Link>
-            //     ),
-            //     headerClassName: "headerColumn",
-            // },
         ],
         []
     );

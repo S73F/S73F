@@ -1,13 +1,10 @@
 import React, { useMemo } from "react";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import {
-    faFilePdf,
-    faFileZipper,
     faPenToSquare,
     faShareFromSquare,
     faTrashCan,
 } from "@fortawesome/free-regular-svg-icons";
-import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";

@@ -8,6 +8,7 @@ import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 import { anchorStyle, iconStyle } from "../../styles/styles";
 import { ModalLink } from "@inertiaui/modal-react";
 import { StatusChip } from "../StatusChip";
+import { Allegati } from "../TableFields";
 
 export default function OrdiniClienteTable({ ordini }) {
     const { handleFile } = useLavori();
@@ -94,50 +95,11 @@ export default function OrdiniClienteTable({ ordini }) {
                 sortable: false,
                 filterable: false,
                 renderCell: (params) => (
-                    <>
-                        <Link
-                            component="button"
-                            title="File sorgente"
-                            onClick={() =>
-                                handleFile(
-                                    "operatore",
-                                    "sorgente",
-                                    params.row.id
-                                )
-                            }
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faFileZipper} size="xl" />
-                        </Link>
-                        <Link
-                            component="a"
-                            title="File PDF"
-                            href={`/operatore/ordini-clienti/pdf/${params.row.id}`}
-                            target="_blank"
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faFilePdf} size="xl" />
-                        </Link>
-                        {params.row.file_fin === 1 && (
-                            <Link
-                                component="button"
-                                title="File finale"
-                                onClick={() =>
-                                    handleFile(
-                                        "operatore",
-                                        "finale",
-                                        params.row.id
-                                    )
-                                }
-                                sx={iconStyle}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faFileZipperSolid}
-                                    size="xl"
-                                />
-                            </Link>
-                        )}
-                    </>
+                    <Allegati
+                        rowParams={params.row}
+                        user={"operatore"}
+                        handleFile={handleFile}
+                    />
                 ),
             },
         ],

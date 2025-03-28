@@ -2,15 +2,11 @@ import React, { useMemo } from "react";
 import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faCircleCheck,
-    faFilePdf,
-    faFileZipper,
-    faTrashCan,
-} from "@fortawesome/free-regular-svg-icons";
+import { faCircleCheck, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
 import { anchorStyle, iconStyle } from "../../styles/styles";
+import { Allegati } from "../TableFields";
 
 const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(
@@ -61,31 +57,11 @@ const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
                 headerClassName: "headerColumn",
                 sortable: false,
                 renderCell: (params) => (
-                    <>
-                        <Link
-                            component="button"
-                            title="File sorgente"
-                            onClick={() =>
-                                handleFile(
-                                    "operatore",
-                                    "sorgente",
-                                    params.row.id
-                                )
-                            }
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faFileZipper} size="xl" />
-                        </Link>
-                        <Link
-                            component="a"
-                            title="File PDF"
-                            href={`/operatore/ordini-clienti/pdf/${params.row.id}`}
-                            target="_blank"
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faFilePdf} size="xl" />
-                        </Link>
-                    </>
+                    <Allegati
+                        rowParams={params.row}
+                        user={"operatore"}
+                        handleFile={handleFile}
+                    />
                 ),
             },
             {

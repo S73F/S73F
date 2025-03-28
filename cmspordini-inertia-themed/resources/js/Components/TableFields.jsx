@@ -31,7 +31,10 @@ export const Allegati = ({ rowParams, user, handleFile }) => {
                 <FontAwesomeIcon icon={faFilePdf} size="xl" />
             </Link>
 
-            {rowParams.file_fin === 1 ? (
+            {((user === "operatore" && rowParams.file_fin === 1) ||
+                (user === "cliente" &&
+                    rowParams.stato === 2 &&
+                    rowParams.file_fin === 1)) && (
                 <Link
                     component="button"
                     title="File finale"
@@ -40,7 +43,7 @@ export const Allegati = ({ rowParams, user, handleFile }) => {
                 >
                     <FontAwesomeIcon icon={faFileZipperSolid} size="xl" />
                 </Link>
-            ) : null}
+            )}
         </>
     );
 };
