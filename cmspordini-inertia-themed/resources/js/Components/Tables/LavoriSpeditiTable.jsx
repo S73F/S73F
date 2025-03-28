@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
-import { Allegati, MedicoAndRagione } from "../TableFields";
+import { Allegati, MedicoAndRagioneSociale } from "../TableFields";
 
 const LavoriSpeditiTable = ({ lavori, handleFile }) => {
     const columns = useMemo(
@@ -13,7 +13,7 @@ const LavoriSpeditiTable = ({ lavori, handleFile }) => {
                 minWidth: 220,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <MedicoAndRagione rowParams={params.row} />
+                    <MedicoAndRagioneSociale rowParams={params.row} />
                 ),
             },
             {

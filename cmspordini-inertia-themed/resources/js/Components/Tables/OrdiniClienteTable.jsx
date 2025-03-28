@@ -2,10 +2,8 @@ import React, { useMemo } from "react";
 import { Box, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
-import { anchorStyle } from "../../styles/styles";
-import { ModalLink } from "@inertiaui/modal-react";
 import { StatusChip } from "../StatusChip";
-import { Allegati, MedicoAndRagione } from "../TableFields";
+import { Allegati, MedicoAndRagioneSociale } from "../TableFields";
 
 export default function OrdiniClienteTable({ ordini }) {
     const { handleFile } = useLavori();
@@ -19,7 +17,7 @@ export default function OrdiniClienteTable({ ordini }) {
                 minWidth: 220,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <MedicoAndRagione rowParams={params.row} />
+                    <MedicoAndRagioneSociale rowParams={params.row} />
                 ),
             },
             {

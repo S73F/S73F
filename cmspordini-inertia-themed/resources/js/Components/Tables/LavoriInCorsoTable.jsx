@@ -10,8 +10,8 @@ import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
 import { Box, Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
-import { anchorStyle, iconStyle } from "../../styles/styles";
-import { Allegati, MedicoAndRagione } from "../TableFields";
+import { iconStyle } from "../../styles/styles";
+import { Allegati, MedicoAndRagioneSociale } from "../TableFields";
 
 const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(
@@ -23,7 +23,7 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
                 minWidth: 220,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <MedicoAndRagione rowParams={params.row} />
+                    <MedicoAndRagioneSociale rowParams={params.row} />
                 ),
             },
             {
