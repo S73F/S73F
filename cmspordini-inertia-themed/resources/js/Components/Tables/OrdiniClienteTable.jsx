@@ -1,11 +1,8 @@
 import React, { useMemo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
-import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
-import { anchorStyle, iconStyle } from "../../styles/styles";
+import { anchorStyle } from "../../styles/styles";
 import { ModalLink } from "@inertiaui/modal-react";
 import { StatusChip } from "../StatusChip";
 import { Allegati } from "../TableFields";

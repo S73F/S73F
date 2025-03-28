@@ -1,10 +1,5 @@
 import React, { useMemo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
-import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "@mui/material";
 import { DataTable } from "./DataTable";
-import { iconStyle } from "../../styles/styles";
 import { StatusChip } from "../StatusChip";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 import { Allegati } from "../TableFields";

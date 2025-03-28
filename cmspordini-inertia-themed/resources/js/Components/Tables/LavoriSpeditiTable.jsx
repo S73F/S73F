@@ -1,8 +1,5 @@
 import React, { useMemo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
-import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
 import { anchorStyle, iconStyle } from "../../styles/styles";
