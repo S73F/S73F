@@ -2,8 +2,35 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilePdf, faFileZipper } from "@fortawesome/free-regular-svg-icons";
 import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
-import { iconStyle } from "../styles/styles";
-import { Link } from "@mui/material";
+import { anchorStyle, iconStyle } from "../styles/styles";
+import { Box, Link, Typography } from "@mui/material";
+import { ModalLink } from "@inertiaui/modal-react";
+
+export const TableColumn = (dbField, headerName, minWidth) => ({
+    field: dbField,
+    headerName: headerName,
+    flex: 1,
+    minWidth: minWidth,
+    headerClassName: "headerColumn",
+});
+
+export const MedicoAndRagione = ({ rowParams }) => {
+    return (
+        <Box display="flex" flexDirection="column" gap={0.5}>
+            <Typography component="p" variant="p">
+                {rowParams.medicoOrdinante}
+            </Typography>
+            <Typography
+                component={ModalLink}
+                variant="p"
+                href={`/operatore/gestione-clienti/modifica/${rowParams.idCliente}`}
+                sx={anchorStyle}
+            >
+                {rowParams.ragione_sociale}
+            </Typography>
+        </Box>
+    );
+};
 
 export const Allegati = ({ rowParams, user, handleFile }) => {
     return (

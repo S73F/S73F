@@ -5,7 +5,7 @@ import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 import { anchorStyle } from "../../styles/styles";
 import { ModalLink } from "@inertiaui/modal-react";
 import { StatusChip } from "../StatusChip";
-import { Allegati } from "../TableFields";
+import { Allegati, MedicoAndRagione } from "../TableFields";
 
 export default function OrdiniClienteTable({ ordini }) {
     const { handleFile } = useLavori();
@@ -19,19 +19,7 @@ export default function OrdiniClienteTable({ ordini }) {
                 minWidth: 220,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <Box display="flex" flexDirection="column" gap={0.5}>
-                        <Typography component="p" variant="p">
-                            {params.row.medicoOrdinante}
-                        </Typography>
-                        <Typography
-                            component={ModalLink}
-                            variant="p"
-                            href={`/operatore/gestione-clienti/modifica/${params.row.idCliente}`}
-                            sx={anchorStyle}
-                        >
-                            {params.row.ragione_sociale}
-                        </Typography>
-                    </Box>
+                    <MedicoAndRagione rowParams={params.row} />
                 ),
             },
             {

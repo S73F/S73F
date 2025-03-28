@@ -1,10 +1,7 @@
 import React, { useMemo } from "react";
-import { Box, Typography } from "@mui/material";
 import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
-import { anchorStyle, iconStyle } from "../../styles/styles";
-import { ModalLink } from "@inertiaui/modal-react";
-import { Allegati } from "../TableFields";
+import { Allegati, MedicoAndRagione } from "../TableFields";
 
 const LavoriSpeditiTable = ({ lavori, handleFile }) => {
     const columns = useMemo(
@@ -16,19 +13,7 @@ const LavoriSpeditiTable = ({ lavori, handleFile }) => {
                 minWidth: 220,
                 headerClassName: "headerColumn",
                 renderCell: (params) => (
-                    <Box display="flex" flexDirection="column" gap={0.5}>
-                        <Typography component="p" variant="p">
-                            {params.row.medicoOrdinante}
-                        </Typography>
-                        <Typography
-                            component={ModalLink}
-                            variant="p"
-                            href={`/operatore/gestione-clienti/modifica/${params.row.idCliente}`}
-                            sx={anchorStyle}
-                        >
-                            {params.row.ragione_sociale}
-                        </Typography>
-                    </Box>
+                    <MedicoAndRagione rowParams={params.row} />
                 ),
             },
             {
