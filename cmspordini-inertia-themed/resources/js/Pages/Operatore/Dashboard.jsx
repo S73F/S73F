@@ -1,6 +1,6 @@
 import React from "react";
 import { useDashboard } from "../../Hooks/Operatore/useDashboard";
-import { Lavori } from "../../Components/Tables/Lavori";
+import { LavoriTableContainer } from "../../Components/Tables/LavoriTableContainer";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
 import { ContentContainer } from "../../Components/ContentContainer";
 import { Badge, Button, Stack, Typography } from "@mui/material";
@@ -78,7 +78,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                 </Button>
             </Stack>
 
-            <Lavori lavori={lavori} tipoLavori={tipo} />
+            <LavoriTableContainer lavori={lavori} tipoLavori={tipo} />
         </ContentContainer.Container>
     );
 }
