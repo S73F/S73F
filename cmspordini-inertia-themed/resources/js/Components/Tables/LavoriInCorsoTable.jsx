@@ -1,147 +1,61 @@
 import React, { useMemo } from "react";
-import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
-import {
-    faPenToSquare,
-    faShareFromSquare,
-    faTrashCan,
-} from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
-import { Box, Link, Typography } from "@mui/material";
-import { ModalLink } from "@inertiaui/modal-react";
-import { iconStyle } from "../../styles/styles";
-import { Allegati, MedicoAndRagioneSociale } from "../TableFields";
+import {
+    Allegati,
+    Azioni,
+    DataInizioLavorazione,
+    MedicoAndRagioneSociale,
+    TableColumn,
+} from "../TableFields";
 
 const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(
         () => [
-            {
-                field: "medicoOrdinante",
-                headerName: "Medico ordinante",
-                flex: 1,
-                minWidth: 220,
-                headerClassName: "headerColumn",
-                renderCell: (params) => (
-                    <MedicoAndRagioneSociale rowParams={params.row} />
-                ),
-            },
-            {
-                field: "Paziente",
-                headerName: "Paziente",
-                flex: 1,
-                minWidth: 170,
-                headerClassName: "headerColumn",
-            },
-            {
-                field: "Operatore",
-                headerName: "Operatore",
-                flex: 1,
-                minWidth: 110,
-                headerClassName: "headerColumn",
-            },
-            {
-                field: "data_inizioLavorazione",
-                headerName: "Data inizio lavorazione",
-                flex: 1,
-                minWidth: 170,
-                headerClassName: "headerColumn",
-                renderCell: (params) => (
-                    <Box display="flex" flexDirection="column" gap={0.5}>
-                        <Typography component="p" variant="p">
-                            {params.row.data_inizioLavorazione}
-                        </Typography>
-                        {params.row.note_ulti_mod && (
-                            <Box
-                                sx={{
-                                    color: "#ff0000",
-                                }}
-                            >
-                                <Typography
-                                    component="p"
-                                    variant="p"
-                                    fontWeight={500}
-                                >
-                                    Ultima modifica:
-                                </Typography>
-                                <Typography
-                                    component="p"
-                                    variant="p"
-                                    fontWeight={500}
-                                >
-                                    {params.row.note_ulti_mod}
-                                </Typography>
-                            </Box>
-                        )}
-                    </Box>
-                ),
-            },
-            {
-                field: "Allegati",
-                headerName: "Allegati",
-                flex: 1,
-                minWidth: 100,
-                headerClassName: "headerColumn",
-                sortable: false,
-                renderCell: (params) => (
+            TableColumn(
+                "medicoOrdinante",
+                "Medico ordinante",
+                220,
+                "",
+                (params) => <MedicoAndRagioneSociale rowParams={params.row} />
+            ),
+            TableColumn("Paziente", "Paziente", 170, ""),
+            TableColumn("Operatore", "Operatore", 110, ""),
+            TableColumn(
+                "data_inizioLavorazione",
+                "Data inizio lavorazione",
+                170,
+                "",
+                (params) => <DataInizioLavorazione rowParams={params.row} />
+            ),
+            TableColumn(
+                "",
+                "Allegati",
+                100,
+                "",
+                (params) => (
                     <Allegati
                         rowParams={params.row}
                         user={"operatore"}
                         handleFile={handleFile}
                     />
                 ),
-            },
-            {
-                field: "Azioni",
-                headerName: "Azioni",
-                flex: 1,
-                minWidth: 120,
-                headerClassName: "headerColumn",
-                sortable: false,
-                renderCell: (params) => (
-                    <>
-                        <Link
-                            component={ModalLink}
-                            href={`/operatore/ordini-clienti/caricamento-lavorazione/${params.row.id}`}
-                            title="Modifica lavorazione"
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faPenToSquare} size="xl" />
-                        </Link>
-                        {params.row.file_fin === 1 && (
-                            <Link
-                                component="button"
-                                title="Spedisci lavorazione"
-                                onClick={() => handleIncarico(params.row.id)}
-                                sx={iconStyle}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faShareFromSquare}
-                                    size="xl"
-                                />
-                            </Link>
-                        )}
-                        <Link
-                            component={ModalLink}
-                            title="Elimina lavoro"
-                            href={`/operatore/lavori/eliminazione/${params.row.id}`}
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faTrashCan} size="xl" />
-                        </Link>
-                        <Link
-                            component="button"
-                            title="Annulla incarico"
-                            onClick={() =>
-                                handleIncarico(params.row.id, "back")
-                            }
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faRotateLeft} size="xl" />
-                        </Link>
-                    </>
+                false
+            ),
+            TableColumn(
+                "",
+                "Azioni",
+                120,
+                "",
+                (params) => (
+                    <Azioni
+                        rowParams={params.row}
+                        tipoLavori={"inCorso"}
+                        handleIncarico={handleIncarico}
+                    />
                 ),
-            },
+                false
+            ),
         ],
         []
     );

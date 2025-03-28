@@ -6,16 +6,21 @@ import { Allegati, Azioni, RagioneSociale, TableColumn } from "../TableFields";
 const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
     const columns = useMemo(
         () => [
-            TableColumn("ragione_sociale", "Ragione sociale", 200, (params) => (
-                <RagioneSociale rowParams={params.row} />
-            )),
-            TableColumn("medicoOrdinante", "Medico ordinante", 200),
-            TableColumn("Paziente", "Paziente", 200),
-            TableColumn("Data ordine", "Data ordine", 100),
             TableColumn(
-                "Allegati",
+                "ragione_sociale",
+                "Ragione sociale",
+                200,
+                "",
+                (params) => <RagioneSociale rowParams={params.row} />
+            ),
+            TableColumn("medicoOrdinante", "Medico ordinante", 200, ""),
+            TableColumn("Paziente", "Paziente", 200, ""),
+            TableColumn("Data ordine", "Data ordine", 100, ""),
+            TableColumn(
+                "",
                 "Allegati",
                 80,
+                "",
                 (params) => (
                     <Allegati
                         rowParams={params.row}
@@ -26,9 +31,10 @@ const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
                 false
             ),
             TableColumn(
-                "Azioni",
+                "",
                 "Azioni",
                 70,
+                "",
                 (params) => (
                     <Azioni
                         rowParams={params.row}

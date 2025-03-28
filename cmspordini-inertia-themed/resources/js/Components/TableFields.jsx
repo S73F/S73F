@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCircleCheck,
@@ -20,14 +20,18 @@ export const TableColumn = (
     dbField,
     headerName,
     minWidth,
+    maxWidth,
     renderCell,
-    sortable = true
+    sortable = true,
+    filterable = true
 ) => ({
-    field: dbField,
+    ...(dbField && { field: dbField }),
     headerName: headerName,
     flex: 1,
     minWidth: minWidth,
+    ...(maxWidth && { maxWidth }),
     sortable: sortable,
+    filterable: filterable,
     headerClassName: "headerColumn",
     ...(renderCell && { renderCell }),
 });
@@ -94,6 +98,30 @@ export const MedicoAndRagioneSociale = ({ rowParams }) => {
     );
 };
 
+export const DataInizioLavorazione = ({ rowParams }) => {
+    return (
+        <Box display="flex" flexDirection="column" gap={0.5}>
+            <Typography component="p" variant="p">
+                {rowParams.data_inizioLavorazione}
+            </Typography>
+            {rowParams.note_ulti_mod && (
+                <Box
+                    sx={{
+                        color: "#ff0000",
+                    }}
+                >
+                    <Typography component="p" variant="p" fontWeight={500}>
+                        Ultima modifica:
+                    </Typography>
+                    <Typography component="p" variant="p" fontWeight={500}>
+                        {rowParams.note_ulti_mod}
+                    </Typography>
+                </Box>
+            )}
+        </Box>
+    );
+};
+
 export const Allegati = ({ rowParams, user, handleFile }) => {
     return (
         <>
@@ -141,7 +169,7 @@ export const Azioni = ({ rowParams, tipoLavori, handleIncarico }) => {
                 />
                 <TableFieldButton
                     btnType={ModalLink}
-                    btnTitle={"Elimina lavoro"}
+                    btnTitle={"Elimina ordine"}
                     href={`/operatore/lavori/eliminazione/${rowParams.id}`}
                     icon={faTrashCan}
                 />
