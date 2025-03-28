@@ -180,15 +180,13 @@ class OrdineController extends Controller
 
                         return redirect('/operatore/dashboard?tipo=inCorso')->with('success', 'Hai spedito la lavorazione.');
                     default:
-                        throw new Exception();
+                        throw new Exception("Stato dell'ordine non valido. Contattare un amministratore");
                 }
             } else {
                 $ordine->update(['data_inizioLavorazione' => null, 'stato' => 0, 'data_spedizione' => null, "note_int" => "", 'note_ulti_mod' => null, 'utente_modifica' => "-", "file_fin" => 0, 'file_fin_nome' => null]);
                 return redirect('/operatore/dashboard?tipo=inCorso')->with('success', "Hai annullato l'incarico e ripristinato l'ordine.");
             }
         } catch (Exception $e) {
-            Log::error($e->getMessage());
-
             $errors = $e->getMessage();
             return redirect()->back()->with('error', 'ATTENZIONE: si è verificato un errore. Riprova più tardi.')->withErrors($errors);
         }
