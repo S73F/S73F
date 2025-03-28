@@ -5,6 +5,7 @@ import {
     Allegati,
     Azioni,
     DataInizioLavorazione,
+    mapOrders,
     MedicoAndRagioneSociale,
     TableColumn,
 } from "../TableFields";
@@ -60,29 +61,12 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
         []
     );
 
-    const mapLavoriInCorso = useMemo(
-        () =>
-            lavori.map((lavoro) => ({
-                id: lavoro.IDordine,
-                idCliente: lavoro.IDcliente,
-                ragione_sociale: lavoro.cliente.ragione_sociale,
-                medicoOrdinante: lavoro.medicoOrdinante,
-                Paziente: lavoro.PazienteCognome + " " + lavoro.PazienteNome,
-                Operatore:
-                    (lavoro.operatore?.nome || "") +
-                    " " +
-                    (lavoro.operatore?.cognome || ""),
-                data_inizioLavorazione: lavoro.data_inizioLavorazione || "-",
-                file_fin: lavoro.file_fin,
-                note_ulti_mod: lavoro.note_ulti_mod,
-            })),
-        [lavori]
-    );
+    const mappedLavori = useMemo(() => mapOrders(lavori), [lavori]);
 
     return (
         <>
             <ContentContainer.Layout title={"Lavori in corso"} />
-            <DataTable.Table rows={mapLavoriInCorso} columns={columns} />;
+            <DataTable.Table rows={mappedLavori} columns={columns} />
         </>
     );
 };

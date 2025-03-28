@@ -15,6 +15,7 @@ import {
 import { anchorStyle, iconStyle } from "../styles/styles";
 import { Box, Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
+import { StatusChip } from "./StatusChip";
 
 export const TableColumn = (
     dbField,
@@ -95,6 +96,16 @@ export const MedicoAndRagioneSociale = ({ rowParams }) => {
                 {rowParams.ragione_sociale}
             </TableModalText>
         </Box>
+    );
+};
+
+export const StatoLavoro = ({ rowParams }) => {
+    return (
+        <>
+            {rowParams.stato === 0 && <StatusChip.Nuovo />}
+            {rowParams.stato === 1 && <StatusChip.InCorso />}
+            {rowParams.stato === 2 && <StatusChip.Spedito />}
+        </>
     );
 };
 
@@ -208,3 +219,39 @@ export const Azioni = ({ rowParams, tipoLavori, handleIncarico }) => {
         );
     }
 };
+
+export const mapOrders = (ordini) =>
+    ordini.map((ordine) => ({
+        id: ordine.IDordine,
+        ...(ordine.IDcliente && { idCliente: ordine.IDcliente }),
+        ...(ordine.cliente?.ragione_sociale && {
+            ragione_sociale: ordine.cliente.ragione_sociale,
+        }),
+        ...(ordine.medicoOrdinante && {
+            medicoOrdinante: ordine.medicoOrdinante,
+        }),
+        ...(ordine.PazienteCognome &&
+            ordine.PazienteNome && {
+                Paziente: ordine.PazienteCognome + " " + ordine.PazienteNome,
+            }),
+        ...(ordine.IndirizzoSpedizione && {
+            IndirizzoSpedizione: ordine.IndirizzoSpedizione,
+        }),
+        ...(ordine.operatore && {
+            Operatore:
+                (ordine.operatore?.nome || "") +
+                " " +
+                (ordine.operatore?.cognome || ""),
+        }),
+        ...(ordine.data && {
+            data: ordine.data || "-",
+        }),
+        ...(ordine.data_inizioLavorazione && {
+            data_inizioLavorazione: ordine.data_inizioLavorazione || "-",
+        }),
+        ...(ordine.data_spedizione && {
+            data_spedizione: ordine.data_spedizione || "-",
+        }),
+        ...(ordine.file_fin !== undefined && { file_fin: ordine.file_fin }),
+        ...(ordine.note_ulti_mod && { note_ulti_mod: ordine.note_ulti_mod }),
+    }));
