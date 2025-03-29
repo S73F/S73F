@@ -22,7 +22,7 @@ export default function StoricoOrdiniTable({ ordini }) {
             TableColumn("data_spedizione", "Data spedizione", 100),
             TableColumn("IndirizzoSpedizione", "Indirizzo spedizione", 100),
             TableColumn(
-                "",
+                "Allegati",
                 "Allegati",
                 100,
                 "",

@@ -23,7 +23,7 @@ const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
             TableColumn("Paziente", "Paziente", 200, ""),
             TableColumn("data", "Data ordine", 100, ""),
             TableColumn(
-                "",
+                "Allegati",
                 "Allegati",
                 80,
                 "",
@@ -37,7 +37,7 @@ const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
                 false
             ),
             TableColumn(
-                "",
+                "Azioni",
                 "Azioni",
                 70,
                 "",

@@ -18,7 +18,7 @@ import { ModalLink } from "@inertiaui/modal-react";
 import { StatusChip } from "./StatusChip";
 
 export const TableColumn = (
-    dbField,
+    field,
     headerName,
     minWidth,
     maxWidth,
@@ -26,7 +26,7 @@ export const TableColumn = (
     sortable = true,
     filterable = true
 ) => ({
-    ...(dbField && { field: dbField }),
+    ...(field && { field: field }),
     headerName: headerName,
     flex: 1,
     minWidth: minWidth,

@@ -29,7 +29,7 @@ const LavoriSpeditiTable = ({ lavori, handleFile }) => {
             TableColumn("data_spedizione", "Data spedizione", 140, 140),
             TableColumn("Operatore", "Operatore", 110, ""),
             TableColumn(
-                "",
+                "Allegati",
                 "Allegati",
                 90,
                 "",

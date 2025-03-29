@@ -30,7 +30,7 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
                 (params) => <DataInizioLavorazione rowParams={params.row} />
             ),
             TableColumn(
-                "",
+                "Allegati",
                 "Allegati",
                 100,
                 "",
@@ -44,7 +44,7 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
                 false
             ),
             TableColumn(
-                "",
+                "Azioni",
                 "Azioni",
                 120,
                 "",
