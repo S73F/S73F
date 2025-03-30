@@ -8,8 +8,8 @@ export default function StoricoOrdiniTable({ ordini }) {
 
     const columns = useMemo(
         () => [
-            TableColumn("Data ordine", "Data ordine", 100),
-            TableColumn("Richiedente", "Richiedente", 100),
+            TableColumn("data", "Data ordine", 100),
+            TableColumn("medicoOrdinante", "Richiedente", 100),
             TableColumn("Paziente", "Paziente", 100),
             TableColumn("stato", "Stato lavoro", 130, "", (params) => (
                 <StatoLavoro rowParams={params.row} />

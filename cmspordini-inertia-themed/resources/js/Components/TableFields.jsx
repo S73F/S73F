@@ -249,9 +249,8 @@ export const mapOrders = (ordini) =>
         ...(ordine.data_inizioLavorazione && {
             data_inizioLavorazione: ordine.data_inizioLavorazione || "-",
         }),
-        ...(ordine.data_spedizione && {
-            data_spedizione: ordine.data_spedizione || "-",
-        }),
+        data_spedizione: ordine.data_spedizione || "-",
+        stato: ordine.stato,
         ...(ordine.file_fin !== undefined && { file_fin: ordine.file_fin }),
         ...(ordine.note_ulti_mod && { note_ulti_mod: ordine.note_ulti_mod }),
     }));
