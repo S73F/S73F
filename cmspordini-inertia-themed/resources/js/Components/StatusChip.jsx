@@ -1,7 +1,7 @@
 import React from "react";
 import { Circle } from "@mui/icons-material";
 import { Chip } from "@mui/material";
-import { chipColors, chipStyle, circleStyles } from "../styles/styles";
+import { chipColors, chipStyle, circleStyles } from "../styles/tableStyles";
 
 const Nuovo = () => {
     return (

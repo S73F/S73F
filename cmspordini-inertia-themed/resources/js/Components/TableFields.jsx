@@ -12,7 +12,7 @@ import {
     faFileZipper as faFileZipperSolid,
     faRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { anchorStyle, iconStyle } from "../styles/styles";
+import { anchorStyle, iconStyle } from "../styles/tableStyles";
 import { Box, Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
 import { StatusChip } from "./StatusChip";

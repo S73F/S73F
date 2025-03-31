@@ -10,6 +10,7 @@ import {
     RagioneSociale,
     TableColumn,
 } from "../TableFields";
+import { creazioneClienteBtn } from "../../styles/appStyles";
 
 export default function GestioneClientiTable({ clienti }) {
     const ragioneSocialeCell = useMemo(
@@ -52,19 +53,7 @@ export default function GestioneClientiTable({ clienti }) {
                 component={ModalLink}
                 href={`/operatore/gestione-clienti/creazione`}
                 title="Crea cliente"
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    width: "100px",
-                    height: "40px",
-                    mt: -2,
-                    mb: 6,
-                    textDecoration: "none",
-                    "&:hover": {
-                        opacity: "0.8",
-                    },
-                }}
+                sx={creazioneClienteBtn}
             >
                 <AddBoxIcon sx={{ width: "40px", height: "40px" }} />
                 <Typography

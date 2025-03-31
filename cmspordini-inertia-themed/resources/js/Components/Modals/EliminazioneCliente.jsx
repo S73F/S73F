@@ -4,7 +4,7 @@ import { useEliminazioneCliente } from "../../Hooks/Components/Modals/useElimina
 import "../../../css/modal.css";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { ContentContainer } from "../ContentContainer";
-import { formBtnStyle } from "../../styles/styles";
+import { formBtnStyle } from "../../styles/formStyles";
 
 export default function EliminazioneCliente({ cliente }) {
     const modalRef = useRef(null);

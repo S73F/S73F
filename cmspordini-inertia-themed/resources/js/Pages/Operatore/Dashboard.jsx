@@ -9,7 +9,7 @@ import {
     NewReleases as NewReleasesIcon,
     Mail as MailIcon,
 } from "@mui/icons-material";
-import { badgeStyle, buttonStyles } from "../../styles/styles";
+import { buttonStyles, badgeStyle } from "../../styles/appStyles";
 
 export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
     const { handleLavori, loadingButton } = useDashboard();

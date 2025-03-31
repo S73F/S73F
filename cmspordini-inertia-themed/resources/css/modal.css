@@ -7,7 +7,7 @@
 
 .im-close-button:hover {
     cursor: pointer;
-    color: var(--hover-color);
+    color: #1976d2;
 }
 
 .im-modal-wrapper {

@@ -4,7 +4,7 @@ import { Modal } from "@inertiaui/modal-react";
 import "../../../css/modal.css";
 import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
 import { ContentContainer } from "../ContentContainer";
-import { formBtnStyle } from "../../styles/styles";
+import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
 
 export default function ModificaCliente({ cliente }) {
     const modalRef = useRef(null);
@@ -156,17 +156,7 @@ export default function ModificaCliente({ cliente }) {
                         />
                     </Grid2>
                 </Grid2>
-                <Stack
-                    sx={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "row",
-                        gap: { xs: 3, md: 5 },
-                        justifyContent: "center",
-                        flexWrap: "wrap",
-                        mt: 4,
-                    }}
-                >
+                <Stack sx={formBtnStack}>
                     <Button
                         variant="contained"
                         color="primary"

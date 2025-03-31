@@ -4,7 +4,7 @@ import { useLavorazione } from "../../Hooks/Components/Modals/useLavorazione";
 import { Box, Button, Typography, Stack } from "@mui/material";
 import Tiptap from "../Tiptap";
 import { ContentContainer } from "../ContentContainer";
-import { formBtnStyle } from "../../styles/styles";
+import { formBtnStyle } from "../../styles/formStyles";
 
 const Lavorazione = ({ ordine, note_int }) => {
     const modalRef = useRef(null);

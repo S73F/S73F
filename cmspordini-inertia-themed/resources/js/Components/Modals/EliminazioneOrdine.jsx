@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Modal } from "@inertiaui/modal-react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { ContentContainer } from "../ContentContainer";
-import { formBtnStyle } from "../../styles/styles";
+import { formBtnStyle } from "../../styles/formStyles";
 import { useEliminazioneOrdine } from "../../Hooks/Components/Modals/useEliminazioneOrdine";
 
 export default function EliminazioneOrdine({ ordine, stato }) {

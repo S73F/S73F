@@ -57,28 +57,3 @@ export const circleStyles = {
     inCorso: { fill: "#ffbf00", width: 20 },
     spedito: { fill: "#00c400", width: 20 },
 };
-
-export const badgeStyle = {
-    "& .MuiBadge-badge": {
-        width: 27,
-        height: 27,
-        border: "2px solid #fff",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.5)",
-        userSelect: "none",
-        fontSize: 12,
-        fontWeight: "600",
-    },
-};
-
-export const buttonStyles = {
-    fontWeight: "bold",
-    px: 3,
-    py: 1,
-    width: 170,
-    textAlign: "left",
-};
-
-export const formBtnStyle = {
-    width: { xs: "100%", sm: 100, md: 200 },
-    height: { xs: 50, sm: 70 },
-};

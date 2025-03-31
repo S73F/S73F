@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "../../../css/creazioneOrdine.css";
+import React from "react";
 import { useCreazioneOrdine } from "../../Hooks/Cliente/useCreazioneOrdine";
 import Tiptap from "../../Components/Tiptap";
 import ClienteLayout from "../../Layouts/ClienteLayout";
@@ -12,7 +11,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { formBtnStyle } from "../../styles/styles";
+import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
 
 export default function CreazioneOrdine({ InputLabelProps = {} }) {
     const {
@@ -42,76 +41,48 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                         columnSpacing={{ xs: 1, md: 2, md: 4 }}
                     >
                         <Grid2 size={12}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    label="Medico ordinante"
-                                    name="medico_ordinante"
-                                    variant="outlined"
-                                    required
-                                    value={data.medico_ordinante}
-                                    onChange={handleChange}
-                                />
-                            </Box>
+                            <TextField
+                                fullWidth
+                                label="Medico ordinante"
+                                name="medico_ordinante"
+                                variant="outlined"
+                                required
+                                value={data.medico_ordinante}
+                                onChange={handleChange}
+                            />
                         </Grid2>
                         <Grid2 size={{ xs: 12, md: 6 }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    label="Nome paziente"
-                                    name="paziente_nome"
-                                    variant="outlined"
-                                    required
-                                    value={data.paziente_nome}
-                                    onChange={handleChange}
-                                />
-                            </Box>
+                            <TextField
+                                fullWidth
+                                label="Nome paziente"
+                                name="paziente_nome"
+                                variant="outlined"
+                                required
+                                value={data.paziente_nome}
+                                onChange={handleChange}
+                            />
                         </Grid2>
                         <Grid2 size={{ xs: 12, md: 6 }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    label="Cognome paziente"
-                                    name="paziente_cognome"
-                                    variant="outlined"
-                                    required
-                                    value={data.paziente_cognome}
-                                    onChange={handleChange}
-                                />
-                            </Box>
+                            <TextField
+                                fullWidth
+                                label="Cognome paziente"
+                                name="paziente_cognome"
+                                variant="outlined"
+                                required
+                                value={data.paziente_cognome}
+                                onChange={handleChange}
+                            />
                         </Grid2>
                         <Grid2 size={12}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    label="Indirizzo spedizione"
-                                    name="indirizzo_spedizione"
-                                    variant="outlined"
-                                    required
-                                    value={data.indirizzo_spedizione}
-                                    onChange={handleChange}
-                                />
-                            </Box>
+                            <TextField
+                                fullWidth
+                                label="Indirizzo spedizione"
+                                name="indirizzo_spedizione"
+                                variant="outlined"
+                                required
+                                value={data.indirizzo_spedizione}
+                                onChange={handleChange}
+                            />
                         </Grid2>
                         <Grid2 size={12}>
                             <Tiptap
@@ -122,70 +93,49 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                             />
                         </Grid2>
                         <Grid2 size={{ xs: 12, md: 4 }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    label="Colore"
-                                    name="colore"
-                                    variant="outlined"
-                                    required
-                                    value={data.colore}
-                                    onChange={handleChange}
-                                />
-                            </Box>
+                            <TextField
+                                fullWidth
+                                label="Colore"
+                                name="colore"
+                                variant="outlined"
+                                required
+                                value={data.colore}
+                                onChange={handleChange}
+                            />
                         </Grid2>
                         <Grid2 size={{ xs: 12, md: 4 }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
+                            <TextField
+                                fullWidth
+                                label="Data consegna"
+                                type="date"
+                                name="data_cons"
+                                required
+                                slotProps={{
+                                    inputLabel: {
+                                        ...InputLabelProps,
+                                        shrink: true,
+                                    },
                                 }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    label="Data consegna"
-                                    type="date"
-                                    name="data_cons"
-                                    required
-                                    slotProps={{
-                                        inputLabel: {
-                                            ...InputLabelProps,
-                                            shrink: true,
-                                        },
-                                    }}
-                                    value={data.data_cons}
-                                    onChange={handleChange}
-                                />
-                            </Box>
+                                value={data.data_cons}
+                                onChange={handleChange}
+                            />
                         </Grid2>
                         <Grid2 size={{ xs: 12, md: 4 }}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "column",
+                            <TextField
+                                fullWidth
+                                label="Ora consegna"
+                                type="time"
+                                name="ora_cons"
+                                required
+                                slotProps={{
+                                    inputLabel: {
+                                        ...InputLabelProps,
+                                        shrink: true,
+                                    },
                                 }}
-                            >
-                                <TextField
-                                    fullWidth
-                                    label="Ora consegna"
-                                    type="time"
-                                    name="ora_cons"
-                                    required
-                                    slotProps={{
-                                        inputLabel: {
-                                            ...InputLabelProps,
-                                            shrink: true,
-                                        },
-                                    }}
-                                    value={data.ora_cons}
-                                    onChange={handleChange}
-                                />
-                            </Box>
+                                value={data.ora_cons}
+                                onChange={handleChange}
+                            />
                         </Grid2>
                         <Grid2 size={{ xs: 12, md: 6 }}>
                             <Tiptap
@@ -252,17 +202,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                             </Box>
                         </Grid2>
                     </Grid2>
-                    <Stack
-                        sx={{
-                            width: "100%",
-                            display: "flex",
-                            flexDirection: "row",
-                            gap: { xs: 3, md: 5 },
-                            justifyContent: "center",
-                            flexWrap: "wrap",
-                            mt: 4,
-                        }}
-                    >
+                    <Stack sx={formBtnStack}>
                         <Button
                             fullWidth
                             variant="contained"

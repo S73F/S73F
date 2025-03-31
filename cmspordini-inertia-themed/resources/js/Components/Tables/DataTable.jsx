@@ -8,7 +8,7 @@ import {
     Select,
     Typography,
 } from "@mui/material";
-import { dataTableStyle } from "../../styles/styles";
+import { dataTableStyle } from "../../styles/tableStyles";
 
 const Selector = ({ inputLabel, handleChange, children }) => {
     return (
