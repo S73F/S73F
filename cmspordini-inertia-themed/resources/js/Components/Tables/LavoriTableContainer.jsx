@@ -20,7 +20,7 @@ export const LavoriTableContainer = ({ tipoLavori, lavori }) => {
         );
     } else {
         return (
-            <Box mt={8} width={"100%"}>
+            <Box mt={8} sx={{ width: "100%" }}>
                 {tipoLavori === "nuovi" && (
                     <LavoriNuoviTable
                         lavori={lavori}

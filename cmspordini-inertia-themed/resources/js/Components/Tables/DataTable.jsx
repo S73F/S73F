@@ -1,7 +1,13 @@
 import React, { useMemo } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
-import { FormControl, InputLabel, Select, Typography } from "@mui/material";
+import {
+    Box,
+    FormControl,
+    InputLabel,
+    Select,
+    Typography,
+} from "@mui/material";
 import { dataTableStyle } from "../../styles/styles";
 
 const Selector = ({ inputLabel, handleChange, children }) => {
@@ -28,7 +34,7 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 const Table = ({ rows, columns }) => {
     return (
-        <Paper sx={{ width: "100%", maxWidth: "100%" }}>
+        <Paper sx={{ width: "100%" }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
