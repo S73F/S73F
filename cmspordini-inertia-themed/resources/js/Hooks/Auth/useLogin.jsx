@@ -2,21 +2,25 @@ import { useForm, usePage } from "@inertiajs/react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
+// Hook personalizzato per gestire il login
 export const useLogin = () => {
+    // Ottiene i messaggi flash dalla risposta del server
     const { flash } = usePage().props;
 
+    // Effetto che ascolta i cambiamenti nei messaggi flash e mostra le notifiche
     useEffect(() => {
         if (flash?.success) {
-            toast.success(flash.success);
-            history.replaceState({}, document.title);
+            toast.success(flash.success); // Mostra un messaggio di successo
+            history.replaceState({}, document.title); // Rimuove il messaggio dalla cronologia per evitare la ricomparsa al refresh
         }
 
         if (flash?.error) {
-            toast.error(flash.error);
+            toast.error(flash.error); // Mostra un messaggio di errore
             history.replaceState({}, document.title);
         }
 
         if (flash?.validation_errors) {
+            // Se ci sono errori di validazione, li mostra come notifiche individuali
             Object.values(flash.validation_errors).forEach((errors) => {
                 errors.forEach((error) => {
                     toast.error(error);
@@ -24,27 +28,31 @@ export const useLogin = () => {
             });
             history.replaceState({}, document.title);
         }
-    }, [flash]);
+    }, [flash]); // L'effetto si attiva ogni volta che `flash` cambia
 
+    // Inizializza il form con Inertia.js, con dati iniziali vuoti
     const { data, processing, setData, post } = useForm({
         username: "",
         password: "",
     });
 
+    // Funzione per gestire il cambiamento dei campi del form
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
     };
 
+    // Funzione per gestire l'invio del form
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Previene il comportamento predefinito del form
 
-        data.username !== "" && data.password !== ""
-            ? post("/login")
-            : data.username === "" && data.password !== ""
+        // Controlla se i campi sono vuoti e mostra messaggi di errore appropriati
+        !data.username && !data.password
+            ? toast.error("I campi username e password sono obbligatori")
+            : !data.username
             ? toast.error("Il campo username è obbligatorio")
-            : data.username !== "" && data.password === ""
+            : !data.password
             ? toast.error("Il campo password è obbligatorio")
-            : toast.error("I campi username e password sono obbligatori");
+            : post("/login");
     };
 
     return { data, processing, handleChange, handleSubmit };
