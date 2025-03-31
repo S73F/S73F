@@ -21,16 +21,13 @@ const Container = ({ children }) => {
         <Paper
             elevation={5}
             sx={{
+                width: "100%",
                 display: "flex",
+                flex: 1,
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
                 textAlign: "center",
-                width: "100%",
-                minHeight: {
-                    xs: `calc(90vh - 56px)`,
-                    sm: `calc(90vh - 64px)`,
-                },
                 px: 4,
                 py: 6,
             }}
