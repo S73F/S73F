@@ -1,8 +1,6 @@
 import React, { useMemo } from "react";
-import { Box, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
-import { StatusChip } from "../StatusChip";
 import {
     Allegati,
     mapOrders,

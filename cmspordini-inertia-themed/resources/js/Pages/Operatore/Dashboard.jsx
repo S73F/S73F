@@ -2,7 +2,7 @@ import React from "react";
 import { useDashboard } from "../../Hooks/Operatore/useDashboard";
 import { LavoriTableContainer } from "../../Components/Tables/LavoriTableContainer";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
-import { ContentContainer } from "../../Components/ContentContainer";
+import { Content } from "../../Components/Content";
 import { Badge, Button, Stack, Typography } from "@mui/material";
 import {
     Loop as LoopIcon,
@@ -15,7 +15,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
     const { handleLavori, loadingButton } = useDashboard();
 
     return (
-        <ContentContainer.Container>
+        <Content.Container>
             <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
                 {user?.nome
                     ? `Benvenuto ${user?.nome}`
@@ -79,7 +79,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
             </Stack>
 
             <LavoriTableContainer lavori={lavori} tipoLavori={tipo} />
-        </ContentContainer.Container>
+        </Content.Container>
     );
 }
 

@@ -1,5 +1,6 @@
 import { Paper, Typography } from "@mui/material";
 import React from "react";
+import { contentContainer } from "../styles/appStyles";
 
 const Layout = ({ title, children }) => {
     return (
@@ -18,26 +19,13 @@ const Layout = ({ title, children }) => {
 
 const Container = ({ children }) => {
     return (
-        <Paper
-            elevation={5}
-            sx={{
-                width: "100%",
-                display: "flex",
-                flex: 1,
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                px: 4,
-                py: 6,
-            }}
-        >
+        <Paper elevation={5} sx={contentContainer}>
             {children}
         </Paper>
     );
 };
 
-export const ContentContainer = {
+export const Content = {
     Layout,
     Container,
 };

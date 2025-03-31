@@ -3,7 +3,7 @@ import { useCreazioneCliente } from "../../Hooks/Components/Modals/useCreazioneC
 import { Modal } from "@inertiaui/modal-react";
 import "../../../css/modal.css";
 import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
-import { ContentContainer } from "../ContentContainer";
+import { Content } from "../Content";
 import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
 
 export default function CreazioneCliente() {
@@ -20,7 +20,7 @@ export default function CreazioneCliente() {
 
     return (
         <Modal ref={modalRef}>
-            <ContentContainer.Layout title={"Creazione cliente"} />
+            <Content.Layout title={"Creazione cliente"} />
             <Box
                 component="form"
                 onSubmit={handleSubmit}

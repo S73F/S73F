@@ -1,13 +1,7 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
-import {
-    Box,
-    FormControl,
-    InputLabel,
-    Select,
-    Typography,
-} from "@mui/material";
+import { FormControl, InputLabel, Select } from "@mui/material";
 import { dataTableStyle } from "../../styles/tableStyles";
 
 const Selector = ({ inputLabel, handleChange, children }) => {

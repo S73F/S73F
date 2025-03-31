@@ -3,15 +3,15 @@ import StoricoOrdiniTable from "../../Components/Tables/StoricoOrdiniTable";
 import { useStoricoOrdini } from "../../Hooks/Cliente/useStoricoOrdini";
 import ClienteLayout from "../../Layouts/ClienteLayout";
 import { MenuItem, Typography } from "@mui/material";
-import { ContentContainer } from "../../Components/ContentContainer";
+import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
 
 export default function StoricoOrdini({ ordini }) {
     const { handleChange } = useStoricoOrdini();
 
     return (
-        <ContentContainer.Container>
-            <ContentContainer.Layout title={"Storico ordini"}>
+        <Content.Container>
+            <Content.Layout title={"Storico ordini"}>
                 <DataTable.Selector
                     inputLabel={"Lasso di tempo"}
                     handleChange={handleChange}
@@ -20,7 +20,7 @@ export default function StoricoOrdini({ ordini }) {
                     <MenuItem value={60}>60 giorni</MenuItem>
                     <MenuItem value={"tutto"}>Tutto</MenuItem>
                 </DataTable.Selector>
-            </ContentContainer.Layout>
+            </Content.Layout>
 
             {ordini?.length > 0 && <StoricoOrdiniTable ordini={ordini} />}
             {ordini?.length === 0 && (
@@ -32,7 +32,7 @@ export default function StoricoOrdini({ ordini }) {
                     Nessun ordine trovato
                 </Typography>
             )}
-        </ContentContainer.Container>
+        </Content.Container>
     );
 }
 

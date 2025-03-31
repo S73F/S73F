@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from "react";
-import { ContentContainer } from "../ContentContainer";
+import React, { useMemo } from "react";
+import { Content } from "../Content";
 import { DataTable } from "./DataTable";
 import {
     Allegati,
@@ -58,7 +58,7 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
 
     return (
         <>
-            <ContentContainer.Layout title={"Lavori in corso"} />
+            <Content.Layout title={"Lavori in corso"} />
             <DataTable.Table rows={mappedLavori} columns={columns} />
         </>
     );

@@ -3,7 +3,7 @@ import { Modal } from "@inertiaui/modal-react";
 import { useEliminazioneCliente } from "../../Hooks/Components/Modals/useEliminazioneCliente";
 import "../../../css/modal.css";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { ContentContainer } from "../ContentContainer";
+import { Content } from "../Content";
 import { formBtnStyle } from "../../styles/formStyles";
 
 export default function EliminazioneCliente({ cliente }) {
@@ -15,7 +15,7 @@ export default function EliminazioneCliente({ cliente }) {
 
     return (
         <Modal ref={modalRef}>
-            <ContentContainer.Layout title="Eliminazione cliente" />
+            <Content.Layout title="Eliminazione cliente" />
             <Box sx={{ textAlign: "center" }}>
                 <Typography sx={{ mb: 1 }}>
                     Sei sicuro di voler eliminare{" "}

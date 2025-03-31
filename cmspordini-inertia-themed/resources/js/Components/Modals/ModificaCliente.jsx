@@ -3,7 +3,7 @@ import { useModificaCliente } from "../../Hooks/Components/Modals/useModificaCli
 import { Modal } from "@inertiaui/modal-react";
 import "../../../css/modal.css";
 import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
-import { ContentContainer } from "../ContentContainer";
+import { Content } from "../Content";
 import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
 
 export default function ModificaCliente({ cliente }) {
@@ -21,9 +21,7 @@ export default function ModificaCliente({ cliente }) {
 
     return (
         <Modal ref={modalRef}>
-            <ContentContainer.Layout
-                title={`Modifica ${cliente.ragione_sociale}`}
-            />
+            <Content.Layout title={`Modifica ${cliente.ragione_sociale}`} />
             <Box
                 component="form"
                 onSubmit={handleSubmit}

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ContentContainer } from "../ContentContainer";
+import { Content } from "../Content";
 import { DataTable } from "./DataTable";
 import {
     Allegati,
@@ -55,7 +55,7 @@ const LavoriSpeditiTable = ({ lavori, handleFile }) => {
 
     return (
         <>
-            <ContentContainer.Layout title={"Lavori spediti"} />
+            <Content.Layout title={"Lavori spediti"} />
             <DataTable.Table rows={mappedLavori} columns={columns} />;
         </>
     );

@@ -3,15 +3,15 @@ import OrdiniClienteTable from "../../Components/Tables/OrdiniClienteTable";
 import { useOrdiniClienti } from "../../Hooks/Operatore/useOrdiniClienti";
 import { MenuItem, Typography } from "@mui/material";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
-import { ContentContainer } from "../../Components/ContentContainer";
+import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
 
 export default function OrdiniClienti({ clienti, ordini }) {
     const { handleChange } = useOrdiniClienti();
 
     return (
-        <ContentContainer.Container>
-            <ContentContainer.Layout title={"Ordini clienti"}>
+        <Content.Container>
+            <Content.Layout title={"Ordini clienti"}>
                 <DataTable.Selector
                     inputLabel={"Cliente"}
                     handleChange={handleChange}
@@ -25,7 +25,7 @@ export default function OrdiniClienti({ clienti, ordini }) {
                         </MenuItem>
                     ))}
                 </DataTable.Selector>
-            </ContentContainer.Layout>
+            </Content.Layout>
 
             {ordini?.length > 0 && <OrdiniClienteTable ordini={ordini} />}
             {ordini?.length === 0 && (
@@ -37,7 +37,7 @@ export default function OrdiniClienti({ clienti, ordini }) {
                     Nessun ordine trovato
                 </Typography>
             )}
-        </ContentContainer.Container>
+        </Content.Container>
     );
 }
 

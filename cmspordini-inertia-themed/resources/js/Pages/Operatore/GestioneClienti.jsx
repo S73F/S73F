@@ -1,13 +1,13 @@
 import React from "react";
 import GestioneClientiTable from "../../Components/Tables/GestioneClientiTable";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
-import { ContentContainer } from "../../Components/ContentContainer";
+import { Content } from "../../Components/Content";
 import { Typography } from "@mui/material";
 
 export default function GestioneClienti({ clienti }) {
     return (
-        <ContentContainer.Container>
-            <ContentContainer.Layout title={"Gestione clienti"} />
+        <Content.Container>
+            <Content.Layout title={"Gestione clienti"} />
 
             {clienti?.length > 0 && <GestioneClientiTable clienti={clienti} />}
             {clienti?.length === 0 && (
@@ -19,7 +19,7 @@ export default function GestioneClienti({ clienti }) {
                     Nessun cliente trovato
                 </Typography>
             )}
-        </ContentContainer.Container>
+        </Content.Container>
     );
 }
 

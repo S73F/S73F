@@ -12,3 +12,16 @@ export const formBtnStack = {
     flexWrap: "wrap",
     mt: 4,
 };
+
+export const formFileReminder = {
+    border: "2px dashed #1976d2",
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 2,
+    p: 3,
+    textAlign: "center",
+    width: { xs: "100%", md: "50%" },
+};

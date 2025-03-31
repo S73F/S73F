@@ -2,7 +2,7 @@ import React from "react";
 import { useCreazioneOrdine } from "../../Hooks/Cliente/useCreazioneOrdine";
 import Tiptap from "../../Components/Tiptap";
 import ClienteLayout from "../../Layouts/ClienteLayout";
-import { ContentContainer } from "../../Components/ContentContainer";
+import { Content } from "../../Components/Content";
 import {
     Box,
     Button,
@@ -11,7 +11,11 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
+import {
+    formBtnStack,
+    formBtnStyle,
+    formFileReminder,
+} from "../../styles/formStyles";
 
 export default function CreazioneOrdine({ InputLabelProps = {} }) {
     const {
@@ -27,8 +31,8 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
     } = useCreazioneOrdine();
 
     return (
-        <ContentContainer.Container>
-            <ContentContainer.Layout title={"Spedisci nuovo ordine"}>
+        <Content.Container>
+            <Content.Layout title={"Spedisci nuovo ordine"}>
                 <Box
                     component="form"
                     id="form-ordine"
@@ -154,20 +158,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                             />
                         </Grid2>
                         <Grid2 size={12}>
-                            <Box
-                                border="2px dashed #1976d2"
-                                margin="0 auto"
-                                display="flex"
-                                flexDirection="column"
-                                alignItems="center"
-                                justifyContent="center"
-                                borderRadius={2}
-                                p={3}
-                                textAlign="center"
-                                sx={{
-                                    width: { xs: "100%", md: "50%" },
-                                }}
-                            >
+                            <Box sx={formFileReminder}>
                                 <Typography
                                     mb={2}
                                     color="error"
@@ -225,8 +216,8 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                         </Button>
                     </Stack>
                 </Box>
-            </ContentContainer.Layout>
-        </ContentContainer.Container>
+            </Content.Layout>
+        </Content.Container>
     );
 }
 

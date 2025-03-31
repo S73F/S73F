@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Modal } from "@inertiaui/modal-react";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { ContentContainer } from "../ContentContainer";
+import { Content } from "../Content";
 import { formBtnStyle } from "../../styles/formStyles";
 import { useEliminazioneOrdine } from "../../Hooks/Components/Modals/useEliminazioneOrdine";
 
@@ -15,7 +15,7 @@ export default function EliminazioneOrdine({ ordine, stato }) {
 
     return (
         <Modal ref={modalRef}>
-            <ContentContainer.Layout title="Eliminazione ordine" />
+            <Content.Layout title="Eliminazione ordine" />
             <Box sx={{ textAlign: "center" }}>
                 <Typography mb={1}>
                     Sei sicuro di voler eliminare l'ordine?

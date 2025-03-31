@@ -1,3 +1,15 @@
+export const contentContainer = {
+    width: "100%",
+    display: "flex",
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    px: 4,
+    py: 6,
+};
+
 export const badgeStyle = {
     "& .MuiBadge-badge": {
         width: 27,

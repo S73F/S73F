@@ -3,7 +3,7 @@ import { Modal } from "@inertiaui/modal-react";
 import { useLavorazione } from "../../Hooks/Components/Modals/useLavorazione";
 import { Box, Button, Typography, Stack } from "@mui/material";
 import Tiptap from "../Tiptap";
-import { ContentContainer } from "../ContentContainer";
+import { Content } from "../Content";
 import { formBtnStyle } from "../../styles/formStyles";
 
 const Lavorazione = ({ ordine, note_int }) => {
@@ -20,7 +20,7 @@ const Lavorazione = ({ ordine, note_int }) => {
 
     return (
         <Modal ref={modalRef}>
-            <ContentContainer.Layout title="Modifica Lavorazione" />
+            <Content.Layout title="Modifica Lavorazione" />
             <Box sx={{ textAlign: "center" }}>
                 <form
                     onSubmit={(e) => handleLavorazione(e, ordine)}
