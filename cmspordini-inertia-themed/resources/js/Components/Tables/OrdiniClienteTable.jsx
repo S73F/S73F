@@ -14,6 +14,21 @@ import {
 export default function OrdiniClienteTable({ ordini }) {
     const { handleFile } = useLavori();
 
+    const medicoAndRagioneSocialeCell = useMemo(
+        () => (params) => MedicoAndRagioneSociale(params.row),
+        []
+    );
+
+    const statoLavoroCell = useMemo(
+        () => (params) => StatoLavoro(params.row),
+        []
+    );
+
+    const allegatiCell = useMemo(
+        () => (params) => Allegati(params.row, "operatore", handleFile),
+        [handleFile]
+    );
+
     const columns = useMemo(
         () => [
             TableColumn(
@@ -21,12 +36,10 @@ export default function OrdiniClienteTable({ ordini }) {
                 "Medico ordinante",
                 220,
                 "",
-                (params) => <MedicoAndRagioneSociale rowParams={params.row} />
+                medicoAndRagioneSocialeCell
             ),
             TableColumn("Paziente", "Paziente", 170),
-            TableColumn("stato", "Stato lavoro", 130, "", (params) => (
-                <StatoLavoro rowParams={params.row} />
-            )),
+            TableColumn("stato", "Stato lavoro", 130, "", statoLavoroCell),
             TableColumn("data", "Data ordine", 100),
             TableColumn(
                 "data_inizioLavorazione",
@@ -40,13 +53,7 @@ export default function OrdiniClienteTable({ ordini }) {
                 "Allegati",
                 90,
                 "",
-                (params) => (
-                    <Allegati
-                        rowParams={params.row}
-                        user={"operatore"}
-                        handleFile={handleFile}
-                    />
-                ),
+                allegatiCell,
                 false,
                 false
             ),

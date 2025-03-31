@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { ContentContainer } from "../ContentContainer";
 import { DataTable } from "./DataTable";
 import {
@@ -11,6 +11,25 @@ import {
 } from "../TableFields";
 
 const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
+    const medicoAndRagioneSocialeCell = useMemo(
+        () => (params) => MedicoAndRagioneSociale(params.row),
+        []
+    );
+
+    const dataInizioLavorazioneCell = useMemo(
+        () => (params) => DataInizioLavorazione(params.row)
+    );
+
+    const allegatiCell = useMemo(
+        () => (params) => Allegati(params.row, "operatore", handleFile),
+        [handleFile]
+    );
+
+    const azioniCell = useMemo(
+        () => (params) => Azioni(params.row, "inCorso", handleIncarico),
+        [handleIncarico]
+    );
+
     const columns = useMemo(
         () => [
             TableColumn(
@@ -18,7 +37,7 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
                 "Medico ordinante",
                 220,
                 "",
-                (params) => <MedicoAndRagioneSociale rowParams={params.row} />
+                medicoAndRagioneSocialeCell
             ),
             TableColumn("Paziente", "Paziente", 170, ""),
             TableColumn("Operatore", "Operatore", 110, ""),
@@ -27,36 +46,10 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
                 "Data inizio lavorazione",
                 170,
                 "",
-                (params) => <DataInizioLavorazione rowParams={params.row} />
+                dataInizioLavorazioneCell
             ),
-            TableColumn(
-                "Allegati",
-                "Allegati",
-                100,
-                "",
-                (params) => (
-                    <Allegati
-                        rowParams={params.row}
-                        user={"operatore"}
-                        handleFile={handleFile}
-                    />
-                ),
-                false
-            ),
-            TableColumn(
-                "Azioni",
-                "Azioni",
-                120,
-                "",
-                (params) => (
-                    <Azioni
-                        rowParams={params.row}
-                        tipoLavori={"inCorso"}
-                        handleIncarico={handleIncarico}
-                    />
-                ),
-                false
-            ),
+            TableColumn("Allegati", "Allegati", 100, "", allegatiCell, false),
+            TableColumn("Azioni", "Azioni", 120, "", azioniCell, false),
         ],
         []
     );

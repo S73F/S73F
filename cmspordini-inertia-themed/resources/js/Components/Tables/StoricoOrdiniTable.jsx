@@ -6,14 +6,22 @@ import { Allegati, mapOrders, StatoLavoro, TableColumn } from "../TableFields";
 export default function StoricoOrdiniTable({ ordini }) {
     const { handleFile } = useLavori();
 
+    const statoLavoroCell = useMemo(
+        () => (params) => StatoLavoro(params.row),
+        []
+    );
+
+    const allegatiCell = useMemo(
+        () => (params) => Allegati(params.row, "cliente", handleFile),
+        [handleFile]
+    );
+
     const columns = useMemo(
         () => [
             TableColumn("data", "Data ordine", 100),
             TableColumn("medicoOrdinante", "Richiedente", 100),
             TableColumn("Paziente", "Paziente", 100),
-            TableColumn("stato", "Stato lavoro", 130, "", (params) => (
-                <StatoLavoro rowParams={params.row} />
-            )),
+            TableColumn("stato", "Stato lavoro", 130, "", statoLavoroCell),
             TableColumn(
                 "data_inizioLavorazione",
                 "Data inizio lavorazione",
@@ -21,20 +29,7 @@ export default function StoricoOrdiniTable({ ordini }) {
             ),
             TableColumn("data_spedizione", "Data spedizione", 100),
             TableColumn("IndirizzoSpedizione", "Indirizzo spedizione", 100),
-            TableColumn(
-                "Allegati",
-                "Allegati",
-                100,
-                "",
-                (params) => (
-                    <Allegati
-                        rowParams={params.row}
-                        user={"cliente"}
-                        handleFile={handleFile}
-                    />
-                ),
-                false
-            ),
+            TableColumn("Allegati", "Allegati", 100, "", allegatiCell, false),
         ],
         []
     );

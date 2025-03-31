@@ -10,6 +10,21 @@ import {
 } from "../TableFields";
 
 const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
+    const ragioneSocialeCell = useMemo(
+        () => (params) => RagioneSociale(params.row),
+        []
+    );
+
+    const allegatiCell = useMemo(
+        () => (params) => Allegati(params.row, "operatore", handleFile),
+        [handleFile]
+    );
+
+    const azioniCell = useMemo(
+        () => (params) => Azioni(params.row, "nuovi", handleIncarico),
+        [handleIncarico]
+    );
+
     const columns = useMemo(
         () => [
             TableColumn(
@@ -17,39 +32,13 @@ const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
                 "Ragione sociale",
                 200,
                 "",
-                (params) => <RagioneSociale rowParams={params.row} />
+                ragioneSocialeCell
             ),
             TableColumn("medicoOrdinante", "Medico ordinante", 200, ""),
             TableColumn("Paziente", "Paziente", 200, ""),
             TableColumn("data", "Data ordine", 100, ""),
-            TableColumn(
-                "Allegati",
-                "Allegati",
-                80,
-                "",
-                (params) => (
-                    <Allegati
-                        rowParams={params.row}
-                        user={"operatore"}
-                        handleFile={handleFile}
-                    />
-                ),
-                false
-            ),
-            TableColumn(
-                "Azioni",
-                "Azioni",
-                70,
-                "",
-                (params) => (
-                    <Azioni
-                        rowParams={params.row}
-                        tipoLavori={"nuovi"}
-                        handleIncarico={handleIncarico}
-                    />
-                ),
-                false
-            ),
+            TableColumn("Allegati", "Allegati", 80, "", allegatiCell, false),
+            TableColumn("Azioni", "Azioni", 70, "", azioniCell, false),
         ],
         []
     );

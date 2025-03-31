@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCircleCheck,
@@ -74,7 +74,7 @@ export const TableFieldButton = ({
     );
 };
 
-export const RagioneSociale = ({ rowParams }) => {
+export const RagioneSociale = (rowParams) => {
     return (
         <TableModalText
             href={`/operatore/gestione-clienti/modifica/${rowParams.idCliente}`}
@@ -84,7 +84,7 @@ export const RagioneSociale = ({ rowParams }) => {
     );
 };
 
-export const MedicoAndRagioneSociale = ({ rowParams }) => {
+export const MedicoAndRagioneSociale = (rowParams) => {
     return (
         <Box display="flex" flexDirection="column" gap={0.5}>
             <Typography component="p" variant="p">
@@ -99,7 +99,7 @@ export const MedicoAndRagioneSociale = ({ rowParams }) => {
     );
 };
 
-export const StatoLavoro = ({ rowParams }) => {
+export const StatoLavoro = (rowParams) => {
     return (
         <>
             {rowParams.stato === 0 && <StatusChip.Nuovo />}
@@ -109,7 +109,7 @@ export const StatoLavoro = ({ rowParams }) => {
     );
 };
 
-export const DataInizioLavorazione = ({ rowParams }) => {
+export const DataInizioLavorazione = (rowParams) => {
     return (
         <Box display="flex" flexDirection="column" gap={0.5}>
             <Typography component="p" variant="p">
@@ -133,7 +133,7 @@ export const DataInizioLavorazione = ({ rowParams }) => {
     );
 };
 
-export const Allegati = ({ rowParams, user, handleFile }) => {
+export const Allegati = (rowParams, user, handleFile) => {
     return (
         <>
             <TableFieldButton
@@ -168,7 +168,7 @@ export const Allegati = ({ rowParams, user, handleFile }) => {
     );
 };
 
-export const Azioni = ({ rowParams, tipoLavori, handleIncarico }) => {
+export const Azioni = (rowParams, tipoLavori, handleIncarico) => {
     if (tipoLavori === "nuovi") {
         return (
             <>
@@ -243,12 +243,13 @@ export const mapOrders = (ordini) =>
                 " " +
                 (ordine.operatore?.cognome || ""),
         }),
+        ...(!ordine.operatore && {
+            Operatore: "-",
+        }),
         ...(ordine.data && {
             data: ordine.data || "-",
         }),
-        ...(ordine.data_inizioLavorazione && {
-            data_inizioLavorazione: ordine.data_inizioLavorazione || "-",
-        }),
+        data_inizioLavorazione: ordine.data_inizioLavorazione || "-",
         data_spedizione: ordine.data_spedizione || "-",
         stato: ordine.stato,
         ...(ordine.file_fin !== undefined && { file_fin: ordine.file_fin }),

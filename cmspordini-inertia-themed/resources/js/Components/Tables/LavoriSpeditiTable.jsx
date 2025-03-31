@@ -9,6 +9,16 @@ import {
 } from "../TableFields";
 
 const LavoriSpeditiTable = ({ lavori, handleFile }) => {
+    const medicoAndRagioneSocialeCell = useMemo(
+        () => (params) => MedicoAndRagioneSociale(params.row),
+        []
+    );
+
+    const allegatiCell = useMemo(
+        () => (params) => Allegati(params.row, "operatore", handleFile),
+        [handleFile]
+    );
+
     const columns = useMemo(
         () => [
             TableColumn(
@@ -16,7 +26,7 @@ const LavoriSpeditiTable = ({ lavori, handleFile }) => {
                 "Medico ordinante",
                 220,
                 "",
-                (params) => <MedicoAndRagioneSociale rowParams={params.row} />
+                medicoAndRagioneSocialeCell
             ),
             TableColumn("Paziente", "Paziente", 170, ""),
             TableColumn("data", "Data ordine", 140, 140),
@@ -33,13 +43,7 @@ const LavoriSpeditiTable = ({ lavori, handleFile }) => {
                 "Allegati",
                 90,
                 "",
-                (params) => (
-                    <Allegati
-                        rowParams={params.row}
-                        user={"operatore"}
-                        handleFile={handleFile}
-                    />
-                ),
+                allegatiCell,
                 false,
                 false
             ),
