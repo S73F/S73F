@@ -34,7 +34,7 @@ const paginationModel = { page: 0, pageSize: 5 };
 
 const Table = ({ rows, columns }) => {
     return (
-        <Paper sx={{ width: "100%" }}>
+        <Paper elevation={5} sx={{ width: "100%" }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
