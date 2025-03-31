@@ -67,15 +67,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     justifyContent: "flex-end",
 }));
 
-export default function Layout({ children, ListItems }) {
+export default function Layout({
+    children,
+    ListItems,
+    open,
+    handleDrawerToggle,
+}) {
     const theme = useTheme(); // Recupera il tema corrente
-    const [open, setOpen] = useState(false); // Stato per il controllo della visibilità del drawer (menu laterale)
     const { handleLogout } = useLayout(); // Recupera la funzione di logout personalizzata
-
-    // Funzione che gestisce l'apertura/chiusura del drawer
-    const handleDrawerToggle = useCallback(() => {
-        setOpen((prev) => !prev); // Cambia lo stato dell'apertura del drawer
-    }, []);
 
     // Contenuto del drawer, memorizzato tramite useMemo per evitare ricalcoli inutili
     const drawerContent = useMemo(
@@ -102,7 +101,11 @@ export default function Layout({ children, ListItems }) {
                 {/* Lista di collegamenti del drawer */}
                 <List>
                     <ListItem disablePadding>
-                        <ListItemButton component={Link} href="/">
+                        <ListItemButton
+                            onClick={handleDrawerToggle}
+                            component={Link}
+                            href="/"
+                        >
                             <ListItemIcon>
                                 <HomeIcon />
                             </ListItemIcon>
@@ -151,7 +154,7 @@ export default function Layout({ children, ListItems }) {
                 </Box>
             </Box>
         ),
-        [handleDrawerToggle, handleLogout, ListItems, theme.direction] // Dipendenze per il memo
+        [handleLogout, ListItems, theme.direction] // Dipendenze per il memo
     );
 
     return (

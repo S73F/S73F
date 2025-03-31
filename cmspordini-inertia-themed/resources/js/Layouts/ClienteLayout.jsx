@@ -1,5 +1,5 @@
 import { Link, usePage } from "@inertiajs/react";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import {
     ListItem,
     ListItemButton,
@@ -8,11 +8,18 @@ import {
 } from "@mui/material";
 import Layout from "./Layout";
 import { History as HistoryIcon } from "@mui/icons-material";
+import { useLayout } from "../Hooks/Layouts/useLayout";
 
 export default function ClienteLayout({ children }) {
+    const { handleDrawerToggle, open } = useLayout();
+
     const ListItems = (
         <ListItem disablePadding>
-            <ListItemButton component={Link} href="/cliente/ordini/storico">
+            <ListItemButton
+                onClick={handleDrawerToggle}
+                component={Link}
+                href="/cliente/ordini/storico"
+            >
                 <ListItemIcon>
                     <HistoryIcon />
                 </ListItemIcon>
@@ -21,5 +28,13 @@ export default function ClienteLayout({ children }) {
         </ListItem>
     );
 
-    return <Layout ListItems={ListItems}>{children}</Layout>;
+    return (
+        <Layout
+            ListItems={ListItems}
+            open={open}
+            handleDrawerToggle={handleDrawerToggle}
+        >
+            {children}
+        </Layout>
+    );
 }

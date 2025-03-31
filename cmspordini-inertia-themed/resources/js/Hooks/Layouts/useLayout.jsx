@@ -1,8 +1,15 @@
 import { useForm, usePage } from "@inertiajs/react";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export const useLayout = () => {
+    const [open, setOpen] = useState(false); // Stato per il controllo della visibilità del drawer (menu laterale)
+
+    // Funzione che gestisce l'apertura/chiusura del drawer
+    const handleDrawerToggle = useCallback(() => {
+        setOpen((prev) => !prev); // Cambia lo stato dell'apertura del drawer
+    }, []);
+
     const { flash } = usePage().props;
     const { post } = useForm();
 
@@ -32,5 +39,5 @@ export const useLayout = () => {
         post("/logout");
     };
 
-    return { handleLogout };
+    return { handleDrawerToggle, open, setOpen, handleLogout };
 };
