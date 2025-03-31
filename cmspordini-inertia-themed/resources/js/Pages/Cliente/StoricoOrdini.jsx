@@ -7,11 +7,13 @@ import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
 
 export default function StoricoOrdini({ ordini }) {
+    // Custom hook per gestire il cambiamento del filtro temporale
     const { handleChange } = useStoricoOrdini();
 
     return (
         <Content.Container>
             <Content.Layout title={"Storico ordini"}>
+                {/* Selettore per filtrare gli ordini in base al lasso di tempo */}
                 <DataTable.Selector
                     inputLabel={"Lasso di tempo"}
                     handleChange={handleChange}
@@ -22,7 +24,10 @@ export default function StoricoOrdini({ ordini }) {
                 </DataTable.Selector>
             </Content.Layout>
 
+            {/* Mostra la tabella solo se ci sono ordini disponibili */}
             {ordini?.length > 0 && <StoricoOrdiniTable ordini={ordini} />}
+
+            {/* Messaggio di fallback nel caso non ci siano ordini */}
             {ordini?.length === 0 && (
                 <Typography
                     variant="h5"

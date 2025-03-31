@@ -11,6 +11,7 @@ import {
 import { ToastContainer } from "react-toastify";
 
 export default function Login() {
+    // Custom hook per la gestione del login
     const { data, processing, handleChange, handleSubmit } = useLogin();
 
     return (
@@ -32,6 +33,7 @@ export default function Login() {
                     padding: 3,
                 }}
             >
+                {/* Logo */}
                 <Box
                     component="img"
                     src="/assets/img/ODONTOTECNICA-LOGO.svg"
@@ -40,6 +42,8 @@ export default function Login() {
                 <Typography component="h1" variant="h5">
                     Accedi
                 </Typography>
+
+                {/* Form di login */}
                 <Box
                     component="form"
                     onSubmit={handleSubmit}

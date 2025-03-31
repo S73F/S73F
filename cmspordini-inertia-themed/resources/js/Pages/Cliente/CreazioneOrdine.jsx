@@ -18,6 +18,7 @@ import {
 } from "../../styles/formStyles";
 
 export default function CreazioneOrdine({ InputLabelProps = {} }) {
+    // Custom hook per gestire la creazione dell'ordine
     const {
         data,
         editorKey,
@@ -55,6 +56,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 onChange={handleChange}
                             />
                         </Grid2>
+
                         <Grid2 size={{ xs: 12, md: 6 }}>
                             <TextField
                                 fullWidth
@@ -66,6 +68,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 onChange={handleChange}
                             />
                         </Grid2>
+
                         <Grid2 size={{ xs: 12, md: 6 }}>
                             <TextField
                                 fullWidth
@@ -77,6 +80,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 onChange={handleChange}
                             />
                         </Grid2>
+
                         <Grid2 size={12}>
                             <TextField
                                 fullWidth
@@ -88,14 +92,16 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 onChange={handleChange}
                             />
                         </Grid2>
+
                         <Grid2 size={12}>
                             <Tiptap
-                                key={editorKey}
+                                key={editorKey} // Assegna una key all'editor Tiptap, la quale, una volta cambiata, permette di rigenerare il componente (utile per il reset del form)
                                 onEditorContentSave={handleEditorContentSave}
                                 tipo={"lavorazione"}
                                 titolo={"Lavorazione"}
                             />
                         </Grid2>
+
                         <Grid2 size={{ xs: 12, md: 4 }}>
                             <TextField
                                 fullWidth
@@ -107,6 +113,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 onChange={handleChange}
                             />
                         </Grid2>
+
                         <Grid2 size={{ xs: 12, md: 4 }}>
                             <TextField
                                 fullWidth
@@ -124,6 +131,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 onChange={handleChange}
                             />
                         </Grid2>
+
                         <Grid2 size={{ xs: 12, md: 4 }}>
                             <TextField
                                 fullWidth
@@ -141,6 +149,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 onChange={handleChange}
                             />
                         </Grid2>
+
                         <Grid2 size={{ xs: 12, md: 6 }}>
                             <Tiptap
                                 key={editorKey}
@@ -149,6 +158,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 titolo={"Piattaforma impianti"}
                             />
                         </Grid2>
+
                         <Grid2 size={{ xs: 12, md: 6 }}>
                             <Tiptap
                                 key={editorKey}
@@ -157,6 +167,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                                 titolo={"Note"}
                             />
                         </Grid2>
+
                         <Grid2 size={12}>
                             <Box sx={formFileReminder}>
                                 <Typography
@@ -193,6 +204,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                             </Box>
                         </Grid2>
                     </Grid2>
+
                     <Stack sx={formBtnStack}>
                         <Button
                             fullWidth
@@ -204,6 +216,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                         >
                             Invia ordine
                         </Button>
+
                         <Button
                             fullWidth
                             variant="outlined"

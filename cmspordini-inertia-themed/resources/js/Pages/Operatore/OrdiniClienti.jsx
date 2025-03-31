@@ -7,27 +7,32 @@ import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
 
 export default function OrdiniClienti({ clienti, ordini }) {
+    // Custom hook per gestire il cambio di selezione del cliente
     const { handleChange } = useOrdiniClienti();
 
     return (
         <Content.Container>
             <Content.Layout title={"Ordini clienti"}>
+                {/* Selettore per filtrare gli ordini in base al cliente */}
                 <DataTable.Selector
                     inputLabel={"Cliente"}
                     handleChange={handleChange}
                 >
                     {clienti.map((cliente) => (
                         <MenuItem
-                            key={cliente.IDcliente}
-                            value={cliente.IDcliente}
+                            key={cliente.IDcliente} // Chiave univoca per React
+                            value={cliente.IDcliente} // Valore da passare all'handler
                         >
-                            {cliente.ragione_sociale}
+                            {cliente.ragione_sociale} {/* Nome del cliente */}
                         </MenuItem>
                     ))}
                 </DataTable.Selector>
             </Content.Layout>
 
+            {/* Mostra la tabella solo se ci sono ordini disponibili */}
             {ordini?.length > 0 && <OrdiniClienteTable ordini={ordini} />}
+
+            {/* Messaggio di fallback nel caso non ci siano ordini */}
             {ordini?.length === 0 && (
                 <Typography
                     variant="h5"
