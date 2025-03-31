@@ -1,112 +1,50 @@
 import React, { useMemo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faFilePdf,
-    faFileZipper,
-    faPenToSquare,
-    faTrashCan,
-} from "@fortawesome/free-regular-svg-icons";
-import { faFileZipper as faFileZipperSolid } from "@fortawesome/free-solid-svg-icons";
-import { Container, Link, Typography } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { ModalLink } from "@inertiaui/modal-react";
 import { AddBox as AddBoxIcon } from "@mui/icons-material";
-import { anchorStyle } from "../../styles/styles";
-import { iconStyle } from "../../styles/styles";
+import {
+    AzioniCliente,
+    EmailCliente,
+    mapClienti,
+    RagioneSociale,
+    TableColumn,
+} from "../TableFields";
 
 export default function GestioneClientiTable({ clienti }) {
+    const ragioneSocialeCell = useMemo(
+        () => (params) => RagioneSociale(params.row),
+        []
+    );
+
+    const emailClienteCell = useMemo(
+        () => (params) => EmailCliente(params.row),
+        []
+    );
+
+    const azioniClienteCell = useMemo(
+        () => (params) => AzioniCliente(params.row),
+        []
+    );
+
     const columns = useMemo(
         () => [
-            {
-                field: "ragione_sociale",
-                headerName: "Ragione sociale",
-                flex: 1,
-                minWidth: 180,
-                headerClassName: "headerColumn",
-                renderCell: (params) => (
-                    <Link
-                        component={ModalLink}
-                        href={`/operatore/gestione-clienti/modifica/${params.row.id}`}
-                        sx={anchorStyle}
-                    >
-                        {params.row.ragione_sociale}
-                    </Link>
-                ),
-            },
-            {
-                field: "Nome",
-                headerName: "Nome",
-                flex: 1,
-                minWidth: 100,
-                headerClassName: "headerColumn",
-            },
-            {
-                field: "emailcliente",
-                headerName: "Email",
-                flex: 1,
-                minWidth: 250,
-                headerClassName: "headerColumn",
-                renderCell: (params) => (
-                    <Link
-                        component="a"
-                        href={`mailto:${params.row.emailcliente}`}
-                        sx={anchorStyle}
-                    >
-                        {params.row.emailcliente}
-                    </Link>
-                ),
-            },
-            {
-                field: "Username",
-                headerName: "Username",
-                flex: 1,
-                minWidth: 100,
-                headerClassName: "headerColumn",
-            },
-            {
-                field: "Azioni",
-                headerName: "Azioni",
-                flex: 1,
-                minWidth: 100,
-                headerClassName: "headerColumn",
-                sortable: false,
-                filterable: false,
-                renderCell: (params) => (
-                    <>
-                        <Link
-                            component={ModalLink}
-                            href={`/operatore/gestione-clienti/modifica/${params.row.id}`}
-                            title="Modifica cliente"
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faPenToSquare} size="xl" />
-                        </Link>
-                        <Link
-                            component={ModalLink}
-                            href={`/operatore/gestione-clienti/eliminazione/${params.row.id}`}
-                            title="Elimina cliente"
-                            sx={iconStyle}
-                        >
-                            <FontAwesomeIcon icon={faTrashCan} size="xl" />
-                        </Link>
-                    </>
-                ),
-            },
+            TableColumn(
+                "ragione_sociale",
+                "Ragione sociale",
+                180,
+                "",
+                ragioneSocialeCell
+            ),
+            TableColumn("Nome", "Nome", 100),
+            TableColumn("emailcliente", "Email", 250, "", emailClienteCell),
+            TableColumn("Username", "Username", 100),
+            TableColumn("Azioni", "Azioni", 100, "", azioniClienteCell),
         ],
         []
     );
 
-    const mapOrders = useMemo(
-        () =>
-            clienti.map((cliente) => ({
-                id: cliente.IDcliente,
-                ragione_sociale: cliente.ragione_sociale,
-                Nome: cliente.cognome + " " + cliente.nome,
-                emailcliente: cliente.emailcliente,
-                Username: cliente.username,
-            })),
-        [clienti]
-    );
+    const mappedClienti = useMemo(() => mapClienti(clienti), [clienti]);
 
     return (
         <>
@@ -138,7 +76,7 @@ export default function GestioneClientiTable({ clienti }) {
                     Crea cliente
                 </Typography>
             </Link>
-            <DataTable.Table rows={mapOrders} columns={columns} />
+            <DataTable.Table rows={mappedClienti} columns={columns} />
         </>
     );
 }

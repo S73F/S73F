@@ -133,6 +133,18 @@ export const DataInizioLavorazione = (rowParams) => {
     );
 };
 
+export const EmailCliente = (rowParams) => {
+    return (
+        <Link
+            component="a"
+            href={`mailto:${rowParams.emailcliente}`}
+            sx={anchorStyle}
+        >
+            {rowParams.emailcliente}
+        </Link>
+    );
+};
+
 export const Allegati = (rowParams, user, handleFile) => {
     return (
         <>
@@ -220,6 +232,29 @@ export const Azioni = (rowParams, tipoLavori, handleIncarico) => {
     }
 };
 
+export const AzioniCliente = (rowParams) => {
+    return (
+        <>
+            <Link
+                component={ModalLink}
+                href={`/operatore/gestione-clienti/modifica/${rowParams.id}`}
+                title="Modifica cliente"
+                sx={iconStyle}
+            >
+                <FontAwesomeIcon icon={faPenToSquare} size="xl" />
+            </Link>
+            <Link
+                component={ModalLink}
+                href={`/operatore/gestione-clienti/eliminazione/${rowParams.id}`}
+                title="Elimina cliente"
+                sx={iconStyle}
+            >
+                <FontAwesomeIcon icon={faTrashCan} size="xl" />
+            </Link>
+        </>
+    );
+};
+
 export const mapOrders = (ordini) =>
     ordini.map((ordine) => ({
         id: ordine.IDordine,
@@ -254,4 +289,14 @@ export const mapOrders = (ordini) =>
         stato: ordine.stato,
         ...(ordine.file_fin !== undefined && { file_fin: ordine.file_fin }),
         ...(ordine.note_ulti_mod && { note_ulti_mod: ordine.note_ulti_mod }),
+    }));
+
+export const mapClienti = (clienti) =>
+    clienti.map((cliente) => ({
+        id: cliente.IDcliente,
+        idCliente: cliente.IDcliente,
+        ragione_sociale: cliente.ragione_sociale,
+        Nome: cliente.cognome + " " + cliente.nome,
+        emailcliente: cliente.emailcliente,
+        Username: cliente.username,
     }));

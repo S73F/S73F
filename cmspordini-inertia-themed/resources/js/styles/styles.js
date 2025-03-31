@@ -65,7 +65,7 @@ export const badgeStyle = {
         border: "2px solid #fff",
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.5)",
         userSelect: "none",
-        fontSize: 15,
+        fontSize: 12,
         fontWeight: "600",
     },
 };
