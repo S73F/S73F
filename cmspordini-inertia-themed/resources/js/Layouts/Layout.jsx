@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import {
     styled,
     useTheme,
@@ -27,17 +27,19 @@ import { ToastContainer } from "react-toastify";
 import { useLayout } from "../Hooks/Layouts/useLayout";
 import { itIT } from "@mui/x-data-grid/locales";
 
+// Creazione del tema personalizzato per l'applicazione, con una palette di colori personalizzata
 const appTheme = createTheme(
     {
         palette: {
-            primary: { main: "#1976d2" },
+            primary: { main: "#1976d2" }, // Colore principale del tema
         },
     },
-    itIT
+    itIT // Impostazione della lingua italiana (per il componente DataGrid)
 );
 
-const drawerWidth = 240;
+const drawerWidth = 240; // Definisce la larghezza del Drawer (menu laterale)
 
+// Stile personalizzato per il contenitore principale
 const Main = styled("main")(({ theme }) => ({
     flexGrow: 1,
     minHeight: "100vh",
@@ -48,6 +50,7 @@ const Main = styled("main")(({ theme }) => ({
     flexDirection: "column",
 }));
 
+// Stile per l'AppBar (barra superiore)
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
     transition: theme.transitions.create(["margin", "width"], {
         easing: theme.transitions.easing.sharp,
@@ -55,24 +58,27 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
     }),
 }));
 
+// Stile per la parte superiore del drawer (menu laterale)
 const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar, // Usa il mixin 'toolbar' per allineare gli elementi
     justifyContent: "flex-end",
 }));
 
 export default function Layout({ children, ListItems }) {
-    const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
-    const { handleLogout } = useLayout();
+    const theme = useTheme(); // Recupera il tema corrente
+    const [open, setOpen] = useState(false); // Stato per il controllo della visibilità del drawer (menu laterale)
+    const { handleLogout } = useLayout(); // Recupera la funzione di logout personalizzata
 
-    const handleDrawerToggle = React.useCallback(() => {
-        setOpen((prev) => !prev);
+    // Funzione che gestisce l'apertura/chiusura del drawer
+    const handleDrawerToggle = useCallback(() => {
+        setOpen((prev) => !prev); // Cambia lo stato dell'apertura del drawer
     }, []);
 
-    const drawerContent = React.useMemo(
+    // Contenuto del drawer, memorizzato tramite useMemo per evitare ricalcoli inutili
+    const drawerContent = useMemo(
         () => (
             <Box
                 sx={{
@@ -81,7 +87,9 @@ export default function Layout({ children, ListItems }) {
                     height: "100%",
                 }}
             >
+                {/* Componente per la parte superiore dell'header */}
                 <DrawerHeader>
+                    {/* Icona per chiudere il drawer */}
                     <IconButton onClick={handleDrawerToggle}>
                         {theme.direction === "ltr" ? (
                             <ChevronLeftIcon />
@@ -90,7 +98,8 @@ export default function Layout({ children, ListItems }) {
                         )}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
+                <Divider /> {/* Divisore tra header e la lista */}
+                {/* Lista di collegamenti del drawer */}
                 <List>
                     <ListItem disablePadding>
                         <ListItemButton component={Link} href="/">
@@ -101,6 +110,7 @@ export default function Layout({ children, ListItems }) {
                         </ListItemButton>
                     </ListItem>
 
+                    {/* Renderizza eventuali voci di menu aggiuntive */}
                     {ListItems}
 
                     <ListItem disablePadding>
@@ -112,9 +122,10 @@ export default function Layout({ children, ListItems }) {
                         </ListItemButton>
                     </ListItem>
                 </List>
+                {/* Contenitore per il logo CMSP nel drawer */}
                 <Box
                     sx={{
-                        mt: "auto",
+                        mt: "auto", // Margine superiore automatico per spingere l'immagine in basso
                         mb: 5,
                         display: "flex",
                         justifyContent: "center",
@@ -128,10 +139,11 @@ export default function Layout({ children, ListItems }) {
                         <Box
                             component="img"
                             src="/assets/img/ODONTOTECNICA-LOGO.svg"
+                            loading="lazy" // Abilita il caricamento lazy per l'immagine
                             sx={{
                                 width: 150,
                                 "&:hover": {
-                                    opacity: "0.7",
+                                    opacity: "0.7", // Cambia l'opacità al passaggio del mouse
                                 },
                             }}
                         />
@@ -139,13 +151,17 @@ export default function Layout({ children, ListItems }) {
                 </Box>
             </Box>
         ),
-        [handleDrawerToggle, handleLogout, ListItems, theme.direction]
+        [handleDrawerToggle, handleLogout, ListItems, theme.direction] // Dipendenze per il memo
     );
 
     return (
+        // Applica il tema personalizzato
         <ThemeProvider theme={appTheme}>
             <Box sx={{ display: "flex" }}>
+                {/* Aggiunge gli stili base per il reset del CSS */}
                 <CssBaseline />
+
+                {/* Barra superiore fissa */}
                 <AppBar position="fixed">
                     <Toolbar>
                         <IconButton
@@ -155,6 +171,7 @@ export default function Layout({ children, ListItems }) {
                             edge="start"
                             sx={{ mr: 2 }}
                         >
+                            {/* Icona del menu per aprire il drawer */}
                             <MenuIcon />
                         </IconButton>
                         <Typography
@@ -183,11 +200,16 @@ export default function Layout({ children, ListItems }) {
                     onClose={handleDrawerToggle}
                     ModalProps={{ keepMounted: true }}
                 >
+                    {/* Contenuto del drawer */}
                     {drawerContent}
                 </Drawer>
                 <Main>
                     <DrawerHeader />
+
+                    {/* Renderizza i figli passati come prop */}
                     {children}
+
+                    {/* Componente di notifica */}
                     <ToastContainer position="bottom-right" closeOnClick />
                 </Main>
             </Box>
