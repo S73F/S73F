@@ -4,6 +4,14 @@ import ClienteLayout from "../../Layouts/ClienteLayout";
 import { Button, Typography } from "@mui/material";
 import { Content } from "../../Components/Content";
 
+/**
+ * Componente della Dashboard del Cliente.
+ * Mostra un messaggio di benvenuto personalizzato e un pulsante per creare un nuovo ordine.
+ *
+ * @param {Object} props - Proprietà del componente.
+ * @param {Object} props.user - Oggetto che rappresenta l'utente, contenente informazioni come nome e cognome.
+ * @returns {JSX.Element} La UI della dashboard del cliente con un messaggio di benvenuto e un link per creare un ordine.
+ */
 export default function Dashboard({ user }) {
     return (
         <Content.Container>
@@ -29,5 +37,10 @@ export default function Dashboard({ user }) {
     );
 }
 
-// Imposta il layout specifico per la dashboard del cliente
+/**
+ * Imposta il layout per la dashboard del cliente, utilizzando il layout specifico ClienteLayout.
+ *
+ * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
+ * @returns {JSX.Element} La pagina avvolta dal layout ClienteLayout.
+ */
 Dashboard.layout = (page) => <ClienteLayout>{page}</ClienteLayout>;

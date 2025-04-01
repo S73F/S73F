@@ -8,8 +8,7 @@ import { router } from "@inertiajs/react";
  * @returns {Function} return.handleChange - Funzione per gestire il cambiamento del cliente selezionato.
  */
 export const useOrdiniClienti = () => {
-    // Stato per memorizzare l'ID del cliente selezionato
-    const [clienteID, setClienteID] = useState(null);
+    const [clienteID, setClienteID] = useState(null); // Stato per memorizzare l'ID del cliente selezionato
 
     /**
      * Funzione per gestire il cambiamento del cliente selezionato.

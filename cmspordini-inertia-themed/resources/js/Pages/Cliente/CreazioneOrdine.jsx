@@ -17,6 +17,15 @@ import {
     formFileReminder,
 } from "../../styles/formStyles";
 
+/**
+ * Componente per la creazione di un nuovo ordine da parte di un cliente.
+ * Gestisce l'invio di un modulo con vari campi, tra cui informazioni sul paziente,
+ * medico ordinante, dati sulla lavorazione e file allegati.
+ *
+ * @param {Object} props - Proprietà del componente.
+ * @param {Object} [props.InputLabelProps={}] - Opzioni aggiuntive per le etichette di input.
+ * @returns {JSX.Element} La UI per la creazione dell'ordine.
+ */
 export default function CreazioneOrdine({ InputLabelProps = {} }) {
     // Custom hook per gestire la creazione dell'ordine
     const {
@@ -234,4 +243,10 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
     );
 }
 
+/**
+ * Imposta il layout per la pagina CreazioneOrdine, utilizzando il layout specifico `ClienteLayout`.
+ *
+ * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
+ * @returns {JSX.Element} La pagina avvolta dal layout ClienteLayout.
+ */
 CreazioneOrdine.layout = (page) => <ClienteLayout>{page}</ClienteLayout>;

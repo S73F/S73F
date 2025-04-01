@@ -18,10 +18,9 @@ import { toast } from "react-toastify";
  * @returns {boolean} return.processing - Indica se la richiesta è in elaborazione.
  */
 export const useCreazioneOrdine = () => {
-    // Stato per gestire la chiave dell'editor di testo Tiptap (utile per forzare un reset)
-    const [editorKey, setEditorKey] = useState(0);
-    // Stato per memorizzare il nome del file caricato
-    const [fileName, setFileName] = useState("");
+    const [editorKey, setEditorKey] = useState(0); // Stato per gestire la chiave dell'editor di testo Tiptap (utile per forzare un reset)
+
+    const [fileName, setFileName] = useState(""); // Stato per memorizzare il nome del file caricato
 
     // Inizializza il form con i dati dell'ordine
     const { data, setData, post, processing } = useForm({

@@ -9,8 +9,7 @@ import { useState, useCallback } from "react";
  * @returns {string|null} return.loadingButton - Stato che indica il tipo di lavoro in caricamento, o `null` se non c'è nessun lavoro in corso.
  */
 export const useDashboard = () => {
-    // Stato per memorizzare quale bottone è in caricamento
-    const [loadingButton, setLoadingButton] = useState(null);
+    const [loadingButton, setLoadingButton] = useState(null); // Stato per memorizzare quale bottone è in caricamento
 
     /**
      * Funzione per gestire la selezione del tipo di lavori.

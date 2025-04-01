@@ -6,9 +6,17 @@ import { MenuItem, Typography } from "@mui/material";
 import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
 
+/**
+ * Componente per visualizzare lo storico degli ordini del cliente.
+ * Permette di filtrare gli ordini in base a un intervallo di tempo e visualizza una tabella
+ * con i dati degli ordini.
+ *
+ * @param {Object} props - Proprietà del componente.
+ * @param {Array} props.ordini - Array di ordini da visualizzare nella tabella.
+ * @returns {JSX.Element} La UI per visualizzare lo storico ordini con il filtro temporale.
+ */
 export default function StoricoOrdini({ ordini }) {
-    // Custom hook per gestire il cambiamento del filtro temporale
-    const { handleChange } = useStoricoOrdini();
+    const { handleChange } = useStoricoOrdini(); // Custom hook per gestire il cambiamento del filtro temporale
 
     return (
         <Content.Container>
@@ -41,4 +49,10 @@ export default function StoricoOrdini({ ordini }) {
     );
 }
 
+/**
+ * Imposta il layout per lo storico ordini del cliente, utilizzando il layout specifico ClienteLayout.
+ *
+ * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
+ * @returns {JSX.Element} La pagina avvolta dal layout ClienteLayout.
+ */
 StoricoOrdini.layout = (page) => <ClienteLayout>{page}</ClienteLayout>;

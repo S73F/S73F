@@ -39,7 +39,11 @@ const appTheme = createTheme(
 
 const drawerWidth = 240; // Definisce la larghezza del Drawer (menu laterale)
 
-// Stile personalizzato per il contenitore principale
+/**
+ * Stile personalizzato per il contenitore principale dell'applicazione.
+ * @param {Object} theme - Il tema corrente dell'applicazione.
+ * @returns {Object} Oggetto di stile per il contenitore principale.
+ */
 const Main = styled("main")(({ theme }) => ({
     flexGrow: 1,
     minHeight: "100vh",
@@ -50,7 +54,11 @@ const Main = styled("main")(({ theme }) => ({
     flexDirection: "column",
 }));
 
-// Stile per l'AppBar (barra superiore)
+/**
+ * Stile personalizzato per la AppBar (barra superiore) dell'applicazione.
+ * @param {Object} theme - Il tema corrente dell'applicazione.
+ * @returns {Object} Oggetto di stile per l'AppBar.
+ */
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
     transition: theme.transitions.create(["margin", "width"], {
         easing: theme.transitions.easing.sharp,
@@ -58,7 +66,11 @@ const AppBar = styled(MuiAppBar)(({ theme }) => ({
     }),
 }));
 
-// Stile per la parte superiore del drawer (menu laterale)
+/**
+ * Stile per la parte superiore del drawer (menu laterale).
+ * @param {Object} theme - Il tema corrente dell'applicazione.
+ * @returns {Object} Oggetto di stile per l'header del drawer.
+ */
 const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
@@ -67,6 +79,17 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     justifyContent: "flex-end",
 }));
 
+/**
+ * Layout del contenuto principale dell'applicazione, comprensivo di un drawer (menu laterale).
+ * Gestisce l'aspetto della barra superiore (AppBar), il drawer laterale e il contenuto principale.
+ *
+ * @param {Object} props - Le proprietà del componente Layout.
+ * @param {React.ReactNode} props.children - I componenti figli da visualizzare nel layout.
+ * @param {React.ReactNode} props.ListItems - Gli elementi di lista da visualizzare nel drawer.
+ * @param {boolean} props.open - Stato che indica se il drawer è aperto o chiuso.
+ * @param {function} props.handleDrawerToggle - Funzione per aprire/chiudere il drawer.
+ * @returns {JSX.Element} Il layout dell'applicazione con drawer e contenuto principale.
+ */
 export default function Layout({
     children,
     ListItems,
@@ -76,7 +99,10 @@ export default function Layout({
     const theme = useTheme(); // Recupera il tema corrente
     const { handleLogout } = useLayout(); // Recupera la funzione di logout personalizzata
 
-    // Contenuto del drawer, memorizzato tramite useMemo per evitare ricalcoli inutili
+    /**
+     * Contenuto del drawer, memorizzato tramite useMemo per evitare ricalcoli inutili.
+     * @returns {JSX.Element} Il contenuto del drawer, che include voci di menu e altre informazioni.
+     */
     const drawerContent = useMemo(
         () => (
             <Box
@@ -157,6 +183,11 @@ export default function Layout({
         [handleLogout, ListItems, theme.direction] // Dipendenze per il memo
     );
 
+    /**
+     * Renderizza il layout con il tema personalizzato, la barra superiore (AppBar), il drawer laterale e il contenuto principale.
+     *
+     * @returns {JSX.Element} Il layout completo dell'applicazione.
+     */
     return (
         // Applica il tema personalizzato
         <ThemeProvider theme={appTheme}>

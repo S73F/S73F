@@ -6,6 +6,15 @@ import OperatoreLayout from "../../Layouts/OperatoreLayout";
 import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
 
+/**
+ * Componente per la gestione e visualizzazione degli ordini dei clienti.
+ * Permette di selezionare un cliente e visualizzare i suoi ordini in una tabella.
+ *
+ * @param {Object} props - Proprietà del componente.
+ * @param {Array} props.clienti - Lista dei clienti da mostrare nel selettore.
+ * @param {Array} props.ordini - Lista degli ordini da visualizzare nella tabella.
+ * @returns {JSX.Element} La UI per la gestione degli ordini clienti.
+ */
 export default function OrdiniClienti({ clienti, ordini }) {
     // Custom hook per gestire il cambio di selezione del cliente
     const { handleChange } = useOrdiniClienti();
@@ -46,4 +55,10 @@ export default function OrdiniClienti({ clienti, ordini }) {
     );
 }
 
+/**
+ * Imposta il layout specifico per la gestione degli ordini dei clienti, utilizzando il layout OperatoreLayout.
+ *
+ * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
+ * @returns {JSX.Element} La pagina avvolta dal layout OperatoreLayout.
+ */
 OrdiniClienti.layout = (page) => <OperatoreLayout>{page}</OperatoreLayout>;

@@ -12,8 +12,7 @@ import { toast } from "react-toastify";
  * @returns {Function} return.handleSubmit - Gestisce l'invio del form.
  */
 export const useLogin = () => {
-    // Ottiene i messaggi flash dalla risposta del server
-    const { flash } = usePage().props;
+    const { flash } = usePage().props; // Ottiene i messaggi flash dalla risposta del server
 
     // Effetto che ascolta i cambiamenti nei messaggi flash e mostra le notifiche
     useEffect(() => {

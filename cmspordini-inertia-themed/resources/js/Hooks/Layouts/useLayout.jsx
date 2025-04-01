@@ -12,8 +12,7 @@ import { toast } from "react-toastify";
  */
 
 export const useLayout = () => {
-    // Stato per il controllo della visibilità del drawer (menu laterale)
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false); // Stato per il controllo della visibilità del drawer (menu laterale)
 
     /**
      * Funzione che gestisce l'apertura/chiusura del drawer (menu laterale).

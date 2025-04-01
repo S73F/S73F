@@ -9,8 +9,7 @@ import { useEffect, useState } from "react";
  * @returns {Function} return.handleChange - Funzione per aggiornare il valore del filtro temporale.
  */
 export const useStoricoOrdini = () => {
-    // Stato per memorizzare il valore del filtro temporale
-    const [tempo, setTempo] = useState(null);
+    const [tempo, setTempo] = useState(null); // Stato per memorizzare il valore del filtro temporale
 
     /**
      * Funzione per aggiornare il lasso di tempo quando cambia il valore selezionato.

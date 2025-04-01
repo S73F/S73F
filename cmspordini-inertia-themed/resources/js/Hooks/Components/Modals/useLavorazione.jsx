@@ -15,8 +15,7 @@ import { useState } from "react";
  * @returns {Function} return.closeModal - Funzione per chiudere la modale di caricamento lavorazione.
  */
 export const useLavorazione = ({ modalRef }) => {
-    // Stato per memorizzare il nome del file caricato
-    const [fileName, setFileName] = useState("");
+    const [fileName, setFileName] = useState(""); // Stato per memorizzare il nome del file caricato
 
     // Inizializza il form con i dati della lavorazione
     const { setData, post, processing } = useForm({

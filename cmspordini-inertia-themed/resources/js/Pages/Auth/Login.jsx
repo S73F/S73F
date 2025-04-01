@@ -10,9 +10,15 @@ import {
 } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 
+/**
+ * Componente per la pagina di login dell'applicazione.
+ * Gestisce il modulo di login, includendo i campi per username e password,
+ * e la gestione dell'invio del modulo.
+ *
+ * @returns {JSX.Element} La UI per la pagina di login.
+ */
 export default function Login() {
-    // Custom hook per la gestione del login
-    const { data, processing, handleChange, handleSubmit } = useLogin();
+    const { data, processing, handleChange, handleSubmit } = useLogin(); // Custom hook per la gestione del login
 
     return (
         <Container
@@ -88,6 +94,7 @@ export default function Login() {
                 </Box>
             </Paper>
 
+            {/* Componente per le notifiche di errore */}
             <ToastContainer position="bottom-right" closeOnClick={true} />
         </Container>
     );
