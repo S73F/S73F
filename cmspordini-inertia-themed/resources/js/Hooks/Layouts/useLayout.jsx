@@ -21,7 +21,7 @@ export const useLayout = () => {
         setOpen((prev) => !prev); // Cambia lo stato dell'apertura del drawer
     }, []);
 
-    const { flash } = usePage().props; // Recupera i messaggi flash dal server
+    const { flash, user } = usePage().props; // Recupera i messaggi flash dal server
     const { post } = useForm(); // Funzione per inviare i dati del form
 
     useEffect(() => {
@@ -55,7 +55,13 @@ export const useLayout = () => {
      */
     const handleLogout = (event) => {
         event.preventDefault();
-        post("/logout"); // Esegue una richiesta POST per il logout
+
+        // Esegue una richiesta POST per il logout, corrispondente al tipo di utente loggato
+        user.IDcliente
+            ? post("/cliente/logout")
+            : user.IDoperatore
+            ? post("/operatore/logout")
+            : null;
     };
 
     return { handleDrawerToggle, open, setOpen, handleLogout };

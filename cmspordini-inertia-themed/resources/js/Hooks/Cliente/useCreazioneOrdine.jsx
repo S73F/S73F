@@ -71,7 +71,7 @@ export const useCreazioneOrdine = () => {
      * @param {Event} e - Evento del submit form.
      */
     const handleSubmit = (e) => {
-        e.preventDefault(); // Previene il comportamento predefinito del form
+        e.preventDefault();
 
         // Se il file è stato caricato, invia il form con i dati
         if (fileName) {

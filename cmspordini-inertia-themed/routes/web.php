@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\OperatoreController;
 use App\Http\Controllers\OrdineController;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -14,10 +13,9 @@ Route::group(['middleware' => RedirectIfAuthenticated::class], function () {
     });
     // Route per il login
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post("/login", [LoginController::class, "login"])->name('loginUser');
 });
 
-Route::post("/login", [LoginController::class, "login"])->name('loginUser');
-Route::post("/logout", [LoginController::class, "logout"])->name('logoutUser');
 
 Route::group(['middleware' => "auth:cliente"], function () {
     Route::get("/cliente/dashboard", [ClienteController::class, "showDashboard"])->name("clienteDashboard");
@@ -27,6 +25,8 @@ Route::group(['middleware' => "auth:cliente"], function () {
     Route::get('/cliente/ordini/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('clienteGeneraPDF');
     Route::get('/cliente/ordini/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFileCliente');
     Route::get('/cliente/ordini/download-finale/{id}', [OrdineController::class, 'downloadFileFinale'])->name('downloadFileFinaleCliente');
+    Route::post("/cliente/logout", [LoginController::class, "logout"])->name('logoutCliente');
+
 });
 
 Route::group(['middleware' => "auth:operatore"], function () {
@@ -50,4 +50,5 @@ Route::group(['middleware' => "auth:operatore"], function () {
     Route::get('/operatore/ordini-clienti/download-finale/{id}', [OrdineController::class, 'downloadFileFinale'])->name('downloadFileFinaleOperatore');
     Route::get('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'showLavorazioneModal'])->name('showLavorazioneModal');
     Route::post('/operatore/ordini-clienti/caricamento-lavorazione/{id}', [OperatoreController::class, 'caricaLavorazione'])->name('caricaLavorazione');
+    Route::post("/operatore/logout", [LoginController::class, "logout"])->name('logoutOperatore');
 });

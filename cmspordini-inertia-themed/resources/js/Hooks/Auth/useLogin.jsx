@@ -56,7 +56,7 @@ export const useLogin = () => {
      * @param {Event} e - Evento del submit form.
      */
     const handleSubmit = (e) => {
-        e.preventDefault(); // Previene il comportamento predefinito del form
+        e.preventDefault();
 
         // Controlla se i campi sono vuoti e mostra messaggi di errore appropriati
         !data.username && !data.password
