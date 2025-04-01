@@ -29,7 +29,6 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         try {
-            // Validazione delle credenziali
             $credentials = $request->validate([
                 "username" => "required",
                 "password" => "required"
@@ -49,11 +48,10 @@ class LoginController extends Controller
             throw new Exception("Credenziali non valide");
 
         } catch (ValidationException $e) {
-            // Gestisce errori di validazione e li restituisce alla pagina di login
             $errors = $e->validator->errors();
             return redirect()->back()->with(["validation_errors" => $errors])->withInput();
+
         } catch (Exception $e) {
-            // Gestisce errori generici di autenticazione
             return back()->with("error", "Le credenziali fornite non sono corrette")->onlyInput("username");
         }
     }
@@ -66,7 +64,7 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        Auth()->logout(); // Effettua il logout dell'utente
+        Auth()->logout();
 
         // Invalida la sessione e rigenera il token CSRF per sicurezza
         $request->session()->invalidate();
