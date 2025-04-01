@@ -9,8 +9,7 @@ use Inertia\Inertia;
 class ClienteController extends Controller
 {
     /**
-     * Se il cliente è autenticato,
-     * mostra la dashboard del cliente.
+     * Mostra la dashboard del cliente.
      *
      * @return \Inertia\Response
      */

@@ -18,7 +18,6 @@ export const useLogin = () => {
     useEffect(() => {
         if (flash?.success) {
             toast.success(flash.success); // Mostra un messaggio di successo
-
             history.replaceState({}, document.title); // Rimuove il messaggio dalla cronologia per evitare la ricomparsa al refresh
         }
 
