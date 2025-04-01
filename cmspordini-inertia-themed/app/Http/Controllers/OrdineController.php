@@ -171,7 +171,9 @@ class OrdineController extends Controller
                     // Stato iniziale: passa a "In lavorazione" (1), registra la data di inizio e assegna l'ordine all'operatore corrente
                     case 0:
                         $ordine->update(['stato' => 1, 'data_inizioLavorazione' => now(), 'IDoperatore' => $request->user()->IDoperatore]);
+
                         return redirect('/operatore/dashboard?tipo=nuovi')->with('success', 'Hai preso in carico il lavoro.');
+
 
                     // Stato "In lavorazione": passa a "Spedito" (2), registra la data di spedizione
                     case 1:
@@ -179,6 +181,7 @@ class OrdineController extends Controller
 
                         // Dispatch asincrono per inviare un'email di notifica al cliente
                         dispatch(new TermineOrdineMailJob(['mailCliente' => $ordine->cliente->emailcliente, 'numero' => $ordine->numero, 'anno' => Carbon::parse($ordine->data)->format('Y'), 'nomeOperatore' => $ordine->operatore->nome, 'cognomeOperatore' => $ordine->operatore->cognome]));
+
                         return redirect('/operatore/dashboard?tipo=inCorso')->with('success', 'Hai spedito la lavorazione.');
 
                     default:
