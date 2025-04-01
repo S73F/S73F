@@ -1,5 +1,5 @@
-import { Link, usePage } from "@inertiajs/react";
-import React, { useCallback, useState } from "react";
+import { Link } from "@inertiajs/react";
+import React from "react";
 import {
     ListItem,
     ListItemButton,

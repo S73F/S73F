@@ -2,7 +2,15 @@ import { useForm, usePage } from "@inertiajs/react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-// Hook personalizzato per gestire il login
+/**
+ * Hook personalizzato per gestire il login.
+ *
+ * @returns {Object} Oggetto contenente lo stato del form e le funzioni per gestirlo.
+ * @returns {Object} return.data - Stato del form contenente i dati di login.
+ * @returns {boolean} return.processing - Indica se la richiesta è in elaborazione.
+ * @returns {Function} return.handleChange - Gestisce il cambiamento nei campi di input.
+ * @returns {Function} return.handleSubmit - Gestisce l'invio del form.
+ */
 export const useLogin = () => {
     // Ottiene i messaggi flash dalla risposta del server
     const { flash } = usePage().props;
@@ -36,12 +44,18 @@ export const useLogin = () => {
         password: "",
     });
 
-    // Funzione per gestire il cambiamento dei campi del form
+    /**
+     * Funzione per gestire il cambiamento dei campi del form.
+     * @param {Event} e - Evento del change input.
+     */
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
     };
 
-    // Funzione per gestire l'invio del form
+    /**
+     * Funzione per gestire l'invio del form.
+     * @param {Event} e - Evento del submit form.
+     */
     const handleSubmit = (e) => {
         e.preventDefault(); // Previene il comportamento predefinito del form
 

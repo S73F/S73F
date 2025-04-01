@@ -1,6 +1,18 @@
 import { useForm } from "@inertiajs/react";
 
-// Hook personalizzato per la creazione di un cliente
+/**
+ * Hook personalizzato per la creazione di un cliente.
+ *
+ * @param {Object} params - Parametri del hook.
+ * @param {Object} params.modalRef - Riferimento alla modale di creazione cliente.
+ * @returns {Object} Oggetto con funzioni per gestire il form del cliente.
+ * @returns {Object} return.data - Stato del form contenente i dati del cliente.
+ * @returns {boolean} return.processing - Indica se la richiesta è in elaborazione.
+ * @returns {Function} return.handleChange - Gestisce il cambiamento dei campi del form.
+ * @returns {Function} return.handleSubmit - Invia il form per creare un nuovo cliente.
+ * @returns {Function} return.handleDelete - Resetta i dati del form.
+ * @returns {Function} return.closeModal - Chiude la modale di creazione cliente.
+ */
 export const useCreazioneCliente = ({ modalRef }) => {
     // Stato del form gestito con useForm di Inertia
     const { data, setData, post, processing } = useForm({
