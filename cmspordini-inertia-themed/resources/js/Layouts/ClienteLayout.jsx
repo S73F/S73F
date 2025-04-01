@@ -1,5 +1,5 @@
 import { Link } from "@inertiajs/react";
-import React from "react";
+import React, { useMemo } from "react";
 import {
     ListItem,
     ListItemButton,
@@ -19,28 +19,31 @@ import { useLayout } from "../Hooks/Layouts/useLayout";
  * @returns {JSX.Element} Il layout del cliente con il menu laterale.
  */
 export default function ClienteLayout({ children }) {
-    const { handleDrawerToggle, open } = useLayout(); // Recupera la funzione per aprire/chiudere il drawer (menu laterale) e lo stato di apertura del drawer
+    const { handleDrawerToggle, open, handleLogout } = useLayout(); // Recupera la funzione per aprire/chiudere il drawer (menu laterale) e lo stato di apertura del drawer
 
     /**
      * Componente per il menu laterale, che contiene un elemento di lista per lo storico ordini.
      * @returns {JSX.Element} L'elemento di lista con il link per lo storico ordini.
      */
-    const ListItems = (
-        <ListItem disablePadding>
-            <ListItemButton
-                onClick={handleDrawerToggle} // Gestisce l'apertura/chiusura del drawer al click
-                component={Link}
-                href="/cliente/ordini/storico" // Link alla pagina "Storico ordini"
-            >
-                <ListItemIcon>
-                    {/* Icona che rappresenta lo storico ordini */}
-                    <HistoryIcon />
-                </ListItemIcon>
+    const ListItems = useMemo(
+        () => (
+            <ListItem disablePadding>
+                <ListItemButton
+                    onClick={handleDrawerToggle} // Gestisce l'apertura/chiusura del drawer al click
+                    component={Link}
+                    href="/cliente/ordini/storico" // Link alla pagina "Storico ordini"
+                >
+                    <ListItemIcon>
+                        {/* Icona che rappresenta lo storico ordini */}
+                        <HistoryIcon />
+                    </ListItemIcon>
 
-                {/* Testo della voce di menu */}
-                <ListItemText primary="Storico ordini" />
-            </ListItemButton>
-        </ListItem>
+                    {/* Testo della voce di menu */}
+                    <ListItemText primary="Storico ordini" />
+                </ListItemButton>
+            </ListItem>
+        ),
+        []
     );
 
     /**
@@ -53,6 +56,7 @@ export default function ClienteLayout({ children }) {
             ListItems={ListItems} // Passa gli elementi del menu laterale di "cliente" al Layout predefinito
             open={open}
             handleDrawerToggle={handleDrawerToggle}
+            handleLogout={handleLogout}
         >
             {/* Renderizza i componenti figli passati al ClienteLayout */}
             {children}

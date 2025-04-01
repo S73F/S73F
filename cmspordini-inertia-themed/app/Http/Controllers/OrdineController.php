@@ -17,11 +17,6 @@ use Illuminate\Support\Facades\Storage;
 
 class OrdineController extends Controller
 {
-    public function showCreazione()
-    {
-        return Inertia::render("Cliente/CreazioneOrdine");
-    }
-
     public function creazione(Request $request)
     {
 
@@ -99,39 +94,6 @@ class OrdineController extends Controller
             $errors = $e->validator->errors();
             return redirect()->back()->with(["error" => "Errore durante la creazione dell'ordine", "validation_errors" => $errors])->withInput();
         }
-    }
-
-    public function getStorico($tempo = null)
-    {
-        $ordini = [];
-
-        if ($tempo !== null) {
-            $idCliente = Auth::guard('cliente')->user()->IDcliente;
-
-            $query = Ordine::where('IDcliente', $idCliente);
-
-            if ($tempo !== "tutto") {
-                $query->whereBetween("data", [now()->subDays($tempo), now()]);
-            }
-
-            $ordini = $query->select(
-                'IDordine',
-                'data',
-                'medicoOrdinante',
-                'PazienteNome',
-                'PazienteCognome',
-                'IndirizzoSpedizione',
-                'data_inizioLavorazione',
-                'stato',
-                'data_spedizione',
-                'file_fin'
-            )->orderBy('data', "desc")->get();
-
-            return Inertia::render('Cliente/StoricoOrdini', ['ordini' => $ordini]);
-        } else {
-            return Inertia::render('Cliente/StoricoOrdini');
-        }
-
     }
 
     public function getNumeroLavori()

@@ -28,6 +28,7 @@ export const useLayout = () => {
         // Gestisce i messaggi flash di successo
         if (flash?.success) {
             toast.success(flash.success);
+
             history.replaceState({}, document.title); // Rimuove il messaggio dalla cronologia per evitare la ricomparsa al refresh
         }
 
@@ -53,16 +54,19 @@ export const useLayout = () => {
      *
      * @param {Event} event - L'evento di invio del form di logout.
      */
-    const handleLogout = (event) => {
-        event.preventDefault();
+    const handleLogout = useCallback(
+        (event) => {
+            event.preventDefault();
 
-        // Esegue una richiesta POST per il logout, corrispondente al tipo di utente loggato
-        user.IDcliente
-            ? post("/cliente/logout")
-            : user.IDoperatore
-            ? post("/operatore/logout")
-            : null;
-    };
+            // Esegue una richiesta POST per il logout, corrispondente al tipo di utente loggato
+            user.IDcliente
+                ? post("/cliente/logout")
+                : user.IDoperatore
+                ? post("/operatore/logout")
+                : null;
+        },
+        [post, user]
+    );
 
     return { handleDrawerToggle, open, setOpen, handleLogout };
 };

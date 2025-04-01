@@ -19,9 +19,9 @@ Route::group(['middleware' => RedirectIfAuthenticated::class], function () {
 
 Route::group(['middleware' => "auth:cliente"], function () {
     Route::get("/cliente/dashboard", [ClienteController::class, "showDashboard"])->name("clienteDashboard");
-    Route::get("/cliente/ordini/creazione", [OrdineController::class, "showCreazione"])->name("paginaCreazioneOrdine");
+    Route::get("/cliente/ordini/creazione", [ClienteController::class, "showCreazioneOrdine"])->name("paginaCreazioneOrdine");
     Route::post('/cliente/ordini/creazione', [OrdineController::class, 'creazione'])->name('creazioneOrdine');
-    Route::get("/cliente/ordini/storico/{tempo?}", [OrdineController::class, "getStorico"])->name("tabellaStoricoOrdini");
+    Route::get("/cliente/ordini/storico/{tempo?}", [ClienteController::class, "getStoricoOrdini"])->name("tabellaStoricoOrdini");
     Route::get('/cliente/ordini/pdf/{id}', [OrdineController::class, 'generaPDF'])->name('clienteGeneraPDF');
     Route::get('/cliente/ordini/download/{id}', [OrdineController::class, 'downloadFile'])->name('downloadFileCliente');
     Route::get('/cliente/ordini/download-finale/{id}', [OrdineController::class, 'downloadFileFinale'])->name('downloadFileFinaleCliente');

@@ -1,5 +1,5 @@
-import { Link, usePage } from "@inertiajs/react";
-import React, { useCallback, useState } from "react";
+import { Link } from "@inertiajs/react";
+import React, { useMemo } from "react";
 import {
     ListItem,
     ListItemButton,
@@ -22,43 +22,46 @@ import { useLayout } from "../Hooks/Layouts/useLayout";
  * @returns {JSX.Element} Il layout dell'operatore con il menu laterale.
  */
 export default function OperatoreLayout({ children }) {
-    const { handleDrawerToggle, open } = useLayout(); // Recupera la funzione per aprire/chiudere il drawer (menu laterale) e lo stato di apertura del drawer
+    const { handleDrawerToggle, open, handleLogout } = useLayout(); // Recupera la funzione per aprire/chiudere il drawer (menu laterale) e lo stato di apertura del drawer
 
     /**
      * Componente del menu laterale contenente i link agli ordini dei clienti e alla gestione clienti.
      * @returns {JSX.Element} Gli elementi di lista con i link agli ordini e alla gestione clienti.
      */
-    const ListItems = (
-        <>
-            <ListItem disablePadding>
-                <ListItemButton
-                    onClick={handleDrawerToggle} // Gestisce l'apertura/chiusura del drawer al click
-                    component={Link}
-                    href="/operatore/ordini-clienti" // Link alla pagina "Ordini clienti"
-                >
-                    <ListItemIcon>
-                        {/* Icona che rappresenta gli ordini dei clienti */}
-                        <HistoryIcon />
-                    </ListItemIcon>
+    const ListItems = useMemo(
+        () => (
+            <>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={handleDrawerToggle} // Gestisce l'apertura/chiusura del drawer al click
+                        component={Link}
+                        href="/operatore/ordini-clienti" // Link alla pagina "Ordini clienti"
+                    >
+                        <ListItemIcon>
+                            {/* Icona che rappresenta gli ordini dei clienti */}
+                            <HistoryIcon />
+                        </ListItemIcon>
 
-                    {/* Testo della voce di menu */}
-                    <ListItemText primary="Ordini clienti" />
-                </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-                <ListItemButton
-                    onClick={handleDrawerToggle}
-                    component={Link}
-                    href="/operatore/gestione-clienti"
-                >
-                    <ListItemIcon>
-                        {/* Icona che rappresenta la gestione clienti */}
-                        <PersonIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Gestione clienti" />
-                </ListItemButton>
-            </ListItem>
-        </>
+                        {/* Testo della voce di menu */}
+                        <ListItemText primary="Ordini clienti" />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton
+                        onClick={handleDrawerToggle}
+                        component={Link}
+                        href="/operatore/gestione-clienti"
+                    >
+                        <ListItemIcon>
+                            {/* Icona che rappresenta la gestione clienti */}
+                            <PersonIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Gestione clienti" />
+                    </ListItemButton>
+                </ListItem>
+            </>
+        ),
+        []
     );
 
     /**
@@ -71,6 +74,7 @@ export default function OperatoreLayout({ children }) {
             ListItems={ListItems} // Passa gli elementi del menu laterale di "operatore" al Layout predefinito
             open={open}
             handleDrawerToggle={handleDrawerToggle}
+            handleLogout={handleLogout}
         >
             {children}
         </Layout>

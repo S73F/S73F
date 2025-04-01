@@ -95,9 +95,9 @@ export default function Layout({
     ListItems,
     open,
     handleDrawerToggle,
+    handleLogout,
 }) {
     const theme = useTheme(); // Recupera il tema corrente
-    const { handleLogout } = useLayout(); // Recupera la funzione di logout personalizzata
 
     /**
      * Contenuto del drawer, memorizzato tramite useMemo per evitare ricalcoli inutili.

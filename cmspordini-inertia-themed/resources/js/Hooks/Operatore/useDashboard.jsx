@@ -17,7 +17,7 @@ export const useDashboard = () => {
      * @param {string} tipoLavori - Il tipo di lavori da visualizzare sulla dashboard.
      */
     const handleLavori = useCallback((tipoLavori) => {
-        // Imposta il tipo di lavoro in caricamento (utile per il controllo di uno spinner o di un bottone)
+        // Imposta il tipo di lavoro in caricamento (utile per l'animazione del bottone)
         setLoadingButton(tipoLavori);
 
         // Naviga verso la pagina della dashboard con i dati relativi al tipo di lavoro selezionato
@@ -25,7 +25,7 @@ export const useDashboard = () => {
             preserveScroll: true,
             preserveState: true,
             replace: true,
-            data: { tipo: tipoLavori }, // Passa il tipo di lavori come parametro alla pagina
+            data: { tipo: tipoLavori }, // Passa il tipo di lavori come query string alla pagina
             only: ["tipo", "lavori"], // Limita l'aggiornamento dei dati alle proprietà "tipo" e "lavori", evitando il ricaricamento dell'intera pagina
             onFinish: () => setLoadingButton(null),
         });

@@ -52,7 +52,7 @@ export default function CreazioneOrdine({ InputLabelProps = {} }) {
                     <Grid2
                         container
                         rowSpacing={{ xs: 3, md: 4 }}
-                        columnSpacing={{ xs: 1, md: 2, md: 4 }}
+                        columnSpacing={{ xs: 1, sm: 2, md: 4 }}
                     >
                         <Grid2 size={12}>
                             <TextField

@@ -44,15 +44,11 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        foreach (['cliente', 'operatore'] as $guard) {
-            if (Auth::guard($guard)->check()) {
-                Auth::guard($guard)->logout();
+        Auth()->logout();
 
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-                return redirect('/login')->with("success", "Logout effettuato con successo");
-            }
-        }
+        return redirect('/login')->with("success", "Logout effettuato con successo");
     }
 }

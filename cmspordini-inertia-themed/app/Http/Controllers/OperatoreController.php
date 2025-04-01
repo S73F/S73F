@@ -12,6 +12,12 @@ use Inertia\Inertia;
 
 class OperatoreController extends Controller
 {
+    /**
+     * Mostra la dashboard dell'operatore con i lavori da gestire.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Inertia\Response
+     */
     public function showDashboard(Request $request)
     {
         $tipo = $request->query('tipo', "nuovi");
