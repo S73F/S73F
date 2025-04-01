@@ -12,22 +12,34 @@ import {
 } from "../TableFields";
 import { creazioneClienteBtn } from "../../styles/appStyles";
 
+/**
+ * Componente che gestisce la visualizzazione e l'interazione con la tabella dei clienti.
+ * Mostra una lista di clienti con la possibilità di aggiungerne di nuovi,
+ * modificare quelli già esistenti oppure eliminarli.
+ *
+ * @param {Array} clienti - Lista dei clienti da visualizzare nella tabella
+ * @returns {JSX.Element} Una sezione che contiene la tabella dei clienti e un pulsante per aggiungere un nuovo cliente
+ */
 export default function GestioneClientiTable({ clienti }) {
+    // Memoizzazione della cella della "Ragione Sociale" per evitare ricalcoli inutili durante il rendering
     const ragioneSocialeCell = useMemo(
         () => (params) => RagioneSociale(params.row),
         []
     );
 
+    // Memoizzazione della cella dell'email del cliente
     const emailClienteCell = useMemo(
         () => (params) => EmailCliente(params.row),
         []
     );
 
+    // Memoizzazione della cella delle azioni per il cliente (modifica o eliminazione)
     const azioniClienteCell = useMemo(
         () => (params) => AzioniCliente(params.row),
         []
     );
 
+    // Definizione delle colonne della tabella usando memoizzazione
     const columns = useMemo(
         () => [
             TableColumn(
@@ -42,20 +54,25 @@ export default function GestioneClientiTable({ clienti }) {
             TableColumn("Username", "Username", 100),
             TableColumn("Azioni", "Azioni", 100, "", azioniClienteCell),
         ],
-        []
+        [] // Le colonne sono memoizzate una sola volta all'inizio
     );
 
+    // Mappatura dei dati dei clienti con una funzione specifica per la gestione della lista
     const mappedClienti = useMemo(() => mapClienti(clienti), [clienti]);
 
     return (
         <>
+            {/* Link per aprire la modale di creazione cliente */}
             <Link
                 component={ModalLink}
                 href={`/operatore/gestione-clienti/creazione`}
                 title="Crea cliente"
                 sx={creazioneClienteBtn}
             >
+                {/* Icona di aggiunta per il pulsante */}
                 <AddBoxIcon sx={{ width: "40px", height: "40px" }} />
+
+                {/* Testo che appare sotto l'icona */}
                 <Typography
                     component="h3"
                     variant="h3"
@@ -65,6 +82,8 @@ export default function GestioneClientiTable({ clienti }) {
                     Crea cliente
                 </Typography>
             </Link>
+
+            {/* Tabella dei clienti con i dati passati */}
             <DataTable.Table rows={mappedClienti} columns={columns} />
         </>
     );

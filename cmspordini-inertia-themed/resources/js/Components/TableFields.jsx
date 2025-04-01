@@ -17,6 +17,18 @@ import { Box, Link, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
 import { StatusChip } from "./StatusChip";
 
+/**
+ * Crea una colonna della tabella con la configurazione specificata.
+ *
+ * @param {string} field - Il campo per il quale viene creata la colonna.
+ * @param {string} headerName - Il nome della colonna da visualizzare nell'intestazione.
+ * @param {number} minWidth - La larghezza minima della colonna.
+ * @param {number} [maxWidth] - La larghezza massima della colonna (opzionale).
+ * @param {Function} [renderCell] - Una funzione opzionale per personalizzare il rendering delle celle della colonna.
+ * @param {boolean} [sortable=true] - Indica se la colonna è ordinabile (default è true).
+ * @param {boolean} [filterable=true] - Indica se la colonna è filtrabile (default è true).
+ * @returns {object} - L'oggetto di configurazione della colonna.
+ */
 export const TableColumn = (
     field,
     headerName,
@@ -26,17 +38,25 @@ export const TableColumn = (
     sortable = true,
     filterable = true
 ) => ({
-    ...(field && { field: field }),
+    field: field,
     headerName: headerName,
-    flex: 1,
+    flex: 1, // Imposta la larghezza flessibile della colonna
     minWidth: minWidth,
-    ...(maxWidth && { maxWidth }),
+    ...(maxWidth && { maxWidth }), // Imposta la larghezza massima, se fornita
     sortable: sortable,
     filterable: filterable,
-    headerClassName: "headerColumn",
-    ...(renderCell && { renderCell }),
+    headerClassName: "headerColumn", // Classe CSS per l'intestazione
+    ...(renderCell && { renderCell }), // Aggiunge la funzione renderCell, se fornita
 });
 
+/**
+ * Componente per il testo all'interno di un link che apre una modale.
+ *
+ * @param {object} props - Le props del componente.
+ * @param {string} props.href - L'URL di destinazione del link.
+ * @param {ReactNode} props.children - Il contenuto del link.
+ * @returns {JSX.Element} - Un componente Typography che avvolge il link.
+ */
 export const TableModalText = ({ href, children }) => {
     return (
         <Typography
@@ -50,6 +70,18 @@ export const TableModalText = ({ href, children }) => {
     );
 };
 
+/**
+ * Componente per un bottone all'interno della tabella che può essere un link o un bottone normale.
+ *
+ * @param {object} props - Le props del componente.
+ * @param {string} props.btnType - Il tipo di bottone (es. "button", "a", "ModalLink").
+ * @param {string} props.btnTitle - Il titolo del bottone (per l'attributo "title").
+ * @param {object} props.icon - L'icona da visualizzare nel bottone.
+ * @param {Function} [props.onClick] - La funzione da chiamare al clic del bottone (opzionale).
+ * @param {string} [props.href] - L'URL di destinazione se il bottone è un link (opzionale).
+ * @param {string} [props.target="_blank"] - L'attributo target per il link (default è "_blank").
+ * @returns {JSX.Element} - Un componente Link o Button che visualizza l'icona.
+ */
 export const TableFieldButton = ({
     btnType,
     btnTitle,
@@ -74,6 +106,12 @@ export const TableFieldButton = ({
     );
 };
 
+/**
+ * Renderizza il nome della ragione sociale come un link che apre la modale per la modifica del cliente.
+ *
+ * @param {object} rowParams - I parametri della riga che contengono i dati.
+ * @returns {JSX.Element} - Un link che apre una modale per la modifica della ragione sociale.
+ */
 export const RagioneSociale = (rowParams) => {
     return (
         <TableModalText
@@ -84,6 +122,12 @@ export const RagioneSociale = (rowParams) => {
     );
 };
 
+/**
+ * Renderizza il medico e la ragione sociale come un blocco di testo con due righe.
+ *
+ * @param {object} rowParams - I parametri della riga che contengono i dati.
+ * @returns {JSX.Element} - Un blocco di testo con il medico e la ragione sociale.
+ */
 export const MedicoAndRagioneSociale = (rowParams) => {
     return (
         <Box display="flex" flexDirection="column" gap={0.5}>
@@ -99,6 +143,12 @@ export const MedicoAndRagioneSociale = (rowParams) => {
     );
 };
 
+/**
+ * Renderizza lo stato del lavoro come un chip che indica se è "Nuovo", "In Corso" o "Spedito".
+ *
+ * @param {object} rowParams - I parametri della riga che contengono lo stato.
+ * @returns {JSX.Element} - Un chip che rappresenta lo stato del lavoro.
+ */
 export const StatoLavoro = (rowParams) => {
     return (
         <>
@@ -109,6 +159,12 @@ export const StatoLavoro = (rowParams) => {
     );
 };
 
+/**
+ * Renderizza la data di inizio lavorazione con eventuali note di modifica.
+ *
+ * @param {object} rowParams - I parametri della riga che contengono i dati.
+ * @returns {JSX.Element} - Un blocco di testo che mostra la data di inizio lavorazione ed eventuali modifiche.
+ */
 export const DataInizioLavorazione = (rowParams) => {
     return (
         <Box display="flex" flexDirection="column" gap={0.5}>
@@ -133,6 +189,12 @@ export const DataInizioLavorazione = (rowParams) => {
     );
 };
 
+/**
+ * Renderizza l'email del cliente come un link mailto.
+ *
+ * @param {object} rowParams - I parametri della riga che contengono l'email.
+ * @returns {JSX.Element} - Un link mailto con l'email del cliente.
+ */
 export const EmailCliente = (rowParams) => {
     return (
         <Link
@@ -145,6 +207,14 @@ export const EmailCliente = (rowParams) => {
     );
 };
 
+/**
+ * Aggiunge i bottoni per gli allegati di un ordine, con opzioni diverse in base al tipo di utente.
+ *
+ * @param {object} rowParams - I parametri della riga che contengono gli allegati.
+ * @param {string} user - Il tipo di utente (es. "operatore" o "cliente").
+ * @param {Function} handleFile - La funzione per gestire il download dei file.
+ * @returns {JSX.Element} - I bottoni per visualizzare e scaricare i file.
+ */
 export const Allegati = (rowParams, user, handleFile) => {
     return (
         <>
@@ -180,6 +250,14 @@ export const Allegati = (rowParams, user, handleFile) => {
     );
 };
 
+/**
+ * Renderizza i bottoni relativi alle azioni disponibili su un ordine, in base al tipo di lavoro selezionato.
+ *
+ * @param {object} rowParams - I parametri della riga che contengono le informazioni dell'ordine.
+ * @param {string} tipoLavori - Il tipo di lavoro ("nuovi" o "inCorso").
+ * @param {Function} handleIncarico - La funzione per gestire l'incarico.
+ * @returns {JSX.Element} - I bottoni per le azioni su un ordine.
+ */
 export const Azioni = (rowParams, tipoLavori, handleIncarico) => {
     if (tipoLavori === "nuovi") {
         return (
@@ -232,6 +310,12 @@ export const Azioni = (rowParams, tipoLavori, handleIncarico) => {
     }
 };
 
+/**
+ * Renderizza i bottoni per le azioni disponibili su un cliente, come modifica ed eliminazione.
+ *
+ * @param {object} rowParams - I parametri della riga che contengono le informazioni del cliente.
+ * @returns {JSX.Element} - I bottoni per modificare o eliminare un cliente.
+ */
 export const AzioniCliente = (rowParams) => {
     return (
         <>
@@ -255,6 +339,12 @@ export const AzioniCliente = (rowParams) => {
     );
 };
 
+/**
+ * Mappa gli ordini e li trasforma in un array di oggetti con le proprietà richieste.
+ *
+ * @param {Array} ordini - L'array degli ordini da mappare.
+ * @returns {Array} - Un array di oggetti mappati da usare nella tabella.
+ */
 export const mapOrders = (ordini) =>
     ordini.map((ordine) => ({
         id: ordine.IDordine,
@@ -291,6 +381,12 @@ export const mapOrders = (ordini) =>
         ...(ordine.note_ulti_mod && { note_ulti_mod: ordine.note_ulti_mod }),
     }));
 
+/**
+ * Mappa i clienti e li trasforma in un array di oggetti con le proprietà richieste.
+ *
+ * @param {Array} clienti - L'array dei clienti da mappare.
+ * @returns {Array} - Un array di oggetti mappati da usare nella tabella.
+ */
 export const mapClienti = (clienti) =>
     clienti.map((cliente) => ({
         id: cliente.IDcliente,

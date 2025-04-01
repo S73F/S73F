@@ -6,9 +6,17 @@ import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
 import { Content } from "../Content";
 import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
 
+/**
+ * Componente per la modale di creazione di un nuovo cliente.
+ * Gestisce l'invio e la validazione del modulo per la creazione di un cliente.
+ * Include campi per la ragione sociale, nome, cognome, partita IVA, indirizzo, città, CAP, provincia, email, username e password.
+ *
+ * @returns {JSX.Element} La UI del modulo per la creazione di un cliente.
+ */
 export default function CreazioneCliente() {
-    const modalRef = useRef(null);
+    const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
 
+    // Stato e funzioni per la gestione del modulo
     const {
         data,
         processing,
@@ -20,7 +28,10 @@ export default function CreazioneCliente() {
 
     return (
         <Modal ref={modalRef}>
+            {/* Titolo della modale */}
             <Content.Layout title={"Creazione cliente"} />
+
+            {/* Contenuto della modale */}
             <Box
                 component="form"
                 onSubmit={handleSubmit}
@@ -154,6 +165,7 @@ export default function CreazioneCliente() {
                     </Grid2>
                 </Grid2>
 
+                {/* Stack per i pulsanti del modulo */}
                 <Stack sx={formBtnStack}>
                     <Button
                         variant="contained"

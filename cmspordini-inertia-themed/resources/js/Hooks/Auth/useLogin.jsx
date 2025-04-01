@@ -30,12 +30,12 @@ export const useLogin = () => {
             // Se ci sono errori di validazione, li mostra come notifiche individuali
             Object.values(flash.validation_errors).forEach((errors) => {
                 errors.forEach((error) => {
-                    toast.error(error);
+                    toast.error(error); // Mostra ogni errore di validazione
                 });
             });
             history.replaceState({}, document.title);
         }
-    }, [flash]); // L'effetto si attiva ogni volta che `flash` cambia
+    }, [flash]); // L'effetto si attiva ogni volta che "flash" cambia
 
     // Inizializza il form con Inertia.js, con dati iniziali vuoti
     const { data, processing, setData, post } = useForm({

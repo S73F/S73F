@@ -16,8 +16,7 @@ import { DataTable } from "../../Components/Tables/DataTable";
  * @returns {JSX.Element} La UI per la gestione degli ordini clienti.
  */
 export default function OrdiniClienti({ clienti, ordini }) {
-    // Custom hook per gestire il cambio di selezione del cliente
-    const { handleChange } = useOrdiniClienti();
+    const { handleChange } = useOrdiniClienti(); // Custom hook per gestire il cambio di selezione del cliente
 
     return (
         <Content.Container>
