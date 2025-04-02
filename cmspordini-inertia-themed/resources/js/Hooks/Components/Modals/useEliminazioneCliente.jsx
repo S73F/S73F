@@ -12,20 +12,20 @@ import { router } from "@inertiajs/react";
  */
 export const useEliminazioneCliente = ({ cliente, modalRef }) => {
     /**
-     * Funzione per eliminare un cliente effettuando una richiesta DELETE al server.
-     * @param {Event} e - Evento del form.
+     * Effettua una richiesta DELETE per eliminare il cliente.
+     *
+     * @param {Event} e - Evento del submit form.
      */
     const handleDelete = (e) => {
         e.preventDefault();
 
-        // Effettua la richiesta DELETE utilizzando Inertia.js
         router.delete(
             `/operatore/gestione-clienti/eliminazione/${cliente.IDcliente}`,
             {
                 only: ["clienti", "flash"], // Aggiorna solo la lista clienti e i messaggi flash
                 preserveScroll: true,
                 preserveState: true,
-                onSuccess: () => closeModal(), // Chiude la modale in caso di successo.
+                onSuccess: () => closeModal(),
                 onError: (errors) => {
                     console.log(errors);
                 },
@@ -34,10 +34,10 @@ export const useEliminazioneCliente = ({ cliente, modalRef }) => {
     };
 
     /**
-     * Chiude la modale accedendo direttamente al suo elemento DOM tramite il riferimento "modalRef".
+     * Chiude la modale di conferma eliminazione.
      */
     const closeModal = () => {
-        modalRef.current.close();
+        modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     };
 
     return { handleDelete, closeModal };

@@ -15,7 +15,7 @@ import { useState } from "react";
  * @returns {Function} return.closeModal - Funzione per chiudere la modale di caricamento lavorazione.
  */
 export const useLavorazione = ({ modalRef }) => {
-    const [fileName, setFileName] = useState(""); // Stato per memorizzare il nome del file caricato
+    const [fileName, setFileName] = useState(""); // Stato per il nome del file selezionato
 
     // Inizializza il form con i dati della lavorazione
     const { setData, post, processing } = useForm({
@@ -24,37 +24,27 @@ export const useLavorazione = ({ modalRef }) => {
     });
 
     /**
-     * Funzione per aggiornare il campo "userfile" con il file selezionato.
-     * @param {Event} event - Evento del file input.
-     */
-    const handleFile = (event) => {
-        event.preventDefault();
-        setData("userfile", event.target.files[0]);
-    };
-
-    /**
-     * Funzione che gestisce il cambiamento del file selezionato.
+     * Gestisce il cambiamento del file selezionato.
+     *
      * @param {Event} event - Evento del file input.
      */
     const handleFileChange = (event) => {
-        if (event.target.files.length > 0) {
-            setFileName(event.target.files[0].name);
-        } else {
-            setFileName("");
-        }
-        handleFile(event);
+        const file = event.target.files[0] || null;
+        setFileName(file ? file.name : null);
+        setData("userfile", file);
     };
 
     /**
-     * Funzione per gestire l'invio del form e caricare la lavorazione.
+     * Invia il form per caricare la lavorazione associata a un ordine.
+     *
      * @param {Event} e - Evento del submit form.
-     * @param {number|string} IDordine - ID dell'ordine a cui associare la lavorazione.
+     * @param {number|string} IDordine - ID dell'ordine da aggiornare.
      */
     const handleLavorazione = (e, IDordine) => {
         e.preventDefault();
         post(`/operatore/ordini-clienti/caricamento-lavorazione/${IDordine}`, {
-            only: ["lavori", "flash"],
-            forceFormData: true, // Indica che è presente un file
+            only: ["lavori", "flash"], // Aggiorna solo i dati necessari
+            forceFormData: true, // Necessario per gestire l'upload del file
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -67,8 +57,9 @@ export const useLavorazione = ({ modalRef }) => {
     };
 
     /**
-     * Funzione per salvare il contenuto dell'editor Tiptap.
-     * @param {string} tipo - Tipo di contenuto da salvare.
+     * Salva il contenuto dell'editor Tiptap nel form.
+     *
+     * @param {string} tipo - Tipo di contenuto da salvare (es. "note_int").
      * @param {string} html - Contenuto HTML dell'editor.
      */
     const handleEditorContentSave = (tipo, html) => {
@@ -76,10 +67,10 @@ export const useLavorazione = ({ modalRef }) => {
     };
 
     /**
-     * Funzione per chiudere la modale di caricamento lavorazione.
+     * Chiude la modale di caricamento lavorazione in modo sicuro.
      */
     function closeModal() {
-        modalRef.current.close();
+        modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     }
 
     return {

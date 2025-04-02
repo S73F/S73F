@@ -14,7 +14,6 @@ import { useForm } from "@inertiajs/react";
  * @returns {Function} return.closeModal - Chiude la modale di creazione cliente.
  */
 export const useCreazioneCliente = ({ modalRef }) => {
-    // Stato del form gestito con useForm di Inertia
     const { data, setData, post, processing } = useForm({
         ragione_sociale: "",
         nome: "",
@@ -29,26 +28,36 @@ export const useCreazioneCliente = ({ modalRef }) => {
         password: "",
     });
 
-    // Funzione per gestire il cambiamento dei campi del form
+    /**
+     * Gestisce il cambiamento dei campi di input aggiornando lo stato del form.
+     *
+     * @param {Event} e - Evento di input change.
+     */
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
     };
 
-    // Funzione per inviare il form e creare un nuovo cliente
+    /**
+     * Invia il form per creare un nuovo cliente.
+     *
+     * @param {Event} e - Evento di submit del form.
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
         post("/operatore/gestione-clienti/creazione", {
             only: ["clienti", "flash"], // Ricarica solo i dati relativi ai clienti e ai messaggi flash
             preserveScroll: true,
             preserveState: true,
-            onSuccess: () => closeModal(), // Chiude la modale al successo della richiesta
+            onSuccess: () => closeModal(),
             onError: () => {
                 console.log("Errore nella creazione del cliente");
             },
         });
     };
 
-    // Funzione per resettare i dati del form
+    /**
+     * Resetta i dati del form, riportandolo allo stato iniziale.
+     */
     const handleDelete = () => {
         setData({
             ragione_sociale: "",
@@ -65,7 +74,9 @@ export const useCreazioneCliente = ({ modalRef }) => {
         });
     };
 
-    // Funzione per chiudere la modale di creazione cliente
+    /**
+     * Chiude la modale di creazione cliente.
+     */
     const closeModal = () => {
         modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     };

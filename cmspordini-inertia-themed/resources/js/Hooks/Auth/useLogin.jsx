@@ -14,15 +14,14 @@ import { toast } from "react-toastify";
 export const useLogin = () => {
     const { flash } = usePage().props; // Ottiene i messaggi flash dalla risposta del server
 
-    // Effetto che ascolta i cambiamenti nei messaggi flash e mostra le notifiche
     useEffect(() => {
         if (flash?.success) {
-            toast.success(flash.success); // Mostra un messaggio di successo
-            history.replaceState({}, document.title); // Rimuove il messaggio dalla cronologia per evitare la ricomparsa al refresh
+            toast.success(flash.success);
+            history.replaceState({}, document.title); // Rimuove il messaggio dalla cronologia per evitare la ricomparsa al refresh della pagina
         }
 
         if (flash?.error) {
-            toast.error(flash.error); // Mostra un messaggio di errore
+            toast.error(flash.error);
             history.replaceState({}, document.title);
         }
 
@@ -30,14 +29,14 @@ export const useLogin = () => {
             // Se ci sono errori di validazione, li mostra come notifiche individuali
             Object.values(flash.validation_errors).forEach((errors) => {
                 errors.forEach((error) => {
-                    toast.error(error); // Mostra ogni errore di validazione
+                    toast.error(error);
                 });
             });
             history.replaceState({}, document.title);
         }
-    }, [flash]); // L'effetto si attiva ogni volta che "flash" cambia
+    }, [flash]);
 
-    // Inizializza il form con Inertia.js, con dati iniziali vuoti
+    // Inizializza il form con il form helper di Inertia.js
     const { data, processing, setData, post } = useForm({
         username: "",
         password: "",
@@ -58,7 +57,6 @@ export const useLogin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Controlla se i campi sono vuoti e mostra messaggi di errore appropriati
         !data.username && !data.password
             ? toast.error("I campi username e password sono obbligatori")
             : !data.username

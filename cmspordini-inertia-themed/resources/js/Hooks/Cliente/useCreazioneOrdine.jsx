@@ -18,11 +18,11 @@ import { toast } from "react-toastify";
  * @returns {boolean} return.processing - Indica se la richiesta è in elaborazione.
  */
 export const useCreazioneOrdine = () => {
-    const [editorKey, setEditorKey] = useState(0); // Stato per gestire la chiave dell'editor di testo Tiptap (utile per forzare un reset)
+    const [editorKey, setEditorKey] = useState(0); // Stato della chiave dell'editor di testo Tiptap (utile per forzarne il reset)
 
-    const [fileName, setFileName] = useState(""); // Stato per memorizzare il nome del file caricato
+    const [fileName, setFileName] = useState("");
 
-    // Inizializza il form con i dati dell'ordine
+    // Inizializza il form con i campi dell'ordine
     const { data, setData, post, processing } = useForm({
         medico_ordinante: "",
         paziente_nome: "",
@@ -34,7 +34,7 @@ export const useCreazioneOrdine = () => {
         ora_cons: "",
         piattaforma: "",
         note: "",
-        userfile: null, // Campo per il file allegato
+        userfile: null,
     });
 
     /**
@@ -46,24 +46,13 @@ export const useCreazioneOrdine = () => {
     };
 
     /**
-     * Funzione per aggiornare il campo `userfile` con il file selezionato.
+     * Funzione che gestisce il cambiamento del file selezionato.
      * @param {Event} e - Evento del change input file.
      */
-    const handleFile = (e) => {
-        setData("userfile", e.target.files[0]);
-    };
-
-    /**
-     * Funzione che gestisce il cambiamento del file selezionato.
-     * @param {Event} event - Evento del change input file.
-     */
-    const handleFileChange = (event) => {
-        if (event.target.files.length > 0) {
-            setFileName(event.target.files[0].name); // Salva il nome del file
-        } else {
-            setFileName(""); // Resetta il nome del file se non è selezionato
-        }
-        handleFile(event);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0] || null;
+        setFileName(file ? file.name : null);
+        setData("userfile", file);
     };
 
     /**
@@ -73,14 +62,13 @@ export const useCreazioneOrdine = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Se il file è stato caricato, invia il form con i dati
         if (fileName) {
             post("/cliente/ordini/creazione", {
-                preserveScroll: true, // Mantiene la posizione della pagina dopo l'invio
-                forceFormData: true, // Indica che è presente un file
+                preserveScroll: true,
+                forceFormData: true,
             });
         } else {
-            toast.error("Il caricamento del file allegato è obbligatorio"); // Mostra un errore se manca il file
+            toast.error("Il caricamento del file allegato è obbligatorio");
         }
     };
 
@@ -105,7 +93,7 @@ export const useCreazioneOrdine = () => {
             colore: "",
             data_cons: "",
             ora_cons: "",
-            userfile: null, // Resetta il file allegato
+            userfile: null,
         });
 
         // Incrementa la chiave dell'editor per forzarne il reset

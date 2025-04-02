@@ -9,27 +9,26 @@ import { useState, useCallback } from "react";
  * @returns {string|null} return.loadingButton - Stato che indica il tipo di lavoro in caricamento, o `null` se non c'è nessun lavoro in corso.
  */
 export const useDashboard = () => {
-    const [loadingButton, setLoadingButton] = useState(null); // Stato per memorizzare quale bottone è in caricamento
+    // Stato per tracciare quale lavoro è in fase di caricamento (utile per l'animazione del pulsante)
+    const [loadingButton, setLoadingButton] = useState(null);
 
     /**
-     * Funzione per gestire la selezione del tipo di lavori.
+     * Gestisce la selezione del tipo di lavori da visualizzare nella dashboard.
      *
-     * @param {string} tipoLavori - Il tipo di lavori da visualizzare sulla dashboard.
+     * @param {string} tipoLavori - Tipo di lavoro da visualizzare (ad esempio "nuovi", "in corso", ecc.)
      */
     const handleLavori = useCallback((tipoLavori) => {
-        // Imposta il tipo di lavoro in caricamento (utile per l'animazione del bottone)
         setLoadingButton(tipoLavori);
 
-        // Naviga verso la pagina della dashboard con i dati relativi al tipo di lavoro selezionato
         router.visit(`/operatore/dashboard`, {
             preserveScroll: true,
             preserveState: true,
             replace: true,
             data: { tipo: tipoLavori }, // Passa il tipo di lavori come query string alla pagina
-            only: ["tipo", "lavori"], // Limita l'aggiornamento dei dati alle proprietà "tipo" e "lavori", evitando il ricaricamento dell'intera pagina
+            only: ["tipo", "lavori"], // Ricarica solo i dati necessari
             onFinish: () => setLoadingButton(null),
         });
-    }, []); // La funzione viene memorizzata per evitare che venga ricreata ad ogni render
+    }, []);
 
     return {
         handleLavori,

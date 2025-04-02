@@ -24,7 +24,7 @@ export default function ModificaCliente({ cliente }) {
         placeholderData,
         handleChange,
         handleSubmit,
-        handleDelete,
+        handleReset,
         closeModal,
     } = useModificaCliente({ cliente, modalRef });
 
@@ -183,7 +183,7 @@ export default function ModificaCliente({ cliente }) {
                         variant="outlined"
                         color="secondary"
                         type="reset"
-                        onClick={handleDelete}
+                        onClick={handleReset}
                         sx={formBtnStyle}
                     >
                         Azzera campi

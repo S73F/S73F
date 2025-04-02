@@ -13,7 +13,7 @@ class LoginController extends Controller
     /**
      * Mostra il modulo di login.
      *
-     * @return \Inertia\Response
+     * @return \Inertia\Response - La vista del login.
      */
     public function showLoginForm()
     {

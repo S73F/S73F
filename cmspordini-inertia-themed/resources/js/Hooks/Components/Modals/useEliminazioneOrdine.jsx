@@ -13,13 +13,14 @@ import { router } from "@inertiajs/react";
  */
 export const useEliminazioneOrdine = ({ ordine, stato, modalRef }) => {
     /**
-     * Funzione per eliminare un ordine.
+     * Effettua una richiesta DELETE per eliminare un ordine.
+     *
      * @param {Event} e - Evento del submit form.
      */
     const handleDelete = (e) => {
         e.preventDefault();
         router.delete(`/operatore/lavori/eliminazione/${ordine}`, {
-            only: ["lavori", "flash", "numLavoriNuovi"],
+            only: ["lavori", "flash", "numLavoriNuovi"], // Aggiorna solo gli elementi necessari
             preserveScroll: true,
             preserveState: true,
             data: { stato: stato },
@@ -34,10 +35,10 @@ export const useEliminazioneOrdine = ({ ordine, stato, modalRef }) => {
     };
 
     /**
-     * Funzione per chiudere la modale di conferma eliminazione.
+     * Chiude la modale di conferma eliminazione in modo sicuro.
      */
     const closeModal = () => {
-        modalRef.current.close();
+        modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     };
 
     return { handleDelete, closeModal };

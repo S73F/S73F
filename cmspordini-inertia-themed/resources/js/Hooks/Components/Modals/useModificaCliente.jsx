@@ -31,7 +31,7 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
         password: "",
     });
 
-    // Dati placeholder basati sulle informazioni attuali del cliente
+    // Placeholder per i campi del form, utile nella UI per indicare i valori preesistenti
     const placeholderData = {
         ragione_sociale: cliente.ragione_sociale || "",
         nome: cliente.nome || "",
@@ -43,11 +43,12 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
         provincia: cliente.provincia || "",
         emailcliente: cliente.emailcliente || "",
         username: cliente.username || "",
-        password: "*************", // La password viene tralasciata per motivi di privacy
+        password: "*************", // Indica che la password esiste ma non è visibile, per motivi di privacy
     };
 
     /**
-     * Funzione per gestire il cambiamento dei campi del form.
+     * Gestisce il cambiamento dei campi del form.
+     *
      * @param {Event} e - Evento dell'input.
      */
     const handleChange = (e) => {
@@ -55,13 +56,14 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
     };
 
     /**
-     * Funzione per inviare il form e aggiornare i dati del cliente.
+     * Invia il form per aggiornare i dati del cliente.
+     *
      * @param {Event} e - Evento del submit form.
      */
     const handleSubmit = (e) => {
         e.preventDefault();
         patch(`/operatore/gestione-clienti/modifica/${cliente.IDcliente}`, {
-            only: ["clienti", "flash"],
+            only: ["clienti", "flash"], // Aggiorna solo i dati necessari
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => closeModal(),
@@ -72,9 +74,9 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
     };
 
     /**
-     * Funzione per resettare i dati del form.
+     * Resetta i dati del form ai valori iniziali.
      */
-    const handleDelete = () => {
+    const handleReset = () => {
         setData({
             ragione_sociale: "",
             nome: "",
@@ -94,7 +96,7 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
      * Funzione per chiudere la modale di modifica cliente.
      */
     const closeModal = () => {
-        modalRef.current.close();
+        modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     };
 
     return {
@@ -103,7 +105,7 @@ export const useModificaCliente = ({ cliente, modalRef }) => {
         placeholderData,
         handleChange,
         handleSubmit,
-        handleDelete,
+        handleReset,
         closeModal,
     };
 };
