@@ -25,7 +25,6 @@ export default function EliminazioneOrdine({ ordine }) {
             <ActionModal.Buttons
                 action={handleSpedizione}
                 closeModal={closeModal}
-                color="primary"
             />
         </ActionModal.Wrapper>
     );

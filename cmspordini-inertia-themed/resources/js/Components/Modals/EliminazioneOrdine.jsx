@@ -39,6 +39,7 @@ export default function EliminazioneOrdine({ ordine, stato }) {
             <ActionModal.Buttons
                 action={handleDelete}
                 closeModal={closeModal}
+                firstBtnColor="error"
             />
         </ActionModal.Wrapper>
     );

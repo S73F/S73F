@@ -42,6 +42,7 @@ export default function EliminazioneCliente({ cliente }) {
             <ActionModal.Buttons
                 action={handleDelete}
                 closeModal={closeModal}
+                firstBtnColor="error"
             />
         </ActionModal.Wrapper>
     );
