@@ -8,12 +8,13 @@ import { DataTable } from "../../Components/Tables/DataTable";
 
 /**
  * Componente per visualizzare lo storico degli ordini del cliente.
+ *
  * Permette di filtrare gli ordini in base a un intervallo di tempo e visualizza una tabella
  * con i dati degli ordini.
  *
  * @param {Object} props - Proprietà del componente.
  * @param {Array} props.ordini - Array di ordini da visualizzare nella tabella.
- * @returns {JSX.Element} La UI per visualizzare lo storico ordini con il filtro temporale.
+ * @returns {JSX.Element} - La UI per visualizzare lo storico ordini con il filtro temporale.
  */
 export default function StoricoOrdini({ ordini }) {
     const { handleChange } = useStoricoOrdini(); // Custom hook per gestire il cambiamento del filtro temporale
@@ -21,7 +22,7 @@ export default function StoricoOrdini({ ordini }) {
     return (
         <Content.Container>
             <Content.Layout title={"Storico ordini"}>
-                {/* Selettore per filtrare gli ordini in base al lasso di tempo */}
+                {/* Selettore per filtrare gli ordini in base al lasso di tempo selezionato */}
                 <DataTable.Selector
                     inputLabel={"Lasso di tempo"}
                     handleChange={handleChange}

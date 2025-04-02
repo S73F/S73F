@@ -19,12 +19,13 @@ import {
 
 /**
  * Componente per la creazione di un nuovo ordine da parte di un cliente.
+ *
  * Gestisce l'invio di un modulo con vari campi, tra cui informazioni sul paziente,
  * medico ordinante, dati sulla lavorazione e file allegati.
  *
  * @param {Object} props - Proprietà del componente.
  * @param {Object} [props.InputLabelProps={}] - Opzioni aggiuntive per le etichette di input.
- * @returns {JSX.Element} La UI per la creazione dell'ordine.
+ * @returns {JSX.Element} - La UI per la creazione dell'ordine.
  */
 export default function CreazioneOrdine({ InputLabelProps = {} }) {
     // Custom hook per gestire la creazione dell'ordine

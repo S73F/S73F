@@ -13,7 +13,7 @@ import { DataTable } from "../../Components/Tables/DataTable";
  * @param {Object} props - Proprietà del componente.
  * @param {Array} props.clienti - Lista dei clienti da mostrare nel selettore.
  * @param {Array} props.ordini - Lista degli ordini da visualizzare nella tabella.
- * @returns {JSX.Element} La UI per la gestione degli ordini clienti.
+ * @returns {JSX.Element} - La UI per la gestione degli ordini clienti.
  */
 export default function OrdiniClienti({ clienti, ordini }) {
     const { handleChange } = useOrdiniClienti(); // Custom hook per gestire il cambio di selezione del cliente
@@ -21,17 +21,18 @@ export default function OrdiniClienti({ clienti, ordini }) {
     return (
         <Content.Container>
             <Content.Layout title={"Ordini clienti"}>
-                {/* Selettore per filtrare gli ordini in base al cliente */}
+                {/* Selettore utilizzato per filtrare gli ordini del cliente selezionato */}
                 <DataTable.Selector
                     inputLabel={"Cliente"}
                     handleChange={handleChange}
                 >
                     {clienti.map((cliente) => (
                         <MenuItem
-                            key={cliente.IDcliente} // Chiave univoca per React
+                            key={cliente.IDcliente}
                             value={cliente.IDcliente} // Valore da passare all'handler
                         >
-                            {cliente.ragione_sociale} {/* Nome del cliente */}
+                            {/* Nome del cliente visualizzato */}
+                            {cliente.ragione_sociale}
                         </MenuItem>
                     ))}
                 </DataTable.Selector>
@@ -58,6 +59,6 @@ export default function OrdiniClienti({ clienti, ordini }) {
  * Imposta il layout specifico per la gestione degli ordini dei clienti, utilizzando il layout OperatoreLayout.
  *
  * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
- * @returns {JSX.Element} La pagina avvolta dal layout OperatoreLayout.
+ * @returns {JSX.Element} - La pagina avvolta dal layout OperatoreLayout.
  */
 OrdiniClienti.layout = (page) => <OperatoreLayout>{page}</OperatoreLayout>;

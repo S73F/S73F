@@ -24,7 +24,8 @@ import { buttonStyles, badgeStyle } from "../../styles/appStyles";
  * @returns {JSX.Element} La UI della dashboard con la possibilità di filtrare i lavori.
  */
 export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
-    const { handleLavori, loadingButton } = useDashboard(); // Custom hook per gestire il cambio del tipo dei lavori e il loro stato di caricamento
+    // Custom hook per gestire il cambio del tipo dei lavori e il loro stato di caricamento
+    const { handleLavori, loadingButton } = useDashboard();
 
     return (
         <Content.Container>
@@ -36,15 +37,15 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     : `Benvenuto ${user?.cognome ?? "Utente"}`}
             </Typography>
 
-            {/* Stack con i pulsanti per filtrare i lavori */}
+            {/* Stack di pulsanti per filtrare i lavori */}
             <Stack
                 direction={{ xs: "column", md: "row" }}
                 spacing={{ xs: 2, md: 2, lg: 3 }}
                 justifyContent="center"
             >
-                {/* Pulsante per i nuovi lavori con Badge per il numero di nuovi lavori */}
+                {/* Pulsante con Badge per il numero di lavori nuovi */}
                 <Badge
-                    badgeContent={numLavoriNuovi} // Mostra il numero di nuovi lavori
+                    badgeContent={numLavoriNuovi}
                     color="primary"
                     showZero={false} // Nasconde il badge se il numero è 0
                     anchorOrigin={{
@@ -55,14 +56,14 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     sx={badgeStyle}
                 >
                     <Button
-                        startIcon={<NewReleasesIcon />} // Icona per i nuovi lavori
+                        startIcon={<NewReleasesIcon />}
                         size="large"
-                        onClick={() => handleLavori("nuovi")} // Cambia lo stato dei lavori a "nuovi"
+                        onClick={() => handleLavori("nuovi")} // Cambia i lavori visualizzati in "nuovi"
                         variant="contained"
                         color="primary"
                         sx={buttonStyles}
-                        disabled={tipo === "nuovi"} // Disabilita il pulsante se il tipo di lavori è "nuovi (dunque,se è già attivo)"
-                        loading={loadingButton === "nuovi"} // Mostra il loading se è in caricamento
+                        loading={loadingButton === "nuovi"} // Mostra il pulsante in caricamento durante il fetching dei lavori nuovi
+                        disabled={tipo === "nuovi"} // Disabilita il pulsante se il tipo di lavori è "nuovi" (dunque, se è già attivo)
                     >
                         Lavori nuovi
                     </Button>
@@ -75,8 +76,8 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     variant="contained"
                     color="primary"
                     sx={buttonStyles}
-                    disabled={tipo === "inCorso"}
                     loading={loadingButton === "inCorso"}
+                    disabled={tipo === "inCorso"}
                 >
                     Lavori in corso
                 </Button>
@@ -87,8 +88,8 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     variant="contained"
                     color="primary"
                     sx={buttonStyles}
-                    disabled={tipo === "spediti"}
                     loading={loadingButton === "spediti"}
+                    disabled={tipo === "spediti"}
                 >
                     Lavori spediti
                 </Button>
@@ -104,6 +105,6 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
  * Imposta il layout specifico per la dashboard dell'operatore, utilizzando il layout OperatoreLayout.
  *
  * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
- * @returns {JSX.Element} La pagina avvolta dal layout OperatoreLayout.
+ * @returns {JSX.Element} - La pagina avvolta dal layout OperatoreLayout.
  */
 Dashboard.layout = (page) => <OperatoreLayout>{page}</OperatoreLayout>;
