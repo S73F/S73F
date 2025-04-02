@@ -56,7 +56,7 @@ export default function GestioneClientiTable({ clienti }) {
         []
     );
 
-    // Memoizzazione della mappatura dei clienti per evitare ricalcoli inutili
+    // Memoizzazione della mappatura dei clienti, per evitare ricalcoli inutili
     const mappedClienti = useMemo(() => mapClienti(clienti), [clienti]);
 
     return (

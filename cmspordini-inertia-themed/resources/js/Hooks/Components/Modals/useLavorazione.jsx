@@ -7,12 +7,12 @@ import { useState } from "react";
  * @param {Object} params - Parametri del hook.
  * @param {Object} params.modalRef - Riferimento alla modale di caricamento lavorazione.
  * @returns {Object} Oggetto con le funzioni per gestire la lavorazione e lo stato.
- * @returns {string} return.fileName - Nome del file caricato, se presente.
- * @returns {Function} return.handleFileChange - Funzione per gestire il cambiamento del file selezionato.
- * @returns {Function} return.handleEditorContentSave - Funzione per salvare il contenuto dell'editor Tiptap.
- * @returns {Function} return.handleLavorazione - Funzione per inviare il form e caricare la lavorazione.
- * @returns {boolean} return.processing - Stato che indica se il form è in fase di elaborazione.
- * @returns {Function} return.closeModal - Funzione per chiudere la modale di caricamento lavorazione.
+ * @returns {string} fileName - Nome del file caricato, se presente.
+ * @returns {Function} handleFileChange - Funzione per gestire il cambiamento del file selezionato.
+ * @returns {Function} handleEditorContentSave - Funzione per salvare il contenuto dell'editor Tiptap.
+ * @returns {Function} handleLavorazione - Funzione per inviare il form e caricare la lavorazione.
+ * @returns {boolean} processing - Stato che indica se il form è in fase di elaborazione.
+ * @returns {Function} closeModal - Funzione per chiudere la modale di caricamento lavorazione.
  */
 export const useLavorazione = ({ modalRef }) => {
     const [fileName, setFileName] = useState(""); // Stato per il nome del file selezionato

@@ -5,23 +5,23 @@ import { Allegati, mapOrders, StatoLavoro, TableColumn } from "../TableFields";
 
 /**
  * Componente che visualizza la tabella dello storico degli ordini.
+ *
  * Mostra informazioni relative agli ordini effettuato, come la data dell'ordine,
  * il medico richiedente, il paziente, lo stato del lavoro, e gli allegati.
  *
  * @param {Object} props - Le proprietà del componente.
  * @param {Array} props.ordini - Gli ordini da visualizzare nella tabella.
- * @returns {JSX.Element} - Una tabella con le informazioni dello storico ordini.
+ * @returns {JSX.Element} Una tabella con le informazioni dello storico ordini.
  */
 export default function StoricoOrdiniTable({ ordini }) {
     const { handleFile } = useLavori(); // Hook personalizzato per gestire i file
 
-    // Memoizzazione della cella "Stato"
+    // Memoizzazione della cella, per evitare ricalcoli inutili
     const statoLavoroCell = useMemo(
         () => (params) => StatoLavoro(params.row),
         []
     );
 
-    // Memoizzazione della cella "Allegati"
     const allegatiCell = useMemo(
         () => (params) => Allegati(params.row, "cliente", handleFile),
         [handleFile]
@@ -46,7 +46,7 @@ export default function StoricoOrdiniTable({ ordini }) {
         []
     );
 
-    // Mappa gli ordini in un formato compatibile con la struttura della tabella
+    // Memoizzazione della mappatura degli ordini, per evitare ricalcoli inutili
     const mappedOrders = useMemo(() => mapOrders(ordini), [ordini]);
 
     // Renderizza la tabella con le righe e le colonne definite

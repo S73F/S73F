@@ -5,7 +5,7 @@ import { router } from "@inertiajs/react";
  * Hook personalizzato per gestire la visualizzazione degli ordini per un cliente.
  *
  * @returns {Object} Oggetto contenente la funzione per gestire il cambiamento del cliente selezionato.
- * @returns {Function} return.handleChange - Funzione per gestire il cambiamento del cliente selezionato.
+ * @returns {Function} handleChange - Funzione per gestire il cambiamento del cliente selezionato.
  */
 export const useOrdiniClienti = () => {
     const [clienteID, setClienteID] = useState(null); // Stato per memorizzare l'ID del cliente selezionato

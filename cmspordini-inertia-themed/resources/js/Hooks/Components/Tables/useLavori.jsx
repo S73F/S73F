@@ -6,8 +6,8 @@ import { toast } from "react-toastify";
  * Hook personalizzato per la gestione dei lavori.
  *
  * @returns {Object} Oggetto contenente le funzioni per gestire il download dei file e l'assegnazione degli incarichi.
- * @returns {Function} return.handleFile - Funzione per gestire il download dei file.
- * @returns {Function} return.handleIncarico - Funzione per gestire l'assegnazione o la riassegnazione di un incarico.
+ * @returns {Function} handleFile - Funzione per gestire il download dei file.
+ * @returns {Function} handleIncarico - Funzione per gestire l'assegnazione o la riassegnazione di un incarico.
  */
 export const useLavori = () => {
     /**

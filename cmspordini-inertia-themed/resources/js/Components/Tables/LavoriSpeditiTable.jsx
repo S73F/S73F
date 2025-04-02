@@ -62,7 +62,7 @@ const LavoriSpeditiTable = ({ lavori, handleFile }) => {
         []
     );
 
-    // Memoizzazione della mappatura dei lavori per evitare ricalcoli inutili
+    // Memoizzazione della mappatura dei lavori, per evitare ricalcoli inutili
     const mappedLavori = useMemo(() => mapOrders(lavori), [lavori]);
 
     return (

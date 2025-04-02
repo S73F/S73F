@@ -6,9 +6,9 @@ import { toast } from "react-toastify";
  * Hook personalizzato per la gestione del layout dell'applicazione.
  *
  * @returns {Object} Oggetto contenente le funzioni per gestire il drawer (menu laterale), i messaggi flash, e il logout.
- * @returns {Function} return.handleDrawerToggle - Funzione per gestire l'apertura e la chiusura del drawer (menu laterale).
- * @returns {boolean} return.open - Stato che indica se il drawer è aperto o chiuso.
- * @returns {Function} return.handleLogout - Funzione per effettuare il logout dell'utente.
+ * @returns {Function} handleDrawerToggle - Funzione per gestire l'apertura e la chiusura del drawer (menu laterale).
+ * @returns {boolean} open - Stato che indica se il drawer è aperto o chiuso.
+ * @returns {Function} handleLogout - Funzione per effettuare il logout dell'utente.
  */
 
 export const useLayout = () => {

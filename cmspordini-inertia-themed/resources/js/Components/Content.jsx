@@ -8,7 +8,7 @@ import { contentContainer } from "../styles/appStyles";
  * @param {Object} props - Le proprietà del componente.
  * @param {string} props.title - Il titolo da visualizzare nella parte superiore del layout.
  * @param {React.ReactNode} props.children - I contenuti da visualizzare sotto il titolo.
- * @returns {JSX.Element} - Il layout con il titolo e i contenuti figli.
+ * @returns {JSX.Element} Il layout con il titolo e i contenuti figli.
  */
 const Layout = ({ title, children }) => {
     return (
@@ -33,7 +33,7 @@ const Layout = ({ title, children }) => {
  *
  * @param {Object} props - Le proprietà del componente.
  * @param {React.ReactNode} props.children - I contenuti da visualizzare all'interno del Paper.
- * @returns {JSX.Element} - Il Paper che avvolge i contenuti.
+ * @returns {JSX.Element} Il Paper che avvolge i contenuti.
  */
 const Container = ({ children }) => {
     return (

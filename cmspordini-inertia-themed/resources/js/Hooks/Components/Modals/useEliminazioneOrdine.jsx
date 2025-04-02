@@ -8,8 +8,8 @@ import { router } from "@inertiajs/react";
  * @param {string} params.stato - Stato attuale dell'ordine.
  * @param {Object} params.modalRef - Riferimento alla modale per la conferma eliminazione.
  * @returns {Object} Oggetto con le funzioni per eliminare l'ordine e chiudere la modale.
- * @returns {Function} return.handleDelete - Funzione per eliminare l'ordine.
- * @returns {Function} return.closeModal - Funzione per chiudere la modale di conferma eliminazione.
+ * @returns {Function} handleDelete - Funzione per eliminare l'ordine.
+ * @returns {Function} closeModal - Funzione per chiudere la modale di conferma eliminazione.
  */
 export const useEliminazioneOrdine = ({ ordine, stato, modalRef }) => {
     /**

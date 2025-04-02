@@ -6,7 +6,7 @@ import { chipColors, chipStyle, circleStyles } from "../styles/tableStyles";
 /**
  * Componente che visualizza un chip con il label "Nuovo" e un'icona di cerchio.
  *
- * @returns {JSX.Element} - Un chip con il label "Nuovo" e l'icona corrispondente.
+ * @returns {JSX.Element} Un chip con il label "Nuovo" e l'icona corrispondente.
  */
 const Nuovo = () => {
     return (
@@ -24,7 +24,7 @@ const Nuovo = () => {
 /**
  * Componente che visualizza un chip con il label "In corso" e un'icona di cerchio.
  *
- * @returns {JSX.Element} - Un chip con il label "In corso" e l'icona corrispondente.
+ * @returns {JSX.Element} Un chip con il label "In corso" e l'icona corrispondente.
  */
 const InCorso = () => {
     return (
@@ -42,7 +42,7 @@ const InCorso = () => {
 /**
  * Componente che visualizza un chip con il label "Spedito" e un'icona di cerchio.
  *
- * @returns {JSX.Element} - Un chip con il label "Spedito" e l'icona corrispondente.
+ * @returns {JSX.Element} Un chip con il label "Spedito" e l'icona corrispondente.
  */
 const Spedito = () => {
     return (

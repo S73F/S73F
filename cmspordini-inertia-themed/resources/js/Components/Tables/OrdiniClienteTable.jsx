@@ -11,6 +11,7 @@ import {
 
 /**
  * Componente che visualizza una tabella con gli ordini del cliente.
+ *
  * Mostra le informazioni relative agli ordini, come il medico ordinante,
  * lo stato del lavoro, le date e gli allegati.
  *
@@ -21,19 +22,17 @@ import {
 export default function OrdiniClienteTable({ ordini }) {
     const { handleFile } = useLavori(); // Hook personalizzato per gestire i download dei file
 
-    // Memoizza la funzione per visualizzare il medico e la ragione sociale nella tabella
+    // Memoizzazione della cella, per evitare ricalcoli inutili
     const medicoAndRagioneSocialeCell = useMemo(
         () => (params) => MedicoAndRagioneSociale(params.row),
         []
     );
 
-    // Memoizzazione della cella "Stato"
     const statoLavoroCell = useMemo(
         () => (params) => StatoLavoro(params.row),
         []
     );
 
-    // Memoizzazione della cella "Allegati"
     const allegatiCell = useMemo(
         () => (params) => Allegati(params.row, "operatore", handleFile),
         [handleFile]
@@ -72,7 +71,7 @@ export default function OrdiniClienteTable({ ordini }) {
         []
     );
 
-    // Mappa gli ordini in un formato compatibile con la tabella
+    // Memoizzazione della mappatura degli ordini, per evitare ricalcoli inutili
     const mappedOrders = useMemo(() => mapOrders(ordini), [ordini]);
 
     // Renderizza la tabella con le righe e le colonne definite

@@ -7,13 +7,13 @@ import { useForm } from "@inertiajs/react";
  * @param {Object} params.cliente - Dati del cliente da modificare.
  * @param {Object} params.modalRef - Riferimento alla modale di modifica cliente.
  * @returns {Object} Oggetto con le funzioni per gestire la modifica del cliente e lo stato.
- * @returns {Object} return.data - I dati del form.
- * @returns {Function} return.handleChange - Funzione per gestire il cambiamento dei campi del form.
- * @returns {Function} return.handleSubmit - Funzione per inviare il form e aggiornare i dati del cliente.
- * @returns {Function} return.handleDelete - Funzione per resettare i dati del form.
- * @returns {Function} return.closeModal - Funzione per chiudere la modale di modifica cliente.
- * @returns {boolean} return.processing - Stato che indica se il form è in fase di elaborazione.
- * @returns {Object} return.placeholderData - Dati placeholder per il cliente, usati per precompilare il form.
+ * @returns {Object} data - I dati del form.
+ * @returns {Function} handleChange - Funzione per gestire il cambiamento dei campi del form.
+ * @returns {Function} handleSubmit - Funzione per inviare il form e aggiornare i dati del cliente.
+ * @returns {Function} handleDelete - Funzione per resettare i dati del form.
+ * @returns {Function} closeModal - Funzione per chiudere la modale di modifica cliente.
+ * @returns {boolean} processing - Stato che indica se il form è in fase di elaborazione.
+ * @returns {Object} placeholderData - Dati placeholder per il cliente, usati per precompilare il form.
  */
 export const useModificaCliente = ({ cliente, modalRef }) => {
     // Inizializza il form con i dati del cliente

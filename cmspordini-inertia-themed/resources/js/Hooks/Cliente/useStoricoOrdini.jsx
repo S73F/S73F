@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
  * Hook personalizzato per gestire la tabella dello storico ordini.
  *
  * @returns {Object} Oggetto contenente lo stato del filtro e la funzione per aggiornarlo.
- * @returns {string|null} return.tempo - Valore selezionato per il filtro temporale.
- * @returns {Function} return.handleChange - Funzione per aggiornare il valore del filtro temporale.
+ * @returns {string|null} tempo - Valore selezionato per il filtro temporale.
+ * @returns {Function} handleChange - Funzione per aggiornare il valore del filtro temporale.
  */
 export const useStoricoOrdini = () => {
     const [tempo, setTempo] = useState(null);

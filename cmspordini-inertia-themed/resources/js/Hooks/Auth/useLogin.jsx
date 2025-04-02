@@ -6,10 +6,10 @@ import { toast } from "react-toastify";
  * Hook personalizzato per gestire il login.
  *
  * @returns {Object} Oggetto contenente lo stato del form e le funzioni per gestirlo.
- * @returns {Object} return.data - Stato del form contenente i dati di login.
- * @returns {boolean} return.processing - Indica se la richiesta è in elaborazione.
- * @returns {Function} return.handleChange - Gestisce il cambiamento nei campi di input.
- * @returns {Function} return.handleSubmit - Gestisce l'invio del form.
+ * @returns {Object} data - Stato del form contenente i dati di login.
+ * @returns {boolean} processing - Indica se la richiesta è in elaborazione.
+ * @returns {Function} handleChange - Gestisce il cambiamento nei campi di input.
+ * @returns {Function} handleSubmit - Gestisce l'invio del form.
  */
 export const useLogin = () => {
     const { flash } = usePage().props; // Ottiene i messaggi flash dalla risposta del server

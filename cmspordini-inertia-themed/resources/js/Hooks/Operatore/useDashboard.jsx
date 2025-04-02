@@ -5,8 +5,8 @@ import { useState, useCallback } from "react";
  * Hook personalizzato per la gestione della dashboard e dei lavori.
  *
  * @returns {Object} Oggetto contenente le funzioni e gli stati per gestire i lavori e il pulsante di caricamento.
- * @returns {Function} return.handleLavori - Funzione per gestire la visualizzazione dei lavori.
- * @returns {string|null} return.loadingButton - Stato che indica il tipo di lavoro in caricamento, o `null` se non c'è nessun lavoro in corso.
+ * @returns {Function} handleLavori - Funzione per gestire la visualizzazione dei lavori.
+ * @returns {string|null} loadingButton - Stato che indica il tipo di lavoro in caricamento, o `null` se non c'è nessun lavoro in corso.
  */
 export const useDashboard = () => {
     // Stato per tracciare quale lavoro è in fase di caricamento (utile per l'animazione del pulsante)
