@@ -293,9 +293,9 @@ export const Azioni = (rowParams, tipoLavori, handleIncarico) => {
                 />
                 {rowParams.file_fin === 1 && (
                     <TableFieldButton
-                        btnType={"button"}
+                        btnType={ModalLink}
                         btnTitle={"Spedisci lavorazione"}
-                        onClick={() => handleIncarico(rowParams.id)}
+                        href={`/operatore/lavori/spedizione/${rowParams.id}`}
                         icon={faShareFromSquare}
                     />
                 )}

@@ -305,6 +305,21 @@ class OperatoreController extends Controller
      * @param int $IDordine - L'ID dell'ordine da eliminare.
      * @return \Inertia\Response - La vista della modale per l'eliminazione dell'ordine.
      */
+    public function showSpedizioneOrdineModal($IDordine)
+    {
+        $ordine = Ordine::select('IDordine')->find($IDordine);
+
+        return Inertia::render("Modals/SpedizioneOrdine", [
+            "ordine" => $ordine->IDordine,
+        ]);
+    }
+
+    /**
+     * Mostra il modal per eliminare un ordine.
+     *
+     * @param int $IDordine - L'ID dell'ordine da eliminare.
+     * @return \Inertia\Response - La vista della modale per l'eliminazione dell'ordine.
+     */
     public function showEliminazioneOrdineModal($IDordine)
     {
         $ordine = Ordine::select('IDordine', 'stato')->find($IDordine);

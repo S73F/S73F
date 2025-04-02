@@ -32,6 +32,7 @@ Route::group(['middleware' => "auth:cliente"], function () {
 Route::group(['middleware' => "auth:operatore"], function () {
     Route::get("/operatore/dashboard", [OperatoreController::class, "showDashboard"])->name("operatoreDashboard");
     Route::get('/operatore/lavori/contatore-nuovi', [OrdineController::class, 'getNumeroLavori'])->name('getNumeroLavori');
+    Route::get('/operatore/lavori/spedizione/{id}', [OperatoreController::class, 'showSpedizioneOrdineModal'])->name('showSpedizioneOrdineModal');
     Route::get('/operatore/lavori/eliminazione/{id}', [OperatoreController::class, 'showEliminazioneOrdineModal'])->name('showEliminazioneOrdineModal');
     Route::delete('/operatore/lavori/eliminazione/{id}', [OperatoreController::class, 'deleteOrdine'])->name('deleteOrdine');
     Route::get('/operatore/lavori/{tipo}', [OperatoreController::class, 'showLavori'])->name('showLavori');
