@@ -88,7 +88,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
  * @param {React.ReactNode} props.ListItems - Gli elementi di lista da visualizzare nel drawer.
  * @param {boolean} props.open - Stato che indica se il drawer è aperto o chiuso.
  * @param {function} props.handleDrawerToggle - Funzione per aprire/chiudere il drawer.
- * @returns {JSX.Element} Il layout dell'applicazione con drawer e contenuto principale.
+ * @returns {JSX.Element} - Il layout dell'applicazione con drawer e contenuto principale.
  */
 export default function Layout({
     children,
@@ -101,7 +101,8 @@ export default function Layout({
 
     /**
      * Contenuto del drawer, memorizzato tramite useMemo per evitare ricalcoli inutili.
-     * @returns {JSX.Element} Il contenuto del drawer, che include voci di menu e altre informazioni.
+     *
+     * @returns {JSX.Element} - Il contenuto del drawer, che include voci di menu e altre informazioni.
      */
     const drawerContent = useMemo(
         () => (
@@ -123,7 +124,10 @@ export default function Layout({
                         )}
                     </IconButton>
                 </DrawerHeader>
-                <Divider /> {/* Divisore tra header e la lista */}
+
+                {/* Divisore tra header e la lista */}
+                <Divider />
+
                 {/* Lista di collegamenti del drawer */}
                 <List>
                     <ListItem disablePadding>
@@ -180,13 +184,13 @@ export default function Layout({
                 </Box>
             </Box>
         ),
-        [handleLogout, ListItems, theme.direction] // Dipendenze per il memo
+        [handleLogout, ListItems, theme.direction]
     );
 
     /**
      * Renderizza il layout con il tema personalizzato, la barra superiore (AppBar), il drawer laterale e il contenuto principale.
      *
-     * @returns {JSX.Element} Il layout completo dell'applicazione.
+     * @returns {JSX.Element} - Il layout completo dell'applicazione.
      */
     return (
         // Applica il tema personalizzato

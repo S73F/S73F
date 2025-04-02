@@ -12,29 +12,33 @@ import { useLayout } from "../Hooks/Layouts/useLayout";
 
 /**
  * Componente di layout per la pagina del cliente.
+ *
  * Gestisce la struttura del menu laterale (drawer) e la visualizzazione dei contenuti.
  *
  * @param {Object} props - Le proprietà del componente.
  * @param {React.ReactNode} props.children - I componenti figli da renderizzare all'interno del layout.
- * @returns {JSX.Element} Il layout del cliente con il menu laterale.
+ * @returns {JSX.Element} - Il layout del cliente con il menu laterale.
  */
 export default function ClienteLayout({ children }) {
-    const { handleDrawerToggle, open, handleLogout } = useLayout(); // Recupera la funzione per aprire/chiudere il drawer (menu laterale) e lo stato di apertura del drawer
+    // Recupera la funzione per aprire/chiudere il drawer (menu laterale), lo stato di apertura del drawer e la funzione di logout
+    const { handleDrawerToggle, open, handleLogout } = useLayout();
 
     /**
-     * Componente per il menu laterale, che contiene un elemento di lista per lo storico ordini.
-     * @returns {JSX.Element} L'elemento di lista con il link per lo storico ordini.
+     * Componente per il menu laterale, che contiene un elemento di lista per lo storico ordini,
+     * il quale, una volta cliccato, chiude il drawer e indirizza l'utente alla relativa pagina.
+     *
+     * @returns {JSX.Element} - L'elemento di lista con il link per lo storico ordini.
      */
     const ListItems = useMemo(
         () => (
             <ListItem disablePadding>
                 <ListItemButton
-                    onClick={handleDrawerToggle} // Gestisce l'apertura/chiusura del drawer al click
+                    onClick={handleDrawerToggle}
                     component={Link}
-                    href="/cliente/ordini/storico" // Link alla pagina "Storico ordini"
+                    href="/cliente/ordini/storico"
                 >
+                    {/* Icona che rappresenta lo storico ordini */}
                     <ListItemIcon>
-                        {/* Icona che rappresenta lo storico ordini */}
                         <HistoryIcon />
                     </ListItemIcon>
 
@@ -47,9 +51,9 @@ export default function ClienteLayout({ children }) {
     );
 
     /**
-     * Renderizza il layout dell'cliente, includendo il menu laterale (drawer) e il contenuto.
+     * Renderizza il layout del cliente, includendo il menu laterale (drawer) e il contenuto.
      *
-     * @returns {JSX.Element} Il layout che avvolge il contenuto e il menu laterale.
+     * @returns {JSX.Element} - Il layout che avvolge il contenuto e il menu laterale.
      */
     return (
         <Layout
