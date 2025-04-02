@@ -261,10 +261,9 @@ export const Allegati = (rowParams, user, handleFile) => {
  *
  * @param {object} rowParams - I parametri della riga che contengono le informazioni dell'ordine.
  * @param {string} tipoLavori - Il tipo di lavoro ("nuovi" o "inCorso").
- * @param {Function} handleIncarico - La funzione per gestire l'incarico.
  * @returns {JSX.Element} I bottoni per le azioni su un ordine.
  */
-export const Azioni = (rowParams, tipoLavori, handleIncarico) => {
+export const Azioni = (rowParams, tipoLavori) => {
     if (tipoLavori === "nuovi") {
         return (
             <>

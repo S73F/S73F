@@ -31,7 +31,6 @@ const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
         [handleFile]
     );
 
-    // Memoizzazione della cella "Azioni"
     const azioniCell = useMemo(
         () => (params) => Azioni(params.row, "nuovi", handleIncarico),
         [handleIncarico]
