@@ -10,6 +10,7 @@ import {
     Mail as MailIcon,
 } from "@mui/icons-material";
 import { buttonStyles, badgeStyle } from "../../styles/appStyles";
+import { Messages } from "../../Components/Messages";
 
 /**
  * Componente per la dashboard dell'operatore.
@@ -30,12 +31,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
     return (
         <Content.Container>
             {/* Messaggio di benvenuto personalizzato in base ai dati dell'utente */}
-            <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
-                {/* Se il nome è disponibile, usa quello, altrimenti usa il cognome o un valore predefinito */}
-                {user?.nome
-                    ? `Benvenuto ${user?.nome}`
-                    : `Benvenuto ${user?.cognome ?? "Utente"}`}
-            </Typography>
+            <Messages.Welcome user={user} />
 
             {/* Stack di pulsanti per filtrare i lavori */}
             <Stack

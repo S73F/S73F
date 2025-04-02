@@ -5,7 +5,7 @@ import { MenuItem, Typography } from "@mui/material";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
 import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
-import { FallbackMessage } from "../../Components/FallbackMessage";
+import { Messages } from "../../Components/Messages";
 
 /**
  * Componente per la gestione e visualizzazione degli ordini dei clienti.
@@ -43,7 +43,7 @@ export default function OrdiniClienti({ clienti, ordini }) {
             {ordini?.length > 0 && <OrdiniClienteTable ordini={ordini} />}
 
             {/* Messaggio di fallback nel caso non ci siano ordini */}
-            {ordini?.length === 0 && <FallbackMessage item={"ordine"} />}
+            {ordini?.length === 0 && <Messages.Fallback item={"ordine"} />}
         </Content.Container>
     );
 }

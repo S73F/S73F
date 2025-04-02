@@ -3,6 +3,7 @@ import { Link } from "@inertiajs/react";
 import ClienteLayout from "../../Layouts/ClienteLayout";
 import { Button, Typography } from "@mui/material";
 import { Content } from "../../Components/Content";
+import { Messages } from "../../Components/Messages";
 
 /**
  * Componente della Dashboard del Cliente.
@@ -17,12 +18,7 @@ export default function Dashboard({ user }) {
     return (
         <Content.Container>
             {/* Messaggio di benvenuto personalizzato in base ai dati dell'utente */}
-            <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
-                {/* Se il nome è disponibile, usa quello, altrimenti usa il cognome o un valore predefinito */}
-                {user?.nome
-                    ? `Benvenuto ${user?.nome}`
-                    : `Benvenuto ${user?.cognome ?? "Utente"}`}
-            </Typography>
+            <Messages.Welcome user={user} />
 
             <Button
                 size="large"
