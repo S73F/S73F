@@ -46,22 +46,32 @@ export const useLavori = () => {
     }, []);
 
     /**
-     * Funzione per gestire l'assegnazione o la riassegnazione di un incarico.
+     * Gestisce l'assegnazione o la riassegnazione di un incarico per un ordine specifico.
      *
-     * @param {number} IDordine - ID dell'ordine.
-     * @param {string} [option="forward"] - Opzione per l'assegnazione (default: "forward").
+     * La funzione invia una richiesta PATCH per aggiornare lo stato dell'ordine e supporta il refresh di determinati dati nella UI.
+     *
+     * @param {number} IDordine - L'ID dell'ordine da assegnare o riassegnare.
+     * @param {string} [option="forward"] - L'opzione di assegnazione. Può essere "forward" (avanza allo stato successivo) o "back" (torna allo stato precedente). Default: "forward".
+     * @param {string[]} [refresh=["lavori", "flash", "numLavoriNuovi"]] - Array di chiavi che determinano quali parti della UI devono essere aggiornate dopo la richiesta.
      */
-    const handleIncarico = useCallback((IDordine, option = "forward") => {
-        router.patch(
-            `/operatore/ordini-clienti/update/${IDordine}/${option}`,
-            {},
-            {
-                only: ["lavori", "flash", "numLavoriNuovi"],
-                preserveScroll: true,
-                preserveState: true,
-            }
-        );
-    }, []);
+    const handleIncarico = useCallback(
+        (
+            IDordine,
+            option = "forward",
+            refresh = ["lavori", "flash", "numLavoriNuovi"]
+        ) => {
+            router.patch(
+                `/operatore/ordini-clienti/update/${IDordine}/${option}`,
+                {},
+                {
+                    only: refresh,
+                    preserveScroll: true,
+                    preserveState: true,
+                }
+            );
+        },
+        []
+    );
 
     return {
         handleFile,

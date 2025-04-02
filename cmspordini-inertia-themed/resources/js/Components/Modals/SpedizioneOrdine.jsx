@@ -8,6 +8,7 @@ import { useSpedizioneOrdine } from "../../Hooks/Components/Modals/useSpedizione
 export default function EliminazioneOrdine({ ordine }) {
     const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
 
+    // Funzioni per la gestione della spedizione dell'ordine e chiusura della modale
     const { handleSpedizione, closeModal } = useSpedizioneOrdine({
         ordine,
         modalRef,
@@ -39,7 +40,7 @@ export default function EliminazioneOrdine({ ordine }) {
                 >
                     <Button
                         variant="contained"
-                        color="error"
+                        color="primary"
                         onClick={handleSpedizione}
                         sx={formBtnStyle}
                     >
