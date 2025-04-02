@@ -105,6 +105,6 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
  * Imposta il layout specifico per la dashboard dell'operatore, utilizzando il layout OperatoreLayout.
  *
  * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
- * @returns {JSX.Element} - La pagina avvolta dal layout OperatoreLayout.
+ * @returns {JSX.Element} La pagina avvolta dal layout OperatoreLayout.
  */
 Dashboard.layout = (page) => <OperatoreLayout>{page}</OperatoreLayout>;

@@ -11,7 +11,7 @@ import { Typography } from "@mui/material";
  *
  * @param {Object} props - Proprietà del componente.
  * @param {Array} props.clienti - Lista dei clienti da visualizzare nella tabella.
- * @returns {JSX.Element} - La UI per la gestione dei clienti.
+ * @returns {JSX.Element} La UI per la gestione dei clienti.
  */
 export default function GestioneClienti({ clienti }) {
     return (
@@ -39,6 +39,6 @@ export default function GestioneClienti({ clienti }) {
  * Imposta il layout specifico per la gestione clienti, utilizzando il layout OperatoreLayout.
  *
  * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
- * @returns {JSX.Element} - La pagina avvolta dal layout OperatoreLayout.
+ * @returns {JSX.Element} La pagina avvolta dal layout OperatoreLayout.
  */
 GestioneClienti.layout = (page) => <OperatoreLayout>{page}</OperatoreLayout>;

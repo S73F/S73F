@@ -14,7 +14,7 @@ import { DataTable } from "../../Components/Tables/DataTable";
  *
  * @param {Object} props - Proprietà del componente.
  * @param {Array} props.ordini - Array di ordini da visualizzare nella tabella.
- * @returns {JSX.Element} - La UI per visualizzare lo storico ordini con il filtro temporale.
+ * @returns {JSX.Element} La UI per visualizzare lo storico ordini con il filtro temporale.
  */
 export default function StoricoOrdini({ ordini }) {
     const { handleChange } = useStoricoOrdini(); // Custom hook per gestire il cambiamento del filtro temporale

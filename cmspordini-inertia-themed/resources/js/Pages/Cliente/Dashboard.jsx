@@ -42,6 +42,6 @@ export default function Dashboard({ user }) {
  * Imposta il layout per la dashboard del cliente, utilizzando il layout specifico ClienteLayout.
  *
  * @param {JSX.Element} page - Il contenuto della pagina da inserire nel layout.
- * @returns {JSX.Element} - La pagina avvolta dal layout ClienteLayout.
+ * @returns {JSX.Element} La pagina avvolta dal layout ClienteLayout.
  */
 Dashboard.layout = (page) => <ClienteLayout>{page}</ClienteLayout>;
