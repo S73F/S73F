@@ -6,6 +6,7 @@ import { dataTableStyle } from "../../styles/tableStyles";
 
 /**
  * Componente Selector che rende una tendina con opzioni selezionabili.
+ *
  * Permette all'utente di selezionare un'opzione e attiva una funzione di gestione quando la selezione cambia.
  *
  * @param {string} inputLabel - Etichetta da visualizzare per il campo Select
@@ -16,9 +17,8 @@ import { dataTableStyle } from "../../styles/tableStyles";
 const Selector = ({ inputLabel, handleChange, children }) => {
     return (
         <>
-            {/* FormControl viene utilizzato per avvolgere il selettore */}
             <FormControl sx={{ width: "80%", mb: 4 }}>
-                {/* InputLabel viene utilizzato per visualizzare l'etichetta sopra il campo Select */}
+                {/* InputLabel utilizzato per visualizzare l'etichetta sopra il campo Select */}
                 <InputLabel id="input-label">{inputLabel}</InputLabel>
 
                 {/* Select crea una lista a tendina con opzioni */}
@@ -30,7 +30,7 @@ const Selector = ({ inputLabel, handleChange, children }) => {
                     onChange={handleChange} // Chiamata alla funzione handleChange quando cambia il valore selezionato
                     sx={{ textAlign: "left" }}
                 >
-                    {/* Qui vengono renderizzate le opzioni (children) passate come parametro */}
+                    {/* Qui vengono renderizzate le opzioni (children) */}
                     {children}
                 </Select>
             </FormControl>
@@ -38,7 +38,7 @@ const Selector = ({ inputLabel, handleChange, children }) => {
     );
 };
 
-const paginationModel = { page: 0, pageSize: 5 }; // Paginazione predefinita: prima pagina, 5 righe per pagina
+const paginationModel = { page: 0, pageSize: 5 }; // Paginazione predefinita: parte da pagina 1, 5 righe per pagina
 
 /**
  * Componente Table che renderizza il DataGrid (tabella) di MUI con le righe e le colonne fornite.
@@ -51,13 +51,13 @@ const Table = ({ rows, columns }) => {
     return (
         <Paper elevation={5} sx={{ width: "100%" }}>
             <DataGrid
-                rows={rows} // Le righe di dati da visualizzare nella tabella
-                columns={columns} // La definizione delle colonne, come intestazioni, larghezza, ecc.
+                rows={rows}
+                columns={columns}
                 initialState={{ pagination: { paginationModel } }} // Imposta la paginazione iniziale
-                pageSizeOptions={[5, 10, 25, 50]} // Le opzioni per il numero di righe per pagina che l'utente può selezionare
-                columnHeaderHeight={70} // Imposta l'altezza delle intestazioni delle colonne
-                rowHeight={90} // Imposta l'altezza delle righe
-                sx={dataTableStyle} // Stili personalizzati per la tabella
+                pageSizeOptions={[5, 10, 25, 50]} // Opzioni per il numero di righe visualizzabili
+                columnHeaderHeight={70} // Altezza delle intestazioni delle colonne
+                rowHeight={90} // Altezza delle righe
+                sx={dataTableStyle}
             />
         </Paper>
     );

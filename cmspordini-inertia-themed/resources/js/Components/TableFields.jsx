@@ -343,7 +343,7 @@ export const AzioniCliente = (rowParams) => {
  * Mappa gli ordini e li trasforma in un array di oggetti con le proprietà richieste.
  *
  * @param {Array} ordini - L'array degli ordini da mappare.
- * @returns {Array} - Un array di oggetti mappati da usare nella tabella.
+ * @returns {Array} Un array di oggetti mappati da usare nella tabella.
  */
 export const mapOrders = (ordini) =>
     ordini.map((ordine) => ({

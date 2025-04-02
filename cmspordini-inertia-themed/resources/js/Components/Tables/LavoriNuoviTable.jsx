@@ -11,6 +11,7 @@ import {
 
 /**
  * Componente che visualizza la tabella dei lavori nuovi.
+ *
  * Gestisce la visualizzazione di vari dettagli sui lavori, come ragione sociale, medico ordinante, paziente, data ordine, allegati e azioni.
  *
  * @param {Object[]} lavori - Lista dei lavori da visualizzare nella tabella. Ogni lavoro è un oggetto con informazioni come medico ordinante, paziente, etc.
@@ -19,22 +20,21 @@ import {
  * @returns {JSX.Element} Una sezione che contiene la tabella dei lavori nuovi.
  */
 const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
-    // Memoizzazione della cella "Ragione sociale" per evitare ricalcoli inutili
+    // Memoizzazione della cella, per evitare ricalcoli inutili
     const ragioneSocialeCell = useMemo(
         () => (params) => RagioneSociale(params.row),
         []
     );
 
-    // Memoizzazione della cella "Allegati"
     const allegatiCell = useMemo(
         () => (params) => Allegati(params.row, "operatore", handleFile),
-        [handleFile] // Dipende dalla funzione handleFile
+        [handleFile]
     );
 
     // Memoizzazione della cella "Azioni"
     const azioniCell = useMemo(
         () => (params) => Azioni(params.row, "nuovi", handleIncarico),
-        [handleIncarico] // Dipende dalla funzione handleIncarico
+        [handleIncarico]
     );
 
     // Definizione delle colonne della tabella
@@ -56,7 +56,7 @@ const LavoriNuoviTable = ({ lavori, handleFile, handleIncarico }) => {
         []
     );
 
-    // Mappatura dei lavori tramite la funzione mapOrders
+    // Memoizzazione della mappatura dei lavori per evitare ricalcoli inutili
     const mappedLavori = useMemo(() => mapOrders(lavori), [lavori]);
 
     return (

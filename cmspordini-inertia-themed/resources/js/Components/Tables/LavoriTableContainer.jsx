@@ -7,6 +7,7 @@ import { Box, Typography } from "@mui/material";
 
 /**
  * Componente che gestisce il contenitore delle tabelle dei lavori.
+ *
  * Mostra una delle tre tabelle (nuovi, in corso, spediti) in base al tipo passato tramite la prop `tipoLavori`.
  *
  * @param {Object} props - Le proprietà del componente.

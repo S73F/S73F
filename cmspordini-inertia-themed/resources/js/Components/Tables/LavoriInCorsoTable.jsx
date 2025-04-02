@@ -12,6 +12,7 @@ import {
 
 /**
  * Componente che visualizza la tabella dei lavori in corso.
+ *
  * Gestisce la visualizzazione di vari dettagli sui lavori, come medico ordinante, paziente, operatore, data di inizio lavorazione e allegati.
  *
  * @param {Object[]} lavori - Lista dei lavori da visualizzare nella tabella
@@ -20,30 +21,27 @@ import {
  * @returns {JSX.Element} Una sezione che contiene la tabella dei lavori in corso
  */
 const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
-    // Memoizzazione della cella "Medico ordinante" per evitare ricalcoli inutili
+    // Memoizzazione della cella, per evitare ricalcoli inutili
     const medicoAndRagioneSocialeCell = useMemo(
         () => (params) => MedicoAndRagioneSociale(params.row),
         []
     );
 
-    // Memoizzazione della cella "Data inizio lavorazione"
     const dataInizioLavorazioneCell = useMemo(
         () => (params) => DataInizioLavorazione(params.row)
     );
 
-    // Memoizzazione della cella "Allegati" per gestire i file allegati
     const allegatiCell = useMemo(
         () => (params) => Allegati(params.row, "operatore", handleFile),
-        [handleFile] // Dipende dalla funzione handleFile
+        [handleFile]
     );
 
-    // Memoizzazione della cella "Azioni" per gestire le azioni sugli incarichi
     const azioniCell = useMemo(
         () => (params) => Azioni(params.row, "inCorso", handleIncarico),
-        [handleIncarico] // Dipende dalla funzione handleIncarico
+        [handleIncarico]
     );
 
-    // Definizione delle colonne della tabella utilizzando la memoizzazione
+    // Definizione delle colonne della tabella
     const columns = useMemo(
         () => [
             TableColumn(
@@ -68,7 +66,7 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
         []
     );
 
-    // Mappatura dei dati dei lavori tramite la funzione mapOrders
+    // Memoizzazione della mappatura dei lavori per evitare ricalcoli inutili
     const mappedLavori = useMemo(() => mapOrders(lavori), [lavori]);
 
     return (

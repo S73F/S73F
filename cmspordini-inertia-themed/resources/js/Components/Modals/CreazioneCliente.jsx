@@ -8,6 +8,7 @@ import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
 
 /**
  * Componente per la modale di creazione di un nuovo cliente.
+ *
  * Gestisce l'invio e la validazione del modulo per la creazione di un cliente.
  * Include campi per la ragione sociale, nome, cognome, partita IVA, indirizzo, città, CAP, provincia, email, username e password.
  *

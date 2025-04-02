@@ -8,6 +8,7 @@ import { formBtnStyle } from "../../styles/formStyles";
 
 /**
  * Componente per la gestione della modale di modifica della lavorazione di un ordine.
+ *
  * Permette all'utente di aggiungere note, caricare un file relativo alla lavorazione e inviare il tutto.
  *
  * @param {Object} ordine - Dati dell'ordine che si sta modificando.

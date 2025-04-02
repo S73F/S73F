@@ -7,6 +7,7 @@ import { useEliminazioneOrdine } from "../../Hooks/Components/Modals/useEliminaz
 
 /**
  * Componente per la modale di eliminazione di un ordine.
+ *
  * Gestisce la conferma dell'eliminazione di un ordine.
  * L'eliminazione è irreversibile.
  *

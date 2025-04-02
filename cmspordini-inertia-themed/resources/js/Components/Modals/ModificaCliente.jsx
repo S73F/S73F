@@ -8,6 +8,7 @@ import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
 
 /**
  * Componente per la gestione della modale di modifica di un cliente.
+ *
  * Permette all'utente di aggiornare i dettagli del cliente esistente.
  * I dati esistenti sono precompilati nel modulo, e l'utente può modificarli.
  *
@@ -36,7 +37,7 @@ export default function ModificaCliente({ cliente }) {
             {/* Contenuto della modale: form di modifica del cliente selezionato */}
             <Box
                 component="form"
-                onSubmit={handleSubmit} // Gestione invio del form
+                onSubmit={handleSubmit}
                 encType="multipart/form-data"
             >
                 <Grid2

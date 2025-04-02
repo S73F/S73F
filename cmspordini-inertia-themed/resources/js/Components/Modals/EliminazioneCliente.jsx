@@ -8,6 +8,7 @@ import { formBtnStyle } from "../../styles/formStyles";
 
 /**
  * Componente per la modale di eliminazione di un cliente.
+ *
  * Gestisce la conferma dell'eliminazione di un cliente.
  * L'eliminazione è irreversibile.
  *
