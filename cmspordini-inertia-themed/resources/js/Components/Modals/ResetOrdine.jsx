@@ -2,6 +2,15 @@ import React, { useCallback, useRef } from "react";
 import { ActionModal } from "./ActionModal";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 
+/**
+ * Componente per la gestione del ripristino di un ordine.
+ * Mostra una modale di conferma che permette all'operatore di annullare un incarico e ripristinare l'ordine allo stato iniziale.
+ *
+ * @param {Object} props - Proprietà del componente.
+ * @param {number} props.ordine - ID dell'ordine da ripristinare.
+ *
+ * @returns {JSX.Element} La UI per confermare il ripristino di un ordine.
+ */
 export default function ResetOrdine({ ordine }) {
     const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
 

@@ -2,6 +2,15 @@ import React, { useCallback, useRef } from "react";
 import { ActionModal } from "./ActionModal";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 
+/**
+ * Componente per la conferma della spedizione di un ordine.
+ * Mostra una modale di conferma che permette all'operatore di spedire l'ordine, rendendo irreversibile l'operazione.
+ *
+ * @param {Object} props - Proprietà del componente.
+ * @param {number} props.ordine - ID dell'ordine da spedire.
+ *
+ * @returns {JSX.Element} La UI per confermare la spedizione di un ordine.
+ */
 export default function EliminazioneOrdine({ ordine }) {
     const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
 

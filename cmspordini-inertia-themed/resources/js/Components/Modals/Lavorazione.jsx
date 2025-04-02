@@ -8,7 +8,7 @@ import { formBtnStyle } from "../../styles/formStyles";
 import { ActionModal } from "./ActionModal";
 
 /**
- * Componente per la gestione della modale di modifica della lavorazione di un ordine.
+ * Componente per gestire la modale di modifica di una lavorazione.
  *
  * Permette all'utente di aggiungere note, caricare un file relativo alla lavorazione e inviare il tutto.
  *
