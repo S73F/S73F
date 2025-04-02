@@ -63,8 +63,6 @@
     <div class="email-container">
         <div class="header">
             <img src="{{ $message->embed(public_path() . '/assets/img/ODONTOTECNICA-LOGO.png') }}" />
-
-            <!-- <img src="{{ asset('assets/img/lab-odontotecnico.webp') }}" alt="Logo CMSP"> -->
         </div>
         <div class="content">
             <p>Il tuo ordine è stato creato con successo e verrà processato il prima possibile.</p>
