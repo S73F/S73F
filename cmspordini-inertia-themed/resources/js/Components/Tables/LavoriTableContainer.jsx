@@ -4,6 +4,7 @@ import LavoriInCorsoTable from "./LavoriInCorsoTable";
 import LavoriSpeditiTable from "./LavoriSpeditiTable";
 import { useLavori } from "../../Hooks/Components/Tables/useLavori";
 import { Box, Typography } from "@mui/material";
+import { FallbackMessage } from "../FallbackMessage";
 
 /**
  * Componente che gestisce il contenitore delle tabelle dei lavori.
@@ -20,15 +21,7 @@ export const LavoriTableContainer = ({ tipoLavori, lavori }) => {
 
     // Se non ci sono lavori, mostra un messaggio che indica che non ci sono lavori trovati
     if (lavori?.length === 0) {
-        return (
-            <Typography
-                variant="h5"
-                component={"p"}
-                sx={{ mt: 4, textAlign: "center" }}
-            >
-                Nessun lavoro trovato
-            </Typography>
-        );
+        return <FallbackMessage item={"lavoro"} />;
     } else {
         return (
             // Contenitore della tabella

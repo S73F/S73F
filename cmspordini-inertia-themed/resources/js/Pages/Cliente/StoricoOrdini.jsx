@@ -5,6 +5,7 @@ import ClienteLayout from "../../Layouts/ClienteLayout";
 import { MenuItem, Typography } from "@mui/material";
 import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
+import { FallbackMessage } from "../../Components/FallbackMessage";
 
 /**
  * Componente per visualizzare lo storico degli ordini del cliente.
@@ -37,15 +38,7 @@ export default function StoricoOrdini({ ordini }) {
             {ordini?.length > 0 && <StoricoOrdiniTable ordini={ordini} />}
 
             {/* Messaggio di fallback nel caso non ci siano ordini */}
-            {ordini?.length === 0 && (
-                <Typography
-                    variant="h5"
-                    component={"p"}
-                    sx={{ mt: 4, textAlign: "center" }}
-                >
-                    Nessun ordine trovato
-                </Typography>
-            )}
+            {ordini?.length === 0 && <FallbackMessage item={"ordine"} />}
         </Content.Container>
     );
 }
