@@ -152,9 +152,15 @@ export const MedicoAndRagioneSociale = (rowParams) => {
 export const StatoLavoro = (rowParams) => {
     return (
         <>
-            {rowParams.stato === 0 && <StatusChip.Nuovo />}
-            {rowParams.stato === 1 && <StatusChip.InCorso />}
-            {rowParams.stato === 2 && <StatusChip.Spedito />}
+            {rowParams.stato === 0 && (
+                <StatusChip label={"Nuovo"} prop={"nuovo"} />
+            )}
+            {rowParams.stato === 1 && (
+                <StatusChip label={"In corso"} prop={"inCorso"} />
+            )}
+            {rowParams.stato === 2 && (
+                <StatusChip label={"Spedito"} prop={"spedito"} />
+            )}
         </>
     );
 };

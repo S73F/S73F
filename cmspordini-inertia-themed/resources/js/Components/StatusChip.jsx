@@ -4,63 +4,21 @@ import { Chip } from "@mui/material";
 import { chipColors, chipStyle, circleStyles } from "../styles/tableStyles";
 
 /**
- * Componente che visualizza un chip con il label "Nuovo" e un'icona di cerchio.
+ * Componente che visualizza un chip con un'icona di cerchio e un'etichetta personalizzata.
  *
- * @returns {JSX.Element} Un chip con il label "Nuovo" e l'icona corrispondente.
- */
-const Nuovo = () => {
-    return (
-        <Chip
-            label="Nuovo"
-            icon={<Circle sx={circleStyles.nuovo} />}
-            sx={{
-                ...chipStyle, // Applica gli stili di base del chip.
-                ...chipColors.nuovo, // Applica il colore specifico per "Nuovo".
-            }}
-        />
-    );
-};
-
-/**
- * Componente che visualizza un chip con il label "In corso" e un'icona di cerchio.
+ * @param {Object} props - Proprietà del componente.
+ * @param {string} props.label - Testo da visualizzare all'interno del chip.
+ * @param {string} props.prop - Chiave per determinare lo stile del chip (es. "nuovo", "inCorso", "spedito").
  *
- * @returns {JSX.Element} Un chip con il label "In corso" e l'icona corrispondente.
+ * @returns {JSX.Element} Un chip con il label e l'icona corrispondente.
  */
-const InCorso = () => {
-    return (
-        <Chip
-            label="In corso"
-            icon={<Circle sx={circleStyles.inCorso} />}
-            sx={{
-                ...chipStyle,
-                ...chipColors.inCorso,
-            }}
-        />
-    );
-};
-
-/**
- * Componente che visualizza un chip con il label "Spedito" e un'icona di cerchio.
- *
- * @returns {JSX.Element} Un chip con il label "Spedito" e l'icona corrispondente.
- */
-const Spedito = () => {
-    return (
-        <Chip
-            label="Spedito"
-            icon={<Circle sx={circleStyles.spedito} />}
-            sx={{
-                ...chipStyle,
-                ...chipColors.spedito,
-            }}
-        />
-    );
-};
-
-// Esporta i componenti Nuovo, InCorso, e Spedito come un oggetto,
-// in modo che possano essere utilizzati da altre parti dell'app.
-export const StatusChip = {
-    Nuovo,
-    InCorso,
-    Spedito,
-};
+export const StatusChip = ({ label, prop }) => (
+    <Chip
+        label={label}
+        icon={<Circle sx={circleStyles[prop]} />}
+        sx={{
+            ...chipStyle,
+            ...chipColors[prop],
+        }}
+    />
+);
