@@ -300,6 +300,21 @@ class OperatoreController extends Controller
     }
 
     /**
+     * Mostra il modal per prendere in carico un ordine.
+     *
+     * @param int $IDordine - L'ID dell'ordine da prendere in carico.
+     * @return \Inertia\Response - La vista della modale per la presa in carico dell'ordine.
+     */
+    public function showAccettazioneOrdineModal($IDordine)
+    {
+        $ordine = Ordine::select('IDordine')->find($IDordine);
+
+        return Inertia::render("Modals/AccettazioneOrdine", [
+            "ordine" => $ordine->IDordine,
+        ]);
+    }
+
+    /**
      * Mostra il modal per eliminare un ordine.
      *
      * @param int $IDordine - L'ID dell'ordine da eliminare.
@@ -310,6 +325,21 @@ class OperatoreController extends Controller
         $ordine = Ordine::select('IDordine')->find($IDordine);
 
         return Inertia::render("Modals/SpedizioneOrdine", [
+            "ordine" => $ordine->IDordine,
+        ]);
+    }
+
+    /**
+     * Mostra il modal per ripristinare un ordine.
+     *
+     * @param int $IDordine - L'ID dell'ordine da ripristinare.
+     * @return \Inertia\Response - La vista della modale per il ripristino dell'ordine.
+     */
+    public function showResetOrdineModal($IDordine)
+    {
+        $ordine = Ordine::select('IDordine')->find($IDordine);
+
+        return Inertia::render("Modals/ResetOrdine", [
             "ordine" => $ordine->IDordine,
         ]);
     }
@@ -434,9 +464,9 @@ class OperatoreController extends Controller
             }
 
             if ($fileCaricato && $noteModificate) {
-                $message = "Lavorazione caricata e note modificate con successo!";
+                $message = "File di lavorazione caricato e note modificate con successo!";
             } elseif ($fileCaricato) {
-                $message = "Lavorazione caricata con successo!";
+                $message = "File di lavorazione caricato con successo!";
             } else {
                 $message = "Note modificate con successo!";
             }

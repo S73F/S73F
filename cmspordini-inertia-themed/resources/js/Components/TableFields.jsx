@@ -269,9 +269,9 @@ export const Azioni = (rowParams, tipoLavori, handleIncarico) => {
         return (
             <>
                 <TableFieldButton
-                    btnType={"button"}
+                    btnType={ModalLink}
                     btnTitle={"Accetta incarico"}
-                    onClick={() => handleIncarico(rowParams.id)}
+                    href={`/operatore/lavori/accettazione/${rowParams.id}`}
                     icon={faCircleCheck}
                 />
                 <TableFieldButton
@@ -306,9 +306,9 @@ export const Azioni = (rowParams, tipoLavori, handleIncarico) => {
                     icon={faTrashCan}
                 />
                 <TableFieldButton
-                    btnType={"button"}
+                    btnType={ModalLink}
                     btnTitle={"Annulla incarico"}
-                    onClick={() => handleIncarico(rowParams.id, "back")}
+                    href={`/operatore/lavori/reset/${rowParams.id}`}
                     icon={faRotateLeft}
                 />
             </>

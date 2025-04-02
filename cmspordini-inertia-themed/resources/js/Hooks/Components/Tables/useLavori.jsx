@@ -52,12 +52,14 @@ export const useLavori = () => {
      *
      * @param {number} IDordine - L'ID dell'ordine da assegnare o riassegnare.
      * @param {string} [option="forward"] - L'opzione di assegnazione. Può essere "forward" (avanza allo stato successivo) o "back" (torna allo stato precedente). Default: "forward".
+     * @param {Function|null} [closeModal=null] - Funzione che, se fornita, chiude la modale al termine dell'operazione. Default: null.
      * @param {string[]} [refresh=["lavori", "flash", "numLavoriNuovi"]] - Array di chiavi che determinano quali parti della UI devono essere aggiornate dopo la richiesta.
      */
     const handleIncarico = useCallback(
         (
             IDordine,
             option = "forward",
+            closeModal = null,
             refresh = ["lavori", "flash", "numLavoriNuovi"]
         ) => {
             router.patch(
@@ -67,6 +69,7 @@ export const useLavori = () => {
                     only: refresh,
                     preserveScroll: true,
                     preserveState: true,
+                    ...(closeModal ? { onFinish: closeModal } : {}),
                 }
             );
         },
