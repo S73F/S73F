@@ -29,7 +29,7 @@ export default function AccettazioneOrdine({ ordine }) {
             title={"Presa in carico ordine"}
         >
             <ActionModal.Message>
-                Sei sicuro di prendere in carico l'ordine?
+                Sei sicuro di voler prendere in carico l'ordine?
             </ActionModal.Message>
 
             <ActionModal.Reminder color="primary">
