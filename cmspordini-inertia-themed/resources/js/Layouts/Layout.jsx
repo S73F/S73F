@@ -19,6 +19,7 @@ import { Link } from "@inertiajs/react";
 import { ListItemIcon } from "@mui/material";
 import { Home as HomeIcon, Logout as LogoutIcon } from "@mui/icons-material";
 import { useState } from "react";
+import { useLayout } from "../Hooks/Layouts/useLayout";
 
 const drawerWidth = 240;
 
@@ -36,8 +37,10 @@ const drawerWidth = 240;
  *
  * @returns {JSX.Element} Il layout dell'applicazione.
  */
-function Layout({ window, children, Buttons, ListItems, handleLogout }) {
-    const [mobileOpen, setMobileOpen] = useState(false);
+function Layout({ window, children, Buttons, ListItems }) {
+    const [mobileOpen, setMobileOpen] = useState(false); // Alterna apertura/chiusura del drawer
+
+    const { handleLogout } = useLayout(); // Recupera la funzione di logout dall'hook
 
     /**
      * Gestisce l'apertura e la chiusura del drawer laterale.
@@ -60,14 +63,16 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
             }}
         >
             <Typography variant="h6" sx={{ my: 2 }}>
-                <Link href="/">CMSPordini</Link>
+                <Link href="/" title="Logo CMSPordini">
+                    CMSPordini
+                </Link>
             </Typography>
 
             <Divider />
 
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} href="/">
+                    <ListItemButton component={Link} href="/" title="Home">
                         <ListItemIcon>
                             <HomeIcon />
                         </ListItemIcon>
@@ -79,7 +84,7 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
                 {ListItems}
 
                 <ListItem disablePadding>
-                    <ListItemButton onClick={handleLogout}>
+                    <ListItemButton onClick={handleLogout} title="Logout">
                         <ListItemIcon>
                             <LogoutIcon />
                         </ListItemIcon>
@@ -99,6 +104,7 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
             >
                 <Box
                     component="a"
+                    title="Sito WEB Centro Medico San Pietro"
                     href="https://www.centromedicosanpietro.it/"
                     target="_blank"
                 >
@@ -145,13 +151,16 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
                             userSelect: "none",
                         }}
                     >
-                        <Link href="/">CMSPordini</Link>
+                        <Link href="/" title="Logo CMSPordini">
+                            CMSPordini
+                        </Link>
                     </Typography>
 
                     <Box sx={{ display: { xs: "none", sm: "block" } }}>
                         <Button
                             component={Link}
                             href="/"
+                            title="Home"
                             sx={{ color: "#fff" }}
                         >
                             Home
@@ -159,7 +168,11 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
 
                         {Buttons}
 
-                        <Button onClick={handleLogout} sx={{ color: "#fff" }}>
+                        <Button
+                            onClick={handleLogout}
+                            title="Logout"
+                            sx={{ color: "#fff" }}
+                        >
                             Logout
                         </Button>
                     </Box>

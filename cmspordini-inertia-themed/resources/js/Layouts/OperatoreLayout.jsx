@@ -17,22 +17,27 @@ import { useLayout } from "../Hooks/Layouts/useLayout";
 /**
  * Componente di layout per la pagina dell'operatore.
  *
- * Gestisce la struttura del menu laterale (drawer) e la visualizzazione dei contenuti.
+ * Estende il layout principale (`Layout`) aggiungendo dei pulsanti specifici per l'operatore.
  *
+ * @component
  * @param {Object} props - Le proprietà del componente.
  * @param {React.ReactNode} props.children - I componenti figli da renderizzare all'interno del layout.
- * @returns {JSX.Element} - Il layout dell'operatore con il menu laterale.
+ * @returns {JSX.Element} - Il layout dell'operatore con il menu laterale e i pulsanti di navigazione.
  */
 export default function OperatoreLayout({ children }) {
-    // Recupera la funzione per aprire/chiudere il drawer (menu laterale), lo stato di apertura del drawer e la funzione di logout
-    const { handleLogout } = useLayout();
-
+    /**
+     * Pulsanti da visualizzare nella barra di navigazione superiore.
+     *
+     * @constant
+     * @type {React.ReactNode}
+     */
     const Buttons = useMemo(
         () => (
             <>
                 <Button
                     component={Link}
                     href="/operatore/ordini-clienti"
+                    title="Storico ordini clienti"
                     sx={{ color: "#fff" }}
                 >
                     Storico
@@ -40,6 +45,7 @@ export default function OperatoreLayout({ children }) {
                 <Button
                     component={Link}
                     href="/operatore/gestione-clienti"
+                    title="Gestione clienti"
                     sx={{ color: "#fff" }}
                 >
                     Clienti
@@ -50,10 +56,11 @@ export default function OperatoreLayout({ children }) {
     );
 
     /**
-     * Componente del menu laterale contenente i link agli ordini dei clienti e alla gestione clienti.
-     * i quali, una volta cliccati, chiudono il drawer e indirizzano l'utente alle relative pagine.
+     * Elementi del menu laterale (drawer).
+     * Contiene collegamenti alle sezioni "Ordini clienti" e "Gestione clienti".
      *
-     * @returns {JSX.Element} - Gli elementi di lista con i link agli ordini e alla gestione clienti.
+     * @constant
+     * @type {React.ReactNode}
      */
     const ListItems = useMemo(
         () => (
@@ -62,6 +69,7 @@ export default function OperatoreLayout({ children }) {
                     <ListItemButton
                         component={Link}
                         href="/operatore/ordini-clienti"
+                        title="Storico ordini clienti"
                     >
                         {/* Icona che rappresenta gli ordini dei clienti */}
                         <ListItemIcon>
@@ -76,6 +84,7 @@ export default function OperatoreLayout({ children }) {
                     <ListItemButton
                         component={Link}
                         href="/operatore/gestione-clienti"
+                        title="Gestione clienti"
                     >
                         {/* Icona che rappresenta la gestione clienti */}
                         <ListItemIcon>
@@ -92,15 +101,14 @@ export default function OperatoreLayout({ children }) {
     );
 
     /**
-     * Renderizza il layout dell'operatore, includendo il menu laterale (drawer) e il contenuto.
+     * Renderizza il layout dell'operatore, includendo il menu laterale e la navbar modificati, e il contenuto.
      *
-     * @returns {JSX.Element} - Il layout che avvolge il contenuto e il menu laterale.
+     * @returns {JSX.Element} - Il layout completo con navigazione e contenuti.
      */
     return (
         <Layout
-            Buttons={Buttons}
+            Buttons={Buttons} // Passa i pulsanti personalizzati alla navbar
             ListItems={ListItems} // Passa gli elementi del menu laterale di "operatore" al Layout predefinito
-            handleLogout={handleLogout}
         >
             {children}
         </Layout>
