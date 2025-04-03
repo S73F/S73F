@@ -21,4 +21,8 @@ createInertiaApp({
     setup({ el, App, props }) {
         createRoot(el).render(renderApp(App, props));
     },
+    progress: {
+        // The color of the progress bar...
+        color: "#fff",
+    },
 });
