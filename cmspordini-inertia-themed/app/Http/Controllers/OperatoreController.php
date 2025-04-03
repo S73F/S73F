@@ -132,13 +132,26 @@ class OperatoreController extends Controller
     }
 
     /**
-     * Mostra la modale per la creazione di un cliente.
+     * Mostra la modale per la creazione o modifica di un cliente.
      *
-     * @return \Inertia\Response - La vista della modale per la creazione del cliente.
+     * @param string $azione - L'azione da eseguire: "creazione" o "modifica".
+     * @param int|null $id - L'ID del cliente da modificare (necessario solo per la modifica).
+     * @return \Inertia\Response|\Illuminate\Http\RedirectResponse La risposta Inertia per visualizzare la modale o un redirect in caso di errore.
      */
-    public function showCreateClienteModal()
+    public function showAzioneClienteModal($azione, $id = null)
     {
-        return Inertia::render('Modals/CreazioneCliente');
+        if ($id) {
+            $cliente = Cliente::find($id);
+        }
+
+        switch ($azione) {
+            case "creazione":
+                return Inertia::render('Modals/AzioneCliente', ["action" => $azione]);
+            case "modifica":
+                return Inertia::render('Modals/AzioneCliente', ["action" => $azione, "cliente" => $cliente]);
+            default:
+                return redirect()->back()->with("error", "Azione non valida");
+        }
     }
 
     /**
@@ -192,19 +205,6 @@ class OperatoreController extends Controller
             $errors = $e->validator->errors();
             return redirect()->back()->with(["error" => "Errore durante la creazione del cliente", "validation_errors" => $errors])->withErrors($errors)->withInput();
         }
-    }
-
-    /**
-     * Mostra la modale per modificare un cliente.
-     *
-     * @param int $IDcliente - ID del cliente da modificare.
-     * @return \Inertia\Response - La vista della modale per modificare il cliente.
-     */
-    public function showModificaClienteModal($IDcliente)
-    {
-        $cliente = Cliente::find($IDcliente);
-
-        return Inertia::render("Modals/ModificaCliente", ["cliente" => $cliente]);
     }
 
     /**

@@ -1,10 +1,7 @@
 import React, { useRef } from "react";
-import { Modal } from "@inertiaui/modal-react";
 import { useLavorazione } from "../../Hooks/Components/Modals/useLavorazione";
-import { Box, Button, Typography, Stack } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Tiptap from "../Tiptap";
-import { Content } from "../Content";
-import { formBtnStyle } from "../../styles/formStyles";
 import { ActionModal } from "./ActionModal";
 
 /**

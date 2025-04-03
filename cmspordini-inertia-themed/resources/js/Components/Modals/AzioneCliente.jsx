@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Modal } from "@inertiaui/modal-react";
 import "../../../css/modal.css";
 import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
@@ -9,26 +9,21 @@ import { useCliente } from "../../Hooks/Components/Modals/useCliente";
 /**
  * Componente modale per la gestione dei clienti.
  *
- * Questo componente permette la creazione e la modifica di un cliente tramite un modulo.
- * I campi del modulo includono informazioni come ragione sociale, nome, cognome, partita IVA, indirizzo,
+ * Permette la creazione o la modifica di un cliente attraverso un modulo interattivo.
+ * I campi del modulo includono: ragione sociale, nome, cognome, partita IVA, indirizzo,
  * città, CAP, provincia, email, username e password.
  *
  * @component
  * @param {Object} props - Proprietà del componente.
- * @param {React.Ref} props.modalRef - Riferimento alla modale.
- * @param {"creazione" | "modifica"} props.action - Azione da eseguire: "creazione" o "modifica".
- * @param {Object} props.data - Dati del cliente da inserire o modificare.
- * @param {Object} [props.placeholderData] - Dati placeholder da mostrare in caso di modifica.
- * @param {boolean} props.processing - Stato di elaborazione del modulo.
- * @param {Function} props.handleChange - Gestore per il cambiamento dei campi del modulo.
- * @param {Function} props.handleSubmit - Gestore per l'invio del modulo.
- * @param {Function} props.handleReset - Gestore per il reset dei campi del modulo.
- * @param {Function} props.closeModal - Funzione per chiudere la modale.
+ * @param {"creazione" | "modifica"} props.action - Determina se la modale viene usata per creare o modificare un cliente.
+ * @param {Object} [props.cliente] - Dati del cliente da modificare (opzionale, usato solo in modalità modifica).
  *
  * @returns {JSX.Element} Modale con il modulo per la creazione o modifica di un cliente.
  */
-export default function AzioneCliente({ action, cliente, modalRef }) {
-    // Hook per la logica di modifica del cliente
+export default function AzioneCliente({ action, cliente }) {
+    const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
+
+    // Hook per la logica di creazione o modifica del cliente
     const {
         data,
         processing,

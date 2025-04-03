@@ -1,5 +1,16 @@
 import { useForm } from "@inertiajs/react";
 
+/**
+ * Hook personalizzato per la gestione del form dei clienti.
+ *
+ * Questo hook fornisce i dati del form, i placeholder, e le funzioni necessarie per
+ * creare, modificare un cliente e resettare i campi, oltre a gestire la chiusura della modale.
+ *
+ * @param {Object} params - Parametri del hook.
+ * @param {Object} [params.cliente] - Dati del cliente in caso di modifica.
+ * @param {React.RefObject} params.modalRef - Riferimento alla modale per controllarne l'apertura/chiusura.
+ * @returns {Object} Oggetto contenente i dati del form e le funzioni di gestione.
+ */
 export const useCliente = ({ cliente, modalRef }) => {
     // Inizializza il form con i dati del cliente
     const { data, setData, post, patch, processing } = useForm({
