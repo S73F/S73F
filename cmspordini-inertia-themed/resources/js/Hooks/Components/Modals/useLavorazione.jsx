@@ -1,5 +1,6 @@
 import { useForm } from "@inertiajs/react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 /**
  * Hook personalizzato per la gestione della lavorazione di un ordine.
@@ -18,9 +19,9 @@ export const useLavorazione = ({ modalRef }) => {
     const [fileName, setFileName] = useState(""); // Stato per il nome del file selezionato
 
     // Inizializza il form con i dati della lavorazione
-    const { setData, post, processing } = useForm({
-        userfile: null,
+    const { data, setData, post, processing } = useForm({
         note_int: null,
+        userfile: null,
     });
 
     /**
@@ -42,18 +43,26 @@ export const useLavorazione = ({ modalRef }) => {
      */
     const handleLavorazione = (e, IDordine) => {
         e.preventDefault();
-        post(`/operatore/ordini-clienti/caricamento-lavorazione/${IDordine}`, {
-            only: ["lavori", "flash"], // Aggiorna solo i dati necessari
-            forceFormData: true, // Necessario per gestire l'upload del file
-            preserveScroll: true,
-            preserveState: true,
-            onSuccess: () => {
-                closeModal();
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        });
+
+        if (data.userfile === null && data.note_int === null) {
+            toast.error("Non hai modificato la lavorazione");
+        } else {
+            post(
+                `/operatore/ordini-clienti/caricamento-lavorazione/${IDordine}`,
+                {
+                    only: ["lavori", "flash"], // Aggiorna solo i dati necessari
+                    forceFormData: true, // Necessario per gestire l'upload del file
+                    preserveScroll: true,
+                    preserveState: true,
+                    onSuccess: () => {
+                        closeModal();
+                    },
+                    onError: (error) => {
+                        console.log(error);
+                    },
+                }
+            );
+        }
     };
 
     /**
