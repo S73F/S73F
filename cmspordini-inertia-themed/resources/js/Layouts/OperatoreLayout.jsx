@@ -25,7 +25,7 @@ import { useLayout } from "../Hooks/Layouts/useLayout";
  */
 export default function OperatoreLayout({ children }) {
     // Recupera la funzione per aprire/chiudere il drawer (menu laterale), lo stato di apertura del drawer e la funzione di logout
-    const { handleDrawerToggle, open, handleLogout } = useLayout();
+    const { handleLogout } = useLayout();
 
     const Buttons = useMemo(
         () => (
@@ -60,7 +60,6 @@ export default function OperatoreLayout({ children }) {
             <>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={handleDrawerToggle}
                         component={Link}
                         href="/operatore/ordini-clienti"
                     >
@@ -75,7 +74,6 @@ export default function OperatoreLayout({ children }) {
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton
-                        onClick={handleDrawerToggle}
                         component={Link}
                         href="/operatore/gestione-clienti"
                     >
@@ -102,8 +100,6 @@ export default function OperatoreLayout({ children }) {
         <Layout
             Buttons={Buttons}
             ListItems={ListItems} // Passa gli elementi del menu laterale di "operatore" al Layout predefinito
-            open={open}
-            handleDrawerToggle={handleDrawerToggle}
             handleLogout={handleLogout}
         >
             {children}

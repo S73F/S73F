@@ -22,13 +22,33 @@ import { useState } from "react";
 
 const drawerWidth = 240;
 
+/**
+ * Componente di layout principale che gestisce la struttura dell'applicazione,
+ * includendo una barra di navigazione, un menu a scomparsa (drawer) e il contenuto principale.
+ *
+ * @component
+ * @param {Object} props - Proprietà del componente.
+ * @param {function} [props.window] - Funzione opzionale per ottenere l'oggetto window (necessario per il rendering in iframe).
+ * @param {React.ReactNode} props.children - Contenuto principale da visualizzare nella pagina.
+ * @param {React.ReactNode} [props.Buttons] - Pulsanti aggiuntivi da mostrare nella barra di navigazione.
+ * @param {React.ReactNode} [props.ListItems] - Elementi della lista da visualizzare nel menu laterale.
+ * @param {function} props.handleLogout - Funzione chiamata al click del pulsante di logout.
+ *
+ * @returns {JSX.Element} Il layout dell'applicazione.
+ */
 function Layout({ window, children, Buttons, ListItems, handleLogout }) {
     const [mobileOpen, setMobileOpen] = useState(false);
 
+    /**
+     * Gestisce l'apertura e la chiusura del drawer laterale.
+     */
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
     };
 
+    /**
+     * Contenuto del drawer laterale, che include il logo, la navigazione e il pulsante di logout.
+     */
     const drawer = (
         <Box
             onClick={handleDrawerToggle}
@@ -40,7 +60,7 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
             }}
         >
             <Typography variant="h6" sx={{ my: 2 }}>
-                CMSPordini
+                <Link href="/">CMSPordini</Link>
             </Typography>
 
             <Divider />
@@ -125,7 +145,7 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
                             userSelect: "none",
                         }}
                     >
-                        CMSPordini
+                        <Link href="/">CMSPordini</Link>
                     </Typography>
 
                     <Box sx={{ display: { xs: "none", sm: "block" } }}>
@@ -176,6 +196,7 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
                     flexDirection: "column",
                 }}
             >
+                {/* Spazio per compensare l'AppBar fissa */}
                 <Toolbar />
 
                 {children}
@@ -185,13 +206,5 @@ function Layout({ window, children, Buttons, ListItems, handleLogout }) {
         </Box>
     );
 }
-
-Layout.propTypes = {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * You won't need it on your project.
-     */
-    window: PropTypes.func,
-};
 
 export default Layout;

@@ -22,7 +22,7 @@ import { useLayout } from "../Hooks/Layouts/useLayout";
  */
 export default function ClienteLayout({ children }) {
     // Recupera la funzione per aprire/chiudere il drawer (menu laterale), lo stato di apertura del drawer e la funzione di logout
-    const { handleDrawerToggle, open, handleLogout } = useLayout();
+    const { handleLogout } = useLayout();
 
     const Buttons = useMemo(
         () => (
@@ -48,11 +48,7 @@ export default function ClienteLayout({ children }) {
     const ListItems = useMemo(
         () => (
             <ListItem disablePadding>
-                <ListItemButton
-                    onClick={handleDrawerToggle}
-                    component={Link}
-                    href="/cliente/ordini/storico"
-                >
+                <ListItemButton component={Link} href="/cliente/ordini/storico">
                     {/* Icona che rappresenta lo storico ordini */}
                     <ListItemIcon>
                         <HistoryIcon />
@@ -75,8 +71,6 @@ export default function ClienteLayout({ children }) {
         <Layout
             Buttons={Buttons}
             ListItems={ListItems} // Passa gli elementi del menu laterale di "cliente" al Layout predefinito
-            open={open}
-            handleDrawerToggle={handleDrawerToggle}
             handleLogout={handleLogout}
         >
             {/* Renderizza i componenti figli passati al ClienteLayout */}
