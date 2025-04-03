@@ -59,7 +59,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                         color="primary"
                         sx={buttonStyles}
                         loading={loadingButton === "nuovi"} // Mostra il pulsante in caricamento durante il fetching dei lavori nuovi
-                        disabled={tipo === "nuovi"} // Disabilita il pulsante se il tipo di lavori è "nuovi" (dunque, se è già attivo)
+                        disabled={tipo === "nuovi" && loadingButton === null} // Disabilita il pulsante se il tipo di lavori è "nuovi" (dunque, se è già attivo)
                     >
                         Lavori nuovi
                     </Button>
@@ -73,7 +73,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     color="primary"
                     sx={buttonStyles}
                     loading={loadingButton === "inCorso"}
-                    disabled={tipo === "inCorso"}
+                    disabled={tipo === "inCorso" && loadingButton === null}
                 >
                     Lavori in corso
                 </Button>
@@ -85,7 +85,7 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
                     color="primary"
                     sx={buttonStyles}
                     loading={loadingButton === "spediti"}
-                    disabled={tipo === "spediti"}
+                    disabled={tipo === "spediti" && loadingButton === null}
                 >
                     Lavori spediti
                 </Button>
