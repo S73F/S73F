@@ -1,7 +1,8 @@
 export const contentContainer = {
     width: "100%",
+    height: "100%",
     display: "flex",
-    flex: 1,
+    // flexGrow: 1,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",

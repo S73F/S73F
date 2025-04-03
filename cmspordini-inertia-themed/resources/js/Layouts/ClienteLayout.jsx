@@ -1,6 +1,7 @@
 import { Link } from "@inertiajs/react";
 import React, { useMemo } from "react";
 import {
+    Button,
     ListItem,
     ListItemButton,
     ListItemIcon,
@@ -22,6 +23,21 @@ import { useLayout } from "../Hooks/Layouts/useLayout";
 export default function ClienteLayout({ children }) {
     // Recupera la funzione per aprire/chiudere il drawer (menu laterale), lo stato di apertura del drawer e la funzione di logout
     const { handleDrawerToggle, open, handleLogout } = useLayout();
+
+    const Buttons = useMemo(
+        () => (
+            <>
+                <Button
+                    component={Link}
+                    href="/cliente/ordini/storico"
+                    sx={{ color: "#fff" }}
+                >
+                    Storico
+                </Button>
+            </>
+        ),
+        []
+    );
 
     /**
      * Componente per il menu laterale, che contiene un elemento di lista per lo storico ordini,
@@ -57,6 +73,7 @@ export default function ClienteLayout({ children }) {
      */
     return (
         <Layout
+            Buttons={Buttons}
             ListItems={ListItems} // Passa gli elementi del menu laterale di "cliente" al Layout predefinito
             open={open}
             handleDrawerToggle={handleDrawerToggle}
