@@ -18,25 +18,11 @@ import AzioneCliente from "./AzioneCliente";
 export default function CreazioneCliente({ cliente }) {
     const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
 
-    const {
-        data,
-        processing,
-        handleChange,
-        handleCreateCliente,
-        handleReset,
-        closeModal,
-    } = useCliente({ cliente, modalRef });
-
     return (
         <AzioneCliente
-            modalRef={modalRef}
             action={"creazione"}
-            data={data}
-            processing={processing}
-            handleChange={handleChange}
-            handleSubmit={handleCreateCliente}
-            handleReset={handleReset}
-            closeModal={closeModal}
+            cliente={cliente}
+            modalRef={modalRef}
         />
     );
 }

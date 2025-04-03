@@ -20,28 +20,11 @@ import AzioneCliente from "./AzioneCliente";
 export default function ModificaCliente({ cliente }) {
     const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
 
-    // Hook per la logica di modifica del cliente
-    const {
-        data,
-        processing,
-        placeholderData,
-        handleChange,
-        handleEditCliente,
-        handleReset,
-        closeModal,
-    } = useCliente({ cliente, modalRef });
-
     return (
         <AzioneCliente
-            modalRef={modalRef}
             action={"modifica"}
-            data={data}
-            placeholderData={placeholderData}
-            processing={processing}
-            handleChange={handleChange}
-            handleSubmit={handleEditCliente}
-            handleReset={handleReset}
-            closeModal={closeModal}
+            cliente={cliente}
+            modalRef={modalRef}
         />
     );
 }

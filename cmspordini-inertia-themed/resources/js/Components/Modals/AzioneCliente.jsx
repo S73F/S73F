@@ -4,6 +4,7 @@ import "../../../css/modal.css";
 import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
 import { Content } from "../Content";
 import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
+import { useCliente } from "../../Hooks/Components/Modals/useCliente";
 
 /**
  * Componente modale per la gestione dei clienti.
@@ -26,17 +27,19 @@ import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
  *
  * @returns {JSX.Element} Modale con il modulo per la creazione o modifica di un cliente.
  */
-export default function AzioneCliente({
-    modalRef,
-    action,
-    data,
-    placeholderData,
-    processing,
-    handleChange,
-    handleSubmit,
-    handleReset,
-    closeModal,
-}) {
+export default function AzioneCliente({ action, cliente, modalRef }) {
+    // Hook per la logica di modifica del cliente
+    const {
+        data,
+        processing,
+        placeholderData,
+        handleChange,
+        handleCreateCliente,
+        handleEditCliente,
+        handleReset,
+        closeModal,
+    } = useCliente({ cliente, modalRef });
+
     return (
         <Modal ref={modalRef}>
             {/* Titolo della modale */}
@@ -53,7 +56,13 @@ export default function AzioneCliente({
             {/* Contenuto della modale */}
             <Box
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={
+                    action === "creazione"
+                        ? handleCreateCliente
+                        : action === "modifica"
+                        ? handleEditCliente
+                        : ""
+                }
                 encType="multipart/form-data"
             >
                 <Grid2
