@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('clienti', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id('idCliente')->primary();
             $table->foreignId('id')->constrained('users')->onDelete('cascade'); // Foreign key to the users table
             $table->string('ragioneSociale', 100);
@@ -30,6 +30,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('clienti');
+        Schema::dropIfExists('customers');
     }
 };

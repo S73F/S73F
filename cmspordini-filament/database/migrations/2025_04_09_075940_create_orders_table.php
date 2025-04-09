@@ -10,10 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('ordini', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id('idOrdine')->primary();
-            $table->foreignId('idCliente')->constrained('clienti')->onDelete('cascade');
-            $table->foreignId('idOperatore')->nullable()->constrained('operatori')->onDelete('cascade');
+            $table->foreignId('idCliente')->constrained('customers')->onDelete('cascade');
+            $table->foreignId('idOperatore')->nullable()->constrained('operators')->onDelete('cascade');
             $table->bigInteger('numeroAnnuo');
             $table->string('medicoOrdinante', 50);
             $table->string('nomePaziente', 50);
@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->date('dataConsegna');
             $table->time('oraConsegna');
             $table->text('noteInterne');
-            $table->string('utenteModifica', 150);
+            $table->string('utenteModifica', 150)->nullable();
             $table->tinyInteger('fileFinale')->default(0); // 0 = non presente, 1 = presente
             $table->string('nomeFileFinale', 150)->nullable();
             $table->timestamps();
@@ -43,6 +43,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('ordini');
+        Schema::dropIfExists('orders');
     }
 };
