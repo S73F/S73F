@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('ordini', function (Blueprint $table) {
             $table->id('IDordine');
-            $table->foreignId('IDcliente')->constrained('clienti')->onDelete('restrict')->onUpdate('restrict');
-            $table->foreignId('IDoperatore')->nullable()->constrained('operatoricmsp')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('IDcliente')->constrained('clienti', 'IDcliente')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreignId('IDoperatore')->nullable()->constrained('operatoricmsp', 'IDoperatore')->onDelete('restrict')->onUpdate('restrict');
             $table->integer('numero');
             $table->dateTime('data');
             $table->string('medicoOrdinante', 50);
@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->dateTime('data_spedizione')->nullable();
             $table->text('note');
             $table->string('nomefile', 100)->nullable();
-            $table->string('lavorazione', 250);
+            $table->string('lavorazione', 1000);
             $table->string('colore', 100);
             $table->text('piattaforma');
             $table->date('data_cons');
@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->text('note_int');
             $table->dateTime('note_ulti_mod')->nullable();
             $table->string('utente_modifica', 150)->default('-');
-            $table->boolean('file_fin')->default(false);
+            $table->boolean('file_fin')->default(0);
             $table->string('file_fin_nome', 150)->nullable();
         });
     }

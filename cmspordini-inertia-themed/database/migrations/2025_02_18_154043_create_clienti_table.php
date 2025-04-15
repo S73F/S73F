@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('citta', 50);
             $table->integer('cap');
             $table->string('provincia', 50);
-            $table->string('emailcliente', 50)->unique();
+            $table->string('emailcliente', 50);
             $table->string('username', 20)->unique();
             $table->string('password', 100);
         });

@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('cognome', 50);
             $table->string('username', 20)->unique();
             $table->string('password', 100);
-            $table->string('emailoperatore', 50)->unique();
+            $table->string('emailoperatore', 50);
         });
     }
 
