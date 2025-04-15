@@ -1,0 +1,6 @@
+PROCEDURA CREAZIONE E POPOLAMENTO DATI DB
+
+1) CREATE DATABASE cmspordini;
+2) php artisan migrate
+3) Query di popolamento tabelle con dati attuali del db
+4) php artisan cripta-password
