@@ -13,7 +13,7 @@ import {
     faRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { anchorStyle, iconStyle } from "../styles/tableStyles";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Link, Tooltip, Typography } from "@mui/material";
 import { ModalLink } from "@inertiaui/modal-react";
 import { StatusChip } from "./StatusChip";
 
@@ -93,7 +93,6 @@ export const TableFieldButton = ({
     return (
         <Link
             component={btnType}
-            title={btnTitle}
             {...(btnType === "button" && { onClick })}
             {...((btnType === "a" || btnType === ModalLink) && {
                 href,
@@ -101,7 +100,9 @@ export const TableFieldButton = ({
             })}
             sx={iconStyle}
         >
-            <FontAwesomeIcon icon={icon} size="xl" />
+            <Tooltip title={btnTitle}>
+                <FontAwesomeIcon icon={icon} size="xl" />
+            </Tooltip>
         </Link>
     );
 };

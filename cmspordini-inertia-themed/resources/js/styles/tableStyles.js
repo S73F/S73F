@@ -25,12 +25,14 @@ export const iconStyle = {
     color: "inherit",
     "&:hover": { color: "#1976d2" },
     mr: 1.5,
+    transition: "color 0.2s ease",
 };
 
 export const anchorStyle = {
     color: "inherit",
     textDecoration: "none",
     "&:hover": { color: "#1976d2 " },
+    transition: "color 0.2s ease",
 };
 
 export const chipStyle = {
