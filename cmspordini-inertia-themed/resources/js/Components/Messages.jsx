@@ -34,7 +34,7 @@ const Welcome = ({ user }) => (
  *
  * @returns {JSX.Element} Un messaggio di fallback personalizzato che informa l'utente che non sono stati trovati risultati per l'elemento richiesto.
  */
-const Fallback = ({ item, gender = "neutral" }) => {
+const Fallback = ({ item, gender = "neutral", marginTop = 4 }) => {
     const messages = {
         male: `Nessuno ${item} trovato`,
         female: `Nessuna ${item} trovata`,
@@ -45,7 +45,7 @@ const Fallback = ({ item, gender = "neutral" }) => {
         <Typography
             variant="h5"
             component={"p"}
-            sx={{ mt: 4, textAlign: "center" }}
+            sx={{ mt: marginTop, textAlign: "center" }}
         >
             {messages[gender] || messages.neutral}
         </Typography>
