@@ -20,7 +20,11 @@ import { ListItemIcon, Tooltip } from "@mui/material";
 import { Home as HomeIcon, Logout as LogoutIcon } from "@mui/icons-material";
 import { useState } from "react";
 import { useLayout } from "../Hooks/Layouts/useLayout";
-import { navbarActiveBtnStyles, navbarButtonStyles } from "../styles/appStyles";
+import {
+    mobileActiveBtnStyles,
+    navbarActiveBtnStyles,
+    navbarButtonStyles,
+} from "../styles/appStyles";
 import { useActiveButton } from "../Contexts/ActiveButtonContext";
 
 const drawerWidth = 240;
@@ -66,7 +70,11 @@ function Layout({ window, children, Buttons, ListItems }) {
             }}
         >
             <Typography variant="h6" sx={{ my: 2 }}>
-                <Link href="/" title="Logo CMSPordini">
+                <Link
+                    href="/"
+                    title="Logo CMSPordini"
+                    onClick={() => setActiveBtn("Home")}
+                >
                     CMSPordini
                 </Link>
             </Typography>
@@ -80,6 +88,7 @@ function Layout({ window, children, Buttons, ListItems }) {
                         href="/"
                         title="Home"
                         onClick={() => setActiveBtn("Home")}
+                        sx={activeBtn === "Home" ? mobileActiveBtnStyles : {}}
                     >
                         <ListItemIcon>
                             <HomeIcon />
@@ -159,7 +168,11 @@ function Layout({ window, children, Buttons, ListItems }) {
                             userSelect: "none",
                         }}
                     >
-                        <Link href="/" title="Logo CMSPordini">
+                        <Link
+                            href="/"
+                            title="Logo CMSPordini"
+                            onClick={() => setActiveBtn("Home")}
+                        >
                             CMSPordini
                         </Link>
                     </Typography>

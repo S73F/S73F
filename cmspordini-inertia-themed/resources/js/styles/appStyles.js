@@ -56,3 +56,7 @@ export const navbarActiveBtnStyles = {
     backgroundColor: "#1565c0",
     width: 90,
 };
+
+export const mobileActiveBtnStyles = {
+    backgroundColor: "rgba(0, 0, 0, 0.08)",
+};

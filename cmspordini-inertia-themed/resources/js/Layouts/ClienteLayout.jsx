@@ -9,12 +9,12 @@ import {
 } from "@mui/material";
 import Layout from "./Layout";
 import { History as HistoryIcon } from "@mui/icons-material";
-import { useLayout } from "../Hooks/Layouts/useLayout";
-import { navbarActiveBtnStyles, navbarButtonStyles } from "../styles/appStyles";
 import {
-    ActiveButtonProvider,
-    useActiveButton,
-} from "../Contexts/ActiveButtonContext";
+    mobileActiveBtnStyles,
+    navbarActiveBtnStyles,
+    navbarButtonStyles,
+} from "../styles/appStyles";
+import { useActiveButton } from "../Contexts/ActiveButtonContext";
 
 /**
  * Componente di layout per la pagina del cliente.
@@ -27,7 +27,7 @@ import {
  * @returns {JSX.Element} - Il layout del cliente con il menu laterale e i pulsanti di navigazione.
  */
 export default function ClienteLayout({ children }) {
-    const { activeBtn, setActiveBtn } = useActiveButton();
+    const { activeBtn, setActiveBtn } = useActiveButton(); // Recupera il pulsante attivo dal context
 
     /**
      * Pulsanti da visualizzare nella barra di navigazione superiore.
@@ -71,6 +71,7 @@ export default function ClienteLayout({ children }) {
                     href="/cliente/ordini/storico"
                     title="Storico ordini"
                     onClick={() => setActiveBtn("Storico")}
+                    sx={activeBtn === "Storico" ? mobileActiveBtnStyles : {}}
                 >
                     {/* Icona che rappresenta lo storico ordini */}
                     <ListItemIcon>
@@ -82,7 +83,7 @@ export default function ClienteLayout({ children }) {
                 </ListItemButton>
             </ListItem>
         ),
-        []
+        [activeBtn, setActiveBtn]
     );
 
     /**

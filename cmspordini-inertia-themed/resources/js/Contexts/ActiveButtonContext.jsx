@@ -1,32 +1,43 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// 1. Crea il contesto
+/**
+ * Context per la gestione del pulsante attivo nella navigazione.
+ * Permette di condividere e aggiornare lo stato del pulsante attivo tra i componenti.
+ */
 const ActiveButtonContext = createContext();
 
-// 2. Hook personalizzato
+/**
+ * Hook personalizzato per accedere al contesto ActiveButtonContext.
+ *
+ * @returns {{ activeBtn: string, setActiveBtn: function }} Oggetto contenente il valore del pulsante attivo e la funzione per aggiornarlo.
+ */
 export const useActiveButton = () => useContext(ActiveButtonContext);
 
-// 3. Provider con localStorage
+/**
+ * Provider che avvolge l'applicazione, fornendo lo stato condiviso del pulsante attivo.
+ *
+ * Salva e ripristina il valore del pulsante attivo utilizzando il sessionStorage,
+ * in modo da mantenerlo durante il ciclo di vita della sessione del browser.
+ *
+ * @param {Object} props - Le proprietà del componente.
+ * @param {React.ReactNode} props.children - I componenti figli che avranno accesso al contesto.
+ * @returns {JSX.Element} Il provider del contesto.
+ */
 export const ActiveButtonProvider = ({ children }) => {
-    const [activeBtn, setActiveBtnState] = useState("Home");
+    const [activeBtn, setActiveBtn] = useState("Home");
 
-    // Al primo render, cerca il valore salvato
+    // Al primo render, cerca il valore salvato in sessionStorage
     useEffect(() => {
         const stored = sessionStorage.getItem("activeBtn");
         if (stored) {
-            setActiveBtnState(stored);
+            setActiveBtn(stored);
         }
     }, []);
 
-    // Ogni volta che cambia, salva su localStorage
+    // Ogni volta che cambia, salva su sessionStorage il pulsante attivo
     useEffect(() => {
         sessionStorage.setItem("activeBtn", activeBtn);
     }, [activeBtn]);
-
-    // Funzione di aggiornamento che salva sia in stato che in localStorage
-    const setActiveBtn = (value) => {
-        setActiveBtnState(value);
-    };
 
     return (
         <ActiveButtonContext.Provider value={{ activeBtn, setActiveBtn }}>

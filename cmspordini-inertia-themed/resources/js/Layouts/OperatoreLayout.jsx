@@ -12,12 +12,12 @@ import {
     History as HistoryIcon,
     Person as PersonIcon,
 } from "@mui/icons-material";
-import { useLayout } from "../Hooks/Layouts/useLayout";
-import { navbarActiveBtnStyles, navbarButtonStyles } from "../styles/appStyles";
 import {
-    ActiveButtonProvider,
-    useActiveButton,
-} from "../Contexts/ActiveButtonContext";
+    mobileActiveBtnStyles,
+    navbarActiveBtnStyles,
+    navbarButtonStyles,
+} from "../styles/appStyles";
+import { useActiveButton } from "../Contexts/ActiveButtonContext";
 
 /**
  * Componente di layout per la pagina dell'operatore.
@@ -30,7 +30,7 @@ import {
  * @returns {JSX.Element} - Il layout dell'operatore con il menu laterale e i pulsanti di navigazione.
  */
 export default function OperatoreLayout({ children }) {
-    const { activeBtn, setActiveBtn } = useActiveButton();
+    const { activeBtn, setActiveBtn } = useActiveButton(); // Recupera il pulsante attivo dal context
 
     /**
      * Pulsanti da visualizzare nella barra di navigazione superiore.
@@ -88,6 +88,9 @@ export default function OperatoreLayout({ children }) {
                         href="/operatore/ordini-clienti"
                         title="Storico ordini clienti"
                         onClick={() => setActiveBtn("Storico")}
+                        sx={
+                            activeBtn === "Storico" ? mobileActiveBtnStyles : {}
+                        }
                     >
                         {/* Icona che rappresenta gli ordini dei clienti */}
                         <ListItemIcon>
@@ -104,6 +107,11 @@ export default function OperatoreLayout({ children }) {
                         href="/operatore/gestione-clienti"
                         title="Gestione clienti"
                         onClick={() => setActiveBtn("Gestione clienti")}
+                        sx={
+                            activeBtn === "Gestione clienti"
+                                ? mobileActiveBtnStyles
+                                : {}
+                        }
                     >
                         {/* Icona che rappresenta la gestione clienti */}
                         <ListItemIcon>
@@ -116,7 +124,7 @@ export default function OperatoreLayout({ children }) {
                 </ListItem>
             </>
         ),
-        []
+        [activeBtn, setActiveBtn]
     );
 
     /**
