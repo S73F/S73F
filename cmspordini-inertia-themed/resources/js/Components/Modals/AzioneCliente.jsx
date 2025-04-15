@@ -5,6 +5,7 @@ import { Box, Button, Grid2, Stack, TextField } from "@mui/material";
 import { Content } from "../Content";
 import { formBtnStack, formBtnStyle } from "../../styles/formStyles";
 import { useCliente } from "../../Hooks/Components/Modals/useCliente";
+import { PasswordField } from "../FormFields/PasswordField";
 
 /**
  * Componente modale per la gestione dei clienti.
@@ -65,6 +66,7 @@ export default function AzioneCliente({ action, cliente }) {
                     rowSpacing={4}
                     columnSpacing={{ xs: 1, sm: 2, md: 3 }}
                 >
+                    {/* Campo per la ragione sociale */}
                     <Grid2 size={12}>
                         <TextField
                             fullWidth
@@ -81,6 +83,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per il nome */}
                     <Grid2 size={{ xs: 12, md: 6 }}>
                         <TextField
                             fullWidth
@@ -97,6 +101,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per il cognome */}
                     <Grid2 size={{ xs: 12, md: 6 }}>
                         <TextField
                             fullWidth
@@ -113,6 +119,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per la partita IVA */}
                     <Grid2 size={12}>
                         <TextField
                             fullWidth
@@ -129,6 +137,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per l'indirizzo */}
                     <Grid2 size={{ xs: 12, md: 4 }}>
                         <TextField
                             fullWidth
@@ -145,6 +155,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per la città */}
                     <Grid2 size={{ xs: 12, md: 4 }}>
                         <TextField
                             fullWidth
@@ -161,6 +173,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per il CAP */}
                     <Grid2 size={{ xs: 12, md: 2 }}>
                         <TextField
                             fullWidth
@@ -177,6 +191,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per la provincia */}
                     <Grid2 size={{ xs: 12, md: 2 }}>
                         <TextField
                             fullWidth
@@ -193,6 +209,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per l'email */}
                     <Grid2 size={{ xs: 12, md: 4 }}>
                         <TextField
                             fullWidth
@@ -209,6 +227,8 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per lo username */}
                     <Grid2 size={{ xs: 12, md: 4 }}>
                         <TextField
                             fullWidth
@@ -225,20 +245,18 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                         />
                     </Grid2>
+
+                    {/* Campo per la password */}
                     <Grid2 size={{ xs: 12, md: 4 }}>
-                        <TextField
-                            fullWidth
-                            label="Password"
-                            name="password"
-                            variant="outlined"
+                        <PasswordField
                             value={data.password}
+                            onChange={handleChange}
                             {...(action === "modifica" && {
                                 placeholder: placeholderData?.password,
                             })}
                             {...(action === "creazione" && {
                                 required: true,
                             })}
-                            onChange={handleChange}
                         />
                     </Grid2>
                 </Grid2>

@@ -9,6 +9,7 @@ import {
     Typography,
 } from "@mui/material";
 import { ToastContainer } from "react-toastify";
+import { PasswordField } from "../../Components/FormFields/PasswordField";
 
 /**
  * Componente per la pagina di login dell'applicazione.
@@ -56,6 +57,7 @@ export default function Login() {
                     noValidate
                     sx={{ mt: 1 }}
                 >
+                    {/* Campo per lo username */}
                     <TextField
                         margin="normal"
                         required
@@ -68,18 +70,15 @@ export default function Login() {
                         value={data.username}
                         onChange={handleChange}
                     />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
+
+                    {/* Campo per la password */}
+                    <PasswordField
                         value={data.password}
                         onChange={handleChange}
+                        margin="normal"
                     />
+
+                    {/* Pulsante di accesso */}
                     <Button
                         type="submit"
                         fullWidth
