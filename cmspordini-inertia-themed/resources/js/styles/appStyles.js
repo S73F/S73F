@@ -43,4 +43,5 @@ export const creazioneClienteBtn = {
     "&:hover": {
         opacity: "0.8",
     },
+    transition: "color 0.2s ease",
 };

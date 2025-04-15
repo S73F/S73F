@@ -325,22 +325,18 @@ export const Azioni = (rowParams, tipoLavori) => {
 export const AzioniCliente = (rowParams) => {
     return (
         <>
-            <Link
-                component={ModalLink}
+            <TableFieldButton
+                btnType={ModalLink}
+                btnTitle={"Modifica cliente"}
                 href={`/operatore/gestione-clienti/modifica/${rowParams.id}`}
-                title="Modifica cliente"
-                sx={iconStyle}
-            >
-                <FontAwesomeIcon icon={faPenToSquare} size="xl" />
-            </Link>
-            <Link
-                component={ModalLink}
+                icon={faPenToSquare}
+            />
+            <TableFieldButton
+                btnType={ModalLink}
+                btnTitle={"Elimina cliente"}
                 href={`/operatore/gestione-clienti/eliminazione/${rowParams.id}`}
-                title="Elimina cliente"
-                sx={iconStyle}
-            >
-                <FontAwesomeIcon icon={faTrashCan} size="xl" />
-            </Link>
+                icon={faTrashCan}
+            />
         </>
     );
 };
