@@ -61,7 +61,7 @@ export default function OrdiniClienteTable({ ordini }) {
             TableColumn(
                 "Allegati",
                 "Allegati",
-                90,
+                110,
                 "",
                 allegatiCell,
                 false,

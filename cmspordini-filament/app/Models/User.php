@@ -48,12 +48,12 @@ class User extends Authenticatable
         ];
     }
 
-    public function cliente(): HasOne
+    public function customer(): HasOne
     {
         return $this->hasOne(Customer::class, 'id');
     }
 
-    public function operatore(): HasOne
+    public function operator(): HasOne
     {
         return $this->hasOne(Operator::class, 'id');
     }

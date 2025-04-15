@@ -34,12 +34,12 @@ class Order extends Model
         'nomeFileFinale',
     ];
 
-    public function cliente(): BelongsTo
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class, 'idCliente', 'idCliente');
     }
 
-    public function operatore(): BelongsTo
+    public function operator(): BelongsTo
     {
         return $this->belongsTo(Operator::class, 'idOperatore', 'idOperatore');
     }

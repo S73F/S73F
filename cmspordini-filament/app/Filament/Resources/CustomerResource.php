@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
+use Filament\Actions\ActionGroup;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -19,14 +20,52 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Clienti';
+
+    protected static ?string $label = 'Cliente';
+
+    protected static ?string $pluralLabel = 'Clienti';
+
+    protected static ?string $slug = 'clienti';
+
+    // public static function form(Form $form): Form
+    // {
+    //     return $form
+    //         ->schema([
+    //             Forms\Components\TextInput::make('ragioneSociale')
+    //                 ->required()
+    //                 ->maxLength(100),
+    //             Forms\Components\TextInput::make('nome')
+    //                 ->maxLength(50),
+    //             Forms\Components\TextInput::make('cognome')
+    //                 ->maxLength(50),
+    //             Forms\Components\TextInput::make('partitaIva')
+    //                 ->required()
+    //                 ->maxLength(50),
+    //             Forms\Components\TextInput::make('indirizzo')
+    //                 ->required()
+    //                 ->maxLength(50),
+    //             Forms\Components\TextInput::make('citta')
+    //                 ->required()
+    //                 ->maxLength(50),
+    //             Forms\Components\TextInput::make('cap')
+    //                 ->required()
+    //                 ->numeric(),
+    //             Forms\Components\TextInput::make('provincia')
+    //                 ->required()
+    //                 ->maxLength(50),
+    //             Forms\Components\TextInput::make('email')
+    //                 ->required()
+    //                 ->maxLength(150),
+    //             Forms\Components\TextInput::make('password')
+    //                 ->required()
+    //                 ->maxLength(150),
+    //         ]);
+    // }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                // Forms\Components\TextInput::make('id')
-                //     ->label('ID')
-                //     ->required()
-                //     ->numeric(),
                 Forms\Components\TextInput::make('ragioneSociale')
                     ->required()
                     ->maxLength(100),
@@ -62,32 +101,40 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('ID')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('ragioneSociale')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('nome')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('cognome')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('partitaIva')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('user.email')
+                    ->label('Email')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('indirizzo')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('citta')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('cap')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('provincia')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Data di creazione')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Ultima modifica')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -96,7 +143,11 @@ class CustomerResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -60,8 +60,8 @@ const LavoriInCorsoTable = ({ lavori, handleFile, handleIncarico }) => {
                 "",
                 dataInizioLavorazioneCell
             ),
-            TableColumn("Allegati", "Allegati", 100, "", allegatiCell, false),
-            TableColumn("Azioni", "Azioni", 120, "", azioniCell, false),
+            TableColumn("Allegati", "Allegati", 110, "", allegatiCell, false),
+            TableColumn("Azioni", "Azioni", 140, "", azioniCell, false),
         ],
         []
     );

@@ -24,7 +24,7 @@ export const dataTableStyle = {
 export const iconStyle = {
     color: "inherit",
     "&:hover": { color: "#1976d2" },
-    mr: 0.5,
+    mr: 1.5,
 };
 
 export const anchorStyle = {

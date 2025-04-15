@@ -27,7 +27,7 @@ class Customer extends Model
         return $this->belongsTo(User::class, 'id');
     }
 
-    public function ordini(): HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class, 'idCliente', 'idCliente');
     }

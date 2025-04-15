@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -24,7 +25,7 @@ class NewOrderResource extends Resource
 
     protected static ?string $navigationLabel = 'Nuovi';
 
-    protected static ?string $pluralModelLabel = 'Ordini Nuovi';
+    protected static ?string $pluralModelLabel = 'Nuovi ordini';
 
     public static function getEloquentQuery(): Builder
     {
@@ -43,7 +44,17 @@ class NewOrderResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('customer.ragioneSociale')
+                    ->label('Ragione Sociale')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('medicoOrdinante')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('Paziente')
+                    ->getStateUsing(fn(Order $record): string => "{$record->nomePaziente} {$record->cognomePaziente}"),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Data Creazione')
+                    ->searchable(),
+
             ])
             ->filters([
                 //

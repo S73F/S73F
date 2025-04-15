@@ -52,7 +52,7 @@ const LavoriSpeditiTable = ({ lavori, handleFile }) => {
             TableColumn(
                 "Allegati",
                 "Allegati",
-                90,
+                110,
                 "",
                 allegatiCell,
                 false,
