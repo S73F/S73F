@@ -23,3 +23,8 @@ html body #nprogress .bar {
 .im-dialog {
     z-index: 1200;
 }
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}

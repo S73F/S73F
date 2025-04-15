@@ -6,6 +6,7 @@ import {
     InputAdornment,
     InputLabel,
     OutlinedInput,
+    Tooltip,
 } from "@mui/material";
 import { usePasswordField } from "../../Hooks/Components/FormFields/usePasswordField";
 
@@ -45,19 +46,31 @@ export const PasswordField = ({ value, onChange, margin, ...props }) => {
                 required
                 endAdornment={
                     <InputAdornment position="end">
-                        <IconButton
-                            aria-label={
+                        <Tooltip
+                            title={
                                 showPassword
-                                    ? "hide the password"
-                                    : "display the password"
+                                    ? "Nascondi password"
+                                    : "Mostra password"
                             }
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            onMouseUp={handleMouseUpPassword}
-                            edge="end"
                         >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
+                            <IconButton
+                                aria-label={
+                                    showPassword
+                                        ? "Nascondi password"
+                                        : "Mostra password"
+                                }
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                onMouseUp={handleMouseUpPassword}
+                                edge="end"
+                            >
+                                {showPassword ? (
+                                    <VisibilityOff />
+                                ) : (
+                                    <Visibility />
+                                )}
+                            </IconButton>
+                        </Tooltip>
                     </InputAdornment>
                 }
                 label="Password"
