@@ -7,7 +7,7 @@ export const contentContainer = {
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    px: 4,
+    px: 6,
     py: 6,
 };
 
@@ -29,19 +29,18 @@ export const buttonStyles = {
     py: 1,
     width: 170,
     textAlign: "left",
+    gap: 1,
 };
 
 export const creazioneClienteBtn = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100px",
-    height: "40px",
-    mt: -2,
-    mb: 6,
     textDecoration: "none",
     "&:hover": {
         opacity: "0.8",
     },
-    transition: "color 0.2s ease",
+    transition: "all 0.2s ease",
+    alignSelf: { xs: "center", sm: "end" },
+    mb: { xs: 3, sm: 2 },
+    borderRadius: 1,
+    boxShadow: 2,
+    fontWeight: 600,
 };

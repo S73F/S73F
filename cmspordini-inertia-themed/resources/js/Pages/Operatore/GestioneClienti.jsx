@@ -16,7 +16,10 @@ import { Typography } from "@mui/material";
 export default function GestioneClienti({ clienti }) {
     return (
         <Content.Container>
-            <Content.Layout title={"Gestione clienti"} />
+            <Content.Layout
+                title={"Gestione clienti"}
+                marginBottom={{ xs: 4, sm: 2 }}
+            />
 
             {/* Mostra la tabella solo se sono presenti clienti nel database */}
             {clienti?.length > 0 && <GestioneClientiTable clienti={clienti} />}

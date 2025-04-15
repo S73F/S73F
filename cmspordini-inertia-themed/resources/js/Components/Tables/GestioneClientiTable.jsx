@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Link, Typography } from "@mui/material";
+import { Button, Link, Typography } from "@mui/material";
 import { DataTable } from "./DataTable";
 import { ModalLink } from "@inertiaui/modal-react";
 import { AddBox as AddBoxIcon } from "@mui/icons-material";
@@ -63,25 +63,17 @@ export default function GestioneClientiTable({ clienti }) {
     return (
         <>
             {/* Link per aprire la modale di creazione cliente */}
-            <Link
+            <Button
                 component={ModalLink}
-                href={`/operatore/gestione-clienti/creazione`}
+                href="/operatore/gestione-clienti/creazione"
                 title="Crea cliente"
+                variant="contained"
+                color="primary"
+                startIcon={<AddBoxIcon />}
                 sx={creazioneClienteBtn}
             >
-                {/* Icona del pulsante di creazione cliente */}
-                <AddBoxIcon sx={{ width: "40px", height: "40px" }} />
-
-                {/* Testo che appare sotto l'icona */}
-                <Typography
-                    component="h3"
-                    variant="h3"
-                    fontSize={18}
-                    fontWeight={500}
-                >
-                    Crea cliente
-                </Typography>
-            </Link>
+                CREA CLIENTE
+            </Button>
 
             {/* Tabella dei clienti con i dati passati */}
             <DataTable.Table rows={mappedClienti} columns={columns} />
