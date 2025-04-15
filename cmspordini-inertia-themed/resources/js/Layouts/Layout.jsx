@@ -16,10 +16,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { ToastContainer } from "react-toastify";
 import { Link } from "@inertiajs/react";
-import { ListItemIcon } from "@mui/material";
+import { ListItemIcon, Tooltip } from "@mui/material";
 import { Home as HomeIcon, Logout as LogoutIcon } from "@mui/icons-material";
 import { useState } from "react";
 import { useLayout } from "../Hooks/Layouts/useLayout";
+import { navbarActiveBtnStyles, navbarButtonStyles } from "../styles/appStyles";
+import { useActiveButton } from "../Contexts/ActiveButtonContext";
 
 const drawerWidth = 240;
 
@@ -38,6 +40,7 @@ const drawerWidth = 240;
  * @returns {JSX.Element} Il layout dell'applicazione.
  */
 function Layout({ window, children, Buttons, ListItems }) {
+    const { activeBtn, setActiveBtn } = useActiveButton();
     const [mobileOpen, setMobileOpen] = useState(false); // Alterna apertura/chiusura del drawer
 
     const { handleLogout } = useLayout(); // Recupera la funzione di logout dall'hook
@@ -72,7 +75,12 @@ function Layout({ window, children, Buttons, ListItems }) {
 
             <List>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} href="/" title="Home">
+                    <ListItemButton
+                        component={Link}
+                        href="/"
+                        title="Home"
+                        onClick={() => setActiveBtn("Home")}
+                    >
                         <ListItemIcon>
                             <HomeIcon />
                         </ListItemIcon>
@@ -161,7 +169,12 @@ function Layout({ window, children, Buttons, ListItems }) {
                             component={Link}
                             href="/"
                             title="Home"
-                            sx={{ color: "#fff" }}
+                            onClick={() => setActiveBtn("Home")}
+                            sx={
+                                activeBtn === "Home"
+                                    ? navbarActiveBtnStyles
+                                    : navbarButtonStyles
+                            }
                         >
                             Home
                         </Button>
@@ -171,7 +184,7 @@ function Layout({ window, children, Buttons, ListItems }) {
                         <Button
                             onClick={handleLogout}
                             title="Logout"
-                            sx={{ color: "#fff" }}
+                            sx={navbarButtonStyles}
                         >
                             Logout
                         </Button>

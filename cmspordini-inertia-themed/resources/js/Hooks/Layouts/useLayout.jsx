@@ -1,6 +1,7 @@
 import { useForm, usePage } from "@inertiajs/react";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useActiveButton } from "../../Contexts/ActiveButtonContext";
 
 /**
  * Hook personalizzato per la gestione del layout dell'applicazione.
@@ -12,6 +13,7 @@ import { toast } from "react-toastify";
 export const useLayout = () => {
     const { flash, user } = usePage().props; // Recupera i messaggi flash e l'utente dal server
     const { post } = useForm(); // Funzione per inviare i dati del form
+    const { activeBtn, setActiveBtn } = useActiveButton(); // Recupera lo stato del pulsante attivo e la funzione per aggiornarlo
 
     /**
      * Mostra tramite toast i messaggi flash e li rimuove dalla cronologia.
@@ -53,9 +55,13 @@ export const useLayout = () => {
                 : user.IDoperatore
                 ? post("/operatore/logout")
                 : null;
+
+            setTimeout(() => {
+                setActiveBtn("Home"); // Resetta il pulsante attivo a "Home"
+            }, 2000);
         },
         [post, user]
     );
 
-    return { handleLogout };
+    return { activeBtn, setActiveBtn, handleLogout };
 };

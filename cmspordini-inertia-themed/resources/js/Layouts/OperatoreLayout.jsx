@@ -13,6 +13,11 @@ import {
     Person as PersonIcon,
 } from "@mui/icons-material";
 import { useLayout } from "../Hooks/Layouts/useLayout";
+import { navbarActiveBtnStyles, navbarButtonStyles } from "../styles/appStyles";
+import {
+    ActiveButtonProvider,
+    useActiveButton,
+} from "../Contexts/ActiveButtonContext";
 
 /**
  * Componente di layout per la pagina dell'operatore.
@@ -25,6 +30,8 @@ import { useLayout } from "../Hooks/Layouts/useLayout";
  * @returns {JSX.Element} - Il layout dell'operatore con il menu laterale e i pulsanti di navigazione.
  */
 export default function OperatoreLayout({ children }) {
+    const { activeBtn, setActiveBtn } = useActiveButton();
+
     /**
      * Pulsanti da visualizzare nella barra di navigazione superiore.
      *
@@ -38,7 +45,12 @@ export default function OperatoreLayout({ children }) {
                     component={Link}
                     href="/operatore/ordini-clienti"
                     title="Storico ordini clienti"
-                    sx={{ color: "#fff" }}
+                    onClick={() => setActiveBtn("Storico")}
+                    sx={
+                        activeBtn === "Storico"
+                            ? navbarActiveBtnStyles
+                            : navbarButtonStyles
+                    }
                 >
                     Storico
                 </Button>
@@ -46,13 +58,18 @@ export default function OperatoreLayout({ children }) {
                     component={Link}
                     href="/operatore/gestione-clienti"
                     title="Gestione clienti"
-                    sx={{ color: "#fff" }}
+                    onClick={() => setActiveBtn("Gestione clienti")}
+                    sx={
+                        activeBtn === "Gestione clienti"
+                            ? navbarActiveBtnStyles
+                            : navbarButtonStyles
+                    }
                 >
                     Clienti
                 </Button>
             </>
         ),
-        []
+        [activeBtn, setActiveBtn]
     );
 
     /**
@@ -70,6 +87,7 @@ export default function OperatoreLayout({ children }) {
                         component={Link}
                         href="/operatore/ordini-clienti"
                         title="Storico ordini clienti"
+                        onClick={() => setActiveBtn("Storico")}
                     >
                         {/* Icona che rappresenta gli ordini dei clienti */}
                         <ListItemIcon>
@@ -77,7 +95,7 @@ export default function OperatoreLayout({ children }) {
                         </ListItemIcon>
 
                         {/* Testo della voce di menu */}
-                        <ListItemText primary="Ordini clienti" />
+                        <ListItemText primary="Storico ordini" />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -85,6 +103,7 @@ export default function OperatoreLayout({ children }) {
                         component={Link}
                         href="/operatore/gestione-clienti"
                         title="Gestione clienti"
+                        onClick={() => setActiveBtn("Gestione clienti")}
                     >
                         {/* Icona che rappresenta la gestione clienti */}
                         <ListItemIcon>

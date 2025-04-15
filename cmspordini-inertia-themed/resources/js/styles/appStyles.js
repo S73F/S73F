@@ -44,3 +44,15 @@ export const creazioneClienteBtn = {
     boxShadow: 2,
     fontWeight: 600,
 };
+
+export const navbarButtonStyles = {
+    color: "#fff",
+    "&:hover": { backgroundColor: "#1565c0" },
+    width: 90,
+};
+
+export const navbarActiveBtnStyles = {
+    color: "#fff",
+    backgroundColor: "#1565c0",
+    width: 90,
+};

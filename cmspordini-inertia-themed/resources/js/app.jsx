@@ -1,3 +1,4 @@
+import React from "react";
 import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
 import { renderApp } from "@inertiaui/modal-react";
@@ -5,6 +6,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { ActiveButtonProvider } from "./Contexts/ActiveButtonContext";
 
 createInertiaApp({
     resolve: (name) => {
@@ -19,7 +21,9 @@ createInertiaApp({
         );
     },
     setup({ el, App, props }) {
-        createRoot(el).render(renderApp(App, props));
+        createRoot(el).render(
+            <ActiveButtonProvider>{renderApp(App, props)}</ActiveButtonProvider>
+        );
     },
     progress: {
         // The color of the progress bar...
