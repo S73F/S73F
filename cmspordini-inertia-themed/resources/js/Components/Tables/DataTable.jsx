@@ -17,7 +17,7 @@ import { dataTableStyle } from "../../styles/tableStyles";
 const Selector = ({ inputLabel, handleChange, children }) => {
     return (
         <>
-            <FormControl sx={{ width: "90%", mb: 4 }}>
+            <FormControl sx={{ width: "95%", mb: 4 }}>
                 {/* InputLabel utilizzato per visualizzare l'etichetta sopra il campo Select */}
                 <InputLabel id="input-label">{inputLabel}</InputLabel>
 
@@ -49,7 +49,7 @@ const paginationModel = { page: 0, pageSize: 5 }; // Paginazione predefinita: pa
  */
 const Table = ({ rows, columns }) => {
     return (
-        <Paper elevation={5} sx={{ width: "90%", margin: "0 auto" }}>
+        <Paper elevation={5} sx={{ width: "95%", margin: "0 auto" }}>
             <DataGrid
                 rows={rows}
                 columns={columns}
