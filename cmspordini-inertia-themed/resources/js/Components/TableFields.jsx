@@ -41,7 +41,7 @@ export const TableColumn = (
     field: field,
     headerName: headerName,
     flex: 1, // Imposta la larghezza flessibile della colonna
-    minWidth: minWidth,
+    ...(minWidth && { minWidth }), // Imposta la larghezza massima, se fornita
     ...(maxWidth && { maxWidth }), // Imposta la larghezza massima, se fornita
     sortable: sortable,
     filterable: filterable,
@@ -397,7 +397,8 @@ export const mapClienti = (clienti) =>
         id: cliente.IDcliente,
         idCliente: cliente.IDcliente,
         ragione_sociale: cliente.ragione_sociale,
-        Nome: cliente.cognome + " " + cliente.nome,
+        Nome: cliente.nome,
+        Cognome: cliente.cognome,
         emailcliente: cliente.emailcliente,
         Username: cliente.username,
     }));

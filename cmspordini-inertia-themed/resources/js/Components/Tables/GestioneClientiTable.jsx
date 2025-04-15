@@ -49,6 +49,7 @@ export default function GestioneClientiTable({ clienti }) {
                 ragioneSocialeCell
             ),
             TableColumn("Nome", "Nome", 100),
+            TableColumn("Cognome", "Cognome", 100),
             TableColumn("emailcliente", "Email", 250, "", emailClienteCell),
             TableColumn("Username", "Username", 100),
             TableColumn("Azioni", "Azioni", 100, "", azioniClienteCell),
