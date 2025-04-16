@@ -3,6 +3,7 @@ import GestioneClientiTable from "../../Components/Tables/GestioneClientiTable";
 import OperatoreLayout from "../../Layouts/OperatoreLayout";
 import { Content } from "../../Components/Content";
 import { Typography } from "@mui/material";
+import { Head } from "@inertiajs/react";
 
 /**
  * Pagina per la gestione dei clienti dell'operatore.
@@ -15,26 +16,39 @@ import { Typography } from "@mui/material";
  */
 export default function GestioneClienti({ clienti }) {
     return (
-        <Content.Container>
-            <Content.Layout
-                title={"Gestione clienti"}
-                marginBottom={{ xs: 4, sm: 2 }}
-            />
+        <>
+            <Head>
+                <title>Gestione clienti - CMSPordini</title>
+                <meta
+                    head-key="description"
+                    name="description"
+                    content="Pagina di gestione dei clienti."
+                />
+            </Head>
 
-            {/* Mostra la tabella solo se sono presenti clienti nel database */}
-            {clienti?.length > 0 && <GestioneClientiTable clienti={clienti} />}
+            <Content.Container>
+                <Content.Layout
+                    title={"Gestione clienti"}
+                    marginBottom={{ xs: 4, sm: 2 }}
+                />
 
-            {/* Messaggio di fallback nel caso non ci siano clienti */}
-            {clienti?.length === 0 && (
-                <Typography
-                    variant="h5"
-                    component={"p"}
-                    sx={{ mt: 4, textAlign: "center" }}
-                >
-                    Nessun cliente trovato
-                </Typography>
-            )}
-        </Content.Container>
+                {/* Mostra la tabella solo se sono presenti clienti nel database */}
+                {clienti?.length > 0 && (
+                    <GestioneClientiTable clienti={clienti} />
+                )}
+
+                {/* Messaggio di fallback nel caso non ci siano clienti */}
+                {clienti?.length === 0 && (
+                    <Typography
+                        variant="h5"
+                        component={"p"}
+                        sx={{ mt: 4, textAlign: "center" }}
+                    >
+                        Nessun cliente trovato
+                    </Typography>
+                )}
+            </Content.Container>
+        </>
     );
 }
 

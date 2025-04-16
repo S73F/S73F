@@ -6,6 +6,7 @@ import { MenuItem, Typography } from "@mui/material";
 import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
 import { Messages } from "../../Components/Messages";
+import { Head } from "@inertiajs/react";
 
 /**
  * Componente per visualizzare lo storico degli ordini del cliente.
@@ -21,25 +22,36 @@ export default function StoricoOrdini({ ordini }) {
     const { handleChange } = useStoricoOrdini(); // Custom hook per gestire il cambiamento del filtro temporale
 
     return (
-        <Content.Container>
-            <Content.Layout title={"Storico ordini"}>
-                {/* Selettore per filtrare gli ordini in base al lasso di tempo selezionato */}
-                <DataTable.Selector
-                    inputLabel={"Lasso di tempo"}
-                    handleChange={handleChange}
-                >
-                    <MenuItem value={30}>30 giorni</MenuItem>
-                    <MenuItem value={60}>60 giorni</MenuItem>
-                    <MenuItem value={"tutto"}>Tutto</MenuItem>
-                </DataTable.Selector>
-            </Content.Layout>
+        <>
+            <Head>
+                <title>Storico ordini - CMSPordini</title>
+                <meta
+                    head-key="description"
+                    name="description"
+                    content="Pagina di storico degli ordini del cliente."
+                />
+            </Head>
 
-            {/* Mostra la tabella solo se ci sono ordini disponibili */}
-            {ordini?.length > 0 && <StoricoOrdiniTable ordini={ordini} />}
+            <Content.Container>
+                <Content.Layout title={"Storico ordini"}>
+                    {/* Selettore per filtrare gli ordini in base al lasso di tempo selezionato */}
+                    <DataTable.Selector
+                        inputLabel={"Lasso di tempo"}
+                        handleChange={handleChange}
+                    >
+                        <MenuItem value={30}>30 giorni</MenuItem>
+                        <MenuItem value={60}>60 giorni</MenuItem>
+                        <MenuItem value={"tutto"}>Tutto</MenuItem>
+                    </DataTable.Selector>
+                </Content.Layout>
 
-            {/* Messaggio di fallback nel caso non ci siano ordini */}
-            {ordini?.length === 0 && <Messages.Fallback item={"ordine"} />}
-        </Content.Container>
+                {/* Mostra la tabella solo se ci sono ordini disponibili */}
+                {ordini?.length > 0 && <StoricoOrdiniTable ordini={ordini} />}
+
+                {/* Messaggio di fallback nel caso non ci siano ordini */}
+                {ordini?.length === 0 && <Messages.Fallback item={"ordine"} />}
+            </Content.Container>
+        </>
     );
 }
 

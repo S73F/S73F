@@ -6,6 +6,7 @@ import OperatoreLayout from "../../Layouts/OperatoreLayout";
 import { Content } from "../../Components/Content";
 import { DataTable } from "../../Components/Tables/DataTable";
 import { Messages } from "../../Components/Messages";
+import { Head } from "@inertiajs/react";
 
 /**
  * Componente per la gestione e visualizzazione degli ordini dei clienti.
@@ -20,31 +21,42 @@ export default function OrdiniClienti({ clienti, ordini }) {
     const { handleChange } = useOrdiniClienti(); // Custom hook per gestire il cambio di selezione del cliente
 
     return (
-        <Content.Container>
-            <Content.Layout title={"Ordini clienti"}>
-                {/* Selettore utilizzato per filtrare gli ordini del cliente selezionato */}
-                <DataTable.Selector
-                    inputLabel={"Cliente"}
-                    handleChange={handleChange}
-                >
-                    {clienti.map((cliente) => (
-                        <MenuItem
-                            key={cliente.IDcliente}
-                            value={cliente.IDcliente} // Valore da passare all'handler
-                        >
-                            {/* Nome del cliente visualizzato */}
-                            {cliente.ragione_sociale}
-                        </MenuItem>
-                    ))}
-                </DataTable.Selector>
-            </Content.Layout>
+        <>
+            <Head>
+                <title>Storico ordini - CMSPordini</title>
+                <meta
+                    head-key="description"
+                    name="description"
+                    content="Pagina di storico degli ordini dei clienti."
+                />
+            </Head>
 
-            {/* Mostra la tabella solo se ci sono ordini disponibili */}
-            {ordini?.length > 0 && <OrdiniClienteTable ordini={ordini} />}
+            <Content.Container>
+                <Content.Layout title={"Ordini clienti"}>
+                    {/* Selettore utilizzato per filtrare gli ordini del cliente selezionato */}
+                    <DataTable.Selector
+                        inputLabel={"Cliente"}
+                        handleChange={handleChange}
+                    >
+                        {clienti.map((cliente) => (
+                            <MenuItem
+                                key={cliente.IDcliente}
+                                value={cliente.IDcliente} // Valore da passare all'handler
+                            >
+                                {/* Nome del cliente visualizzato */}
+                                {cliente.ragione_sociale}
+                            </MenuItem>
+                        ))}
+                    </DataTable.Selector>
+                </Content.Layout>
 
-            {/* Messaggio di fallback nel caso non ci siano ordini */}
-            {ordini?.length === 0 && <Messages.Fallback item={"ordine"} />}
-        </Content.Container>
+                {/* Mostra la tabella solo se ci sono ordini disponibili */}
+                {ordini?.length > 0 && <OrdiniClienteTable ordini={ordini} />}
+
+                {/* Messaggio di fallback nel caso non ci siano ordini */}
+                {ordini?.length === 0 && <Messages.Fallback item={"ordine"} />}
+            </Content.Container>
+        </>
     );
 }
 

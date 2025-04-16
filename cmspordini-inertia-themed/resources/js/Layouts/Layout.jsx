@@ -15,7 +15,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { ToastContainer } from "react-toastify";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { ListItemIcon, Tooltip } from "@mui/material";
 import { Home as HomeIcon, Logout as LogoutIcon } from "@mui/icons-material";
 import { useState } from "react";
@@ -145,104 +145,110 @@ function Layout({ window, children, Buttons, ListItems }) {
         window !== undefined ? () => window().document.body : undefined;
 
     return (
-        <Box sx={{ display: "flex", minHeight: "100vh" }}>
-            <CssBaseline />
-            <AppBar component="nav">
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        edge="start"
-                        onClick={handleDrawerToggle}
-                        sx={{ mr: 2, display: { sm: "none" } }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+        <>
+            <Head>
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+            </Head>
 
-                    <Typography
-                        variant="h6"
-                        component="div"
+            <Box sx={{ display: "flex", minHeight: "100vh" }}>
+                <CssBaseline />
+                <AppBar component="nav">
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            edge="start"
+                            onClick={handleDrawerToggle}
+                            sx={{ mr: 2, display: { sm: "none" } }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+
+                        <Typography
+                            variant="h6"
+                            component="div"
+                            sx={{
+                                flexGrow: 1,
+                                display: { xs: "none", sm: "block" },
+                                userSelect: "none",
+                            }}
+                        >
+                            <Link
+                                href="/"
+                                title="Logo CMSPordini"
+                                onClick={() => setActiveBtn("Home")}
+                            >
+                                CMSPordini
+                            </Link>
+                        </Typography>
+
+                        <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                            <Button
+                                component={Link}
+                                href="/"
+                                title="Home"
+                                onClick={() => setActiveBtn("Home")}
+                                sx={
+                                    activeBtn === "Home"
+                                        ? navbarActiveBtnStyles
+                                        : navbarButtonStyles
+                                }
+                            >
+                                Home
+                            </Button>
+
+                            {Buttons}
+
+                            <Button
+                                onClick={handleLogout}
+                                title="Logout"
+                                sx={navbarButtonStyles}
+                            >
+                                Logout
+                            </Button>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+                <nav>
+                    <Drawer
+                        container={container}
+                        variant="temporary"
+                        open={mobileOpen}
+                        onClose={handleDrawerToggle}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
                         sx={{
-                            flexGrow: 1,
-                            display: { xs: "none", sm: "block" },
-                            userSelect: "none",
+                            display: { xs: "block", sm: "none" },
+                            "& .MuiDrawer-paper": {
+                                boxSizing: "border-box",
+                                width: drawerWidth,
+                            },
                         }}
                     >
-                        <Link
-                            href="/"
-                            title="Logo CMSPordini"
-                            onClick={() => setActiveBtn("Home")}
-                        >
-                            CMSPordini
-                        </Link>
-                    </Typography>
-
-                    <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                        <Button
-                            component={Link}
-                            href="/"
-                            title="Home"
-                            onClick={() => setActiveBtn("Home")}
-                            sx={
-                                activeBtn === "Home"
-                                    ? navbarActiveBtnStyles
-                                    : navbarButtonStyles
-                            }
-                        >
-                            Home
-                        </Button>
-
-                        {Buttons}
-
-                        <Button
-                            onClick={handleLogout}
-                            title="Logout"
-                            sx={navbarButtonStyles}
-                        >
-                            Logout
-                        </Button>
-                    </Box>
-                </Toolbar>
-            </AppBar>
-            <nav>
-                <Drawer
-                    container={container}
-                    variant="temporary"
-                    open={mobileOpen}
-                    onClose={handleDrawerToggle}
-                    ModalProps={{
-                        keepMounted: true, // Better open performance on mobile.
-                    }}
+                        {drawer}
+                    </Drawer>
+                </nav>
+                <Box
+                    component="main"
                     sx={{
-                        display: { xs: "block", sm: "none" },
-                        "& .MuiDrawer-paper": {
-                            boxSizing: "border-box",
-                            width: drawerWidth,
-                        },
+                        p: 3,
+                        width: "100%",
+                        flexGrow: 1,
+                        overflowX: "hidden",
+                        display: "flex",
+                        flexDirection: "column",
                     }}
                 >
-                    {drawer}
-                </Drawer>
-            </nav>
-            <Box
-                component="main"
-                sx={{
-                    p: 3,
-                    width: "100%",
-                    flexGrow: 1,
-                    overflowX: "hidden",
-                    display: "flex",
-                    flexDirection: "column",
-                }}
-            >
-                {/* Spazio per compensare l'AppBar fissa */}
-                <Toolbar />
+                    {/* Spazio per compensare l'AppBar fissa */}
+                    <Toolbar />
 
-                {children}
+                    {children}
 
-                <ToastContainer position="bottom-right" closeOnClick />
+                    <ToastContainer position="bottom-right" closeOnClick />
+                </Box>
             </Box>
-        </Box>
+        </>
     );
 }
 

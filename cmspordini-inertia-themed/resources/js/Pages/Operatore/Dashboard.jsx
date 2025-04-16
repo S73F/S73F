@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import { buttonStyles, badgeStyle } from "../../styles/appStyles";
 import { Messages } from "../../Components/Messages";
+import { Head } from "@inertiajs/react";
 
 /**
  * Componente per la dashboard dell'operatore.
@@ -29,71 +30,84 @@ export default function Dashboard({ user, tipo, lavori, numLavoriNuovi }) {
     const { handleLavori, loadingButton } = useDashboard();
 
     return (
-        <Content.Container>
-            {/* Messaggio di benvenuto personalizzato in base ai dati dell'utente */}
-            <Messages.Welcome user={user} />
+        <>
+            <Head>
+                <title>Home - CMSPordini</title>
+                <meta
+                    head-key="description"
+                    name="description"
+                    content="Home page della dashboard operatore."
+                />
+            </Head>
 
-            {/* Stack di pulsanti per filtrare i lavori */}
-            <Stack
-                direction={{ xs: "column", md: "row" }}
-                spacing={{ xs: 2, md: 2, lg: 3 }}
-                justifyContent="center"
-            >
-                {/* Pulsante con Badge per il numero di lavori nuovi */}
-                <Badge
-                    badgeContent={numLavoriNuovi}
-                    color="primary"
-                    showZero={false} // Nasconde il badge se il numero è 0
-                    anchorOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                    }}
-                    max={99} // Limita il conteggio del badge a 99
-                    sx={badgeStyle}
+            <Content.Container>
+                {/* Messaggio di benvenuto personalizzato in base ai dati dell'utente */}
+                <Messages.Welcome user={user} />
+
+                {/* Stack di pulsanti per filtrare i lavori */}
+                <Stack
+                    direction={{ xs: "column", md: "row" }}
+                    spacing={{ xs: 2, md: 2, lg: 3 }}
+                    justifyContent="center"
                 >
+                    {/* Pulsante con Badge per il numero di lavori nuovi */}
+                    <Badge
+                        badgeContent={numLavoriNuovi}
+                        color="primary"
+                        showZero={false} // Nasconde il badge se il numero è 0
+                        anchorOrigin={{
+                            vertical: "top",
+                            horizontal: "right",
+                        }}
+                        max={99} // Limita il conteggio del badge a 99
+                        sx={badgeStyle}
+                    >
+                        <Button
+                            startIcon={<NewReleasesIcon />}
+                            size="large"
+                            onClick={() => handleLavori("nuovi")} // Cambia i lavori visualizzati in "nuovi"
+                            variant="contained"
+                            color="primary"
+                            sx={buttonStyles}
+                            loading={loadingButton === "nuovi"} // Mostra il pulsante in caricamento durante il fetching dei lavori nuovi
+                            disabled={
+                                tipo === "nuovi" && loadingButton === null
+                            } // Disabilita il pulsante se il tipo di lavori è "nuovi" (dunque, se è già attivo)
+                        >
+                            Lavori nuovi
+                        </Button>
+                    </Badge>
+
                     <Button
-                        startIcon={<NewReleasesIcon />}
+                        startIcon={<LoopIcon />}
                         size="large"
-                        onClick={() => handleLavori("nuovi")} // Cambia i lavori visualizzati in "nuovi"
+                        onClick={() => handleLavori("inCorso")}
                         variant="contained"
                         color="primary"
                         sx={buttonStyles}
-                        loading={loadingButton === "nuovi"} // Mostra il pulsante in caricamento durante il fetching dei lavori nuovi
-                        disabled={tipo === "nuovi" && loadingButton === null} // Disabilita il pulsante se il tipo di lavori è "nuovi" (dunque, se è già attivo)
+                        loading={loadingButton === "inCorso"}
+                        disabled={tipo === "inCorso" && loadingButton === null}
                     >
-                        Lavori nuovi
+                        Lavori in corso
                     </Button>
-                </Badge>
+                    <Button
+                        startIcon={<MailIcon />}
+                        size="large"
+                        onClick={() => handleLavori("spediti")}
+                        variant="contained"
+                        color="primary"
+                        sx={buttonStyles}
+                        loading={loadingButton === "spediti"}
+                        disabled={tipo === "spediti" && loadingButton === null}
+                    >
+                        Lavori spediti
+                    </Button>
+                </Stack>
 
-                <Button
-                    startIcon={<LoopIcon />}
-                    size="large"
-                    onClick={() => handleLavori("inCorso")}
-                    variant="contained"
-                    color="primary"
-                    sx={buttonStyles}
-                    loading={loadingButton === "inCorso"}
-                    disabled={tipo === "inCorso" && loadingButton === null}
-                >
-                    Lavori in corso
-                </Button>
-                <Button
-                    startIcon={<MailIcon />}
-                    size="large"
-                    onClick={() => handleLavori("spediti")}
-                    variant="contained"
-                    color="primary"
-                    sx={buttonStyles}
-                    loading={loadingButton === "spediti"}
-                    disabled={tipo === "spediti" && loadingButton === null}
-                >
-                    Lavori spediti
-                </Button>
-            </Stack>
-
-            {/* Contenitore per la tabella dei lavori filtrati */}
-            <LavoriTableContainer lavori={lavori} tipoLavori={tipo} />
-        </Content.Container>
+                {/* Contenitore per la tabella dei lavori filtrati */}
+                <LavoriTableContainer lavori={lavori} tipoLavori={tipo} />
+            </Content.Container>
+        </>
     );
 }
 

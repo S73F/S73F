@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import { PasswordField } from "../../Components/FormFields/PasswordField";
+import { Head } from "@inertiajs/react";
 
 /**
  * Componente per la pagina di login dell'applicazione.
@@ -22,79 +23,91 @@ export default function Login() {
     const { data, processing, handleChange, handleSubmit } = useLogin(); // Custom hook per la gestione del login
 
     return (
-        <Container
-            maxWidth="xs"
-            sx={{
-                height: "100vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-            }}
-        >
-            <Paper
-                elevation={5}
+        <>
+            <Head>
+                <title>Login - CMSPordini</title>
+                <meta
+                    head-key="description"
+                    name="description"
+                    content="Pagina di login"
+                />
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+            </Head>
+
+            <Container
+                maxWidth="xs"
                 sx={{
+                    height: "100vh",
                     display: "flex",
-                    flexDirection: "column",
+                    justifyContent: "center",
                     alignItems: "center",
-                    padding: 3,
                 }}
             >
-                {/* Logo */}
-                <Box
-                    component="img"
-                    src="/assets/img/ODONTOTECNICA-LOGO.svg"
-                    sx={{ width: 150, mb: 3 }}
-                />
-                <Typography component="h1" variant="h5">
-                    Accedi
-                </Typography>
-
-                {/* Form di login */}
-                <Box
-                    component="form"
-                    onSubmit={handleSubmit}
-                    noValidate
-                    sx={{ mt: 1 }}
+                <Paper
+                    elevation={5}
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        padding: 3,
+                    }}
                 >
-                    {/* Campo per lo username */}
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="username"
-                        label="Username"
-                        name="username"
-                        autoComplete="username"
-                        autoFocus
-                        value={data.username}
-                        onChange={handleChange}
+                    {/* Logo */}
+                    <Box
+                        component="img"
+                        src="/assets/img/ODONTOTECNICA-LOGO.svg"
+                        sx={{ width: 150, mb: 3 }}
                     />
-
-                    {/* Campo per la password */}
-                    <PasswordField
-                        value={data.password}
-                        onChange={handleChange}
-                        margin="normal"
-                    />
-
-                    {/* Pulsante di accesso */}
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        loading={processing}
-                        disabled={processing}
-                        size="large"
-                    >
+                    <Typography component="h1" variant="h5">
                         Accedi
-                    </Button>
-                </Box>
-            </Paper>
+                    </Typography>
 
-            {/* Componente per le notifiche di errore */}
-            <ToastContainer position="bottom-right" closeOnClick={true} />
-        </Container>
+                    {/* Form di login */}
+                    <Box
+                        component="form"
+                        onSubmit={handleSubmit}
+                        noValidate
+                        sx={{ mt: 1 }}
+                    >
+                        {/* Campo per lo username */}
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="username"
+                            label="Username"
+                            name="username"
+                            autoComplete="username"
+                            autoFocus
+                            value={data.username}
+                            onChange={handleChange}
+                        />
+
+                        {/* Campo per la password */}
+                        <PasswordField
+                            value={data.password}
+                            onChange={handleChange}
+                            margin="normal"
+                        />
+
+                        {/* Pulsante di accesso */}
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            loading={processing}
+                            disabled={processing}
+                            size="large"
+                        >
+                            Accedi
+                        </Button>
+                    </Box>
+                </Paper>
+
+                {/* Componente per le notifiche di errore */}
+                <ToastContainer position="bottom-right" closeOnClick={true} />
+            </Container>
+        </>
     );
 }
