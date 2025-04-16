@@ -268,6 +268,7 @@ export default function AzioneCliente({ action, cliente }) {
                         color="primary"
                         type="submit"
                         disabled={processing}
+                        loading={processing}
                         sx={formBtnStyle}
                     >
                         {action === "creazione"

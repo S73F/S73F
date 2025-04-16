@@ -103,6 +103,7 @@ const Buttons = ({
                 color={firstBtnColor}
                 onClick={action}
                 sx={formBtnStyle}
+                loading={processing}
                 disabled={processing}
             >
                 {firstBtnText}
@@ -112,6 +113,7 @@ const Buttons = ({
                 color={secondBtnColor}
                 onClick={closeModal}
                 sx={formBtnStyle}
+                disabled={processing}
             >
                 {secondBtnText}
             </Button>

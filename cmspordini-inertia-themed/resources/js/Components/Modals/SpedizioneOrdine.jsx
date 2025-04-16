@@ -21,7 +21,7 @@ export default function EliminazioneOrdine({ ordine }) {
         modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     }, [modalRef]);
 
-    const { handleIncarico } = useLavori(); // Funzione utilizzata per spedire l'incarico
+    const { handleIncarico, loading } = useLavori(); // Funzione utilizzata per spedire l'incarico
 
     return (
         <ActionModal.Wrapper modalRef={modalRef} title={"Spedizione ordine"}>
@@ -42,6 +42,7 @@ export default function EliminazioneOrdine({ ordine }) {
                     ])
                 }
                 closeModal={closeModal}
+                processing={loading}
             />
         </ActionModal.Wrapper>
     );

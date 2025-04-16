@@ -21,7 +21,7 @@ export default function AccettazioneOrdine({ ordine }) {
         modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     }, [modalRef]);
 
-    const { handleIncarico } = useLavori(); // Funzione utilizzata per accettare l'incarico
+    const { handleIncarico, loading } = useLavori(); // Funzione utilizzata per accettare l'incarico
 
     return (
         <ActionModal.Wrapper
@@ -39,6 +39,7 @@ export default function AccettazioneOrdine({ ordine }) {
             <ActionModal.Buttons
                 action={() => handleIncarico(ordine, "forward", closeModal)}
                 closeModal={closeModal}
+                processing={loading}
             />
         </ActionModal.Wrapper>
     );

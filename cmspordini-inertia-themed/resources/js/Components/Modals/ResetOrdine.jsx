@@ -21,7 +21,7 @@ export default function ResetOrdine({ ordine }) {
         modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     }, [modalRef]);
 
-    const { handleIncarico } = useLavori(); // Funzione utilizzata per ripristinare l'incarico
+    const { handleIncarico, loading } = useLavori(); // Funzione utilizzata per ripristinare l'incarico
 
     return (
         <ActionModal.Wrapper modalRef={modalRef} title={"Ripristino ordine"}>
@@ -38,6 +38,7 @@ export default function ResetOrdine({ ordine }) {
                 action={() => handleIncarico(ordine, "back", closeModal)}
                 closeModal={closeModal}
                 firstBtnColor="error"
+                processing={loading}
             />
         </ActionModal.Wrapper>
     );

@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 
 /**
@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
  * @returns {Function} handleIncarico - Funzione per gestire l'assegnazione o la riassegnazione di un incarico.
  */
 export const useLavori = () => {
+    const [loading, setLoading] = useState(false);
+
     /**
      * Funzione per gestire il download dei file.
      *
@@ -69,7 +71,16 @@ export const useLavori = () => {
                     only: refresh,
                     preserveScroll: true,
                     preserveState: true,
-                    ...(closeModal ? { onFinish: closeModal } : {}),
+
+                    onStart: () => setLoading(true),
+                    ...(closeModal
+                        ? {
+                              onFinish: () => {
+                                  closeModal();
+                                  setLoading(false);
+                              },
+                          }
+                        : {}),
                 }
             );
         },
@@ -79,5 +90,6 @@ export const useLavori = () => {
     return {
         handleFile,
         handleIncarico,
+        loading,
     };
 };

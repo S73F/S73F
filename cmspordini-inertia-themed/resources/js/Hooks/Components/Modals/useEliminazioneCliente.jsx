@@ -1,4 +1,5 @@
 import { router } from "@inertiajs/react";
+import { useState } from "react";
 
 /**
  * Hook personalizzato per gestire l'eliminazione di un cliente.
@@ -11,6 +12,8 @@ import { router } from "@inertiajs/react";
  * @returns {Function} closeModal - Funzione per chiudere il modale di conferma eliminazione.
  */
 export const useEliminazioneCliente = ({ cliente, modalRef }) => {
+    const [loading, setLoading] = useState(false);
+
     /**
      * Effettua una richiesta DELETE per eliminare il cliente.
      *
@@ -25,7 +28,9 @@ export const useEliminazioneCliente = ({ cliente, modalRef }) => {
                 only: ["clienti", "flash"], // Aggiorna solo la lista clienti e i messaggi flash
                 preserveScroll: true,
                 preserveState: true,
+                onStart: () => setLoading(true),
                 onSuccess: () => closeModal(),
+                onFinish: () => setLoading(false),
                 onError: (errors) => {
                     console.log(errors);
                 },
@@ -40,5 +45,5 @@ export const useEliminazioneCliente = ({ cliente, modalRef }) => {
         modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     };
 
-    return { handleDelete, closeModal };
+    return { handleDelete, closeModal, loading };
 };

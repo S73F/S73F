@@ -17,7 +17,7 @@ export default function EliminazioneCliente({ cliente }) {
     const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
 
     // Funzioni per la gestione dell'eliminazione e chiusura della modale
-    const { handleDelete, closeModal } = useEliminazioneCliente({
+    const { handleDelete, closeModal, loading } = useEliminazioneCliente({
         cliente,
         modalRef,
     });
@@ -40,6 +40,7 @@ export default function EliminazioneCliente({ cliente }) {
                 action={handleDelete}
                 closeModal={closeModal}
                 firstBtnColor="error"
+                processing={loading}
             />
         </ActionModal.Wrapper>
     );

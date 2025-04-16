@@ -16,7 +16,7 @@ export default function EliminazioneOrdine({ ordine, stato }) {
     const modalRef = useRef(null); // Riferimento alla modale per controllarne l'apertura/chiusura
 
     // Funzioni per la gestione dell'eliminazione e chiusura della modale
-    const { handleDelete, closeModal } = useEliminazioneOrdine({
+    const { handleDelete, closeModal, loading } = useEliminazioneOrdine({
         ordine,
         modalRef,
         stato,
@@ -36,6 +36,7 @@ export default function EliminazioneOrdine({ ordine, stato }) {
                 action={handleDelete}
                 closeModal={closeModal}
                 firstBtnColor="error"
+                processing={loading}
             />
         </ActionModal.Wrapper>
     );

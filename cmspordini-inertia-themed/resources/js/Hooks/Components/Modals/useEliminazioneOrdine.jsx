@@ -1,4 +1,5 @@
 import { router } from "@inertiajs/react";
+import { useState } from "react";
 
 /**
  * Hook personalizzato per l'eliminazione di un ordine.
@@ -12,6 +13,8 @@ import { router } from "@inertiajs/react";
  * @returns {Function} closeModal - Funzione per chiudere la modale di conferma eliminazione.
  */
 export const useEliminazioneOrdine = ({ ordine, stato, modalRef }) => {
+    const [loading, setLoading] = useState(false);
+
     /**
      * Effettua una richiesta DELETE per eliminare un ordine.
      *
@@ -25,9 +28,11 @@ export const useEliminazioneOrdine = ({ ordine, stato, modalRef }) => {
             preserveState: true,
             data: { stato: stato },
 
+            onStart: () => setLoading(true),
             onSuccess: () => {
                 closeModal();
             },
+            onFinish: () => setLoading(false),
             onError: (errors) => {
                 console.log(errors);
             },
@@ -41,5 +46,5 @@ export const useEliminazioneOrdine = ({ ordine, stato, modalRef }) => {
         modalRef.current.close(); // Chiude la modale facendo riferimento al suo elemento nel DOM
     };
 
-    return { handleDelete, closeModal };
+    return { handleDelete, closeModal, loading };
 };
