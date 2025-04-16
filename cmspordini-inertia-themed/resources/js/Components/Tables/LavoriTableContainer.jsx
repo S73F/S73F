@@ -21,7 +21,12 @@ export const LavoriTableContainer = ({ tipoLavori, lavori }) => {
 
     // Se non ci sono lavori, mostra un messaggio che indica che non ci sono lavori trovati
     if (lavori?.length === 0) {
-        return <Messages.Fallback item={"lavoro"} marginTop={7} />;
+        if (tipoLavori === "nuovi")
+            return <Messages.Fallback item={"lavoro nuovo"} marginTop={7} />;
+        if (tipoLavori === "inCorso")
+            return <Messages.Fallback item={"lavoro in corso"} marginTop={7} />;
+        if (tipoLavori === "spediti")
+            return <Messages.Fallback item={"lavoro spedito"} marginTop={7} />;
     } else {
         return (
             // Contenitore della tabella
