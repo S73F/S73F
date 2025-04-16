@@ -24,7 +24,7 @@ class OperatoreController extends Controller
     public function showDashboard(Request $request)
     {
         // Imposta il tipo di lavori da visualizzare (default: "nuovi")
-        $tipo = $request->query('tipo', "nuovi");
+        $tipo = $request->query('tipo', "inCorso");
 
         $lavori = [];
 
@@ -374,9 +374,9 @@ class OperatoreController extends Controller
         $ordine->delete();
 
         // Recupera la query string "stato" attuale, utile per il reindirizzamento alla pagina corretta
-        $stato = $request->input('stato', "nuovi");
+        $stato = $request->input('stato', 1);
 
-        $redirectUrl = ($stato == 'nuovi')
+        $redirectUrl = ($stato == 0)
             ? '/operatore/dashboard?tipo=nuovi'
             : '/operatore/dashboard?tipo=inCorso';
 
