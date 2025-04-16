@@ -253,6 +253,7 @@ export default function AzioneCliente({ action, cliente }) {
                             onChange={handleChange}
                             {...(action === "modifica" && {
                                 placeholder: placeholderData?.password,
+                                required: false,
                             })}
                             {...(action === "creazione" && {
                                 required: true,
