@@ -45,6 +45,8 @@
 
         main {
             clear: both;
+            word-wrap: break-word;
+
         }
 
         #lavorazione-title {
@@ -105,6 +107,10 @@
             color: #666;
             margin-top: 10px;
         }
+
+        #lavorazione-details .separator {
+            height: 0.3rem;
+        }
     </style>
 </head>
 
@@ -145,11 +151,26 @@
             </tr>
         </table>
 
-        <h3 class="section-title">Dettagli Lavorazione</h3>
-        <p>Lavorazione: <strong>{!! $ordine->lavorazione !!}</strong></p>
-        <p>Colorazione: <strong>{{ $ordine->colore }}</strong></p>
-        <p>Piattaforma Impianti: <strong>{!! $ordine->piattaforma !!}</strong></p>
-        <p>Data di Consegna: <strong>{{ $ordine->data_cons }} alle {{ $ordine->ora_cons }}</strong></p>
+        <div id="lavorazione-details">
+            <h3 class="section-title">Dettagli Lavorazione</h3>
+            <p><strong>Lavorazione: </strong>{!! $ordine->lavorazione !!}</p>
+
+            <div class="separator"></div>
+
+            <p><strong>Colorazione:</strong>
+            <p>{{ $ordine->colore }}</p>
+
+            <div class="separator"></div>
+
+            <p><strong>Piattaforma Impianti: </strong>
+                {!! $ordine->piattaforma !!}</p>
+
+            <div class="separator"></div>
+
+            <p><strong>Data di Consegna:</strong>
+            <p>{{ $ordine->data_cons }} alle {{ $ordine->ora_cons }}</p>
+            </p>
+        </div>
 
         @if($ordine->note)
             <h3 class="section-title">Note Cliente</h3>
