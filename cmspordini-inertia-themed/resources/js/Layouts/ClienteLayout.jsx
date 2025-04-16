@@ -1,20 +1,5 @@
-import { Link } from "@inertiajs/react";
-import React, { useMemo } from "react";
-import {
-    Button,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-} from "@mui/material";
+import React from "react";
 import Layout from "./Layout";
-import { History as HistoryIcon } from "@mui/icons-material";
-import {
-    mobileActiveBtnStyles,
-    navbarActiveBtnStyles,
-    navbarButtonStyles,
-} from "../styles/appStyles";
-import { useActiveButton } from "../Contexts/ActiveButtonContext";
 
 /**
  * Componente di layout per la pagina del cliente.
@@ -27,65 +12,6 @@ import { useActiveButton } from "../Contexts/ActiveButtonContext";
  * @returns {JSX.Element} - Il layout del cliente con il menu laterale e i pulsanti di navigazione.
  */
 export default function ClienteLayout({ children }) {
-    const { activeBtn, setActiveBtn } = useActiveButton(); // Recupera il pulsante attivo dal context
-
-    /**
-     * Pulsanti da visualizzare nella barra di navigazione superiore.
-     *
-     * @constant
-     * @type {React.ReactNode}
-     */
-    const Buttons = useMemo(
-        () => (
-            <>
-                <Button
-                    component={Link}
-                    href="/cliente/ordini/storico"
-                    title="Storico ordini"
-                    onClick={() => setActiveBtn("Storico")}
-                    sx={
-                        activeBtn === "Storico"
-                            ? navbarActiveBtnStyles
-                            : navbarButtonStyles
-                    }
-                >
-                    Storico
-                </Button>
-            </>
-        ),
-        [activeBtn, setActiveBtn]
-    );
-
-    /**
-     * Elementi del menu laterale (drawer).
-     * Includono un collegamento alla pagina dello storico ordini.
-     *
-     * @constant
-     * @type {React.ReactNode}
-     */
-    const ListItems = useMemo(
-        () => (
-            <ListItem disablePadding>
-                <ListItemButton
-                    component={Link}
-                    href="/cliente/ordini/storico"
-                    title="Storico ordini"
-                    onClick={() => setActiveBtn("Storico")}
-                    sx={activeBtn === "Storico" ? mobileActiveBtnStyles : {}}
-                >
-                    {/* Icona che rappresenta lo storico ordini */}
-                    <ListItemIcon>
-                        <HistoryIcon />
-                    </ListItemIcon>
-
-                    {/* Testo della voce di menu */}
-                    <ListItemText primary="Storico ordini" />
-                </ListItemButton>
-            </ListItem>
-        ),
-        [activeBtn, setActiveBtn]
-    );
-
     /**
      * Renderizza il layout del cliente, includendo il menu laterale e la navbar modificati, e il contenuto.
      *
@@ -93,8 +19,7 @@ export default function ClienteLayout({ children }) {
      */
     return (
         <Layout
-            Buttons={Buttons} // Passa i pulsanti personalizzati alla navbar
-            ListItems={ListItems} // Passa gli elementi del menu laterale di "cliente" al Layout predefinito
+            type={"cliente"} // Passa gli elementi del menu laterale di "cliente" al Layout predefinito
         >
             {/* Renderizza i componenti figli passati al ClienteLayout */}
             {children}
