@@ -10,14 +10,13 @@ import { contentContainer } from "../styles/appStyles";
  * @param {React.ReactNode} props.children - I contenuti da visualizzare sotto il titolo.
  * @returns {JSX.Element} Il layout con il titolo e i contenuti figli.
  */
-const Layout = ({ title, children, marginBottom = 4 }) => {
+const Layout = ({ title, children, marginBottom = 3 }) => {
     return (
         <>
             {/* Titolo principale del layout, con uno stile personalizzato */}
             <Typography
-                variant="h4"
                 component="h2"
-                sx={{ mb: marginBottom, textAlign: "center" }}
+                sx={{ mb: marginBottom, textAlign: "center", fontSize: 30 }}
             >
                 {title}
             </Typography>

@@ -15,7 +15,7 @@ import { Typography } from "@mui/material";
  * @returns {JSX.Element} Un messaggio di benvenuto personalizzato per l'utente, basato sul nome o cognome.
  */
 const Welcome = ({ user }) => (
-    <Typography variant="h4" component="h2" sx={{ mb: 4 }}>
+    <Typography component="h2" color="primary" mb={4} fontSize={40}>
         {user?.nome
             ? `Benvenuto ${user?.nome}`
             : `Benvenuto ${user?.cognome ?? "Utente"}`}
