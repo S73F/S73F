@@ -255,9 +255,6 @@ export default function AzioneCliente({ action, cliente }) {
                                 placeholder: placeholderData?.password,
                                 required: false,
                             })}
-                            {...(action === "creazione" && {
-                                required: true,
-                            })}
                         />
                     </Grid2>
                 </Grid2>
