@@ -5,6 +5,12 @@ import {
     navbarButtonStyles,
 } from "../../styles/appStyles";
 import { Link } from "@inertiajs/react";
+import {
+    Home as HomeIcon,
+    History as HistoryIcon,
+    Logout as LogoutIcon,
+    Person as PersonIcon,
+} from "@mui/icons-material";
 
 /**
  * Componente che renderizza il set di pulsanti della navbar di default:
@@ -25,7 +31,7 @@ export const DefaultNavbarButtons = ({
     children,
 }) => {
     return (
-        <Box sx={{ display: { xs: "none", sm: "block" } }}>
+        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
             <Button
                 component={Link}
                 href="/"
@@ -37,6 +43,7 @@ export const DefaultNavbarButtons = ({
                         : navbarButtonStyles
                 }
             >
+                <HomeIcon />
                 Home
             </Button>
 
@@ -47,6 +54,7 @@ export const DefaultNavbarButtons = ({
                 title="Logout"
                 sx={navbarButtonStyles}
             >
+                <LogoutIcon />
                 Logout
             </Button>
         </Box>
@@ -87,6 +95,7 @@ export const ClienteNavbarButtons = ({
                             : navbarButtonStyles
                     }
                 >
+                    <HistoryIcon />
                     Storico
                 </Button>
             </>
@@ -128,6 +137,7 @@ export const OperatoreNavbarButtons = ({
                             : navbarButtonStyles
                     }
                 >
+                    <HistoryIcon />
                     Storico
                 </Button>
                 <Button
@@ -141,6 +151,7 @@ export const OperatoreNavbarButtons = ({
                             : navbarButtonStyles
                     }
                 >
+                    <PersonIcon />
                     Clienti
                 </Button>
             </>

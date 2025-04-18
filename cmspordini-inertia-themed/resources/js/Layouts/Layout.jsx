@@ -70,7 +70,7 @@ function Layout({ window, children, type }) {
                             aria-label="open drawer"
                             edge="start"
                             onClick={handleDrawerToggle}
-                            sx={{ mr: 2, display: { sm: "none" } }}
+                            sx={{ mr: 2, display: { md: "none" } }}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -119,7 +119,7 @@ function Layout({ window, children, type }) {
                             keepMounted: true, // Better open performance on mobile.
                         }}
                         sx={{
-                            display: { xs: "block", sm: "none" },
+                            display: { xs: "block", md: "none" },
                             "& .MuiDrawer-paper": {
                                 boxSizing: "border-box",
                                 width: drawerWidth,
