@@ -2,28 +2,24 @@
 
 namespace Database\Factories;
 
-use App\Models\Cliente;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 
 class ClienteFactory extends Factory
 {
-    protected $model = Cliente::class;
-
-    public function definition()
+    public function definition(): array
     {
         return [
-            'ragione_sociale' => $this->faker->company(),
-            'nome' => $this->faker->firstName(),
-            'cognome' => $this->faker->lastName(),
-            'partitaIVA' => $this->faker->numerify('IT###########'),
-            'indirizzo' => $this->faker->streetAddress(),
-            'citta' => $this->faker->city(),
-            'cap' => $this->faker->randomNumber(5, true),
-            'provincia' => $this->faker->state(),
-            'emailcliente' => $this->faker->unique()->safeEmail(),
-            'username' => $this->faker->unique()->userName(),
-            'password' => Hash::make('password123'), // Password di default
+            'ragione_sociale' => substr($this->faker->company, 0, 100),
+            'nome' => $this->faker->firstName,
+            'cognome' => $this->faker->lastName,
+            'partitaIVA' => $this->faker->numerify('###########'), // 11 cifre, valido per l'Italia
+            'indirizzo' => substr($this->faker->streetAddress, 0, 50),
+            'citta' => substr($this->faker->city, 0, 50),
+            'cap' => $this->faker->numberBetween(10000, 98100),
+            'provincia' => substr($this->faker->stateAbbr, 0, 50),
+            'emailcliente' => substr($this->faker->unique()->safeEmail, 0, 50),
+            'username' => substr($this->faker->unique()->userName, 0, 20),
+            'password' => bcrypt('password'),
         ];
     }
 }

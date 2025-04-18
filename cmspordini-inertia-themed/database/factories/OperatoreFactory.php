@@ -2,22 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Operatore;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 
 class OperatoreFactory extends Factory
 {
-    protected $model = Operatore::class;
-
-    public function definition()
+    public function definition(): array
     {
         return [
-            'nome' => $this->faker->firstName(),
-            'cognome' => $this->faker->lastName(),
-            'username' => $this->faker->unique()->userName(),
-            'password' => Hash::make('password123'), // Password di default
-            'emailoperatore' => $this->faker->unique()->safeEmail(),
+            'nome' => $this->faker->firstName,
+            'cognome' => $this->faker->lastName,
+            'username' => substr($this->faker->unique()->userName, 0, 20),
+            'password' => bcrypt('password'),
+            'emailoperatore' => substr($this->faker->unique()->safeEmail, 0, 50),
         ];
     }
 }

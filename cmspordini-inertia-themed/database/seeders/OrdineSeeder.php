@@ -9,6 +9,6 @@ class OrdineSeeder extends Seeder
 {
     public function run()
     {
-        Ordine::factory()->count(20)->create(); // Genera 20 ordini fittizi
+        Ordine::factory()->count(300)->create(); // Genera 30 ordini fittizi
     }
 }
