@@ -53,10 +53,8 @@ export const navbarButtonStyles = {
 };
 
 export const navbarActiveBtnStyles = {
-    color: "#fff",
+    ...navbarButtonStyles,
     backgroundColor: "#1565c0",
-    width: 110,
-    gap: 1,
 };
 
 export const mobileActiveBtnStyles = {
