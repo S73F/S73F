@@ -15,12 +15,11 @@ import { Typography } from "@mui/material";
  * @returns {JSX.Element} Un messaggio di benvenuto personalizzato per l'utente, basato sul nome o cognome.
  */
 const Welcome = ({ user }) => {
-    // Get current time for time-based greetings
+    // Recupera l'ora corrente per determinare il saluto appropriato
     const hours = new Date().getHours();
 
     let greeting;
 
-    // Determine greeting based on time of day;
     if (hours < 12) {
         greeting = "Buongiorno";
     } else if (hours < 18) {
