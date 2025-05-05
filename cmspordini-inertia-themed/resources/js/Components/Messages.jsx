@@ -34,7 +34,7 @@ const Welcome = ({ user }) => {
             {greeting},{" "}
             {user?.nome || user?.cognome
                 ? user?.nome || user?.cognome
-                : "Operatore"}
+                : "utente"}
         </Typography>
     );
 };
